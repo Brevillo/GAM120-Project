@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 30886898699939077}
   - component: {fileID: 579340631908965096}
+  - component: {fileID: 1176355699515460300}
+  - component: {fileID: 7501728411578513382}
   - component: {fileID: 6177127757091233344}
   - component: {fileID: 4911955032992510564}
   m_Layer: 0
@@ -55,9 +57,41 @@ MonoBehaviour:
   diveSpeed: 50
   maxDiveDist: 20
   airFriction: 100
+  damageFlashDur: 0.1
   minWanderMoves: 2
   maxWanderMoves: 5
   rigidbody: {fileID: 4911955032992510564}
+  rend: {fileID: 6851537655748982450}
+  timeScale: {fileID: 1176355699515460300}
+  health: {fileID: 7501728411578513382}
+--- !u!114 &1176355699515460300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421639643989790829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471381aed7e914d1da8c776c79ed2b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 1
+--- !u!114 &7501728411578513382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421639643989790829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 880cc4a2493624f3aa7c0a9c658ff117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  team: {fileID: 11400000, guid: 94cf57cbd4a1040ecaad9cd91c2c783f, type: 2}
+  <Health>k__BackingField: 0
 --- !u!58 &6177127757091233344
 CircleCollider2D:
   m_ObjectHideFlags: 0
