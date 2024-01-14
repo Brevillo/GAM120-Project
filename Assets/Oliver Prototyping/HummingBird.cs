@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HummingBird : MonoBehaviour {
+public class HummingBird : MonoBehaviour, IWhippable {
 
     [SerializeField] private float minIdleTime, maxIdleTime, minWanderDist, maxWanderDist, wanderSpeed, diveSpeed, maxDiveDist, airFriction;
     [SerializeField] private int minWanderMoves, maxWanderMoves;
     [SerializeField] private new Rigidbody2D rigidbody;
 
     private Transform target;
+    private Coroutine behaviour;
+
+    public IWhippable.Type type => IWhippable.Type.Light;
 
     private void Start() {
 
         target = FindObjectOfType<PlayerMovement>().transform;
 
-        StartCoroutine(Behaviour());
+        behaviour = StartCoroutine(Behaviour());
     }
 
     private IEnumerator Behaviour() {
@@ -78,5 +81,17 @@ public class HummingBird : MonoBehaviour {
               time = distance / speed;
 
         yield return new WaitForSeconds(time);
+    }
+
+    public void DisableMovement() {
+        StopCoroutine(behaviour);
+    }
+
+    public void EnableMovement() {
+        behaviour = StartCoroutine(Behaviour());
+    }
+
+    public void MoveTo(Vector2 position) {
+        rigidbody.MovePosition(position);
     }
 }

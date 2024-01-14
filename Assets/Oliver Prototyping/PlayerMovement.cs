@@ -22,6 +22,12 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight;
     [SerializeField] private Transform wing1, wing2;
 
+    [Header("Whipping")]
+    [SerializeField] private float whipExtendSpeed;
+    [SerializeField] private float whipPullSpeed, whipMaxLength;
+    [SerializeField] private LineRenderer whipRenderer;
+    [SerializeField] private PlayerWhipTrigger whipTrigger;
+
     [Header("References")]
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private BoxCollider2D col;
@@ -31,13 +37,9 @@ public class PlayerMovement : MonoBehaviour {
 
     #region Variables
 
-    [Header("State Machine Debug"), SerializeField] private StateMachine<PlayerMovement> stateMachine;
-
-    // instances of each state class
-    private Grounded    grounded;
-    private Jumping     jumping;
-    private Falling     falling;
-    private Flying      flying;
+    private StateMachine<PlayerMovement>
+        stateMachine,
+        whipStateMachine;
 
     private Vector2Int inputDir;               // current movement input
     private bool jumpBuffered;              // is jump buffered?
@@ -48,10 +50,15 @@ public class PlayerMovement : MonoBehaviour {
 
     private float remainingFlightStamina;   // how much flight stamina reminas
 
+    private Vector2 whipPosition;           // end point of the whip
+
+    private IWhippable whipping;
+
     #endregion
 
     private void Awake() {
         InitializeStateMachine();
+        InitializeWhipStateMachine();
     }
 
     private void Update() {
@@ -72,6 +79,7 @@ public class PlayerMovement : MonoBehaviour {
         // state machine
 
         stateMachine.Update(Time.deltaTime);
+        whipStateMachine.Update(Time.deltaTime);
 
         // apply velocity
 
@@ -94,6 +102,17 @@ public class PlayerMovement : MonoBehaviour {
         velocity.y = Mathf.MoveTowards(velocity.y, -maxFallSpeed, gravity * Time.deltaTime);
     }
 
+    private void UpdateWhip() {
+        whipRenderer.useWorldSpace = true;
+        whipRenderer.positionCount = 2;
+        whipRenderer.SetPositions(new Vector3[] { transform.position, whipPosition });
+    }
+
+    private void OnWhipCollision(Collider2D collision) {
+        if (collision.TryGetComponent(out IWhippable whippable))
+            whipping = whippable;
+    }
+
     #region State Machine
 
     #region Helper Classes
@@ -107,6 +126,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     #endregion
+
+    // instances of each state class
+    private Grounded grounded;
+    private Jumping jumping;
+    private Falling falling;
+    private Flying flying;
 
     private void InitializeStateMachine() {
 
@@ -281,6 +306,151 @@ public class PlayerMovement : MonoBehaviour {
             context.Run();
 
             base.Update();
+        }
+    }
+
+    #endregion
+
+    #region Whip State Machine
+
+    // whip state instances
+    private WhipIdle            whipIdle;
+    private WhipExtending       whipExtending;
+    private WhipRetracting      whipRetracting;
+    private WhipPullingEnemy    whipPullingEnemy;
+
+    private void InitializeWhipStateMachine() {
+
+        whipIdle            = new(this);
+        whipExtending       = new(this);
+        whipRetracting      = new(this);
+        whipPullingEnemy    = new(this);
+
+        TransitionDelegate
+
+            startWhip       = () => inputManager.Whip.Down && inputDir != Vector2Int.zero,
+            stopWhip        = () => !inputManager.Whip.Pressed || whipExtending.reachedTarget,
+
+            whipRetracted   = () => whipPosition == (Vector2)transform.position,
+
+            pullEnemy       = () => whipping != null && whipping.type == IWhippable.Type.Light;
+
+        whipStateMachine = new(
+
+            firstState: whipIdle,
+
+            new() {
+
+                { whipIdle, new() {
+                    new(whipExtending, startWhip),
+                } },
+
+                { whipExtending, new() {
+                    new(whipRetracting, stopWhip),
+                    new(whipPullingEnemy, pullEnemy),
+                } },
+
+                { whipRetracting, new() {
+                    new(whipIdle, whipRetracted),
+                } },
+
+                { whipPullingEnemy, new() {
+                    new(whipIdle, whipRetracted)
+                } },
+            }
+        );
+    }
+
+    private class WhipIdle : State {
+
+        public WhipIdle(PlayerMovement context) : base(context) { }
+
+        public override void Enter() {
+
+            base.Enter();
+
+            context.whipRenderer.enabled = false;
+        }
+    }
+
+    private class WhipExtending : State {
+
+        public WhipExtending(PlayerMovement context) : base(context) { }
+
+        private Vector2 targetPosition;
+        private PlayerWhipTrigger activeWhipTrigger;
+
+        public bool reachedTarget => context.whipPosition == targetPosition;
+
+        public override void Enter() {
+
+            base.Enter();
+
+            context.whipPosition = context.transform.position;
+            targetPosition = context.whipPosition + ((Vector2)context.inputDir).normalized * context.whipMaxLength;
+
+            activeWhipTrigger = Instantiate(context.whipTrigger);
+            activeWhipTrigger.OnCollision += context.OnWhipCollision;
+
+            context.whipRenderer.enabled = true;
+        }
+
+        public override void Update() {
+
+            context.whipPosition = Vector2.MoveTowards(context.whipPosition, targetPosition, context.whipExtendSpeed * Time.deltaTime);
+            activeWhipTrigger.MoveTo(context.whipPosition);
+            context.UpdateWhip();
+
+            base.Update();
+        }
+
+        public override void Exit() {
+
+            Destroy(activeWhipTrigger.gameObject);
+
+            base.Exit();
+        }
+    }
+
+    private class WhipRetracting : State {
+
+        public WhipRetracting(PlayerMovement context) : base(context) { }
+
+        public override void Update() {
+
+            context.whipPosition = Vector2.MoveTowards(context.whipPosition, context.transform.position, context.whipExtendSpeed * Time.deltaTime);
+            context.UpdateWhip();
+
+            base.Update();
+        }
+    }
+
+    private class WhipPullingEnemy : State {
+
+        public WhipPullingEnemy(PlayerMovement context) : base(context) { }
+
+        public override void Enter() {
+
+            base.Enter();
+
+            context.whipping.DisableMovement();
+        }
+
+        public override void Update() {
+
+            context.whipPosition = Vector2.MoveTowards(context.whipPosition, context.transform.position, context.whipPullSpeed * Time.deltaTime);
+            context.whipping.MoveTo(context.whipPosition);
+            context.UpdateWhip();
+
+            base.Update();
+        }
+
+        public override void Exit() {
+
+            context.whipping.EnableMovement();
+            context.whipping = null;
+
+            base.Exit();
         }
     }
 

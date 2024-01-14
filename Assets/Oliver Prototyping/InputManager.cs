@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour {
 
     public Button Jump;
     public Axis Movement;
+    public Button Whip;
 
     private List<Button> buttons;
 
@@ -17,6 +18,7 @@ public class InputManager : MonoBehaviour {
         buttons = new() {
             Jump,
             Movement,
+            Whip,
         };
 
         foreach (var button in buttons)
@@ -85,6 +87,7 @@ public class InputManager : MonoBehaviour {
     [System.Serializable]
     public class Axis : Button {
 
+        [Tooltip("If true, sets the value to zero when not pressed.")]
         [SerializeField] private bool impulse;
 
         public override void Init() {
