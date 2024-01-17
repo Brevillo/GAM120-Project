@@ -402,7 +402,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 84dbb17f182fe401cb5dd26199f1f0d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -423,9 +423,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.25
@@ -477,7 +475,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -658,6 +656,7 @@ MonoBehaviour:
     pointCount: 20
   whipRenderer: {fileID: 3751569453558091447}
   whipTrigger: {fileID: 6268666334621699268, guid: d98ef91243d0d423886e4abafa97a5cc, type: 3}
+  whipHitFreezeFrame: 0.15
   rigidbody: {fileID: 4716952027819047374}
   col: {fileID: 4074593258213741689}
   inputManager: {fileID: -1058919617282530638}

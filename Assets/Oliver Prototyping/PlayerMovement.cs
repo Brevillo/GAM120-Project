@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private VerletRope.Parameters whipRopeParameters;
     [SerializeField] private LineRenderer whipRenderer;
     [SerializeField] private PlayerWhipTrigger whipTrigger;
+    [SerializeField] private float whipHitFreezeFrame;
 
     [Header("References")]
     [SerializeField] private new Rigidbody2D rigidbody;
@@ -420,7 +421,7 @@ public class PlayerMovement : MonoBehaviour {
             base.Enter();
 
             context.whipPosition = context.transform.position;
-            aimDirection = ((Vector2)context.inputDir).normalized;
+            aimDirection = context.inputManager.Movement.Vector.normalized;
             targetPosition = context.whipPosition + aimDirection * context.whipMaxLength;
 
             activeWhipTrigger = Instantiate(context.whipTrigger);
@@ -473,6 +474,10 @@ public class PlayerMovement : MonoBehaviour {
         public override void Enter() {
 
             base.Enter();
+
+            context.whipPosition = context.whipping.Position;
+            context.UpdateWhip();
+            TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
 
             context.whipping.DisableMovement();
         }

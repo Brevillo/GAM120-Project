@@ -8,6 +8,8 @@ public interface IWhippable {
 
     public Type type { get; }
 
+    public Vector2 Position { get; }
+
     public void DisableMovement();
 
     public void EnableMovement();

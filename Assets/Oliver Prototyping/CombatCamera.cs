@@ -10,7 +10,7 @@ public class CombatCamera : MonoBehaviour {
     private Vector2 positionVel;
     private Vector3 rotationVel;
 
-    private void Update() {
+    private void LateUpdate() {
 
         transform.position
             = (Vector3)Vector2.SmoothDamp(transform.position, cameraTarget.position, ref positionVel, followSpeed)

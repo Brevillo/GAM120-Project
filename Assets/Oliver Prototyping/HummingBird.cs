@@ -15,6 +15,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
     private Coroutine behaviour;
 
     public IWhippable.Type type => IWhippable.Type.Light;
+    public Vector2 Position => transform.position;
 
     private Vector2 position => transform.position;
     private Vector2 velocity {
