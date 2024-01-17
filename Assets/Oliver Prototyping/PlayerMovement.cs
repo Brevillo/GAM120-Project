@@ -19,12 +19,13 @@ public class PlayerMovement : MonoBehaviour {
 
     [Header("Flying")]
     [SerializeField] private float flightForce;
-    [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight;
+    [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight, dontFlyAboveGroundDist;
     [SerializeField] private Transform wing1, wing2;
 
     [Header("Whipping")]
     [SerializeField] private float whipExtendSpeed;
-    [SerializeField] private float whipPullSpeed, whipMaxLength;
+    [SerializeField] private float whipExtendDist, whipRetractSpeed, whipPullSpeed, whipMaxLength;
+    [SerializeField] private VerletRope.Parameters whipRopeParameters;
     [SerializeField] private LineRenderer whipRenderer;
     [SerializeField] private PlayerWhipTrigger whipTrigger;
 
@@ -47,14 +48,18 @@ public class PlayerMovement : MonoBehaviour {
     private Vector2 velocity;               // current velocity (stored so that I can edit the x and y components individually)
     private RaycastHit2D groundHit;         // raycast hit for the ground
     private bool onGround;                  // is the player on the ground?
+    private float groundDist;               // distance to the ground
 
     private float remainingFlightStamina;   // how much flight stamina reminas
 
     private Vector2 whipPosition;           // end point of the whip
 
     private IWhippable whipping;
+    private VerletRope whipRope;
 
     #endregion
+
+    #region Awake and Update
 
     private void Awake() {
         InitializeStateMachine();
@@ -62,6 +67,10 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
+
+        // debug helpers
+
+        if (inputManager.Debug1.Down) UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
         // input
 
@@ -75,8 +84,10 @@ public class PlayerMovement : MonoBehaviour {
         velocity = rigidbody.velocity;
         groundHit = Physics2D.BoxCast(transform.position, col.size, 0, Vector2.down, groundDetectDist, groundMask);
         onGround = groundHit && groundHit.normal == Vector2.up;
+        var groundDistHit = Physics2D.BoxCast(transform.position, col.size, 0, Vector2.down, Mathf.Infinity, groundMask);
+        groundDist = groundDistHit ? transform.position.y - col.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
 
-        // state machine
+        // run state machines
 
         stateMachine.Update(Time.deltaTime);
         whipStateMachine.Update(Time.deltaTime);
@@ -85,6 +96,17 @@ public class PlayerMovement : MonoBehaviour {
 
         rigidbody.velocity = velocity;
     }
+
+    private void FixedUpdate() {
+
+        whipRope?.Update(transform.position);
+
+        whipRope?.ApplyToLineRenderer(whipRenderer);
+    }
+
+    #endregion
+
+    #region Helper Functions
 
     private void Run() {
 
@@ -113,16 +135,24 @@ public class PlayerMovement : MonoBehaviour {
             whipping = whippable;
     }
 
+    #endregion
+
     #region State Machine
 
     #region Helper Classes
 
     private class State : State<PlayerMovement> {
-        public State(PlayerMovement context) : base(context) { }
+
+        public State(PlayerMovement context) : base(context) {
+
+        }
     }
 
     private class SubState : SubState<PlayerMovement, State> {
-        public SubState(PlayerMovement context, State superState) : base(context, superState) { }
+
+        public SubState(PlayerMovement context, State superState) : base(context, superState) {
+
+        }
     }
 
     #endregion
@@ -145,13 +175,16 @@ public class PlayerMovement : MonoBehaviour {
         TransitionDelegate
 
             toGrounded  = () => onGround,
-            toFlight    = () => inputManager.Jump.Pressed && remainingFlightStamina > 0 && !onGround && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight),
 
             startJump   = () => jumpBuffered && onGround,
             endJump     = () => !inputManager.Jump.Pressed || velocity.y <= 0,
 
             toFalling   = () => !onGround,
 
+            toFlight    = () => remainingFlightStamina > 0
+                                && !onGround
+                                && ((inputManager.Jump.Pressed && !jumpBuffered) || (groundDist > dontFlyAboveGroundDist && jumpBuffered))
+                                && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight),
             endFlying   = () => !inputManager.Jump.Pressed || remainingFlightStamina <= 0;
 
         // initialize state machine
@@ -160,7 +193,7 @@ public class PlayerMovement : MonoBehaviour {
             firstState: grounded,
 
             // define transitions
-            new() {
+            transitions: new() {
 
                 /* example
 
@@ -339,7 +372,7 @@ public class PlayerMovement : MonoBehaviour {
 
             firstState: whipIdle,
 
-            new() {
+            transitions: new() {
 
                 { whipIdle, new() {
                     new(whipExtending, startWhip),
@@ -377,7 +410,7 @@ public class PlayerMovement : MonoBehaviour {
 
         public WhipExtending(PlayerMovement context) : base(context) { }
 
-        private Vector2 targetPosition;
+        private Vector2 aimDirection, targetPosition;
         private PlayerWhipTrigger activeWhipTrigger;
 
         public bool reachedTarget => context.whipPosition == targetPosition;
@@ -387,19 +420,26 @@ public class PlayerMovement : MonoBehaviour {
             base.Enter();
 
             context.whipPosition = context.transform.position;
-            targetPosition = context.whipPosition + ((Vector2)context.inputDir).normalized * context.whipMaxLength;
+            aimDirection = ((Vector2)context.inputDir).normalized;
+            targetPosition = context.whipPosition + aimDirection * context.whipMaxLength;
 
             activeWhipTrigger = Instantiate(context.whipTrigger);
             activeWhipTrigger.OnCollision += context.OnWhipCollision;
 
             context.whipRenderer.enabled = true;
+
+            context.whipRope = new(context.whipRopeParameters, (Vector2)context.transform.position + aimDirection * 0.5f);
+            context.whipRope.OnUpdate += point => {
+                context.whipPosition = point;
+                activeWhipTrigger.MoveTo(point);
+            };
+            context.whipRope.AddForce(aimDirection * context.whipExtendSpeed + Vector2.one * 0.01f);
         }
 
         public override void Update() {
 
-            context.whipPosition = Vector2.MoveTowards(context.whipPosition, targetPosition, context.whipExtendSpeed * Time.deltaTime);
-            activeWhipTrigger.MoveTo(context.whipPosition);
-            context.UpdateWhip();
+            //context.whipPosition = Vector2.MoveTowards(context.whipPosition, targetPosition, context.whipExtendSpeed * Time.deltaTime);
+            //context.UpdateWhip();
 
             base.Update();
         }
@@ -407,6 +447,7 @@ public class PlayerMovement : MonoBehaviour {
         public override void Exit() {
 
             Destroy(activeWhipTrigger.gameObject);
+            context.whipRope = null;
 
             base.Exit();
         }
@@ -418,7 +459,7 @@ public class PlayerMovement : MonoBehaviour {
 
         public override void Update() {
 
-            context.whipPosition = Vector2.MoveTowards(context.whipPosition, context.transform.position, context.whipExtendSpeed * Time.deltaTime);
+            context.whipPosition = Vector2.MoveTowards(context.whipPosition, context.transform.position, context.whipRetractSpeed * Time.deltaTime);
             context.UpdateWhip();
 
             base.Update();

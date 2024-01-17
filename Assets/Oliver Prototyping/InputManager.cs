@@ -7,18 +7,31 @@ public class InputManager : MonoBehaviour {
 
     [SerializeField] private InputActionAsset inputActions;
 
+    [Header("Movement")]
     public Button Jump;
     public Axis Movement;
     public Button Whip;
+
+    [Header("Debug")]
+    public Button Debug1;
+    public Button Debug2;
+    public Button Debug3;
+    public Button Debug4;
 
     private List<Button> buttons;
 
     private void Awake() {
 
         buttons = new() {
+
             Jump,
             Movement,
             Whip,
+
+            Debug1,
+            Debug2,
+            Debug3,
+            Debug4,
         };
 
         foreach (var button in buttons)
