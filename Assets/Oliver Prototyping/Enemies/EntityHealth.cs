@@ -19,7 +19,9 @@ public class EntityHealth : MonoBehaviour {
     [SerializeField] private EntityHealthTeam team;
 
     [field: SerializeField, Readonly] public float Health { get; private set; }
+
     public EntityHealthTeam Team => team;
+    public float HealthPercent => Health / maxHealth;
 
     public event System.Action<DamageInfo> OnTakeDamage;
     public event System.Action<float> OnHeal;

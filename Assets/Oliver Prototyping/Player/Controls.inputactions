@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "b59b4dbc-4b4a-4ab5-9124-4af466808e22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Debug1",
                     "type": "Button",
                     "id": "75c22068-0195-419e-9f4f-719a8aa9cbff",
@@ -237,17 +246,6 @@
                 },
                 {
                     "name": "",
-                    "id": "fb0aa6ae-7ee3-4cb8-8770-5a08cb4a471a",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Whip",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "09dade27-7adf-4847-92f7-fc5f4a1c0b4b",
                     "path": "<Keyboard>/x",
                     "interactions": "",
@@ -342,6 +340,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Debug4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1c9a6ff-80df-4c9f-bda3-2a78f2323123",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d197a19-f188-4aff-902a-88a960e971af",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

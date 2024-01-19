@@ -2,38 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class InputManager : MonoBehaviour {
 
-    [SerializeField] private InputActionAsset inputActions;
-
-    [Header("Movement")]
-    public Button Jump;
-    public Axis Movement;
-    public Button Whip;
-    public Button Attack;
-
-    [Header("Debug")]
-    public Button Debug1;
-    public Button Debug2;
-    public Button Debug3;
-    public Button Debug4;
-
-    private List<Button> buttons;
+    private Button[] buttons;
+    private InputActionAsset inputActions;
 
     private void Awake() {
 
-        buttons = new() {
+        buttons =
+            GetType()
+            .GetFields()
+            .Select(field => field.GetValue(this))
+            .OfType<Button>()
+            .ToArray();
 
-            Jump,
-            Movement,
-            Whip,
+        if (buttons.Any(button => button.ActionReference == null)) {
+            Debug.LogError($"Missing Input Actions for {GetType().Name} on {name}!");
+            return;
+        }
 
-            Debug1,
-            Debug2,
-            Debug3,
-            Debug4,
-        };
+        inputActions = buttons[0].ActionReference.asset;
 
         foreach (var button in buttons)
             button.Init();
@@ -56,7 +46,7 @@ public class InputManager : MonoBehaviour {
     [System.Serializable]
     public class Button {
 
-        [SerializeField] protected InputActionReference actionReference;
+        [SerializeField] private InputActionReference actionReference;
 
         public bool Enabled = true;
         public bool Pressed     => Enabled && pressed;
@@ -74,9 +64,12 @@ public class InputManager : MonoBehaviour {
 
         #region Internals
 
+        protected InputAction Action => actionReference.action;
+        public InputActionReference ActionReference => actionReference;
+
         public virtual void Init() {
-            actionReference.action.performed += context => pressed = true;
-            actionReference.action.canceled += context => pressed = false;
+            Action.performed += context => pressed = true;
+            Action.canceled  += context => pressed = false;
         }
 
         [Readonly, SerializeField] protected bool pressed     = false;
@@ -101,28 +94,21 @@ public class InputManager : MonoBehaviour {
     [System.Serializable]
     public class Axis : Button {
 
+        public Vector2 Vector => Enabled && !forceNew ? _vector : Vector2.zero;
+
+        #region Internals
+
         [Tooltip("If true, sets the value to zero when not pressed.")]
         [SerializeField] private bool impulse;
 
         public override void Init() {
-
             base.Init();
-
-            actionReference.action.performed += context => {
-                _vector = context.ReadValue<Vector2>();
-                OnPerformed?.Invoke();
-            };
-
-            if (impulse) actionReference.action.canceled += context => _vector = Vector2.zero;
+            Action.performed += context => _vector = context.ReadValue<Vector2>();
+            if (impulse) Action.canceled += context => _vector = Vector2.zero;
         }
 
-        public Vector2 Vector => Enabled && !forceNew ? _vector : Vector2.zero;
-
-        public static implicit operator Vector2(Axis axis) => axis.Vector;
-        public static implicit operator Vector3(Axis axis) => axis.Vector;
-
-        public event System.Action OnPerformed;
-
         [Readonly, SerializeField] private Vector2 _vector;
+
+        #endregion
     }
 }

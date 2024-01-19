@@ -77,7 +77,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.14}
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 504657889318610054}
   - component: {fileID: 2452180612639037256}
   - component: {fileID: 1535773389568884769}
-  - component: {fileID: -1058919617282530638}
+  - component: {fileID: 7241147085908660038}
   - component: {fileID: 1402925452533963934}
   - component: {fileID: 4716952027819047374}
   - component: {fileID: 4074593258213741689}
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88065540d580a4cf4b234b4a35331957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1402925452533963934}
+  player: {fileID: 1402925452533963934}
   runSpeed: 15
   groundAccel: 200
   groundDeccel: 200
@@ -784,6 +784,16 @@ MonoBehaviour:
   maxFlightStamina: 0.5
   timeAfterJumpingBeforeFlight: 0.15
   dontFlyAboveGroundDist: 1
+  maxChargeTime: 0.5
+  minDamage: 1
+  maxDamage: 3
+  headbuttCooldown: 0.25
+  minDashDistance: 3
+  maxDashDistance: 7
+  dashSpeed: 80
+  minChargeShake: 0.01
+  maxChargeShake: 0.1
+  chargingRunSpeed: 5
   maxSpriteAngle: 15
   maxAngleVelocity: 20
   spriteRotationSpeed: 0.01
@@ -801,13 +811,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0867c882f69274a7785cabe2c7d3cf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1402925452533963934}
+  player: {fileID: 1402925452533963934}
   whipBackForce: 0.5
   whipForwardForce: 1.75
   whipForwardDelay: 0.1
   whipTriggerDelay: 0.13
   whipRetractSpeed: 50
-  whipPullSpeed: 50
+  whipPullSpeed: 20
   whipMaxLength: 30
   enemyGrappleVerticalBoost: 10
   whipRopeParameters:
@@ -865,7 +875,7 @@ MonoBehaviour:
   maxHealth: 10
   team: {fileID: 11400000, guid: e29e6f6d0ca34479282fe85a6f23d579, type: 2}
   <Health>k__BackingField: 0
---- !u!114 &-1058919617282530638
+--- !u!114 &7241147085908660038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -874,7 +884,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6063646460510966481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92a1b31e1765349149a97378de61e939, type: 3}
+  m_Script: {fileID: 11500000, guid: e2f319e958dc94b63a572e175ce0cdf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 97a76fd0d12aa484796c795210097222, type: 3}
@@ -890,7 +900,7 @@ MonoBehaviour:
     pressed: 0
     down: 0
     released: 0
-    impulse: 1
+    impulse: 0
     _vector: {x: 0, y: 0}
   Whip:
     actionReference: {fileID: 4453636792242108997, guid: 97a76fd0d12aa484796c795210097222, type: 3}
@@ -899,7 +909,7 @@ MonoBehaviour:
     down: 0
     released: 0
   Attack:
-    actionReference: {fileID: 0}
+    actionReference: {fileID: -5131303573255728265, guid: 97a76fd0d12aa484796c795210097222, type: 3}
     Enabled: 1
     pressed: 0
     down: 0
@@ -940,7 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d1d5d8904604700a7a7f454fd30085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: -1058919617282530638}
+  inputManager: {fileID: 7241147085908660038}
   playerMovement: {fileID: 504657889318610054}
   rigidbody: {fileID: 4716952027819047374}
   collider: {fileID: 4074593258213741689}
@@ -981,7 +991,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6063646460510966481}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ac2e78d0a3624471682d1bdbdf41bfe8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1262,6 +1272,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 7962311941996778800}
     m_Modifications:
     - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1402925452533963934}
+    - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 1402925452533963934}
@@ -1332,6 +1346,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 7962311941996778800}
     m_Modifications:
     - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1402925452533963934}
+    - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 1402925452533963934}
@@ -1397,6 +1415,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7962311941996778800}
     m_Modifications:
+    - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1402925452533963934}
     - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
       propertyPath: _player
       value: 
@@ -1467,6 +1489,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7962311941996778800}
     m_Modifications:
+    - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1402925452533963934}
     - target: {fileID: 4319380155456778676, guid: b3748a0ba0a804625b73ba1952a10edc, type: 3}
       propertyPath: _player
       value: 

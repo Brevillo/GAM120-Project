@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWhipTrigger : MonoBehaviour {
 
-    [SerializeField] private Rigidbody2D rigidbody;
+    [SerializeField] private new Rigidbody2D rigidbody;
 
     public event System.Action<Collider2D> OnCollision;
 

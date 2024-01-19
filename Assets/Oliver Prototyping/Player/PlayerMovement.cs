@@ -22,6 +22,10 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float flightForce;
     [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight, dontFlyAboveGroundDist;
 
+    [Header("Headbutting")]
+    [SerializeField] private float maxChargeTime;
+    [SerializeField] private float minDamage, maxDamage, headbuttCooldown, minDashDistance, maxDashDistance, dashSpeed, minChargeShake, maxChargeShake, chargingRunSpeed;
+
     [Header("Animation")]
     [SerializeField] private float maxSpriteAngle;
     [SerializeField] private float maxAngleVelocity, spriteRotationSpeed;
@@ -31,7 +35,9 @@ public class PlayerMovement : Player.Component {
 
     #region Variables
 
-    private StateMachine<PlayerMovement> stateMachine;
+    private StateMachine<PlayerMovement>
+        stateMachine,   // regular movement state machine
+        hbStateMachine; // headbutt (hb) stae machine
 
     private bool jumpBuffered;              // is jump buffered?
 
@@ -41,7 +47,9 @@ public class PlayerMovement : Player.Component {
     private float groundDist;               // distance to the ground
 
     private float remainingFlightStamina;   // how much flight stamina reminas
-    private float spriteRotationVelocity;         // current veloctiy of sprite rotation
+    private float spriteRotationVelocity;   // current veloctiy of sprite rotation
+
+    private float hbStrengthPercent;        // percent of the headbutt that was charged
 
     #endregion
 
@@ -74,13 +82,14 @@ public class PlayerMovement : Player.Component {
     #region Awake and Update
 
     private void Awake() {
-
         InitializeStateMachine();
+        InitializeHeadbuttingStateMachine();
     }
 
     private void Update() {
 
         // input
+
         jumpBuffered = jumpBuffer.Buffer(Input.Jump.Down);
 
         // get information about current physical state
@@ -94,6 +103,7 @@ public class PlayerMovement : Player.Component {
         // run state machines
 
         stateMachine.Update(Time.deltaTime);
+        hbStateMachine.Update(Time.deltaTime);
 
         // apply velocity
 
@@ -114,15 +124,20 @@ public class PlayerMovement : Player.Component {
 
     private void Run() {
 
-        float accel = onGround
+        float
+            accel = onGround
             ? InputDirection.x != 0 ? groundAccel : groundDeccel
-            : InputDirection.x != 0 ? airAccel    : airDeccel;
+            : InputDirection.x != 0 ? airAccel    : airDeccel,
+            speed = hbStateMachine.currentState == hbCharging
+            ? chargingRunSpeed
+            : runSpeed;
 
-        velocity.x = Mathf.MoveTowards(velocity.x, InputDirection.x * runSpeed, accel * Time.deltaTime);
+        velocity.x = Mathf.MoveTowards(velocity.x, speed * InputDirection.x, accel * Time.deltaTime);
     }
 
     private void Fall(float gravity) {
 
+        // apply peak gravity if necessary
         gravity = Mathf.Abs(velocity.y) < peakVelThreshold ? peakGravity : gravity;
 
         velocity.y = Mathf.MoveTowards(velocity.y, -maxFallSpeed, gravity * Time.deltaTime);
@@ -151,10 +166,11 @@ public class PlayerMovement : Player.Component {
     #endregion
 
     // instances of each state class
-    private Grounded grounded;
-    private Jumping jumping;
-    private Falling falling;
-    private Flying flying;
+    private Grounded    grounded;
+    private Jumping     jumping;
+    private Falling     falling;
+    private Flying      flying;
+    private Headbutting headbutting;
 
     private void InitializeStateMachine() {
 
@@ -163,6 +179,7 @@ public class PlayerMovement : Player.Component {
         jumping     = new(this);
         falling     = new(this);
         flying      = new(this);
+        headbutting = new(this);
 
         // define transition requirements
         TransitionDelegate
@@ -174,10 +191,9 @@ public class PlayerMovement : Player.Component {
 
             toFalling   = () => !onGround,
 
-            toFlight    = () => remainingFlightStamina > 0
-                                && !onGround
-                                && ((Input.Jump.Pressed && !jumpBuffered) || (groundDist > dontFlyAboveGroundDist && jumpBuffered))
-                                && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight),
+            toFlight    = () => remainingFlightStamina > 0 && !onGround
+                                && ((Input.Jump.Pressed && !jumpBuffered) || (groundDist > dontFlyAboveGroundDist && jumpBuffered))      // so you don't accidentally start flying if you try to buffer a jump
+                                && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immeditaley fly after jumping
             endFlying   = () => !Input.Jump.Pressed || remainingFlightStamina <= 0;
 
         // initialize state machine
@@ -333,13 +349,112 @@ public class PlayerMovement : Player.Component {
         }
     }
 
+    [Serializable]
     private class Headbutting : State {
 
         public Headbutting(PlayerMovement context) : base(context) { }
+    }
+
+    #endregion
+
+    #region Headbutting
+
+    // instances of each headbutt state class
+    private HbIdle hbIdle;
+    private HbCharging hbCharging;
+    private HbAttacking hbAttacking;
+
+    private void InitializeHeadbuttingStateMachine() {
+
+        hbIdle      = new(this);
+        hbCharging  = new(this);
+        hbAttacking = new(this);
+
+        TransitionDelegate
+            startCharging   = () => Input.Attack.Down && hbStateMachine.stateDuration > headbuttCooldown,
+            startAttacking  = () => !Input.Attack.Pressed,
+            stopAttacking   = () => hbStateMachine.stateDuration > Mathf.Lerp(minDashDistance, maxDashDistance, hbStrengthPercent) / dashSpeed;
+
+        hbStateMachine = new(
+
+            firstState: hbIdle,
+
+            transitions: new() {
+
+                { hbIdle, new() {
+                    new(hbCharging, startCharging),
+                } },
+
+                { hbCharging , new() {
+                    new(hbAttacking, startAttacking),
+                } },
+
+                { hbAttacking , new() {
+                    new(hbIdle, stopAttacking),
+                } },
+            }
+        );
+    }
+
+    [Serializable]
+    private class HbIdle : State {
+
+        public HbIdle(PlayerMovement context) : base(context) { }
+    }
+
+    [Serializable]
+    private class HbCharging : State {
+
+        public HbCharging(PlayerMovement context) : base(context) { }
+
+        private float chargePercent => Mathf.Clamp01(context.hbStateMachine.stateDuration / context.maxChargeTime);
+
+        public override void Update() {
+
+            context.bodyPivot.localPosition = UnityEngine.Random.insideUnitCircle * Mathf.Lerp(context.minChargeShake, context.maxChargeShake, chargePercent);
+            new List<SpriteRenderer>(context.GetComponentsInChildren<SpriteRenderer>()).ForEach(rend => rend.color = Color.Lerp(Color.white, Color.red, chargePercent));
+
+            base.Update();
+        }
+
+        public override void Exit() {
+
+            context.bodyPivot.localPosition = Vector2.zero;
+            new List<SpriteRenderer>(context.GetComponentsInChildren<SpriteRenderer>()).ForEach(rend => rend.color = Color.white);
+
+            context.hbStrengthPercent = chargePercent;
+
+            base.Exit();
+        }
+    }
+
+    [Serializable]
+    private class HbAttacking : State {
+
+        public HbAttacking(PlayerMovement context) : base(context) { }
 
         public override void Enter() {
 
             base.Enter();
+
+            context.stateMachine.ChangeState(context.headbutting);
+
+            Vector2 dashDirection = context.InputDirection != Vector2Int.zero
+                ? context.Input.Movement.Vector.normalized
+                : Vector2.right * context.Facing;
+
+            context.velocity = dashDirection * context.dashSpeed;
+        }
+
+        public override void Exit() {
+
+            context.velocity = Vector2.zero;
+
+            context.stateMachine.ChangeState(context.onGround
+                ? context.grounded
+                : context.falling);
+
+            base.Exit();
         }
     }
 
