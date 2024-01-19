@@ -14,9 +14,6 @@ public class HummingBird : MonoBehaviour, IWhippable {
     private Transform target;
     private Coroutine behaviour;
 
-    public IWhippable.Type type => IWhippable.Type.Light;
-    public Vector2 Position => transform.position;
-
     private Vector2 position => transform.position;
     private Vector2 velocity {
         get => rigidbody.velocity / timeScale;
@@ -100,6 +97,9 @@ public class HummingBird : MonoBehaviour, IWhippable {
     #endregion
 
     #region Whippable
+
+    public IWhippable.Type WhippableType => IWhippable.Type.Light;
+    public Vector2 WhippablePosition => transform.position;
 
     public void DisableMovement() {
         StopCoroutine(behaviour);

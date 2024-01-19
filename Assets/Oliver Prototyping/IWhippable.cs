@@ -6,9 +6,9 @@ public interface IWhippable {
 
     public enum Type { Light, Heavy }
 
-    public Type type { get; }
+    public Type WhippableType { get; }
 
-    public Vector2 Position { get; }
+    public Vector2 WhippablePosition { get; }
 
     public void DisableMovement();
 

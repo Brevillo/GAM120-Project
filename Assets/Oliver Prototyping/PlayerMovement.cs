@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : Player.Component {
 
     #region Parameters
 
@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight;
-    [SerializeField] private float jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist;
+    [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist;
     [SerializeField] private BufferTimer jumpBuffer;
     [SerializeField] private LayerMask groundMask;
 
@@ -22,28 +22,12 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight, dontFlyAboveGroundDist;
     [SerializeField] private Transform wing1, wing2;
 
-    [Header("Whipping")]
-    [SerializeField] private float whipExtendSpeed;
-    [SerializeField] private float whipExtendDist, whipRetractSpeed, whipPullSpeed, whipMaxLength;
-    [SerializeField] private VerletRope.Parameters whipRopeParameters;
-    [SerializeField] private LineRenderer whipRenderer;
-    [SerializeField] private PlayerWhipTrigger whipTrigger;
-    [SerializeField] private float whipHitFreezeFrame;
-
-    [Header("References")]
-    [SerializeField] private new Rigidbody2D rigidbody;
-    [SerializeField] private BoxCollider2D col;
-    [SerializeField] private InputManager inputManager;
-
     #endregion
 
     #region Variables
 
-    private StateMachine<PlayerMovement>
-        stateMachine,
-        whipStateMachine;
+    private StateMachine<PlayerMovement> stateMachine;
 
-    private Vector2Int inputDir;               // current movement input
     private bool jumpBuffered;              // is jump buffered?
 
     private Vector2 velocity;               // current velocity (stored so that I can edit the x and y components individually)
@@ -53,56 +37,48 @@ public class PlayerMovement : MonoBehaviour {
 
     private float remainingFlightStamina;   // how much flight stamina reminas
 
-    private Vector2 whipPosition;           // end point of the whip
+    #endregion
 
-    private IWhippable whipping;
-    private VerletRope whipRope;
+    #region Public Functions
+
+    /// <summary> Set x and/or y velocity individually. </summary>
+    public void SetVelocity(float? x = null, float? y = null)
+        => SetVelocity(new(x ?? Rigidbody.velocity.x, y ?? Rigidbody.velocity.y));
+    /// <summary> Set palyer velocity. </summary>
+    public void SetVelocity(Vector2 velocity) {
+        Rigidbody.velocity = velocity;
+        stateMachine.ChangeState(falling);
+    }
 
     #endregion
 
     #region Awake and Update
 
     private void Awake() {
+
         InitializeStateMachine();
-        InitializeWhipStateMachine();
     }
 
     private void Update() {
 
-        // debug helpers
-
-        if (inputManager.Debug1.Down) UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-
         // input
-
-        inputDir = new(
-            Mathf.RoundToInt(inputManager.Movement.Vector.x),
-            Mathf.RoundToInt(inputManager.Movement.Vector.y));
-        jumpBuffered = jumpBuffer.Buffer(inputManager.Jump.Down);
+        jumpBuffered = jumpBuffer.Buffer(Input.Jump.Down);
 
         // get information about current physical state
 
-        velocity = rigidbody.velocity;
-        groundHit = Physics2D.BoxCast(transform.position, col.size, 0, Vector2.down, groundDetectDist, groundMask);
+        velocity = Rigidbody.velocity;
+        groundHit = Physics2D.BoxCast(transform.position, Collider.size, 0, Vector2.down, groundDetectDist, groundMask);
         onGround = groundHit && groundHit.normal == Vector2.up;
-        var groundDistHit = Physics2D.BoxCast(transform.position, col.size, 0, Vector2.down, Mathf.Infinity, groundMask);
-        groundDist = groundDistHit ? transform.position.y - col.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
+        var groundDistHit = Physics2D.BoxCast(transform.position, Collider.size, 0, Vector2.down, Mathf.Infinity, groundMask);
+        groundDist = groundDistHit ? transform.position.y - Collider.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
 
         // run state machines
 
         stateMachine.Update(Time.deltaTime);
-        whipStateMachine.Update(Time.deltaTime);
 
         // apply velocity
 
-        rigidbody.velocity = velocity;
-    }
-
-    private void FixedUpdate() {
-
-        whipRope?.Update(transform.position);
-
-        whipRope?.ApplyToLineRenderer(whipRenderer);
+        Rigidbody.velocity = velocity;
     }
 
     #endregion
@@ -112,10 +88,10 @@ public class PlayerMovement : MonoBehaviour {
     private void Run() {
 
         float accel = onGround
-            ? inputDir.x != 0 ? groundAccel : groundDeccel
-            : inputDir.x != 0 ? airAccel    : airDeccel;
+            ? InputDirection.x != 0 ? groundAccel : groundDeccel
+            : InputDirection.x != 0 ? airAccel    : airDeccel;
 
-        velocity.x = Mathf.MoveTowards(velocity.x, inputDir.x * runSpeed, accel * Time.deltaTime);
+        velocity.x = Mathf.MoveTowards(velocity.x, InputDirection.x * runSpeed, accel * Time.deltaTime);
     }
 
     private void Fall(float gravity) {
@@ -123,17 +99,6 @@ public class PlayerMovement : MonoBehaviour {
         gravity = Mathf.Abs(velocity.y) < peakVelThreshold ? peakGravity : gravity;
 
         velocity.y = Mathf.MoveTowards(velocity.y, -maxFallSpeed, gravity * Time.deltaTime);
-    }
-
-    private void UpdateWhip() {
-        whipRenderer.useWorldSpace = true;
-        whipRenderer.positionCount = 2;
-        whipRenderer.SetPositions(new Vector3[] { transform.position, whipPosition });
-    }
-
-    private void OnWhipCollision(Collider2D collision) {
-        if (collision.TryGetComponent(out IWhippable whippable))
-            whipping = whippable;
     }
 
     #endregion
@@ -178,15 +143,15 @@ public class PlayerMovement : MonoBehaviour {
             toGrounded  = () => onGround,
 
             startJump   = () => jumpBuffered && onGround,
-            endJump     = () => !inputManager.Jump.Pressed || velocity.y <= 0,
+            endJump     = () => (!Input.Jump.Pressed && stateMachine.stateDuration > minJumpTime) || velocity.y <= 0,
 
             toFalling   = () => !onGround,
 
             toFlight    = () => remainingFlightStamina > 0
                                 && !onGround
-                                && ((inputManager.Jump.Pressed && !jumpBuffered) || (groundDist > dontFlyAboveGroundDist && jumpBuffered))
+                                && ((Input.Jump.Pressed && !jumpBuffered) || (groundDist > dontFlyAboveGroundDist && jumpBuffered))
                                 && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight),
-            endFlying   = () => !inputManager.Jump.Pressed || remainingFlightStamina <= 0;
+            endFlying   = () => !Input.Jump.Pressed || remainingFlightStamina <= 0;
 
         // initialize state machine
         stateMachine = new(
@@ -340,163 +305,6 @@ public class PlayerMovement : MonoBehaviour {
             context.Run();
 
             base.Update();
-        }
-    }
-
-    #endregion
-
-    #region Whip State Machine
-
-    // whip state instances
-    private WhipIdle            whipIdle;
-    private WhipExtending       whipExtending;
-    private WhipRetracting      whipRetracting;
-    private WhipPullingEnemy    whipPullingEnemy;
-
-    private void InitializeWhipStateMachine() {
-
-        whipIdle            = new(this);
-        whipExtending       = new(this);
-        whipRetracting      = new(this);
-        whipPullingEnemy    = new(this);
-
-        TransitionDelegate
-
-            startWhip       = () => inputManager.Whip.Down && inputDir != Vector2Int.zero,
-            stopWhip        = () => !inputManager.Whip.Pressed || whipExtending.reachedTarget,
-
-            whipRetracted   = () => whipPosition == (Vector2)transform.position,
-
-            pullEnemy       = () => whipping != null && whipping.type == IWhippable.Type.Light;
-
-        whipStateMachine = new(
-
-            firstState: whipIdle,
-
-            transitions: new() {
-
-                { whipIdle, new() {
-                    new(whipExtending, startWhip),
-                } },
-
-                { whipExtending, new() {
-                    new(whipRetracting, stopWhip),
-                    new(whipPullingEnemy, pullEnemy),
-                } },
-
-                { whipRetracting, new() {
-                    new(whipIdle, whipRetracted),
-                } },
-
-                { whipPullingEnemy, new() {
-                    new(whipIdle, whipRetracted)
-                } },
-            }
-        );
-    }
-
-    private class WhipIdle : State {
-
-        public WhipIdle(PlayerMovement context) : base(context) { }
-
-        public override void Enter() {
-
-            base.Enter();
-
-            context.whipRenderer.enabled = false;
-        }
-    }
-
-    private class WhipExtending : State {
-
-        public WhipExtending(PlayerMovement context) : base(context) { }
-
-        private Vector2 aimDirection, targetPosition;
-        private PlayerWhipTrigger activeWhipTrigger;
-
-        public bool reachedTarget => context.whipPosition == targetPosition;
-
-        public override void Enter() {
-
-            base.Enter();
-
-            context.whipPosition = context.transform.position;
-            aimDirection = context.inputManager.Movement.Vector.normalized;
-            targetPosition = context.whipPosition + aimDirection * context.whipMaxLength;
-
-            activeWhipTrigger = Instantiate(context.whipTrigger);
-            activeWhipTrigger.OnCollision += context.OnWhipCollision;
-
-            context.whipRenderer.enabled = true;
-
-            context.whipRope = new(context.whipRopeParameters, (Vector2)context.transform.position + aimDirection * 0.5f);
-            context.whipRope.OnUpdate += point => {
-                context.whipPosition = point;
-                activeWhipTrigger.MoveTo(point);
-            };
-            context.whipRope.AddForce(aimDirection * context.whipExtendSpeed + Vector2.one * 0.01f);
-        }
-
-        public override void Update() {
-
-            //context.whipPosition = Vector2.MoveTowards(context.whipPosition, targetPosition, context.whipExtendSpeed * Time.deltaTime);
-            //context.UpdateWhip();
-
-            base.Update();
-        }
-
-        public override void Exit() {
-
-            Destroy(activeWhipTrigger.gameObject);
-            context.whipRope = null;
-
-            base.Exit();
-        }
-    }
-
-    private class WhipRetracting : State {
-
-        public WhipRetracting(PlayerMovement context) : base(context) { }
-
-        public override void Update() {
-
-            context.whipPosition = Vector2.MoveTowards(context.whipPosition, context.transform.position, context.whipRetractSpeed * Time.deltaTime);
-            context.UpdateWhip();
-
-            base.Update();
-        }
-    }
-
-    private class WhipPullingEnemy : State {
-
-        public WhipPullingEnemy(PlayerMovement context) : base(context) { }
-
-        public override void Enter() {
-
-            base.Enter();
-
-            context.whipPosition = context.whipping.Position;
-            context.UpdateWhip();
-            TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
-
-            context.whipping.DisableMovement();
-        }
-
-        public override void Update() {
-
-            context.whipPosition = Vector2.MoveTowards(context.whipPosition, context.transform.position, context.whipPullSpeed * Time.deltaTime);
-            context.whipping.MoveTo(context.whipPosition);
-            context.UpdateWhip();
-
-            base.Update();
-        }
-
-        public override void Exit() {
-
-            context.whipping.EnableMovement();
-            context.whipping = null;
-
-            base.Exit();
         }
     }
 

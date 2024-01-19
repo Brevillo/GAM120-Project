@@ -4,7 +4,7 @@ using UnityEngine;
 public class VerletRope {
 
     private readonly Parameters parameters;
-    private readonly float segmentLength;
+    private float segmentLength;
     private readonly Vector2[] points, prevPoints;
 
     public event System.Action<Vector2> OnUpdate;
@@ -27,16 +27,16 @@ public class VerletRope {
         public int pointCount = 20;
     }
 
-    public VerletRope(Parameters parameters, Vector2 start) {
+    public VerletRope(Parameters parameters, Vector2 start, Vector2 end) {
 
         this.parameters = parameters;
         segmentLength = parameters.length / parameters.pointCount;
 
-        points = new Vector2[parameters.pointCount];
+        points     = new Vector2[parameters.pointCount];
         prevPoints = new Vector2[parameters.pointCount];
 
-        System.Array.Fill(points, start);
-        System.Array.Fill(prevPoints, start);
+        for (int i = 0; i < parameters.pointCount; i++)
+            points[i] = prevPoints[i] = Vector2.Lerp(start, end, (float)i / parameters.pointCount);
     }
 
     // constraint equations from https://toqoz.fyi/game-rope.html
@@ -44,6 +44,11 @@ public class VerletRope {
     public void AddForce(Vector2 force) {
         for (int i = 0; i < parameters.pointCount; i++)
             points[i] += force;
+    }
+
+    public float Length {
+        get => segmentLength * parameters.pointCount;
+        set => segmentLength = value / parameters.pointCount;
     }
 
     public Vector2[] Update(Vector2 start) {
@@ -83,6 +88,14 @@ public class VerletRope {
         OnUpdate?.Invoke(points[^1]);
 
         return points;
+    }
+
+    public void Simulate(float duration, Vector2 start) {
+
+        float counts = Mathf.RoundToInt(duration / Time.fixedDeltaTime);
+
+        for (int i = 0; i < counts; i++)
+            Update(start);
     }
 
     public void ApplyToLineRenderer(LineRenderer line) {

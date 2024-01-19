@@ -142,7 +142,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3313340264802497438}
@@ -577,8 +577,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2287260068182436129}
   - component: {fileID: 504657889318610054}
+  - component: {fileID: 2452180612639037256}
   - component: {fileID: 1535773389568884769}
   - component: {fileID: -1058919617282530638}
+  - component: {fileID: 1402925452533963934}
   - component: {fileID: 4716952027819047374}
   - component: {fileID: 4074593258213741689}
   m_Layer: 0
@@ -618,12 +620,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88065540d580a4cf4b234b4a35331957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1402925452533963934}
   runSpeed: 15
   groundAccel: 200
   groundDeccel: 200
   airAccel: 150
   airDeccel: 150
   jumpHeight: 4.5
+  minJumpTime: 0.07
   jumpGravity: 80
   fallGravity: 100
   peakVelThreshold: 7
@@ -643,23 +647,67 @@ MonoBehaviour:
   dontFlyAboveGroundDist: 1
   wing1: {fileID: 1918334092711594943}
   wing2: {fileID: 3753093963009212017}
-  whipExtendSpeed: 2
-  whipExtendDist: 4
+--- !u!114 &2452180612639037256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063646460510966481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0867c882f69274a7785cabe2c7d3cf9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1402925452533963934}
+  whipBackForce: 0.5
+  whipForwardForce: 1.75
+  whipForwardDelay: 0.1
+  whipTriggerDelay: 0.13
   whipRetractSpeed: 50
   whipPullSpeed: 50
   whipMaxLength: 30
+  enemyGrappleVerticalBoost: 10
   whipRopeParameters:
-    gravity: 50
+    gravity: 60
     dampening: 0.99
-    iterations: 300
+    iterations: 100
     length: 20
-    pointCount: 20
+    pointCount: 50
   whipRenderer: {fileID: 3751569453558091447}
   whipTrigger: {fileID: 6268666334621699268, guid: d98ef91243d0d423886e4abafa97a5cc, type: 3}
   whipHitFreezeFrame: 0.15
-  rigidbody: {fileID: 4716952027819047374}
-  col: {fileID: 4074593258213741689}
-  inputManager: {fileID: -1058919617282530638}
+  hitEnemyShake:
+    amplitude: 1
+    duration: 0.25
+    unscaledTime: 1
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    interactionType: 0
+    shakeType: 1
+    timeBetweenPositions: 0.02
 --- !u!114 &1535773389568884769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,6 +780,22 @@ MonoBehaviour:
     pressed: 0
     down: 0
     released: 0
+--- !u!114 &1402925452533963934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063646460510966481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d1d5d8904604700a7a7f454fd30085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: -1058919617282530638}
+  playerMovement: {fileID: 504657889318610054}
+  rigidbody: {fileID: 4716952027819047374}
+  collider: {fileID: 4074593258213741689}
 --- !u!50 &4716952027819047374
 Rigidbody2D:
   serializedVersion: 4

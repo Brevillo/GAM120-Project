@@ -21,7 +21,7 @@ public class DraggableRope : MonoBehaviour {
     }
 
     private void Awake() {
-        rope = new(parameters, transform.position);
+        rope = new(parameters, transform.position, transform.position);
         line = GetComponent<LineRenderer>();
     }
 
