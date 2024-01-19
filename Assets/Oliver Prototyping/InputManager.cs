@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour {
     public Button Jump;
     public Axis Movement;
     public Button Whip;
+    public Button Attack;
 
     [Header("Debug")]
     public Button Debug1;

@@ -21,7 +21,6 @@ public class PlayerWhip : Player.Component {
 
     private IWhippable whipping;            // currently whipped thing
     private VerletRope whipRopeSim;         // current whip simulation
-    private int facing;                     // current direction being faced, 1 = right, -1 = left
 
     private StateMachine<PlayerWhip> stateMachine;
 
@@ -36,16 +35,10 @@ public class PlayerWhip : Player.Component {
     #region Awake and Update
 
     private void Awake() {
-
         InitializeWhipStateMachine();
-
-        facing = 1;
     }
 
     private void Update() {
-
-        if (InputDirection.x != 0) facing = InputDirection.x;
-
         stateMachine.Update(Time.deltaTime);
     }
     
@@ -150,7 +143,7 @@ public class PlayerWhip : Player.Component {
 
         private Vector2 aimDirection => context.InputDirection != Vector2Int.zero
             ? context.Input.Movement.Vector.normalized
-            : Vector2.right * context.facing;
+            : Vector2.right * context.Facing;
 
         private PlayerWhipTrigger activeWhipTrigger;
         private bool whippedForward, triggerActive;

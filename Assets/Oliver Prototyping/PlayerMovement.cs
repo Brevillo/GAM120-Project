@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using StateMachine;
 
@@ -20,7 +21,11 @@ public class PlayerMovement : Player.Component {
     [Header("Flying")]
     [SerializeField] private float flightForce;
     [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight, dontFlyAboveGroundDist;
-    [SerializeField] private Transform wing1, wing2;
+
+    [Header("Animation")]
+    [SerializeField] private float maxSpriteAngle;
+    [SerializeField] private float maxAngleVelocity, spriteRotationSpeed;
+    [SerializeField] private Transform bodyPivot, wingPivot;
 
     #endregion
 
@@ -36,17 +41,31 @@ public class PlayerMovement : Player.Component {
     private float groundDist;               // distance to the ground
 
     private float remainingFlightStamina;   // how much flight stamina reminas
+    private float spriteRotationVelocity;         // current veloctiy of sprite rotation
 
     #endregion
 
     #region Public Functions
 
-    /// <summary> Set x and/or y velocity individually. </summary>
+    public bool OnGround() => onGround;
+
+    /// <summary> Set player x and/or y velocity individually. </summary>
     public void SetVelocity(float? x = null, float? y = null)
         => SetVelocity(new(x ?? Rigidbody.velocity.x, y ?? Rigidbody.velocity.y));
+
     /// <summary> Set palyer velocity. </summary>
     public void SetVelocity(Vector2 velocity) {
         Rigidbody.velocity = velocity;
+        stateMachine.ChangeState(falling);
+    }
+
+    /// <summary> Add to player's current x and/or y velocity.</summary>
+    public void AddVelocity(float x = 0, float y = 0)
+        => AddVelocity(new(x, y));
+
+    /// <summary> Add to player's current velocity. </summary>
+    public void AddVelocity(Vector2 velocity) {
+        Rigidbody.velocity += velocity;
         stateMachine.ChangeState(falling);
     }
 
@@ -79,6 +98,14 @@ public class PlayerMovement : Player.Component {
         // apply velocity
 
         Rigidbody.velocity = velocity;
+
+        // visuals
+
+        float targetAngle = maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
+
+        bodyPivot.eulerAngles = Vector3.forward * Mathf.SmoothDampAngle(bodyPivot.eulerAngles.z, targetAngle, ref spriteRotationVelocity, spriteRotationSpeed);
+
+        bodyPivot.localScale = new(Facing, 1, 1);
     }
 
     #endregion
@@ -204,7 +231,7 @@ public class PlayerMovement : Player.Component {
 
      */
 
-    [System.Serializable]
+    [Serializable]
     private class Grounded : State {
 
         public Grounded(PlayerMovement context) : base(context) { }
@@ -224,7 +251,7 @@ public class PlayerMovement : Player.Component {
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     private class Jumping : State {
 
         public Jumping(PlayerMovement context) : base(context) { }
@@ -254,7 +281,7 @@ public class PlayerMovement : Player.Component {
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     private class Flying : State {
 
         public Flying(PlayerMovement context) : base(context) { }
@@ -276,8 +303,7 @@ public class PlayerMovement : Player.Component {
             context.velocity.y = Mathf.MoveTowards(context.velocity.y, context.maxFlightVel, context.flightForce * Time.deltaTime);
 
             wingOscillation *= -1;
-            context.wing1.localEulerAngles = Vector3.forward * 15 * wingOscillation;
-            context.wing2.localEulerAngles = Vector3.forward * 15 * -wingOscillation;
+            context.wingPivot.localEulerAngles = Vector3.forward * (-45 + 15 * wingOscillation);
 
             context.Run();
 
@@ -286,14 +312,13 @@ public class PlayerMovement : Player.Component {
 
         public override void Exit() {
 
-            context.wing1.localEulerAngles = Vector3.zero;
-            context.wing2.localEulerAngles = Vector3.zero;
+            context.wingPivot.localEulerAngles = Vector3.zero;
 
             base.Exit();
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     private class Falling : State {
 
         public Falling(PlayerMovement context) : base(context) { }
@@ -305,6 +330,16 @@ public class PlayerMovement : Player.Component {
             context.Run();
 
             base.Update();
+        }
+    }
+
+    private class Headbutting : State {
+
+        public Headbutting(PlayerMovement context) : base(context) { }
+
+        public override void Enter() {
+
+            base.Enter();
         }
     }
 

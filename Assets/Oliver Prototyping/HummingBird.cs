@@ -123,11 +123,12 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
         IEnumerator Flash() {
 
-            rend.color = Color.red;
+            var color = rend.color;
+            rend.color = (Color.white - color) * 1.5f;
 
             yield return new WaitForSeconds(damageFlashDur * timeScale);
 
-            rend.color = Color.white;
+            rend.color = color;
         }
     }
 
