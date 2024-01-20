@@ -25,6 +25,8 @@ public class PlayerMovement : Player.Component {
     [Header("Headbutting")]
     [SerializeField] private float maxChargeTime;
     [SerializeField] private float minDamage, maxDamage, headbuttCooldown, minDashDistance, maxDashDistance, dashSpeed, minChargeShake, maxChargeShake, chargingRunSpeed;
+    [SerializeField] private BufferTimer headbuttBuffer;
+    [SerializeField] private PlayerHornTrigger hornTrigger;
 
     [Header("Animation")]
     [SerializeField] private float maxSpriteAngle;
@@ -38,8 +40,6 @@ public class PlayerMovement : Player.Component {
     private StateMachine<PlayerMovement>
         stateMachine,   // regular movement state machine
         hbStateMachine; // headbutt (hb) stae machine
-
-    private bool jumpBuffered;              // is jump buffered?
 
     private Vector2 velocity;               // current velocity (stored so that I can edit the x and y components individually)
     private RaycastHit2D groundHit;         // raycast hit for the ground
@@ -82,15 +82,19 @@ public class PlayerMovement : Player.Component {
     #region Awake and Update
 
     private void Awake() {
+
         InitializeStateMachine();
         InitializeHeadbuttingStateMachine();
+
+        hornTrigger.OnEntityCollision += OnHornCollision;
     }
 
     private void Update() {
 
         // input
 
-        jumpBuffered = jumpBuffer.Buffer(Input.Jump.Down);
+        jumpBuffer.Buffer(Input.Jump.Down);
+        headbuttBuffer.Buffer(Input.Attack.Pressed);
 
         // get information about current physical state
 
@@ -143,6 +147,16 @@ public class PlayerMovement : Player.Component {
         velocity.y = Mathf.MoveTowards(velocity.y, -maxFallSpeed, gravity * Time.deltaTime);
     }
 
+    private void OnHornCollision(EntityHealth entity) {
+
+        if (entity.Team == Health.Team) return;
+
+        if (hbStateMachine.currentState == hbAttacking) {
+
+            entity.TakeDamage(new(Mathf.Lerp(minDamage, maxDamage, hbStrengthPercent), hbAttacking.direction));
+        }
+    }
+
     #endregion
 
     #region State Machine
@@ -186,13 +200,13 @@ public class PlayerMovement : Player.Component {
 
             toGrounded  = () => onGround,
 
-            startJump   = () => jumpBuffered && onGround,
+            startJump   = () => jumpBuffer && onGround,
             endJump     = () => (!Input.Jump.Pressed && stateMachine.stateDuration > minJumpTime) || velocity.y <= 0,
 
             toFalling   = () => !onGround,
 
             toFlight    = () => remainingFlightStamina > 0 && !onGround
-                                && ((Input.Jump.Pressed && !jumpBuffered) || (groundDist > dontFlyAboveGroundDist && jumpBuffered))      // so you don't accidentally start flying if you try to buffer a jump
+                                && ((Input.Jump.Pressed && !jumpBuffer) || (groundDist > dontFlyAboveGroundDist && jumpBuffer))          // so you don't accidentally start flying if you try to buffer a jump
                                 && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immeditaley fly after jumping
             endFlying   = () => !Input.Jump.Pressed || remainingFlightStamina <= 0;
 
@@ -371,7 +385,7 @@ public class PlayerMovement : Player.Component {
         hbAttacking = new(this);
 
         TransitionDelegate
-            startCharging   = () => Input.Attack.Down && hbStateMachine.stateDuration > headbuttCooldown,
+            startCharging   = () => headbuttBuffer && hbStateMachine.stateDuration > headbuttCooldown,
             startAttacking  = () => !Input.Attack.Pressed,
             stopAttacking   = () => hbStateMachine.stateDuration > Mathf.Lerp(minDashDistance, maxDashDistance, hbStrengthPercent) / dashSpeed;
 
@@ -433,17 +447,19 @@ public class PlayerMovement : Player.Component {
 
         public HbAttacking(PlayerMovement context) : base(context) { }
 
+        public Vector2 direction;
+
         public override void Enter() {
 
             base.Enter();
 
             context.stateMachine.ChangeState(context.headbutting);
 
-            Vector2 dashDirection = context.InputDirection != Vector2Int.zero
+            direction = context.InputDirection != Vector2Int.zero
                 ? context.Input.Movement.Vector.normalized
                 : Vector2.right * context.Facing;
 
-            context.velocity = dashDirection * context.dashSpeed;
+            context.velocity = direction * context.dashSpeed;
         }
 
         public override void Exit() {

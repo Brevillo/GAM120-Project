@@ -96,7 +96,8 @@ public class PlayerWhip : Player.Component {
 
             whipRetracted   = () => whipRopeSim.Length == 0,
 
-            pullEnemy       = () => whipping != null && whipping.WhippableType == IWhippable.Type.Light;
+            pullEnemy       = () => whipping != null && whipping.WhippableType == IWhippable.Type.Light,
+            stopPullEnemy   = () => whipping == null;
 
         stateMachine = new(
 
@@ -118,7 +119,8 @@ public class PlayerWhip : Player.Component {
                 } },
 
                 { whipPullingEnemy, new() {
-                    new(whipIdle, whipRetracted)
+                    new(whipIdle, whipRetracted),
+                    new(whipRetracting, stopPullEnemy),
                 } },
             }
         );
@@ -232,7 +234,10 @@ public class PlayerWhip : Player.Component {
             context.whipRopeSim = new(context.whipRopeParameters, context.transform.position, context.whipping.WhippablePosition) {
                 Length = ((Vector2)context.transform.position - context.whipping.WhippablePosition).magnitude
             };
-            context.whipRopeSim.OnUpdate += context.whipping.MoveTo;
+            context.whipRopeSim.OnUpdate += position => {
+                if (context.whipping != null)
+                    context.whipping.MoveTo(position);
+            };
         }
 
         public override void Update() {
@@ -244,7 +249,8 @@ public class PlayerWhip : Player.Component {
 
         public override void Exit() {
 
-            context.whipping.EnableMovement();
+            if (context.whipping != null)
+                context.whipping.EnableMovement();
             context.whipping = null;
 
             base.Exit();

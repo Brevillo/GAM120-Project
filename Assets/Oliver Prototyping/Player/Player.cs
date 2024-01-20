@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private PlayerInput inputManager;
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private EntityHealth health;
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private new BoxCollider2D collider;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour {
         protected Player            Player          => player;
         protected PlayerInput       Input           => player.  inputManager;
         protected PlayerMovement    Movement        => player.  playerMovement;
+        protected EntityHealth      Health          => player.  health;
         protected Rigidbody2D       Rigidbody       => player.  rigidbody;
         protected BoxCollider2D     Collider        => player.  collider;
         protected SpriteRenderer    Renderer        => player.  spriteRenderer;

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PlayerHornTrigger : MonoBehaviour {
 
-    [SerializeField] private EntityHealthTeam team;
-    [SerializeField] private float damage;
+    public event System.Action<EntityHealth> OnEntityCollision;
 
     private void OnTriggerEnter2D(Collider2D collision) {
 
-        if (collision.TryGetComponent(out EntityHealth entity) && entity.Team != team)
-            entity.TakeDamage(new(damage, entity.transform.position - transform.position));
+        if (collision.TryGetComponent(out EntityHealth entity))
+            OnEntityCollision?.Invoke(entity);
     }
 }

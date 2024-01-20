@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class HummingBird : MonoBehaviour, IWhippable {
 
-    [SerializeField] private float minIdleTime, maxIdleTime, minWanderDist, maxWanderDist, wanderSpeed, diveSpeed, maxDiveDist, airFriction, damageFlashDur;
+    [SerializeField] private float damage;
+    [SerializeField] private float minIdleTime, maxIdleTime, minWanderDist, maxWanderDist, wanderSpeed, diveSpeed, maxDiveDist, airFriction, damageFlashDur, knockbackForce;
     [SerializeField] private int minWanderMoves, maxWanderMoves;
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private SpriteRenderer rend;
-    [SerializeField] private EntityTimeScale timeScale;
     [SerializeField] private EntityHealth health;
 
     private Transform target;
     private Coroutine behaviour;
+    private Color color;
 
     private Vector2 position => transform.position;
     private Vector2 velocity {
-        get => rigidbody.velocity / timeScale;
-        set => rigidbody.velocity = value * timeScale;
+        get => rigidbody.velocity;
+        set => rigidbody.velocity = value;
     }
+
+    private bool attacking;
 
     private void Start() {
 
@@ -26,14 +29,22 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
         behaviour = StartCoroutine(Behaviour());
 
+        color = rend.color;
         health.OnTakeDamage += OnTakeDamage;
     }
 
     #region Movement
 
+    public void RestartBehaviour() {
+        StopCoroutine(behaviour);
+        behaviour = StartCoroutine(Behaviour());
+    }
+
     private IEnumerator Behaviour() {
 
         while (true) {
+
+            attacking = false;
 
             yield return Idle();
 
@@ -47,6 +58,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
                 yield return Idle();
             }
 
+            attacking = true;
             yield return Dive();
         }
     }
@@ -57,10 +69,10 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
         while (idleTime > 0) {
 
-            idleTime -= Time.deltaTime * timeScale;
+            idleTime -= Time.deltaTime;
 
             // move velocity to zero if bumped
-            velocity = Vector2.MoveTowards(velocity, Vector2.zero, airFriction * Time.deltaTime * timeScale);
+            velocity = Vector2.MoveTowards(velocity, Vector2.zero, airFriction * Time.deltaTime);
 
             yield return null;
         }
@@ -106,7 +118,8 @@ public class HummingBird : MonoBehaviour, IWhippable {
     }
 
     public void EnableMovement() {
-        behaviour = StartCoroutine(Behaviour());
+        if (this != null)
+            behaviour = StartCoroutine(Behaviour());
     }
 
     public void MoveTo(Vector2 position) {
@@ -119,17 +132,38 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
     private void OnTakeDamage(DamageInfo info) {
 
+        if (health.Health <= 0) {
+            Death();
+            return;
+        }
+
         StartCoroutine(Flash());
 
         IEnumerator Flash() {
 
-            var color = rend.color;
-            rend.color = (Color.white - color) * 1.5f;
+            rend.color = Color.white;
+            velocity = Vector2.zero;
 
-            yield return new WaitForSeconds(damageFlashDur * timeScale);
+            yield return new WaitForSeconds(damageFlashDur);
 
             rend.color = color;
+            velocity = -info.direction * knockbackForce;
+            RestartBehaviour();
         }
+    }
+
+    private void Death() {
+        Destroy(gameObject);
+    }
+
+    #endregion
+
+    #region Attacking
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+
+        if (attacking && collision.TryGetComponent(out EntityHealth entity) && entity.Team != health.Team) 
+            entity.TakeDamage(new(damage, velocity.normalized));
     }
 
     #endregion
