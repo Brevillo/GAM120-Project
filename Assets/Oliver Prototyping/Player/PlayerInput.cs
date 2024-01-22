@@ -10,6 +10,9 @@ public class PlayerInput : InputManager {
     public Button Whip;
     public Button Attack;
 
+    [Header("Menus")]
+    public Button Pause;
+
     [Header("Debug")]
     public Button Debug1;
     public Button Debug2;
