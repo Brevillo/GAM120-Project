@@ -123,7 +123,8 @@ public class HummingBird : MonoBehaviour, IWhippable {
     }
 
     public void MoveTo(Vector2 position) {
-        rigidbody.MovePosition(position);
+        if (this != null)
+            rigidbody.MovePosition(position);
     }
 
     #endregion
