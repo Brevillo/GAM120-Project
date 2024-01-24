@@ -26,9 +26,9 @@ public class Player : MonoBehaviour {
         // debug helpers
 
         if (inputManager.Debug1.Down) UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        if (inputManager.Debug2.Down) ;
-        if (inputManager.Debug3.Down) ;
-        if (inputManager.Debug4.Down) ;
+        //if (inputManager.Debug2.Down) ;
+        //if (inputManager.Debug3.Down) ;
+        //if (inputManager.Debug4.Down) ;
     }
 
     private Vector2Int inputDirection => new(
