@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  minIdleTime: 0.25
-  maxIdleTime: 0.5
+  minIdleTime: 1
+  maxIdleTime: 2
   minWanderDist: 1
   maxWanderDist: 3
   wanderSpeed: 30
@@ -62,6 +62,11 @@ MonoBehaviour:
   knockbackForce: 50
   minWanderMoves: 2
   maxWanderMoves: 5
+  hoverOscillation:
+    amplitude: 0.1
+    frequency: 0.25
+    offset: 0
+    baseline: 0
   rigidbody: {fileID: 4911955032992510564}
   rend: {fileID: 6851537655748982450}
   health: {fileID: 7501728411578513382}

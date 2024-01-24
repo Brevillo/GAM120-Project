@@ -1286,6 +1286,66 @@ MonoBehaviour:
   headbuttBuffer:
     threshold: 0.25
   hornTrigger: {fileID: 2319287322730345604}
+  headbuttHitShake:
+    amplitude: 0.25
+    duration: 0.15
+    unscaledTime: 0
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    interactionType: 0
+    shakeType: 0
+    timeBetweenPositions: 0.02
+  headbuttHitBounce:
+    amplitude: 0.25
+    duration: 0.05
+    unscaledTime: 0
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -2.1434886
+        outSlope: -2.1434886
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.016176462
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    interactionType: 0
   maxSpriteAngle: 15
   maxAngleVelocity: 20
   spriteRotationSpeed: 0.01
@@ -1307,15 +1367,20 @@ MonoBehaviour:
   whipBackForce: 0.5
   whipForwardForce: 1.75
   whipForwardDelay: 0.1
+  minWhipLength: 3
+  maxWhipLength: 20
+  maxLengthExtendDuration: 0.25
+  minWhipDuration: 0.2
+  maxWhipDuration: 0.25
   whipTriggerDelay: 0.13
   whipRetractSpeed: 50
-  whipPullSpeed: 20
+  whipPullSpeed: 40
   whipMaxLength: 30
   enemyGrappleVerticalBoost: 10
   whipRopeParameters:
     gravity: 60
     dampening: 0.99
-    iterations: 100
+    iterations: 50
     length: 20
     pointCount: 50
   whipRenderer: {fileID: 3751569453558091447}

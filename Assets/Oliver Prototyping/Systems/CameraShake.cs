@@ -17,24 +17,71 @@ public class CameraShake : MonoBehaviour {
     private static CameraShake I;
 
     private readonly List<ActiveShake> activeShakes = new();
+    private readonly List<ActiveBounce> activeBounces = new();
 
     public static void AddShake(CameraShakeProfile profile) => I.activeShakes.Add(new(profile));
+    public static void AddBounce(CameraBounceProfile profile, Vector2 direction) => I.activeBounces.Add(new(profile, direction));
+
+    private static Vector2 CalculateOffset<T>(List<T> effects) where T : ActiveEffect {
+
+        Vector2 totalOffset = Vector2.zero;
+        Vector2? largest = null;
+
+        float largestMagnitude = 0;
+
+        foreach (var effect in effects) {
+
+            Vector2 offset = effect.Evaluate();
+
+            switch (effect.interactionType) {
+
+                case InteractionType.Additive:
+                    totalOffset += offset;
+                    break;
+
+                case InteractionType.Override:
+
+                    float magnitude = offset.magnitude;
+
+                    if (magnitude > largestMagnitude) {
+                        largestMagnitude = magnitude;
+                        largest = offset;
+                    }
+
+                    break;
+            }
+        }
+
+        effects.RemoveAll(ActiveEffect.IsCompleted);
+
+        return largest ?? totalOffset;
+    }
 
     private void Update() {
 
-        Vector2 totalOffset = Vector2.zero;
-
-        foreach (var shake in activeShakes)
-            totalOffset = shake.Evaluate(totalOffset);
-
-        activeShakes.RemoveAll(ActiveShake.IsCompleted);
-
-        shakeTransform.localPosition = totalOffset;
+        shakeTransform.localPosition
+            = CalculateOffset(activeShakes)
+            + CalculateOffset(activeBounces);
     }
 
-    private class ActiveShake {
+    private abstract class ActiveEffect {
 
-        public ActiveShake(CameraShakeProfile profile) {
+        public ActiveEffect() {
+            timer = 0;
+        }
+
+        protected float timer;
+        protected abstract float duration { get; }
+        public abstract InteractionType interactionType { get; }
+
+        public abstract Vector2 Evaluate();
+
+        public static bool IsCompleted(ActiveEffect effect) => effect.timer >= effect.duration;
+    }
+
+    private class ActiveShake : ActiveEffect {
+
+        public ActiveShake(CameraShakeProfile profile) : base() {
 
             this.profile = profile;
 
@@ -46,12 +93,13 @@ public class CameraShake : MonoBehaviour {
 
         private readonly CameraShakeProfile profile;
 
-        private float timer;
-
         private Vector2 prevTargetPosition, targetPosition;
         private float moveTimeRemaining;
 
-        public Vector2 Evaluate(Vector2 current) {
+        protected override float duration => profile.duration;
+        public override InteractionType interactionType => profile.interactionType;
+
+        public override Vector2 Evaluate() {
 
             float dt = profile.unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
 
@@ -90,42 +138,40 @@ public class CameraShake : MonoBehaviour {
                     break;
             }
 
-            switch (profile.interactionType) {
+            return position;
+        }
+    }
 
-                case CameraShakeProfile.InteractionType.Additive:
-                    current += position;
-                    break;
+    private class ActiveBounce : ActiveEffect {
 
-                case CameraShakeProfile.InteractionType.Override:
-                    if (position.magnitude > current.magnitude)
-                        current = position;
-                    break;
-            }
+        public ActiveBounce(CameraBounceProfile profile, Vector2 direction) : base() {
 
-            return current;
+            this.profile = profile;
+            this.direction = direction;
+
+            timer = 0;
         }
 
-        public static bool IsCompleted(ActiveShake shake) => shake.timer >= shake.profile.duration;
+        private readonly CameraBounceProfile profile;
+        private readonly Vector2 direction;
+
+        protected override float duration => profile.duration;
+        public override InteractionType interactionType => profile.interactionType;
+
+        public override Vector2 Evaluate() {
+
+            float dt = profile.unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+
+            timer += dt;
+
+            // calculate current amplitude
+            float timePercent      = timer / profile.duration,
+                  intensityPercent = profile.intensityCurve.Evaluate(timePercent),
+                  amplitude        = intensityPercent * profile.amplitude;
+
+            return direction * amplitude;
+        }
     }
-}
-
-[System.Serializable]
-public class CameraShakeProfile {
-
-    [Tooltip("How large the shake will be.")]
-    public float amplitude = 0.25f;
-    [Tooltip("How long the shake will be.")]
-    public float duration = 0.15f;
-    [Tooltip("Is the shake affected by time scale?")]
-    public bool unscaledTime = false;
-    [Tooltip("The percent intensity of the shake over the duration.")]
-    public AnimationCurve intensityCurve = AnimationCurve.Linear(0, 1, 1, 0);
-    [Tooltip("How the shake will interact with other active shapes.")]
-    public InteractionType interactionType = InteractionType.Additive;
-    [Tooltip("How the shake moves the camera.")]
-    public ShakeType shakeType = ShakeType.NewPositionWithinRadiusEachFrame;
-    [Tooltip("Duration it takes for the camera to move between shake positions.")]
-    public float timeBetweenPositions = 0.02f;
 
     public enum InteractionType {
 
@@ -135,6 +181,31 @@ public class CameraShakeProfile {
         [Tooltip("Shake will override all shakes if it has a higher magnitude.")]
         Override,
     }
+}
+
+[System.Serializable]
+public class CameraShakeProfile {
+
+    [Tooltip("How large the shake will be.")]
+    public float amplitude = 0.25f;
+
+    [Tooltip("How long the shake will be.")]
+    public float duration = 0.15f;
+
+    [Tooltip("Is the shake affected by time scale?")]
+    public bool unscaledTime = false;
+
+    [Tooltip("The percent intensity of the shake over the duration.")]
+    public AnimationCurve intensityCurve = AnimationCurve.Linear(0, 1, 1, 0);
+
+    [Tooltip("How the shake will interact with other active shakes.")]
+    public CameraShake.InteractionType interactionType = CameraShake.InteractionType.Additive;
+
+    [Tooltip("How the shake moves the camera.")]
+    public ShakeType shakeType = ShakeType.NewPositionWithinRadiusEachFrame;
+
+    [Tooltip("Duration it takes for the camera to move between shake positions.")]
+    public float timeBetweenPositions = 0.02f;
 
     public enum ShakeType {
 
@@ -206,4 +277,23 @@ public class CameraShakeProfile {
 
 #endif
     #endregion
+}
+
+[System.Serializable]
+public class CameraBounceProfile {
+
+    [Tooltip("How large the bounce will be.")]
+    public float amplitude = 0.25f;
+
+    [Tooltip("How long the bounce will be.")]
+    public float duration = 0.15f;
+
+    [Tooltip("Is the bounce affected by time scale?")]
+    public bool unscaledTime = false;
+
+    [Tooltip("The percent intensity of the bounce over the duration.")]
+    public AnimationCurve intensityCurve = AnimationCurve.Linear(0, 1, 1, 0);
+
+    [Tooltip("How the bounce will interact with other active bounces.")]
+    public CameraShake.InteractionType interactionType = CameraShake.InteractionType.Additive;
 }
