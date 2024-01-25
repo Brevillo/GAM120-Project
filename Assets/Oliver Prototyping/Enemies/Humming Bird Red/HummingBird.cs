@@ -5,7 +5,7 @@ using UnityEngine;
 public class HummingBird : MonoBehaviour, IWhippable {
 
     [SerializeField] private float damage;
-    [SerializeField] private float minIdleTime, maxIdleTime, minWanderDist, maxWanderDist, wanderSpeed, diveSpeed, maxDiveDist, airFriction, damageFlashDur, knockbackForce;
+    [SerializeField] private float knockback, minIdleTime, maxIdleTime, minWanderDist, maxWanderDist, wanderSpeed, diveSpeed, maxDiveDist, airFriction, damageFlashDur, knockbackForce;
     [SerializeField] private int minWanderMoves, maxWanderMoves;
     [SerializeField] private Wave hoverOscillation;
     [SerializeField] private new Rigidbody2D rigidbody;
@@ -128,13 +128,11 @@ public class HummingBird : MonoBehaviour, IWhippable {
     }
 
     public void EnableMovement() {
-        if (this != null)
-            behaviour = StartCoroutine(Behaviour());
+        behaviour = StartCoroutine(Behaviour());
     }
 
     public void MoveTo(Vector2 position) {
-        if (this != null)
-            rigidbody.MovePosition(position);
+        rigidbody.MovePosition(position);
     }
 
     #endregion
@@ -174,7 +172,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (attacking && collision.TryGetComponent(out EntityHealth entity) && entity.Team != health.Team) 
-            entity.TakeDamage(new(damage, velocity.normalized));
+            entity.TakeDamage(new(damage, velocity.normalized, Vector2.right * knockback * Mathf.Sign(velocity.x)));
     }
 
     #endregion

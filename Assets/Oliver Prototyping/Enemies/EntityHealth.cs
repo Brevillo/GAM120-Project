@@ -6,10 +6,12 @@ public readonly struct DamageInfo {
 
     public readonly float damageAmount;
     public readonly Vector2 direction;
+    public readonly Vector2 knockback;
 
-    public DamageInfo(float damageAmount, Vector2 direction) {
+    public DamageInfo(float damageAmount, Vector2 direction, Vector2 knockback) {
         this.damageAmount = damageAmount;
         this.direction = direction;
+        this.knockback = knockback;
     }
 }
 
@@ -36,18 +38,18 @@ public class EntityHealth : MonoBehaviour {
     public event System.Action<float> OnHeal;
     public event System.Action OnHealthUpdated;
 
-    private void Start() {
+    protected virtual void Start() {
         Health = maxHealth;
     }
 
-    public void TakeDamage(DamageInfo info) {
+    public virtual void TakeDamage(DamageInfo info) {
 
         Health -= info.damageAmount;
 
         OnTakeDamage?.Invoke(info);
     }
 
-    public void FullHeal() {
+    public virtual void FullHeal() {
 
         float healthDiff = maxHealth - Health;
 
@@ -56,7 +58,7 @@ public class EntityHealth : MonoBehaviour {
         OnHeal?.Invoke(healthDiff);
     }
 
-    public void Heal(float amount) {
+    public virtual void Heal(float amount) {
 
         Health += amount;
 

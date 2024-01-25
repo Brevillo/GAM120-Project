@@ -226,19 +226,21 @@ public class PlayerWhip : Player.Component {
 
             base.Enter();
 
-            context.whipping.DisableMovement();
-
             context.Movement.SetVelocity(y: Mathf.Max(context.Rigidbody.velocity.y, context.enemyGrappleVerticalBoost));
 
             TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
-            CameraShake.AddShake(context.hitEnemyShake);
+            CameraEffects.AddShake(context.hitEnemyShake);
+
+            if (context.whipping == null) return;
+
+            context.whipping.DisableMovement();
 
             // move enemy with whip
             context.whipRopeSim = new(context.whipRopeParameters, context.transform.position, context.whipping.WhippablePosition) {
                 Length = ((Vector2)context.transform.position - context.whipping.WhippablePosition).magnitude
             };
             context.whipRopeSim.OnUpdate += position => {
-                if (context.whipping != null)
+                if (context.whipping as Object != null)
                     context.whipping.MoveTo(position);
             };
         }
@@ -252,8 +254,9 @@ public class PlayerWhip : Player.Component {
 
         public override void Exit() {
 
-            if (context.whipping != null)
+            if (context.whipping as Object != null)
                 context.whipping.EnableMovement();
+
             context.whipping = null;
 
             base.Exit();

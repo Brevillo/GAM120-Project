@@ -23,25 +23,24 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight, dontFlyAboveGroundDist;
 
     [Header("Headbutting")]
-    [SerializeField] private float maxChargeTime;
-    [SerializeField] private float minDamage, maxDamage, headbuttCooldown, minDashDistance, maxDashDistance, dashSpeed, minChargeShake, maxChargeShake, chargingRunSpeed;
+    [SerializeField] private float headbuttCooldown;
+    [SerializeField] private SmartCurve headbuttCurve;
+    [SerializeField] private int maxHeadbuttsInAir;
     [SerializeField] private BufferTimer headbuttBuffer;
-    [SerializeField] private PlayerHornTrigger hornTrigger;
-    [SerializeField] private CameraShakeProfile headbuttHitShake;
-    [SerializeField] private CameraBounceProfile headbuttHitBounce;
+
+    [Header("Taking Knockback")]
+    [SerializeField] private float knockbackFriction;
 
     [Header("Animation")]
     [SerializeField] private float maxSpriteAngle;
     [SerializeField] private float maxAngleVelocity, spriteRotationSpeed;
-    [SerializeField] private Transform bodyPivot, wingPivot;
+    [SerializeField] private Transform wingPivot;
 
     #endregion
 
     #region Variables
 
-    private StateMachine<PlayerMovement>
-        stateMachine,   // regular movement state machine
-        hbStateMachine; // headbutt (hb) stae machine
+    private StateMachine<PlayerMovement> stateMachine;
 
     private Vector2 velocity;               // current velocity (stored so that I can edit the x and y components individually)
     private RaycastHit2D groundHit;         // raycast hit for the ground
@@ -51,7 +50,7 @@ public class PlayerMovement : Player.Component {
     private float remainingFlightStamina;   // how much flight stamina reminas
     private float spriteRotationVelocity;   // current veloctiy of sprite rotation
 
-    private float hbStrengthPercent;        // percent of the headbutt that was charged
+    private int aerialHeadbuttsRemaining;   // how many headbutts the player has left after leaving the ground
 
     #endregion
 
@@ -63,20 +62,20 @@ public class PlayerMovement : Player.Component {
     public void SetVelocity(float? x = null, float? y = null)
         => SetVelocity(new(x ?? Rigidbody.velocity.x, y ?? Rigidbody.velocity.y));
 
-    /// <summary> Set palyer velocity. </summary>
+    /// <summary> Set player velocity. </summary>
     public void SetVelocity(Vector2 velocity) {
         Rigidbody.velocity = velocity;
         stateMachine.ChangeState(falling);
     }
 
-    /// <summary> Add to player's current x and/or y velocity.</summary>
-    public void AddVelocity(float x = 0, float y = 0)
-        => AddVelocity(new(x, y));
+    /// <summary> Knocks the player back by distance. </summary>
+    public void TakeKnockback(Vector2 distance) {
 
-    /// <summary> Add to player's current velocity. </summary>
-    public void AddVelocity(Vector2 velocity) {
-        Rigidbody.velocity += velocity;
-        stateMachine.ChangeState(falling);
+        Rigidbody.velocity = new Vector2(
+            Mathf.Sqrt(Mathf.Abs(distance.x) * knockbackFriction * 2f) * Mathf.Sign(distance.x),
+            Mathf.Sqrt(Mathf.Abs(distance.y) * fallGravity * 2) * Mathf.Sign(distance.y));
+
+        stateMachine.ChangeState(knockbacking);
     }
 
     #endregion
@@ -86,9 +85,6 @@ public class PlayerMovement : Player.Component {
     private void Awake() {
 
         InitializeStateMachine();
-        InitializeHeadbuttingStateMachine();
-
-        hornTrigger.OnEntityCollision += OnHornCollision;
     }
 
     private void Update() {
@@ -96,7 +92,7 @@ public class PlayerMovement : Player.Component {
         // input
 
         jumpBuffer.Buffer(Input.Jump.Down);
-        headbuttBuffer.Buffer(Input.Attack.Pressed);
+        headbuttBuffer.Buffer(Input.Attack.Down);
 
         // get information about current physical state
 
@@ -109,7 +105,8 @@ public class PlayerMovement : Player.Component {
         // run state machines
 
         stateMachine.Update(Time.deltaTime);
-        hbStateMachine.Update(Time.deltaTime);
+
+        if (Input.Attack.Pressed && !onGround && aerialHeadbuttsRemaining == 0) Attacks.EnterSwingCharge();
 
         // apply velocity
 
@@ -119,24 +116,23 @@ public class PlayerMovement : Player.Component {
 
         float targetAngle = maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
 
-        bodyPivot.eulerAngles = Vector3.forward * Mathf.SmoothDampAngle(bodyPivot.eulerAngles.z, targetAngle, ref spriteRotationVelocity, spriteRotationSpeed);
+        BodyPivot.eulerAngles = Vector3.forward * Mathf.SmoothDampAngle(BodyPivot.eulerAngles.z, targetAngle, ref spriteRotationVelocity, spriteRotationSpeed);
 
-        bodyPivot.localScale = new(Facing, 1, 1);
+        BodyPivot.localScale = new(Facing, 1, 1);
     }
 
     #endregion
 
     #region Helper Functions
 
-    private void Run() {
+    private void Run(bool withMomentum) {
 
-        float
-            accel = onGround
-            ? InputDirection.x != 0 ? groundAccel : groundDeccel
-            : InputDirection.x != 0 ? airAccel    : airDeccel,
-            speed = hbStateMachine.currentState == hbCharging
-            ? chargingRunSpeed
-            : runSpeed;
+        float accel = onGround
+                ? InputDirection.x != 0 ? groundAccel : groundDeccel
+                : InputDirection.x != 0 ? airAccel    : airDeccel,
+              speed = withMomentum
+                ? Mathf.Max(runSpeed, Mathf.Abs(velocity.x))
+                : runSpeed;
 
         velocity.x = Mathf.MoveTowards(velocity.x, speed * InputDirection.x, accel * Time.deltaTime);
     }
@@ -147,17 +143,6 @@ public class PlayerMovement : Player.Component {
         gravity = Mathf.Abs(velocity.y) < peakVelThreshold ? peakGravity : gravity;
 
         velocity.y = Mathf.MoveTowards(velocity.y, -maxFallSpeed, gravity * Time.deltaTime);
-    }
-
-    private void OnHornCollision(EntityHealth entity) {
-
-        if (entity.Team == Health.Team) return;
-
-        if (hbStateMachine.currentState == hbAttacking) {
-
-            entity.TakeDamage(new(Mathf.Lerp(minDamage, maxDamage, hbStrengthPercent), hbAttacking.direction));
-            CameraShake.AddShake(headbuttHitShake);
-        }
     }
 
     #endregion
@@ -183,35 +168,53 @@ public class PlayerMovement : Player.Component {
     #endregion
 
     // instances of each state class
-    private Grounded    grounded;
-    private Jumping     jumping;
-    private Falling     falling;
-    private Flying      flying;
-    private Headbutting headbutting;
+    private Grounded        grounded;
+    private Jumping         jumping;
+    private Falling         falling;
+    private Flying          flying;
+    private Headbutting     headbutting;
+    private Knockbacking    knockbacking;
 
     private void InitializeStateMachine() {
 
         // initialize states
-        grounded    = new(this);
-        jumping     = new(this);
-        falling     = new(this);
-        flying      = new(this);
-        headbutting = new(this);
+        grounded        = new(this);
+        jumping         = new(this);
+        falling         = new(this);
+        flying          = new(this);
+        headbutting     = new(this);
+        knockbacking    = new(this);
 
         // define transition requirements
         TransitionDelegate
 
-            toGrounded  = () => onGround,
+            toGrounded      = () => onGround,
 
-            startJump   = () => jumpBuffer && onGround,
-            endJump     = () => (!Input.Jump.Pressed && stateMachine.stateDuration > minJumpTime) || velocity.y <= 0,
+            startJump       = () => jumpBuffer && onGround,
+            endJump         = () => (!Input.Jump.Pressed && stateMachine.stateDuration > minJumpTime) || velocity.y <= 0,
 
-            toFalling   = () => !onGround,
+            toFalling       = () => !onGround,
 
-            toFlight    = () => remainingFlightStamina > 0 && !onGround
+            toFlight        = () => remainingFlightStamina > 0 && !onGround
                                 && ((Input.Jump.Pressed && !jumpBuffer) || (groundDist > dontFlyAboveGroundDist && jumpBuffer))          // so you don't accidentally start flying if you try to buffer a jump
                                 && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immeditaley fly after jumping
-            endFlying   = () => !Input.Jump.Pressed || remainingFlightStamina <= 0;
+            endFlying       = () => !Input.Jump.Pressed || remainingFlightStamina <= 0,
+
+            startHeadbutt   = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0)
+                                && (stateMachine.previousState != headbutting || stateMachine.stateDuration > headbuttCooldown), // headbutt cooldown
+
+            stopHeadbutt    = () => stateMachine.stateDuration > headbuttCurve.timeScale,
+            stopHbGrounded  = () => stopHeadbutt() && onGround,
+            stopHbFalling   = () => stopHeadbutt() && !onGround,
+
+            stopKnockback   = () => Mathf.Abs(velocity.x) <= runSpeed,
+            stopKbGrounded  = () => stopKnockback() && onGround,
+            stopKbFalling   = () => stopKnockback() && !onGround;
+
+        // common transitions
+        StateMachine<PlayerMovement>.Transition
+
+            toHeadbutt = new(headbutting, startHeadbutt);
 
         // initialize state machine
         stateMachine = new(
@@ -237,19 +240,34 @@ public class PlayerMovement : Player.Component {
                 { grounded, new() {
                     new(jumping, startJump),
                     new(falling, toFalling),
+                    toHeadbutt,
                 } },
 
                 { jumping, new() {
                     new(falling, endJump),
+                    toHeadbutt,
                 } },
 
                 { falling, new() {
                     new(grounded, toGrounded),
                     new(flying, toFlight),
+                    toHeadbutt,
                 } },
 
                 { flying, new() {
                     new(falling, endFlying),
+                    toHeadbutt,
+                } },
+
+                { headbutting, new() {
+                    new(grounded, stopHbGrounded),
+                    new(falling, stopHbFalling),
+                    new(jumping, startJump), // a dash of the wave variety perhaps?
+                } },
+
+                { knockbacking, new() {
+                    new(grounded, stopKbGrounded),
+                    new(falling, stopKbGrounded),
                 } },
             }
         );
@@ -269,18 +287,19 @@ public class PlayerMovement : Player.Component {
 
         public Grounded(PlayerMovement context) : base(context) { }
 
-        public override void Enter() {
-
-            context.remainingFlightStamina = context.maxFlightStamina;
-
-            base.Enter();
-        }
-
         public override void Update() {
 
-            context.Run();
+            context.Run(false);
 
             base.Update();
+        }
+
+        public override void Exit() {
+
+            context.remainingFlightStamina = context.maxFlightStamina;
+            context.aerialHeadbuttsRemaining = context.maxHeadbuttsInAir;
+
+            base.Exit();
         }
     }
 
@@ -301,7 +320,7 @@ public class PlayerMovement : Player.Component {
 
             context.Fall(context.jumpGravity);
 
-            context.Run();
+            context.Run(true);
 
             base.Update();
         }
@@ -338,7 +357,7 @@ public class PlayerMovement : Player.Component {
             wingOscillation *= -1;
             context.wingPivot.localEulerAngles = Vector3.forward * (-45 + 15 * wingOscillation);
 
-            context.Run();
+            context.Run(true);
 
             base.Update();
         }
@@ -360,7 +379,7 @@ public class PlayerMovement : Player.Component {
 
             context.Fall(context.fallGravity);
 
-            context.Run();
+            context.Run(true);
 
             base.Update();
         }
@@ -370,112 +389,53 @@ public class PlayerMovement : Player.Component {
     private class Headbutting : State {
 
         public Headbutting(PlayerMovement context) : base(context) { }
-    }
 
-    #endregion
+        private Vector2 direction;
 
-    #region Headbutting
+        public override void Enter() {
 
-    // instances of each headbutt state class
-    private HbIdle hbIdle;
-    private HbCharging hbCharging;
-    private HbAttacking hbAttacking;
+            base.Enter();
 
-    private void InitializeHeadbuttingStateMachine() {
+            context.aerialHeadbuttsRemaining--;
 
-        hbIdle      = new(this);
-        hbCharging  = new(this);
-        hbAttacking = new(this);
+            context.headbuttBuffer.Reset();
 
-        TransitionDelegate
-            startCharging   = () => headbuttBuffer && hbStateMachine.stateDuration > headbuttCooldown,
-            startAttacking  = () => !Input.Attack.Pressed,
-            stopAttacking   = () => hbStateMachine.stateDuration > Mathf.Lerp(minDashDistance, maxDashDistance, hbStrengthPercent) / dashSpeed;
+            direction = context.InputDirection != Vector2Int.zero
+                ? context.Input.Movement.Vector.normalized
+                : Vector2.right * context.Facing;
 
-        hbStateMachine = new(
+            context.headbuttCurve.Start();
 
-            firstState: hbIdle,
-
-            transitions: new() {
-
-                { hbIdle, new() {
-                    new(hbCharging, startCharging),
-                } },
-
-                { hbCharging , new() {
-                    new(hbAttacking, startAttacking),
-                } },
-
-                { hbAttacking , new() {
-                    new(hbIdle, stopAttacking),
-                } },
-            }
-        );
-    }
-
-    [Serializable]
-    private class HbIdle : State {
-
-        public HbIdle(PlayerMovement context) : base(context) { }
-    }
-
-    [Serializable]
-    private class HbCharging : State {
-
-        public HbCharging(PlayerMovement context) : base(context) { }
-
-        private float chargePercent => Mathf.Clamp01(context.hbStateMachine.stateDuration / context.maxChargeTime);
+            context.Attacks.EnterHeadbutt(direction);
+        }
 
         public override void Update() {
 
-            context.bodyPivot.localPosition = UnityEngine.Random.insideUnitCircle * Mathf.Lerp(context.minChargeShake, context.maxChargeShake, chargePercent);
-            new List<SpriteRenderer>(context.GetComponentsInChildren<SpriteRenderer>()).ForEach(rend => rend.color = Color.Lerp(Color.white, Color.red, chargePercent));
+            context.velocity = context.headbuttCurve.Evaluate(1) * direction;
 
             base.Update();
         }
 
         public override void Exit() {
 
-            context.bodyPivot.localPosition = Vector2.zero;
-            new List<SpriteRenderer>(context.GetComponentsInChildren<SpriteRenderer>()).ForEach(rend => rend.color = Color.white);
-
-            context.hbStrengthPercent = chargePercent;
+            if (!context.onGround) context.velocity = Vector2.zero;
+            context.Attacks.ExitHeadbutt();
 
             base.Exit();
         }
     }
 
     [Serializable]
-    private class HbAttacking : State {
+    private class Knockbacking : State {
 
-        public HbAttacking(PlayerMovement context) : base(context) { }
+        public Knockbacking(PlayerMovement context) : base(context) { }
 
-        public Vector2 direction;
+        public override void Update() {
 
-        public override void Enter() {
+            context.velocity.x = Mathf.MoveTowards(context.velocity.x, 0, context.knockbackFriction * Time.deltaTime);
+            context.Fall(context.fallGravity);
 
-            base.Enter();
-
-            context.stateMachine.ChangeState(context.headbutting);
-
-            direction = context.InputDirection != Vector2Int.zero
-                ? context.Input.Movement.Vector.normalized
-                : Vector2.right * context.Facing;
-
-            context.velocity = direction * context.dashSpeed;
-
-            CameraShake.AddBounce(context.headbuttHitBounce, context.hbAttacking.direction);
-        }
-
-        public override void Exit() {
-
-            context.velocity = Vector2.zero;
-
-            context.stateMachine.ChangeState(context.onGround
-                ? context.grounded
-                : context.falling);
-
-            base.Exit();
+            base.Update();
         }
     }
 

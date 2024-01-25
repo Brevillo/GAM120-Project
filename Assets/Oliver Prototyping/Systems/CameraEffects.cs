@@ -1,26 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-public class CameraShake : MonoBehaviour {
+public class CameraEffects : MonoBehaviour {
 
     [SerializeField] private Transform shakeTransform;
+    [SerializeField] private VolumeProfile effectVolume;
 
     private void Awake() {
         I = this;
     }
 
     // instance
-    private static CameraShake I;
+    private static CameraEffects I;
 
     private readonly List<ActiveShake> activeShakes = new();
     private readonly List<ActiveBounce> activeBounces = new();
 
     public static void AddShake(CameraShakeProfile profile) => I.activeShakes.Add(new(profile));
     public static void AddBounce(CameraBounceProfile profile, Vector2 direction) => I.activeBounces.Add(new(profile, direction));
+    public static void PostProcessingEffect<T>(float duration, bool unscaled, System.Action<T> preEffect, System.Action<T> postEffect) where T : VolumeComponent {
+
+        if (!I.effectVolume.TryGet(out T component)) return;
+
+        I.StartCoroutine(Routine());
+
+        IEnumerator Routine() {
+
+            preEffect.Invoke(component);
+
+            yield return unscaled
+                ? new WaitForSecondsRealtime(duration)
+                : new WaitForSeconds(duration);
+
+            postEffect.Invoke(component);
+        }
+    }
 
     private static Vector2 CalculateOffset<T>(List<T> effects) where T : ActiveEffect {
 
@@ -199,7 +219,7 @@ public class CameraShakeProfile {
     public AnimationCurve intensityCurve = AnimationCurve.Linear(0, 1, 1, 0);
 
     [Tooltip("How the shake will interact with other active shakes.")]
-    public CameraShake.InteractionType interactionType = CameraShake.InteractionType.Additive;
+    public CameraEffects.InteractionType interactionType = CameraEffects.InteractionType.Additive;
 
     [Tooltip("How the shake moves the camera.")]
     public ShakeType shakeType = ShakeType.NewPositionWithinRadiusEachFrame;
@@ -295,5 +315,5 @@ public class CameraBounceProfile {
     public AnimationCurve intensityCurve = AnimationCurve.Linear(0, 1, 1, 0);
 
     [Tooltip("How the bounce will interact with other active bounces.")]
-    public CameraShake.InteractionType interactionType = CameraShake.InteractionType.Additive;
+    public CameraEffects.InteractionType interactionType = CameraEffects.InteractionType.Additive;
 }
