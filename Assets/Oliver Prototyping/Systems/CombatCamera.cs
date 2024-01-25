@@ -5,7 +5,7 @@ using UnityEngine;
 public class CombatCamera : MonoBehaviour {
 
     [SerializeField] private Transform cameraTarget;
-    [SerializeField] private float lookSpeed, followSpeed;
+    [SerializeField] private float lookSpeed, followSpeed, followMagnitude;
 
     private Vector2 positionVel;
     private Vector3 rotationVel;
@@ -13,14 +13,14 @@ public class CombatCamera : MonoBehaviour {
     private void LateUpdate() {
 
         transform.position
-            = (Vector3)Vector2.SmoothDamp(transform.position, cameraTarget.position, ref positionVel, followSpeed)
+            = (Vector3)Vector2.SmoothDamp(transform.position, cameraTarget.position * followMagnitude, ref positionVel, followSpeed)
             + Vector3.forward * transform.position.z;
 
-        transform.eulerAngles = SmoothDampAngle(
-            current:    transform.eulerAngles,
-            target:     Quaternion.LookRotation(cameraTarget.position - transform.position).eulerAngles,
-            velocity:   ref rotationVel,
-            smoothTime: Vector3.one * lookSpeed);
+        //transform.eulerAngles = SmoothDampAngle(
+        //    current:    transform.eulerAngles,
+        //    target:     Quaternion.LookRotation(cameraTarget.position - transform.position).eulerAngles,
+        //    velocity:   ref rotationVel,
+        //    smoothTime: Vector3.one * lookSpeed);
     }
 
     private Vector3 SmoothDampAngle(Vector3 current, Vector3 target, ref Vector3 velocity, Vector3 smoothTime) => new(

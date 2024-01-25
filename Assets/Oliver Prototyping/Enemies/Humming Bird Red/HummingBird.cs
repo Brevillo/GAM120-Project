@@ -7,6 +7,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
     [SerializeField] private float damage;
     [SerializeField] private float minIdleTime, maxIdleTime, minWanderDist, maxWanderDist, wanderSpeed, diveSpeed, maxDiveDist, airFriction, damageFlashDur, knockbackForce;
     [SerializeField] private int minWanderMoves, maxWanderMoves;
+    [SerializeField] private Wave hoverOscillation;
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private SpriteRenderer rend;
     [SerializeField] private EntityHealth health;
@@ -31,6 +32,15 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
         color = rend.color;
         health.OnTakeDamage += OnTakeDamage;
+
+        hoverOscillation.offset = Random.value;
+    }
+
+    private void Update() {
+
+        if (behaviour != null) {
+            rend.transform.localPosition = Vector2.up * hoverOscillation.Evaluate();
+        }
     }
 
     #region Movement

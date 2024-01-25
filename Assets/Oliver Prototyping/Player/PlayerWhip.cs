@@ -8,7 +8,7 @@ public class PlayerWhip : Player.Component {
     #region Parameters
 
     [SerializeField] private float whipBackForce;
-    [SerializeField] private float whipForwardForce, whipForwardDelay, whipTriggerDelay, whipRetractSpeed, whipPullSpeed, whipMaxLength, enemyGrappleVerticalBoost;
+    [SerializeField] private float whipForwardForce, whipForwardDelay, minWhipLength, maxWhipLength, maxLengthExtendDuration, minWhipDuration, maxWhipDuration, whipTriggerDelay, whipRetractSpeed, whipPullSpeed, whipMaxLength, enemyGrappleVerticalBoost;
     [SerializeField] private VerletRope.Parameters whipRopeParameters;
     [SerializeField] private LineRenderer whipRenderer;
     [SerializeField] private PlayerWhipTrigger whipTrigger;
@@ -41,7 +41,7 @@ public class PlayerWhip : Player.Component {
     private void Update() {
         stateMachine.Update(Time.deltaTime);
     }
-    
+
     private void FixedUpdate() {
 
         // question mark means that it only runs these functions if whipRopeSim isn't null
@@ -92,7 +92,7 @@ public class PlayerWhip : Player.Component {
         TransitionDelegate
 
             startWhip       = () => Input.Whip.Down,
-            stopWhip        = () => !Input.Whip.Pressed,
+            stopWhip        = () => (stateMachine.stateDuration > minWhipDuration && !Input.Whip.Pressed) || stateMachine.stateDuration > maxWhipDuration,
 
             whipRetracted   = () => whipRopeSim.Length == 0,
 
@@ -143,10 +143,7 @@ public class PlayerWhip : Player.Component {
 
         public WhipExtending(PlayerWhip context) : base(context) { }
 
-        private Vector2 aimDirection => context.InputDirection != Vector2Int.zero
-            ? context.Input.Movement.Vector.normalized
-            : Vector2.right * context.Facing;
-
+        private Vector2 aimDirection;
         private PlayerWhipTrigger activeWhipTrigger;
         private bool whippedForward, triggerActive;
 
@@ -163,6 +160,10 @@ public class PlayerWhip : Player.Component {
 
             whippedForward = false;
             triggerActive = false;
+
+            aimDirection = context.InputDirection != Vector2Int.zero
+                ? context.Input.Movement.Vector.normalized
+                : Vector2.right * context.Facing;
 
             context.whipRopeSim.AddForce(-aimDirection * context.whipBackForce + Vector2.one * 0.01f);
         }
@@ -188,8 +189,10 @@ public class PlayerWhip : Player.Component {
                     if (activeWhipTrigger != null)
                         activeWhipTrigger.MoveTo(position);
                 };
-
             }
+
+            if (context.Input.Whip.Pressed)
+            context.whipRopeSim.Length = Mathf.Lerp(context.minWhipLength, context.maxWhipLength, Mathf.InverseLerp(0, context.maxLengthExtendDuration, duration));
 
             base.Update();
         }

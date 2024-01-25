@@ -27,6 +27,8 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float minDamage, maxDamage, headbuttCooldown, minDashDistance, maxDashDistance, dashSpeed, minChargeShake, maxChargeShake, chargingRunSpeed;
     [SerializeField] private BufferTimer headbuttBuffer;
     [SerializeField] private PlayerHornTrigger hornTrigger;
+    [SerializeField] private CameraShakeProfile headbuttHitShake;
+    [SerializeField] private CameraBounceProfile headbuttHitBounce;
 
     [Header("Animation")]
     [SerializeField] private float maxSpriteAngle;
@@ -154,6 +156,7 @@ public class PlayerMovement : Player.Component {
         if (hbStateMachine.currentState == hbAttacking) {
 
             entity.TakeDamage(new(Mathf.Lerp(minDamage, maxDamage, hbStrengthPercent), hbAttacking.direction));
+            CameraShake.AddShake(headbuttHitShake);
         }
     }
 
@@ -460,6 +463,8 @@ public class PlayerMovement : Player.Component {
                 : Vector2.right * context.Facing;
 
             context.velocity = direction * context.dashSpeed;
+
+            CameraShake.AddBounce(context.headbuttHitBounce, context.hbAttacking.direction);
         }
 
         public override void Exit() {
