@@ -65,7 +65,6 @@ public class Player : MonoBehaviour {
         protected SpriteRenderer    Renderer        => player.  spriteRenderer;
         protected Transform         BodyPivot       => player.  bodyPivot;
 
-
         // helper properties
         protected Vector2Int        InputDirection  => player.inputDirection;
         protected int               Facing          => player.facing;
