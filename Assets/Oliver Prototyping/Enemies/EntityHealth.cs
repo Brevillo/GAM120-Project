@@ -36,7 +36,7 @@ public class EntityHealth : MonoBehaviour {
 
     public event System.Action<DamageInfo> OnTakeDamage;
     public event System.Action<float> OnHeal;
-    public event System.Action OnHealthUpdated;
+    public event System.Action OnHealthUpdated, OnDeath;
 
     protected virtual void Start() {
         Health = maxHealth;
@@ -46,7 +46,9 @@ public class EntityHealth : MonoBehaviour {
 
         Health -= info.damageAmount;
 
-        OnTakeDamage?.Invoke(info);
+
+        if (Health > 0) OnTakeDamage?.Invoke(info);
+        else            OnDeath?.Invoke();
     }
 
     public virtual void FullHeal() {

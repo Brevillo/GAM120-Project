@@ -419,6 +419,7 @@ public class PlayerMovement : Player.Component {
         public override void Exit() {
 
             if (!context.onGround) context.velocity = Vector2.zero;
+            else context.velocity *= 0.5f;
             context.Attacks.ExitHeadbutt();
 
             base.Exit();

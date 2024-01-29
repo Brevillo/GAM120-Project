@@ -32,6 +32,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
         color = rend.color;
         health.OnTakeDamage += OnTakeDamage;
+        health.OnDeath += OnDeath;
 
         hoverOscillation.offset = Random.value;
     }
@@ -54,8 +55,6 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
         while (true) {
 
-            attacking = false;
-
             yield return Idle();
 
             int wanderMoves = Random.Range(minWanderMoves, maxWanderMoves);
@@ -70,6 +69,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
             attacking = true;
             yield return Dive();
+            attacking = false;
         }
     }
 
@@ -124,11 +124,12 @@ public class HummingBird : MonoBehaviour, IWhippable {
     public Vector2 WhippablePosition => transform.position;
 
     public void DisableMovement() {
+        attacking = false;
         StopCoroutine(behaviour);
     }
 
     public void EnableMovement() {
-        behaviour = StartCoroutine(Behaviour());
+        RestartBehaviour();
     }
 
     public void MoveTo(Vector2 position) {
@@ -140,11 +141,6 @@ public class HummingBird : MonoBehaviour, IWhippable {
     #region Health
 
     private void OnTakeDamage(DamageInfo info) {
-
-        if (health.Health <= 0) {
-            Death();
-            return;
-        }
 
         StartCoroutine(Flash());
 
@@ -161,7 +157,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
         }
     }
 
-    private void Death() {
+    private void OnDeath() {
         Destroy(gameObject);
     }
 
