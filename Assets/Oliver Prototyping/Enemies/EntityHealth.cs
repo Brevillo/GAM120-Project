@@ -62,7 +62,7 @@ public class EntityHealth : MonoBehaviour {
 
     public virtual void Heal(float amount) {
 
-        Health += amount;
+        Health = Mathf.MoveTowards(Health, maxHealth, amount);
 
         OnHeal?.Invoke(amount);
     }

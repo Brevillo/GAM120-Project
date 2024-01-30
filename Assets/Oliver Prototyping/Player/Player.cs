@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerWhip playerWhip;
     [SerializeField] private PlayerAttacks playerAttacks;
+    [SerializeField] private PlayerHealth playerHealth;
 
     [SerializeField] private EntityHealth health;
 
@@ -35,8 +36,8 @@ public class Player : MonoBehaviour {
         // debug helpers
 
         if (inputManager.Debug1.Down) UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        //if (inputManager.Debug2.Down) ;
-        //if (inputManager.Debug3.Down) ;
+        if (inputManager.Debug2.Down) health.Heal(1);
+        if (inputManager.Debug3.Down) playerHealth.IncreaseZen(0.1f);
         //if (inputManager.Debug4.Down) ;
     }
 
