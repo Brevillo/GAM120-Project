@@ -68,7 +68,7 @@ public class PlayerAttacks : Player.Component {
 
         if (stateMachine.currentState == headbutting) {
 
-            entity.TakeDamage(new(headbuttDamage, headbuttDirection, headbuttDirection * headbuttKnockback));
+            entity.TakeDamage(new(headbuttDamage * PlayerHealth.DamageMultiplier, headbuttDirection, headbuttDirection * headbuttKnockback));
             CameraEffects.AddShake(headbuttHitShake);
             CameraEffects.AddBounce(headbuttHitBounce, headbuttDirection);
         }
@@ -80,7 +80,7 @@ public class PlayerAttacks : Player.Component {
 
         if (stateMachine.currentState == swinging) {
 
-            entity.TakeDamage(new(swingDamage, InputDirection, headbuttDirection * swingKnockback));
+            entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, headbuttDirection * swingKnockback));
             CameraEffects.AddShake(swingHitShake);
         }
     }

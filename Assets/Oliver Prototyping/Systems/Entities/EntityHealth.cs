@@ -18,6 +18,7 @@ public readonly struct DamageInfo {
 public class EntityHealth : MonoBehaviour {
 
     [SerializeField] private float maxHealth;
+    [SerializeField] private float invincibilityDuration;
     [SerializeField] private EntityHealthTeam team;
     [SerializeField, Readonly] private float health;
 
@@ -33,25 +34,38 @@ public class EntityHealth : MonoBehaviour {
 
     public EntityHealthTeam Team => team;
     public float HealthPercent => health / maxHealth;
+    public bool Invincible => invincibilityRemaining > 0;
+
+    private float invincibilityRemaining;
 
     public event System.Action<DamageInfo> OnTakeDamage;
     public event System.Action<float> OnHeal;
     public event System.Action OnHealthUpdated, OnDeath;
 
-    protected virtual void Start() {
+    private void Start() {
         Health = maxHealth;
     }
 
-    public virtual void TakeDamage(DamageInfo info) {
+    private void Update() {
+        invincibilityRemaining -= Time.deltaTime;
+    }
+
+    public void ResetInvincibilty() => invincibilityRemaining = 0;
+
+    public void TakeDamage(DamageInfo info) {
+
+        // take no damage if still invincible
+        if (invincibilityRemaining > 0) return;
 
         Health -= info.damageAmount;
 
+        invincibilityRemaining = invincibilityDuration;
 
         if (Health > 0) OnTakeDamage?.Invoke(info);
         else            OnDeath?.Invoke();
     }
 
-    public virtual void FullHeal() {
+    public void FullHeal() {
 
         float healthDiff = maxHealth - Health;
 
@@ -60,9 +74,9 @@ public class EntityHealth : MonoBehaviour {
         OnHeal?.Invoke(healthDiff);
     }
 
-    public virtual void Heal(float amount) {
+    public void Heal(float amount) {
 
-        Health += amount;
+        Health = Mathf.MoveTowards(Health, maxHealth, amount);
 
         OnHeal?.Invoke(amount);
     }

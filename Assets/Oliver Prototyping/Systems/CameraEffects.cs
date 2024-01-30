@@ -16,33 +16,39 @@ public class CameraEffects : MonoBehaviour {
         I = this;
     }
 
+    private void Start() {
+        effectVolume.Reset();
+    }
+
     // instance
     private static CameraEffects I;
 
     private readonly List<ActiveShake> activeShakes = new();
     private readonly List<ActiveBounce> activeBounces = new();
 
+    public delegate IEnumerator Routine<T>(T component);
+
     public static void AddShake(CameraShakeProfile profile) => I.activeShakes.Add(new(profile));
     public static void AddBounce(CameraBounceProfile profile, Vector2 direction) => I.activeBounces.Add(new(profile, direction));
-    public static void PostProcessingEffect<T>(float duration, bool unscaled, System.Action<T> preEffect, System.Action<T> postEffect) where T : VolumeComponent {
+    public static void PostProcessingEffect<T>(Routine<T> r) where T : VolumeComponent {
 
         if (!I.effectVolume.TryGet(out T component)) return;
 
-        I.StartCoroutine(Routine());
+        I.StartCoroutine(r.Invoke(component));
 
-        IEnumerator Routine() {
+        //IEnumerator Routine() {
 
-            preEffect.Invoke(component);
+        //    preEffect.Invoke(component);
 
-            yield return unscaled
-                ? new WaitForSecondsRealtime(duration)
-                : new WaitForSeconds(duration);
+        //    yield return unscaled
+        //        ? new WaitForSecondsRealtime(duration)
+        //        : new WaitForSeconds(duration);
 
-            postEffect.Invoke(component);
-        }
+        //    postEffect.Invoke(component);
+        //}
     }
 
-    private static Vector2 CalculateOffset<T>(List<T> effects) where T : ActiveEffect {
+    private Vector2 CalculateOffset<T>(List<T> effects) where T : ActiveEffect {
 
         Vector2 totalOffset = Vector2.zero;
         Vector2? largest = null;
