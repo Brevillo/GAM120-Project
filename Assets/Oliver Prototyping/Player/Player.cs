@@ -57,6 +57,7 @@ public class Player : MonoBehaviour {
         protected PlayerMovement    Movement        => player.  playerMovement;
         protected PlayerWhip        Whip            => player.  playerWhip;
         protected PlayerAttacks     Attacks         => player.  playerAttacks;
+        protected PlayerHealth      PlayerHealth    => player.  playerHealth;
 
         protected EntityHealth      Health          => player.  health;
 
