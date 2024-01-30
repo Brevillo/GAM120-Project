@@ -2068,6 +2068,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3060111673363044745}
   ZealBar: {fileID: 4857507759451292312}
+  ZenHealRate50: 0.2
+  ZenHealRate75: 0.5
+  ZenHealRate100: 1
+  ZealPerHit: 0.15
   damageShake:
     amplitude: 0.5
     duration: 0.25

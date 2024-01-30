@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class PlayerHealth : Player.Component {
 
     [SerializeField] private Image ZealBar;
+    [SerializeField] private float ZenHealRate50;
+    [SerializeField] private float ZenHealRate75;
+    [SerializeField] private float ZenHealRate100;
+    [SerializeField] private float ZealPerHit;
     [Header("Effects")]
     [SerializeField] private CameraShakeProfile damageShake;
     [SerializeField] private float damageTimeFreezeDuration;
@@ -15,15 +19,20 @@ public class PlayerHealth : Player.Component {
         Health.OnTakeDamage += TakeDamage;
     }
 
+    private void Start()
+    {
+        energy = 0.5f;
+    }
     private void Update()
     {
-        ZealBar.fillAmount = energy;
+        ZealBar.fillAmount = 1-energy;
         float healAmount = energy switch
-        { 
-            > 0.75f => 2,
-            > 0.5f => 1,
+        {
+            1 => ZenHealRate100,
+            > 0.75f => ZenHealRate75,
+            > 0.5f => ZenHealRate50,
             _ => 0,
-        };
+        } ;
 
         Health.Heal(healAmount * Time.deltaTime);
     }
@@ -37,15 +46,15 @@ public class PlayerHealth : Player.Component {
             unscaled:   true,
             preEffect:  color => color.saturation.value = -100,
             postEffect: color => color.saturation.value = 0);
-        
-        energy -= 1.0f;
+
+        energy = Mathf.MoveTowards(energy, 0.0f, ZealPerHit);
 
         Movement.TakeKnockback(info.knockback);
     }
 
     public void IncreaseZen(float energyAmount) {
 
-        energy += energyAmount;
+        energy = Mathf.MoveTowards(energy, 1.0f, energyAmount);
         print(energyAmount);
         
     }
