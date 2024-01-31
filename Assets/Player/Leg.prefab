@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466b7c417de8c4df690460a4785fce9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  player: {fileID: 0}
   wiggleSpeed: 0.1
   wiggleAngleRange: 30
+  alternate: 0
 --- !u!1 &4826573578782545930
 GameObject:
   m_ObjectHideFlags: 0
