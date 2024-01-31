@@ -17,6 +17,7 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist;
     [SerializeField] private BufferTimer jumpBuffer;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private SoundEffect jumpSound;//
 
     [Header("Flying")]
     [SerializeField] private float flightForce;
@@ -311,6 +312,8 @@ public class PlayerMovement : Player.Component {
         public override void Enter() {
 
             base.Enter();
+
+            context.jumpSound.Play(context);
 
             context.jumpBuffer.Reset();
             context.velocity.y = Mathf.Sqrt(context.jumpHeight * context.jumpGravity * 2f);
