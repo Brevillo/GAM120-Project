@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class CameraBoundsVolume : MonoBehaviour {
+public abstract class CameraBound : MonoBehaviour {
 
-    private static readonly Vector2 roomSize = new(16, 9);
+    public static readonly Vector2 defaultCameraSize = new(16, 9);
 
     [Header("Camera Variables")]
-    [SerializeField] private float cameraSize;
+    [SerializeField] private float cameraSizeMultiple;
     [SerializeField] private Vector2 max;
     [SerializeField] private Vector2 min;
 
@@ -20,16 +20,16 @@ public class CameraBoundsVolume : MonoBehaviour {
 
     private void Reset() {
 
-        cameraSize = 4f;
+        cameraSizeMultiple = 4f;
 
-        max = roomSize * cameraSize / 2f;
-        min = roomSize * cameraSize / -2f;
+        max = defaultCameraSize * cameraSizeMultiple / 2f;
+        min = defaultCameraSize * cameraSizeMultiple / -2f;
 
         snapTo = new(1, 1);
         color = Color.green;
     }
 
-    private Rect rect {
+    protected Rect rect {
         get => new() {
             min = min + (Vector2)transform.position,
             max = max + (Vector2)transform.position,
@@ -41,14 +41,9 @@ public class CameraBoundsVolume : MonoBehaviour {
         }
     }
 
-    #region Public Members
-
-    public static List<CameraBoundsVolume> Contains(Vector2 position)
-        => volumes.FindAll(v => v.rect.Contains(position));
-
     public Vector2 Clamp(Vector2 position) {
 
-        Vector2 bounds = (rect.size - roomSize * cameraSize) / 2f,
+        Vector2 bounds = (rect.size - defaultCameraSize * cameraSizeMultiple) / 2f,
                 center = rect.center,
                 min = center - bounds,
                 max = center + bounds;
@@ -58,18 +53,7 @@ public class CameraBoundsVolume : MonoBehaviour {
             Mathf.Clamp(position.y, min.y, max.y));
     }
 
-    public float Height => roomSize.y * cameraSize;
-
-    #endregion
-
-    #region Volumes Management
-
-    private void OnEnable()  => volumes.Add(this);
-    private void OnDisable() => volumes.Remove(this);
-
-    private static readonly List<CameraBoundsVolume> volumes = new();
-
-    #endregion
+    public Vector2 CameraSize => defaultCameraSize * cameraSizeMultiple;
 
     #region Gizmos
 
@@ -85,8 +69,8 @@ public class CameraBoundsVolume : MonoBehaviour {
 
         // traversable area by the camera
         Gizmos.color = new(color.r, color.g, color.b, 0.15f);
-        Gizmos.DrawWireCube(rect.center, rect.size - roomSize * cameraSize * Vector2.up);
-        Gizmos.DrawWireCube(rect.center, rect.size - roomSize * cameraSize * Vector2.right);
+        Gizmos.DrawWireCube(rect.center, rect.size - defaultCameraSize * cameraSizeMultiple * Vector2.up);
+        Gizmos.DrawWireCube(rect.center, rect.size - defaultCameraSize * cameraSizeMultiple * Vector2.right);
     }
 
     private void DrawBorder() {
@@ -99,12 +83,12 @@ public class CameraBoundsVolume : MonoBehaviour {
     #region Editor
 #if UNITY_EDITOR
 
-    [CustomEditor(typeof(CameraBoundsVolume)), CanEditMultipleObjects]
+    [CustomEditor(typeof(CameraBound), true), CanEditMultipleObjects]
     private class CameraBoundsEditor : Editor {
 
         private const float handleSize = 2f;
 
-        private CameraBoundsVolume Bounds => target as CameraBoundsVolume;
+        private CameraBound Bounds => target as CameraBound;
 
         public override void OnInspectorGUI() {
 
@@ -113,11 +97,11 @@ public class CameraBoundsVolume : MonoBehaviour {
                     toggle = !toggle;
             }
 
-            base.OnInspectorGUI();
-
             GUI.enabled = false;
             EditorGUILayout.Vector2Field("Size", Bounds.max - Bounds.min);
             GUI.enabled = true;
+
+            base.OnInspectorGUI();
 
             Toggle("Always Show Border", ref alwaysShowBorder);
         }
@@ -128,7 +112,7 @@ public class CameraBoundsVolume : MonoBehaviour {
 
             Vector2 worldPos = Bounds.transform.position,
                     snapTo   = Bounds.snapTo,
-                    camSize  = roomSize * Bounds.cameraSize;
+                    camSize  = defaultCameraSize * Bounds.cameraSizeMultiple;
 
             Handles.color = Bounds.color;
 

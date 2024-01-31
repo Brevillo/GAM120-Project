@@ -26,9 +26,7 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
     private void Start() {
 
-        target = FindObjectOfType<PlayerMovement>().transform;
-
-        behaviour = StartCoroutine(Behaviour());
+        target = FindObjectOfType<Player>().transform;
 
         color = rend.color;
         health.OnTakeDamage += OnTakeDamage;
@@ -37,18 +35,31 @@ public class HummingBird : MonoBehaviour, IWhippable {
         hoverOscillation.offset = Random.value;
     }
 
+    private void OnEnable() {
+        StartBehaviour();
+    }
+
+    private void OnDisable() {
+        StopBehaviour();
+    }
+
     private void Update() {
 
-        if (behaviour != null) {
+        // hover effect
+        if (behaviour != null)
             rend.transform.localPosition = Vector2.up * hoverOscillation.Evaluate();
-        }
     }
 
     #region Movement
 
-    public void RestartBehaviour() {
+    private void StartBehaviour() {
+        if (behaviour != null) StopCoroutine(behaviour);
+        if (isActiveAndEnabled) behaviour = StartCoroutine(Behaviour());
+    }
+
+    private void StopBehaviour() {
+        attacking = false;
         StopCoroutine(behaviour);
-        behaviour = StartCoroutine(Behaviour());
     }
 
     private IEnumerator Behaviour() {
@@ -123,18 +134,10 @@ public class HummingBird : MonoBehaviour, IWhippable {
     public IWhippable.Type WhippableType => IWhippable.Type.Light;
     public Vector2 WhippablePosition => transform.position;
 
-    public void DisableMovement() {
-        attacking = false;
-        StopCoroutine(behaviour);
-    }
+    public void DisableMovement() => StopBehaviour();
+    public void EnableMovement() => StartBehaviour();
 
-    public void EnableMovement() {
-        RestartBehaviour();
-    }
-
-    public void MoveTo(Vector2 position) {
-        rigidbody.MovePosition(position);
-    }
+    public void MoveTo(Vector2 position) => rigidbody.MovePosition(position);
 
     #endregion
 
@@ -153,12 +156,12 @@ public class HummingBird : MonoBehaviour, IWhippable {
 
             rend.color = color;
             velocity = -info.direction * knockbackForce;
-            RestartBehaviour();
+            StartBehaviour();
         }
     }
 
     private void OnDeath() {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     #endregion

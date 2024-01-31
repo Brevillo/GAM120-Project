@@ -22,6 +22,8 @@ public class EntityHealth : MonoBehaviour {
     [SerializeField] private EntityHealthTeam team;
     [SerializeField, Readonly] private float health;
 
+    #region Public Fields
+
     public float Health {
 
         get => health;
@@ -33,22 +35,19 @@ public class EntityHealth : MonoBehaviour {
     }
 
     public EntityHealthTeam Team => team;
-    public float HealthPercent => health / maxHealth;
-    public bool Invincible => invincibilityRemaining > 0;
 
-    private float invincibilityRemaining;
+    public float HealthPercent => health / maxHealth;
+
+    public bool Invincible => invincibilityRemaining > 0;
+    public bool Dead => health <= 0;
 
     public event System.Action<DamageInfo> OnTakeDamage;
     public event System.Action<float> OnHeal;
     public event System.Action OnHealthUpdated, OnDeath;
 
-    private void Start() {
-        Health = maxHealth;
-    }
+    #endregion
 
-    private void Update() {
-        invincibilityRemaining -= Time.deltaTime;
-    }
+    #region Public Functions
 
     public void ResetInvincibilty() => invincibilityRemaining = 0;
 
@@ -57,12 +56,12 @@ public class EntityHealth : MonoBehaviour {
         // take no damage if still invincible
         if (invincibilityRemaining > 0) return;
 
-        Health -= info.damageAmount;
+        Health = Mathf.MoveTowards(Health, 0, info.damageAmount);
 
         invincibilityRemaining = invincibilityDuration;
 
         if (Health > 0) OnTakeDamage?.Invoke(info);
-        else            OnDeath?.Invoke();
+        else OnDeath?.Invoke();
     }
 
     public void FullHeal() {
@@ -80,4 +79,20 @@ public class EntityHealth : MonoBehaviour {
 
         OnHeal?.Invoke(amount);
     }
+
+    #endregion
+
+    #region Internals
+
+    private float invincibilityRemaining;
+
+    private void Start() {
+        Health = maxHealth;
+    }
+
+    private void Update() {
+        invincibilityRemaining -= Time.deltaTime;
+    }
+
+    #endregion
 }

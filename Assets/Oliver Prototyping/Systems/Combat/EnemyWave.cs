@@ -24,6 +24,8 @@ public class EnemyWave : MonoBehaviour {
 
     public void Activate() {
 
+        if (enemies.Count == 0) OnWaveCompleted.Invoke();
+
         StartCoroutine(WaveDelay());
 
         // if the wave duration is being used

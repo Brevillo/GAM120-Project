@@ -47,29 +47,24 @@ public class PlayerHealth : Player.Component {
 
         TimeManager.FreezeTime(damageTimeFreezeDuration, this);
         CameraEffects.AddShake(damageShake);
-        CameraEffects.PostProcessingEffect<UnityEngine.Rendering.Universal.ColorAdjustments>(
-            //duration:   damageTimeFreezeDuration,
-            //unscaled:   true,
-            //preEffect:  color => color.saturation.value = -100,
-            //postEffect: color => color.saturation.value = 0,
-            r: InvincibilityFlashing);
+        CameraEffects.PostProcessingEffect<UnityEngine.Rendering.Universal.ColorAdjustments>(InvincibilityFlashing);
 
         energy = Mathf.MoveTowards(energy, 0.0f, ZealPerHit);
 
         Movement.TakeKnockback(info.knockback);
     }
 
-    private IEnumerator InvincibilityFlashing(UnityEngine.Rendering.Universal.ColorAdjustments c) {
+    private IEnumerator InvincibilityFlashing(UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustment) {
 
         bool flash = false;
 
         while (Health.Invincible) {
             flash = !flash;
-            c.saturation.value = flash ? -100 : 0;
+            colorAdjustment.saturation.value = flash ? -100 : 0;
             yield return null;
         }
 
-        c.saturation.value = 0;
+        colorAdjustment.saturation.value = 0;
     }
 
     public void IncreaseZen(float energyAmount) {

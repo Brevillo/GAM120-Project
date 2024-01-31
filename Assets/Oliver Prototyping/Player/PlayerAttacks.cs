@@ -185,17 +185,18 @@ public class PlayerAttacks : Player.Component {
 
             context.BodyPivot.localPosition = UnityEngine.Random.insideUnitCircle * Mathf.Lerp(context.minChargeShake, context.maxChargeShake, chargePercent);
 
-            flickerTimer += Time.deltaTime;
-            if (flickerTimer > 0.1f) {
-                flicker = !flicker;
-                flickerTimer = 0f;
+            if (chargePercent >= 1) {
+
+                flickerTimer += Time.deltaTime;
+                if (flickerTimer > 0.1f) {
+                    flicker = !flicker;
+                    flickerTimer = 0f;
+                }
+
+                var color = flicker ? Color.white : Color.red;
+
+                context.swingChargeRends.ForEach(rend => rend.color = color);
             }
-
-            var color = chargePercent < 1
-                ? Color.Lerp(Color.white, Color.red, chargePercent)
-                : flicker ? Color.white : Color.red;
-
-            context.swingChargeRends.ForEach(rend => rend.color = color);
 
             base.Update();
         }
