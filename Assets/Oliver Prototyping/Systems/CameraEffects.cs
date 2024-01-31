@@ -8,7 +8,6 @@ using UnityEditor;
 
 public class CameraEffects : MonoBehaviour {
 
-    [SerializeField] private Transform shakeTransform;
     [SerializeField] private VolumeProfile effectVolume;
 
     private void Awake() {
@@ -82,9 +81,9 @@ public class CameraEffects : MonoBehaviour {
         return largest ?? totalOffset;
     }
 
-    private void Update() {
+    private void LateUpdate() {
 
-        shakeTransform.localPosition
+        transform.localPosition
             = CalculateOffset(activeShakes)
             + CalculateOffset(activeBounces);
     }

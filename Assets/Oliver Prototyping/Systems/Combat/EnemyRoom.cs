@@ -33,6 +33,8 @@ public class EnemyRoom : MonoBehaviour {
 
         if (state != State.Incomplete) return;
 
+        state = State.Active;
+
         currentWave = 0;
 
         CameraMovement.CombatLock(cameraCombatBound);
