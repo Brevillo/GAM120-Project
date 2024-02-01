@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6177127757091233344}
   - component: {fileID: 4911955032992510564}
   m_Layer: 0
-  m_Name: Humming Bird
+  m_Name: Humming Bird Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,18 +52,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   knockback: 6
-  minIdleTime: 1
+  minIdleTime: 2
   maxIdleTime: 2
-  minWanderDist: 1
-  maxWanderDist: 3
-  wanderSpeed: 30
-  diveSpeed: 50
-  maxDiveDist: 20
+  minWanderDist: 0.1
+  maxWanderDist: 0.3
+  wanderSpeed: 50
+  diveSpeed: 30
+  maxDiveDist: 100
   airFriction: 100
   damageFlashDur: 0.1
   knockbackForce: 50
-  minWanderMoves: 2
-  maxWanderMoves: 5
+  minWanderMoves: 1
+  maxWanderMoves: 2
   hoverOscillation:
     amplitude: 0.1
     frequency: 0.25
@@ -224,7 +224,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.9150943, g: 0.29644814, b: 0.22877358, a: 1}
+  m_Color: {r: 0.22745094, g: 0.58140177, b: 0.9137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
