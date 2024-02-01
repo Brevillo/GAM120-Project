@@ -86,16 +86,16 @@ public class HummingBird : GenericEnemy {
         yield return MoveTo(divePosition, diveSpeed);
     }
 
-    private IEnumerator MoveTo(Vector2 position, float speed) {
+    private IEnumerator MoveTo(Vector2 targetPosition, float speed) {
 
-        Vector2 vector = position - this.Position;
+        Vector2 vectorToTarget = targetPosition - Position;
 
-        Velocity = vector.normalized * speed;
+        Velocity = vectorToTarget.normalized * speed;
 
-        float distance = vector.magnitude,
-              time = distance / speed;
+        float distanceToTarget = vectorToTarget.magnitude,
+              timeToTarget = distanceToTarget / speed;
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(timeToTarget);
     }
 
     protected override void OnTakeDamage(DamageInfo info) {
