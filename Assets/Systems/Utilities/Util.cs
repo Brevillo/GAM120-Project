@@ -49,6 +49,11 @@ namespace OliverUtils {
             return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * vector.magnitude;
         }
 
+        /// <summary> Converts an angle in degrees to a normalized Vector2. </summary>
+        public static Vector2 DegToVector(this float angle) => RadToVector(angle * Mathf.Deg2Rad);
+        /// <summary> Converts an angle in radians to a normalized Vector2. </summary>
+        public static Vector2 RadToVector(this float angle) => new(Mathf.Cos(angle), Mathf.Sin(angle));
+
         /// <summary> Returns the float with greatest absolute value. </summary>
         public static float MaxAbs(params float[] floats) {
 

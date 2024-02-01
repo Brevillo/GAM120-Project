@@ -238,7 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13541b15acb4414cac1a2d1e3ed76a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: Oliver Scene
+  startScene:
+    editorSceneAsset: {fileID: 102900000, guid: 9b8fbecf1638542a1837a03c7ef578a7, type: 3}
+    name: Combat Prototype
 --- !u!1 &445855566
 GameObject:
   m_ObjectHideFlags: 0

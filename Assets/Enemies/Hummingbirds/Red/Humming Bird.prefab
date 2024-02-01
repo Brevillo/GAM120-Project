@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 30886898699939077}
-  - component: {fileID: 579340631908965096}
+  - component: {fileID: 6799798868318571501}
   - component: {fileID: 7501728411578513382}
   - component: {fileID: 6177127757091233344}
   - component: {fileID: 4911955032992510564}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 7988577568014029500}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &579340631908965096
+--- !u!114 &6799798868318571501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,21 +47,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8421639643989790829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d09ca8a525d0462087ad59514a7e286, type: 3}
+  m_Script: {fileID: 11500000, guid: 750651dd69265456083166abc31b5664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 7501728411578513382}
+  rigidbody: {fileID: 4911955032992510564}
+  attackKnockback: 5
   damage: 1
-  knockback: 6
+  hurtKnockback: 5
+  damageFlashDur: 0.1
   minIdleTime: 1
   maxIdleTime: 2
+  airFriction: 100
+  wanderSpeed: 30
   minWanderDist: 1
   maxWanderDist: 3
-  wanderSpeed: 30
-  diveSpeed: 50
-  maxDiveDist: 20
-  airFriction: 100
-  damageFlashDur: 0.1
-  knockbackForce: 50
   minWanderMoves: 2
   maxWanderMoves: 5
   hoverOscillation:
@@ -69,9 +69,9 @@ MonoBehaviour:
     frequency: 0.25
     offset: 0
     baseline: 0
-  rigidbody: {fileID: 4911955032992510564}
   rend: {fileID: 6851537655748982450}
-  health: {fileID: 7501728411578513382}
+  diveSpeed: 50
+  maxDiveDist: 100
 --- !u!114 &7501728411578513382
 MonoBehaviour:
   m_ObjectHideFlags: 0

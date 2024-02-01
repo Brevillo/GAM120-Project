@@ -1,12 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OliverUtils;
 
-public class HummingBird : GenericEnemy {
+public abstract class GenericHummingbird : GenericEnemy {
 
-    [SerializeField] private float damage;
-    [SerializeField] private float knockback, minIdleTime, maxIdleTime, minWanderDist, maxWanderDist, wanderSpeed, diveSpeed, maxDiveDist, airFriction, damageFlashDur, knockbackForce;
+    [Header("Damage")]
+    [SerializeField] private float attackKnockback;
+    [SerializeField] private float damage, hurtKnockback, damageFlashDur;
+
+    [Header("Idling")]
+    [SerializeField] private float minIdleTime;
+    [SerializeField] private float maxIdleTime, airFriction;
+
+    [Header("Wandering")]
+    [SerializeField] private float wanderSpeed;
+    [SerializeField] private float minWanderDist, maxWanderDist;
     [SerializeField] private int minWanderMoves, maxWanderMoves;
+
+    [Header("Visuals")]
     [SerializeField] private Wave hoverOscillation;
     [SerializeField] private SpriteRenderer rend;
 
@@ -14,6 +26,8 @@ public class HummingBird : GenericEnemy {
     private Color color;
 
     private bool attacking;
+
+    protected Vector2 TargetPosition => target.position;
 
     public override IWhippable.Type WhippableType => IWhippable.Type.Light;
 
@@ -26,12 +40,14 @@ public class HummingBird : GenericEnemy {
         hoverOscillation.offset = Random.value;
     }
 
-    private void Update() {
+    protected virtual void Update() {
 
         // hover effect
         if (BehaviourActive)
             rend.transform.localPosition = Vector2.up * hoverOscillation.Evaluate();
     }
+
+    protected abstract IEnumerator Attack();
 
     protected override IEnumerator Behaviour() {
 
@@ -50,12 +66,12 @@ public class HummingBird : GenericEnemy {
             }
 
             attacking = true;
-            yield return Dive();
+            yield return Attack();
             attacking = false;
         }
     }
 
-    private IEnumerator Idle() {
+    protected IEnumerator Idle() {
 
         float idleTime = Random.Range(minIdleTime, maxIdleTime);
 
@@ -70,23 +86,16 @@ public class HummingBird : GenericEnemy {
         }
     }
 
-    private IEnumerator Wander() {
+    protected IEnumerator Wander() {
 
-        float wanderAngle = Random.value * 360f * Mathf.Deg2Rad,
+        float wanderAngle = Random.value * 360f,
               wanderDistance = Random.Range(minWanderDist, maxWanderDist);
-        Vector2 wanderPosition = Position + new Vector2(Mathf.Cos(wanderAngle), Mathf.Sin(wanderAngle)) * wanderDistance;
+        Vector2 wanderPosition = Position + wanderAngle.DegToVector() * wanderDistance;
 
         yield return MoveTo(wanderPosition, wanderSpeed);
     }
 
-    private IEnumerator Dive() {
-
-        Vector2 divePosition = Vector2.ClampMagnitude((Vector2)target.position - Position, maxDiveDist) + Position;
-
-        yield return MoveTo(divePosition, diveSpeed);
-    }
-
-    private IEnumerator MoveTo(Vector2 targetPosition, float speed) {
+    protected IEnumerator MoveTo(Vector2 targetPosition, float speed) {
 
         Vector2 vectorToTarget = targetPosition - Position;
 
@@ -110,7 +119,7 @@ public class HummingBird : GenericEnemy {
             yield return new WaitForSeconds(damageFlashDur);
 
             rend.color = color;
-            Velocity = -info.direction * knockbackForce;
+            Velocity = -info.direction * hurtKnockback;
             StartBehaviour();
         }
     }
@@ -118,6 +127,6 @@ public class HummingBird : GenericEnemy {
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (attacking && collision.TryGetComponent(out EntityHealth entity) && entity.Team != health.Team) 
-            entity.TakeDamage(new(damage, Velocity.normalized, Vector2.right * knockback * Mathf.Sign(Velocity.x)));
+            entity.TakeDamage(new(damage, Velocity.normalized, Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
     }
 }
