@@ -52,7 +52,8 @@ public class PlayerHealth : Player.Component {
             _ => 0,
         } ;
 
-        Health.Heal(healAmount * Time.deltaTime);
+        if (healAmount != 0)
+            Health.Heal(healAmount * Time.deltaTime);
     }   
 
     private void TakeDamage(DamageInfo info) {
