@@ -19,6 +19,7 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private RectTransform deathBar;
     [SerializeField] private CanvasGroup deathCanvasGroup;
     [SerializeField] private SmartCurve deathFadeOut, deathFadeIn;
+    [SerializeField] private float deathGravity, deathFriction;
 
     [Header("Effects")]
     [SerializeField] private CameraShakeProfile damageShake;
@@ -70,6 +71,22 @@ public class PlayerHealth : Player.Component {
         Player.Freeze(movement: true, abilities: true, health: true);
 
         StartCoroutine(DeathShake());
+        StartCoroutine(DeathFall());
+
+        IEnumerator DeathFall() {
+
+            Vector2 velocity = Rigidbody.velocity;
+
+            while (true) {
+
+                velocity.y -= deathGravity * Time.deltaTime;
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, deathFriction * Time.deltaTime);
+
+                Rigidbody.velocity = velocity;
+
+                yield return null;
+            }
+        }
 
         IEnumerator DeathShake() {
 

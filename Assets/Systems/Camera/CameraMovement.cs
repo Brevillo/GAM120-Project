@@ -39,12 +39,10 @@ public class CameraMovement : MonoBehaviour {
             size = bound.CameraSize;
         }
 
-        transform.position
+        // move towards focus point
+        transform.position = Vector2.SmoothDamp(transform.position, focus, ref velocity, smoothSpeed);
 
-            // move towards focus point
-            = (Vector3)Vector2.SmoothDamp(transform.position, focus, ref velocity, smoothSpeed)
-
-            // move backwards based on camera size and field of view
-            + Vector3.back * size.y / 2f * Mathf.Tan((90f - cam.fieldOfView / 2f) * Mathf.Deg2Rad);
+        // move backwards based on camera size and field of view
+        cam.transform.localPosition = Vector3.back * size.y / 2f * Mathf.Tan((90f - cam.fieldOfView / 2f) * Mathf.Deg2Rad);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7165306066998528112}
   - component: {fileID: 7511219927458620199}
   - component: {fileID: 3976565769041621602}
+  - component: {fileID: 4137300277990437276}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -73,7 +74,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 631
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -146,3 +147,11 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: c222950980d3140288931067f0672410, type: 2}
+--- !u!81 &4137300277990437276
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9138634524693733585}
+  m_Enabled: 1

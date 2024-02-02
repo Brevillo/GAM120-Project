@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7501728411578513382}
   - component: {fileID: 6177127757091233344}
   - component: {fileID: 4911955032992510564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Humming Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,6 +88,7 @@ MonoBehaviour:
   invincibilityDuration: 0
   team: {fileID: 11400000, guid: 94cf57cbd4a1040ecaad9cd91c2c783f, type: 2}
   health: 0
+  Dead: 0
 --- !u!58 &6177127757091233344
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -160,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9100431057943810731}
   - component: {fileID: 6851537655748982450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,13 +243,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 30886898699939077}
     m_Modifications:
+    - target: {fileID: 1902943199666517398, guid: 96638064809864d4fa881b930355e795, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3623793821079858132, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: health
       value: 
       objectReference: {fileID: 7501728411578513382}
+    - target: {fileID: 4129123458766063136, guid: 96638064809864d4fa881b930355e795, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6653609948639022087, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Name
       value: Health bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653609948639022087, guid: 96638064809864d4fa881b930355e795, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847643424537116005, guid: 96638064809864d4fa881b930355e795, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8795956436052548854, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Pivot.x
@@ -388,9 +405,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 887552998076017976, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021921288653438946, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8343933903172589611, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Name
       value: EntityShadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343933903172589611, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

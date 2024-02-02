@@ -12,8 +12,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Camera Render Texture
   - 
+  - Recieve Outline
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3142107097
     locked: 0
   - name: Foreground
     uniqueID: 1015442889

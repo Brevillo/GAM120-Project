@@ -27,7 +27,10 @@ public class Player : MonoBehaviour {
 
     public void Freeze(bool? movement = null, bool? abilities = null, bool? health = null) {
         if (movement  != null) playerMovement.enabled = !(bool)movement;
-        if (abilities != null) playerMovement.enabled = !(bool)abilities;
+        if (abilities != null) {
+            playerWhip.enabled = !(bool)abilities;
+            playerAttacks.enabled = !(bool)abilities;
+        }
         if (health    != null) playerHealth  .enabled = !(bool)health;
     }
 

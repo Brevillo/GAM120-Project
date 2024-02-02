@@ -9,6 +9,10 @@ public class EntityHealthBar : MonoBehaviour {
     [SerializeField] private Image bar;
 
     private void Awake() {
-        health.OnHealthUpdated += () => bar.fillAmount = health.HealthPercent;
+        health.OnHealthUpdated += OnHealthUpdated;
+    }
+
+    private void OnHealthUpdated() {
+        bar.fillAmount = health.HealthPercent;
     }
 }
