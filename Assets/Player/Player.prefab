@@ -1786,6 +1786,7 @@ Transform:
   - {fileID: 6984676887983115578}
   - {fileID: 8100294127505043150}
   - {fileID: 2078830397157139679}
+  - {fileID: 3123798462131703834}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7350749247390658496
@@ -2074,6 +2075,148 @@ MonoBehaviour:
   ZenHealRate100: 1
   ZealPerHit: 0.15
   zealDamagePercent: 1
+  deathShake:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 1
+    valueScale: 0.25
+    timer: 0
+  deathBarZoom:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.89821327
+        inSlope: 0.2132237
+        outSlope: 0.2132237
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.06500992
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 2
+    valueScale: 1
+    timer: 0
+  deathBarFade:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2.8708763
+        outSlope: 2.8708763
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.018409425
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 2
+    valueScale: 1
+    timer: 0
+  deathBar: {fileID: 7783065693283198565}
+  deathCanvasGroup: {fileID: 7691349959287057336}
+  deathFadeOut:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 3.5
+    valueScale: 1
+    timer: 0
+  deathFadeIn:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 2
+    valueScale: 1
+    timer: 0
   damageShake:
     amplitude: 0.5
     duration: 0.25
@@ -2208,10 +2351,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880cc4a2493624f3aa7c0a9c658ff117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 5
   invincibilityDuration: 0.5
   team: {fileID: 11400000, guid: e29e6f6d0ca34479282fe85a6f23d579, type: 2}
   health: 0
+  Dead: 0
 --- !u!50 &7560332416474703363
 Rigidbody2D:
   serializedVersion: 4
@@ -2568,6 +2712,118 @@ Transform:
   - {fileID: 2920025374127357879}
   m_Father: {fileID: 1483030378175564037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1552180193890317540
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2616233051966812216}
+    m_Modifications:
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667938496377178058, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+      propertyPath: m_Name
+      value: Death Canvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+--- !u!224 &3123798462131703834 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4527108899823625470, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+  m_PrefabInstance: {fileID: 1552180193890317540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &7691349959287057336 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 9166894110445903708, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+  m_PrefabInstance: {fileID: 1552180193890317540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7783065693283198565 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8757657030968611457, guid: 63d9b66cce378479fb78bad25b4b4292, type: 3}
+  m_PrefabInstance: {fileID: 1552180193890317540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6292081943838121711
 PrefabInstance:
   m_ObjectHideFlags: 0

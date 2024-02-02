@@ -42,7 +42,7 @@ public class SmartCurve : ISmartCurve {
         curve = new(copy.curve.keys);
         valueScale = copy.valueScale;
         timeScale = copy.timeScale;
-        timer = 0;
+        timer = copy.timer;
     }
     /// <summary> Constructs a copy of this SmartCurve. </summary>
     public ISmartCurve Copy() => new SmartCurve(this);

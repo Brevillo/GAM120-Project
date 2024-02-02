@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class PlayerHealth : Player.Component {
 
+    [Header("Zeal/Zen")]
     [SerializeField] private Image ZealBar;
     [SerializeField] private float ZenHealRate50;
     [SerializeField] private float ZenHealRate75;
     [SerializeField] private float ZenHealRate100;
     [SerializeField] private float ZealPerHit;
     [SerializeField] private float zealDamagePercent;
+
+    [Header("Death")]
+    [SerializeField] private SmartCurve deathShake;
+    [SerializeField] private SmartCurve deathBarZoom, deathBarFade;
+    [SerializeField] private RectTransform deathBar;
+    [SerializeField] private CanvasGroup deathCanvasGroup;
+    [SerializeField] private SmartCurve deathFadeOut, deathFadeIn;
 
     [Header("Effects")]
     [SerializeField] private CameraShakeProfile damageShake;
@@ -22,11 +30,14 @@ public class PlayerHealth : Player.Component {
 
     private void Awake() {
         Health.OnTakeDamage += TakeDamage;
+        Health.OnDeath += OnDeath;
     }
 
-    private void Start()
-    {
+    private void Start() {
+
         energy = 0.5f;
+
+        CameraEffects.BlackFade(deathFadeIn);
     }
 
     private void Update()
@@ -52,6 +63,41 @@ public class PlayerHealth : Player.Component {
         energy = Mathf.MoveTowards(energy, 0.0f, ZealPerHit);
 
         Movement.TakeKnockback(info.knockback);
+    }
+
+    private void OnDeath() {
+
+        Player.Freeze(movement: true, abilities: true, health: true);
+
+        StartCoroutine(DeathShake());
+
+        IEnumerator DeathShake() {
+
+            deathShake.Start();
+
+            while (!deathShake.Done) {
+                BodyPivot.localPosition = Random.insideUnitCircle * deathShake.Evaluate();
+                yield return null;
+            }
+
+            BodyPivot.localPosition = Vector2.zero;
+            BodyPivot.localEulerAngles = Vector3.forward * 180;
+
+            deathBarZoom.Start();
+            deathBarFade.Start();
+
+            while (!deathBarZoom.Done) {
+
+                deathCanvasGroup.alpha = deathBarFade.Evaluate();
+                deathBar.localScale = Vector3.one * deathBarZoom.Evaluate();
+
+                yield return null;
+            }
+
+            yield return CameraEffects.BlackFade(deathFadeOut);
+
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
     }
 
     private IEnumerator InvincibilityFlashing(UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustment) {

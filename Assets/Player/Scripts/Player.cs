@@ -25,6 +25,12 @@ public class Player : MonoBehaviour {
 
     private int facing; // current direction being faced, 1 = right, -1 = left
 
+    public void Freeze(bool? movement = null, bool? abilities = null, bool? health = null) {
+        if (movement  != null) playerMovement.enabled = !(bool)movement;
+        if (abilities != null) playerMovement.enabled = !(bool)abilities;
+        if (health    != null) playerHealth  .enabled = !(bool)health;
+    }
+
     private void Awake() {
         facing = 1;
     }
@@ -35,10 +41,14 @@ public class Player : MonoBehaviour {
 
         // debug helpers
 
+        #if UNITY_EDITOR
+
         if (inputManager.Debug1.Down) UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         if (inputManager.Debug2.Down) health.Heal(1);
         if (inputManager.Debug3.Down) playerHealth.IncreaseZen(0.1f);
-        //if (inputManager.Debug4.Down) ;
+        if (inputManager.Debug4.Down) health.TakeDamage(new(5f, Vector2.zero, Vector2.zero));
+
+#endif
     }
 
     private Vector2Int inputDirection => new(
@@ -64,7 +74,6 @@ public class Player : MonoBehaviour {
         protected Rigidbody2D       Rigidbody       => player.  rigidbody;
         protected BoxCollider2D     Collider        => player.  collider;
 
-        protected SpriteRenderer    Renderer        => player.  spriteRenderer;
         protected Transform         BodyPivot       => player.  bodyPivot;
 
         // helper properties

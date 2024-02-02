@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+/* Made by Oliver Beebe 2024 */
 using UnityEngine;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
@@ -10,7 +9,7 @@ using UnityEditor;
 public struct Scene {
 
     #if UNITY_EDITOR
-    public SceneAsset editorSceneAsset;
+    [SerializeField] private SceneAsset editorSceneAsset;
     #endif
     public string name;
 

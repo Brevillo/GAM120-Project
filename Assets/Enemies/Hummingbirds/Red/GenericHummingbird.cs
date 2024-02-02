@@ -33,6 +33,8 @@ public abstract class GenericHummingbird : GenericEnemy {
 
     protected override void Start() {
 
+        base.Start();
+
         target = FindObjectOfType<Player>().transform;
 
         color = rend.color;

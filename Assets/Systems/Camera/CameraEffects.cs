@@ -9,6 +9,7 @@ using UnityEditor;
 public class CameraEffects : MonoBehaviour {
 
     [SerializeField] private VolumeProfile effectVolume;
+    [SerializeField] private CanvasGroup whiteFade, blackFade;
 
     private void Awake() {
         I = this;
@@ -29,21 +30,29 @@ public class CameraEffects : MonoBehaviour {
     public static void AddShake(CameraShakeProfile profile) => I.activeShakes.Add(new(profile));
     public static void AddBounce(CameraBounceProfile profile, Vector2 direction) => I.activeBounces.Add(new(profile, direction));
     public static void PostProcessingEffect<T>(Routine<T> r) where T : VolumeComponent {
-
         if (!I.effectVolume.TryGet(out T component)) return;
-
         I.StartCoroutine(r.Invoke(component));
+    }
+    public static Coroutine BlackFade(SmartCurve curve) => I.NewFade(I.blackFade, curve);
+    public static Coroutine WhiteFade(SmartCurve curve) => I.NewFade(I.whiteFade, curve);
 
-        //IEnumerator Routine() {
+    private Coroutine activeFade;
+    private Coroutine NewFade(CanvasGroup group, SmartCurve curve) {
 
-        //    preEffect.Invoke(component);
+        if (activeFade != null) StopCoroutine(activeFade);
+        return activeFade = StartCoroutine(Fade());
 
-        //    yield return unscaled
-        //        ? new WaitForSecondsRealtime(duration)
-        //        : new WaitForSeconds(duration);
+        IEnumerator Fade() {
 
-        //    postEffect.Invoke(component);
-        //}
+            SmartCurve fade = new(curve);
+
+            fade.Start();
+
+            while (!fade.Done) {
+                group.alpha = fade.Evaluate();
+                yield return null;
+            }
+        }
     }
 
     private Vector2 CalculateOffset<T>(List<T> effects) where T : ActiveEffect {

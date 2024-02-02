@@ -36,14 +36,15 @@ public class EntityHealth : MonoBehaviour {
 
     public EntityHealthTeam Team => team;
 
-    public float HealthPercent => health / maxHealth;
+    public float HealthPercent => Health / maxHealth;
 
     public bool Invincible => invincibilityRemaining > 0;
-    public bool Dead => health <= 0;
+    public bool Dead;
 
     public event System.Action<DamageInfo> OnTakeDamage;
+    public event System.Action OnDeath;
     public event System.Action<float> OnHeal;
-    public event System.Action OnHealthUpdated, OnDeath;
+    public event System.Action OnHealthUpdated;
 
     #endregion
 
@@ -53,15 +54,20 @@ public class EntityHealth : MonoBehaviour {
 
     public void TakeDamage(DamageInfo info) {
 
-        // take no damage if still invincible
-        if (invincibilityRemaining > 0) return;
+        // take no damage if invincible or dead
+        if (Invincible || Dead) return;
 
         Health = Mathf.MoveTowards(Health, 0, info.damageAmount);
 
         invincibilityRemaining = invincibilityDuration;
 
-        if (Health > 0) OnTakeDamage?.Invoke(info);
-        else OnDeath?.Invoke();
+        // death
+        if (Health <= 0) {
+            Dead = true;
+            OnDeath?.Invoke();
+        }
+
+        else OnTakeDamage?.Invoke(info);
     }
 
     public void FullHeal() {
