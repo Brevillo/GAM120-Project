@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 168804729}
   - component: {fileID: 168804728}
   m_Layer: 0
-  m_Name: Beetle_Game-6
+  m_Name: Mushrooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ SpriteRenderer:
   m_SortingLayerID: 653420477
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c6692ebb0b7f24c35a191351e29396e8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c346255c074fc4aa5b6f51280a0dcd80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -296,8 +296,8 @@ Transform:
   m_GameObject: {fileID: 168804727}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0300002, y: 0.98999995, z: -1.49}
-  m_LocalScale: {x: 3.2097, y: 3.2097, z: 3.2097}
+  m_LocalPosition: {x: 1, y: 1.2, z: -1.49}
+  m_LocalScale: {x: 2.5288265, y: 2.5288265, z: 2.5288265}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1525524460}
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 494555381}
   - component: {fileID: 494555380}
   m_Layer: 0
-  m_Name: Beetle_Game-10
+  m_Name: ForegroundPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +492,7 @@ SpriteRenderer:
   m_SortingLayerID: 1015442889
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a0577db0b181f4d67843a9ea810b8037, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46c6df8305506487c809fa30ab7dcfd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -512,7 +512,7 @@ Transform:
   m_GameObject: {fileID: 494555379}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.1, y: 2.1, z: 0}
   m_LocalScale: {x: 2.3655024, y: 1.8485, z: 1.8485}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 596107248}
   - component: {fileID: 596107247}
   m_Layer: 0
-  m_Name: Beetle_Game-8
+  m_Name: ForegroundPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +683,7 @@ SpriteRenderer:
   m_SortingLayerID: 1015442889
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0b69aa5594db94d88af8b5240fccf7b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a47e283cd222448ea1cb28364e7ccfc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -703,12 +703,96 @@ Transform:
   m_GameObject: {fileID: 596107246}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.17, y: 0.089999914, z: -1.49}
+  m_LocalPosition: {x: -6.7, y: 0.7, z: -1.49}
   m_LocalScale: {x: 1.6983, y: 1.6983, z: 1.6983}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1525524460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &646905115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 646905116}
+  - component: {fileID: 646905117}
+  m_Layer: 0
+  m_Name: 'Background '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &646905116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646905115}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.8464, y: 0.9146, z: 20.01}
+  m_LocalScale: {x: 2.445074, y: 2.1117067, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1525524460}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &646905117
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646905115}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 653420477
+  m_SortingLayer: -1
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 69db160cb6a4446efa96510c99da8c33, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 27.324455, y: 20.48}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &761501314
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +804,7 @@ GameObject:
   - component: {fileID: 761501316}
   - component: {fileID: 761501315}
   m_Layer: 0
-  m_Name: Beetle_Game-2
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,7 +851,7 @@ SpriteRenderer:
   m_SortingLayerID: 653420477
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1fdd680eac0774b10b90c4d0a5080867, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4791fb609e4a9435984647c8d62caed9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -804,7 +888,7 @@ GameObject:
   - component: {fileID: 805717957}
   - component: {fileID: 805717956}
   m_Layer: 0
-  m_Name: Beetle_Game-3
+  m_Name: Moss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,12 +935,12 @@ SpriteRenderer:
   m_SortingLayerID: 653420477
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b85e39c15e5347b9b98b1180aa7b877, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d36a05cd22014fb189b56d8581dc245, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 27.324455, y: 20.48}
+  m_Size: {x: 32.94, y: 22.083311}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -871,7 +955,7 @@ Transform:
   m_GameObject: {fileID: 805717955}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.95, y: -2.71, z: 7.91}
+  m_LocalPosition: {x: -6.8, y: -2.4, z: 7.91}
   m_LocalScale: {x: 2.631827, y: 1.9632088, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -942,7 +1026,7 @@ GameObject:
   - component: {fileID: 1075177733}
   - component: {fileID: 1075177732}
   m_Layer: 0
-  m_Name: Beetle_Game-3 (1)
+  m_Name: Moss2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -989,12 +1073,12 @@ SpriteRenderer:
   m_SortingLayerID: 653420477
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b85e39c15e5347b9b98b1180aa7b877, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d36a05cd22014fb189b56d8581dc245, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 27.324455, y: 20.48}
+  m_Size: {x: 32.94, y: 22.083311}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1009,7 +1093,7 @@ Transform:
   m_GameObject: {fileID: 1075177731}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.8599997, y: -0.45000005, z: 13.25}
+  m_LocalPosition: {x: 7.3, y: -0.1, z: 13.25}
   m_LocalScale: {x: 2.631827, y: 1.9632088, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1518,7 +1602,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495237061}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -28748,7 +28832,7 @@ GameObject:
   - component: {fileID: 1502866978}
   - component: {fileID: 1502866977}
   m_Layer: 0
-  m_Name: Beetle_Game-1
+  m_Name: Background(Shaded)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28795,7 +28879,7 @@ SpriteRenderer:
   m_SortingLayerID: 653420477
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 42089b94c688345b0a4853dce7403b55, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 263a9e82cf3054d62897dbb48686129c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -28815,8 +28899,8 @@ Transform:
   m_GameObject: {fileID: 1502866976}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.643, y: -5.21, z: 20.01}
-  m_LocalScale: {x: 2.6002328, y: 2.6937945, z: 1}
+  m_LocalPosition: {x: -3.8464, y: 0.9146, z: 20.01}
+  m_LocalScale: {x: 2.445074, y: 2.1117067, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1525524460}
@@ -28850,6 +28934,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 646905116}
   - {fileID: 1502866978}
   - {fileID: 761501316}
   - {fileID: 805717957}
@@ -29135,7 +29220,7 @@ GameObject:
   - component: {fileID: 1940025044}
   - component: {fileID: 1940025043}
   m_Layer: 0
-  m_Name: Beetle_Game-3 (2)
+  m_Name: Moss3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29182,12 +29267,12 @@ SpriteRenderer:
   m_SortingLayerID: 653420477
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b85e39c15e5347b9b98b1180aa7b877, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d36a05cd22014fb189b56d8581dc245, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 27.324455, y: 20.48}
+  m_Size: {x: 32.94, y: 22.083311}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -29219,7 +29304,7 @@ GameObject:
   - component: {fileID: 2134142240}
   - component: {fileID: 2134142239}
   m_Layer: 0
-  m_Name: Beetle_Game-4
+  m_Name: RightPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29266,7 +29351,7 @@ SpriteRenderer:
   m_SortingLayerID: 653420477
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 33525adff0a554c94a4aed41a59db0ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c1eb2ee8a7164a22819a5f3aad7d91e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
