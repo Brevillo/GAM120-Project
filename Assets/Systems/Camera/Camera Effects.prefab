@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979f93dc27be0436aa3c4577972ed058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectVolume: {fileID: 11400000, guid: ccfaffcc65de448fca9d996fc7c49f38, type: 2}
+  volumeComponent: {fileID: -6164786603051733183}
   whiteFade: {fileID: 7184645106443257167}
   blackFade: {fileID: 8459064836127471893}
 --- !u!114 &-6164786603051733183
@@ -65,7 +65,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: ccfaffcc65de448fca9d996fc7c49f38, type: 2}
+  sharedProfile: {fileID: 0}
 --- !u!1 &2246911415499497767
 GameObject:
   m_ObjectHideFlags: 0

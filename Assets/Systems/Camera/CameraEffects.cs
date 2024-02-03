@@ -8,19 +8,18 @@ using UnityEditor;
 
 public class CameraEffects : MonoBehaviour {
 
-    [SerializeField] private VolumeProfile effectVolume;
+    [SerializeField] private Volume volumeComponent;
     [SerializeField] private CanvasGroup whiteFade, blackFade;
 
     private void Awake() {
         I = this;
-    }
-
-    private void Start() {
-        effectVolume.Reset();
+        volumeComponent.profile = ScriptableObject.CreateInstance<VolumeProfile>();
     }
 
     // instance
     private static CameraEffects I;
+
+    private static VolumeProfile effectVolume => I.volumeComponent.profile;
 
     private readonly List<ActiveShake> activeShakes = new();
     private readonly List<ActiveBounce> activeBounces = new();
@@ -30,7 +29,7 @@ public class CameraEffects : MonoBehaviour {
     public static void AddShake(CameraShakeProfile profile) => I.activeShakes.Add(new(profile));
     public static void AddBounce(CameraBounceProfile profile, Vector2 direction) => I.activeBounces.Add(new(profile, direction));
     public static void PostProcessingEffect<T>(Routine<T> r) where T : VolumeComponent {
-        if (!I.effectVolume.TryGet(out T component)) return;
+        if (!effectVolume.TryGet(out T component)) component = effectVolume.Add<T>();
         I.StartCoroutine(r.Invoke(component));
     }
     public static Coroutine BlackFade(SmartCurve curve) => I.NewFade(I.blackFade, curve);

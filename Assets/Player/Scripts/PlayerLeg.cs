@@ -9,7 +9,7 @@ public class PlayerLeg : Player.Component {
 
     private void LateUpdate() {
 
-        transform.eulerAngles = Movement.OnGround() && InputDirection.x != 0
+        transform.localEulerAngles = Movement.OnGround() && InputDirection.x != 0
             ? Vector3.forward * (2f * Mathf.PingPong(Time.time, wiggleSpeed) / wiggleSpeed - 1) * wiggleAngleRange * (alternate ? -1 : 1)
             : Vector3.zero;
     }

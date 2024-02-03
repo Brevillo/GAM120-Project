@@ -11,6 +11,7 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private float ZenHealRate75;
     [SerializeField] private float ZenHealRate100;
     [SerializeField] private float ZealPerHit;
+    [SerializeField] private float zenPerEat;
     [SerializeField] private float zealDamagePercent;
 
     [Header("Death")]
@@ -30,7 +31,7 @@ public class PlayerHealth : Player.Component {
     public float DamageMultiplier => Mathf.Lerp(1, 1 + zealDamagePercent, Mathf.InverseLerp(0.5f, 0, energy));
 
     private void Awake() {
-        Health.OnTakeDamage += TakeDamage;
+        Health.OnTakeDamage += DamageEffects;
         Health.OnDeath += OnDeath;
     }
 
@@ -41,22 +42,22 @@ public class PlayerHealth : Player.Component {
         CameraEffects.BlackFade(deathFadeIn);
     }
 
-    private void Update()
-    {
-        ZealBar.fillAmount = 1-energy;
-        float healAmount = energy switch
-        {
-            1 => ZenHealRate100,
+    private void Update() {
+
+        ZealBar.fillAmount = 1 - energy;
+
+        float healAmount = energy switch {
+                  1 => ZenHealRate100,
             > 0.75f => ZenHealRate75,
-            > 0.5f => ZenHealRate50,
-            _ => 0,
-        } ;
+            >  0.5f => ZenHealRate50,
+                  _ => 0,
+        };
 
         if (healAmount != 0)
             Health.Heal(healAmount * Time.deltaTime);
     }   
 
-    private void TakeDamage(DamageInfo info) {
+    private void DamageEffects(DamageInfo info) {
 
         TimeManager.FreezeTime(damageTimeFreezeDuration, this);
         CameraEffects.AddShake(damageShake);
@@ -70,7 +71,7 @@ public class PlayerHealth : Player.Component {
     private void OnDeath(DamageInfo info) {
 
         Player.Freeze(movement: true, abilities: true, health: true);
-        TakeDamage(info);
+        DamageEffects(info);
 
         StartCoroutine(DeathShake());
         StartCoroutine(DeathFall());
@@ -123,6 +124,8 @@ public class PlayerHealth : Player.Component {
 
         bool flash = false;
 
+        colorAdjustment.saturation.overrideState = true;
+
         while (Health.Invincible) {
             flash = !flash;
             colorAdjustment.saturation.value = flash ? -100 : 0;
@@ -132,10 +135,9 @@ public class PlayerHealth : Player.Component {
         colorAdjustment.saturation.value = 0;
     }
 
-    public void IncreaseZen(float energyAmount) {
+    public void IncreaseZen() {
 
-        energy = Mathf.MoveTowards(energy, 1.0f, energyAmount);
-        print(energyAmount);
+        energy = Mathf.MoveTowards(energy, 1.0f, zenPerEat);
         
     }
 }

@@ -28,8 +28,8 @@ public class YellowHummingbird : GenericEnemy
     private Color color;
 
     public override IWhippable.Type WhippableType => IWhippable.Type.Light;
-    protected override IEnumerator Behaviour()
-    {
+    protected override IEnumerator Behaviour() => throw new System.NotImplementedException();
+/*    {
         while(true) {
 
             yield return Idle(); {
@@ -69,5 +69,5 @@ public class YellowHummingbird : GenericEnemy
         float moveDistance = Random.Range(minMoveDist, maxMoveDist);
         Vector2 movePosition = 
 
-    }
+    }*/
 }

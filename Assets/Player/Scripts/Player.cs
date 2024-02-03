@@ -18,20 +18,24 @@ public class Player : MonoBehaviour {
     [Header("References")]
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private new BoxCollider2D collider;
-    [SerializeField] private SpriteRenderer spriteRenderer;
 
     [Header("Helper")]
     [SerializeField] private Transform bodyPivot;
 
     private int facing; // current direction being faced, 1 = right, -1 = left
 
+    private Vector2Int inputDirection => new(
+        Mathf.RoundToInt(inputManager.Movement.Vector.x),
+        Mathf.RoundToInt(inputManager.Movement.Vector.y));
+
     public void Freeze(bool? movement = null, bool? abilities = null, bool? health = null) {
-        if (movement  != null) playerMovement.enabled = !(bool)movement;
-        if (abilities != null) {
-            playerWhip.enabled = !(bool)abilities;
-            playerAttacks.enabled = !(bool)abilities;
-        }
-        if (health    != null) playerHealth  .enabled = !(bool)health;
+
+        playerMovement.enabled  = movement  ?? playerMovement.enabled;
+
+        playerWhip.enabled      = abilities ?? playerWhip.enabled;
+        playerAttacks.enabled   = abilities ?? playerWhip.enabled;
+
+        this.health.enabled    = health    ?? playerHealth.enabled;
     }
 
     private void Awake() {
@@ -51,12 +55,8 @@ public class Player : MonoBehaviour {
         //if (inputManager.Debug3.Down) ;
         if (inputManager.Debug4.Down) health.TakeDamage(new(5f, Vector2.zero, Vector2.zero));
 
-#endif
+        #endif
     }
-
-    private Vector2Int inputDirection => new(
-        Mathf.RoundToInt(inputManager.Movement.Vector.x),
-        Mathf.RoundToInt(inputManager.Movement.Vector.y));
 
     public class Component : MonoBehaviour {
 

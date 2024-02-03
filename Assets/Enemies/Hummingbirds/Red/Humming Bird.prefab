@@ -80,7 +80,8 @@ GameObject:
   - component: {fileID: 7501728411578513382}
   - component: {fileID: 6177127757091233344}
   - component: {fileID: 4911955032992510564}
-  m_Layer: 8
+  - component: {fileID: 6716722858687099868}
+  m_Layer: 0
   m_Name: Humming Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,6 +221,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &6716722858687099868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421639643989790829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c92acf678d9242b7aa66ec8608f0009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMaterial: {fileID: 2100000, guid: 098dba780fdb04292a9283ba4cc35dcb, type: 2}
+  spriteRenderers:
+  - {fileID: 6851537655748982450}
 --- !u!1 &8580194557186763521
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9100431057943810731}
   - component: {fileID: 6851537655748982450}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +330,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1902943199666517398, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3623793821079858132, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: health
@@ -322,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 7501728411578513382}
     - target: {fileID: 4129123458766063136, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6653609948639022087, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Name
@@ -330,11 +346,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6653609948639022087, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6847643424537116005, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8795956436052548854, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Pivot.x
@@ -476,11 +492,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 887552998076017976, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8021921288653438946, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8343933903172589611, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Name
@@ -488,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8343933903172589611, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
