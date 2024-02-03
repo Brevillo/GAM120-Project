@@ -67,6 +67,7 @@ public class YellowHummingbird : GenericEnemy
     {
 
         float moveDistance = Random.Range(minMoveDist, maxMoveDist);
+        Vector2 movePosition = 
 
     }
 }
