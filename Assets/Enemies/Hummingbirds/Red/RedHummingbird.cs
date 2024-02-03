@@ -6,12 +6,16 @@ public class RedHummingbird : GenericHummingbird {
 
     [Header("Diving")]
     [SerializeField] private float diveSpeed;
-    [SerializeField] private float maxDiveDist;
+    [SerializeField] private float maxDiveDist, playerPassDistance;
 
     protected override IEnumerator Attack() {
 
-        Vector2 divePosition = Vector2.ClampMagnitude(TargetPosition - Position, maxDiveDist) + Position;
+        Vector2 diveVector    = TargetPosition - Position,
+                diveDirection = diveVector.normalized,
+                divePosition  = diveDirection * (Mathf.Min(diveVector.magnitude, maxDiveDist) + playerPassDistance) + Position;
 
         yield return MoveTo(divePosition, diveSpeed);
+
+        Velocity = Vector2.zero;
     }
 }

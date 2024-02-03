@@ -67,9 +67,10 @@ public class PlayerHealth : Player.Component {
         Movement.TakeKnockback(info.knockback);
     }
 
-    private void OnDeath() {
+    private void OnDeath(DamageInfo info) {
 
         Player.Freeze(movement: true, abilities: true, health: true);
+        TakeDamage(info);
 
         StartCoroutine(DeathShake());
         StartCoroutine(DeathFall());

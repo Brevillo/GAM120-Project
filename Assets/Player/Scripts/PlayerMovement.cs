@@ -12,6 +12,9 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float runSpeed;
     [SerializeField] private float groundAccel, groundDeccel, airAccel, airDeccel;
 
+    [Header("Eating")]
+    [SerializeField] private float eatDuration;
+
     [Header("Jumping")]
     [SerializeField] private float jumpHeight;
     [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist;
@@ -99,7 +102,7 @@ public class PlayerMovement : Player.Component {
 
         velocity = Rigidbody.velocity;
         groundHit = Physics2D.BoxCast(transform.position, Collider.size, 0, Vector2.down, groundDetectDist, groundMask);
-        onGround = groundHit && groundHit.normal == Vector2.up;
+        onGround = groundHit;
         var groundDistHit = Physics2D.BoxCast(transform.position, Collider.size, 0, Vector2.down, Mathf.Infinity, groundMask);
         groundDist = groundDistHit ? transform.position.y - Collider.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
 
@@ -292,6 +295,8 @@ public class PlayerMovement : Player.Component {
 
             context.Run(false);
 
+            context.Fall(1000);
+
             base.Update();
         }
 
@@ -301,6 +306,19 @@ public class PlayerMovement : Player.Component {
             context.aerialHeadbuttsRemaining = context.maxHeadbuttsInAir;
 
             base.Exit();
+        }
+    }
+
+    [Serializable]
+    private class Eating : State {
+
+        public Eating(PlayerMovement context) : base(context) { }
+
+        public override void Update() {
+
+
+
+            base.Update();
         }
     }
 

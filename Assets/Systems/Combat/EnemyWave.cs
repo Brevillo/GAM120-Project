@@ -18,7 +18,7 @@ public class EnemyWave : MonoBehaviour {
 
         foreach (var enemy in enemies) {
             enemy.gameObject.SetActive(false);
-            enemy.OnDeath += () => RemoveEnemy(enemy);
+            enemy.OnDeath += info => RemoveEnemy(enemy);
         }
     }
 

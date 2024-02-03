@@ -42,7 +42,7 @@ public class EntityHealth : MonoBehaviour {
     public bool Dead;
 
     public event System.Action<DamageInfo> OnTakeDamage;
-    public event System.Action OnDeath;
+    public event System.Action<DamageInfo> OnDeath;
     public event System.Action<float> OnHeal;
     public event System.Action OnHealthUpdated;
 
@@ -64,7 +64,7 @@ public class EntityHealth : MonoBehaviour {
         // death
         if (Health <= 0) {
             Dead = true;
-            OnDeath?.Invoke();
+            OnDeath?.Invoke(info);
         }
 
         else OnTakeDamage?.Invoke(info);

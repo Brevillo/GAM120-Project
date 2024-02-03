@@ -50,7 +50,7 @@ public abstract class GenericEnemy : MonoBehaviour, IWhippable {
 
     protected virtual void OnTakeDamage(DamageInfo info) { }
 
-    protected virtual void OnDeath() {
+    protected virtual void OnDeath(DamageInfo info) {
         gameObject.SetActive(false);
     }
 
