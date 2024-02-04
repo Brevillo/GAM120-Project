@@ -135,7 +135,7 @@ public class PlayerHealth : Player.Component {
         colorAdjustment.saturation.value = 0;
     }
 
-    public void IncreaseZen() {
+    public void EatingZenIncrease() {
 
         energy = Mathf.MoveTowards(energy, 1.0f, zenPerEat);
         

@@ -30,6 +30,7 @@ public class MultiSpriteOutline : MonoBehaviour {
             var copy = new GameObject($"MultiSpriteOutline ({copying.name})").AddComponent<SpriteRenderer>();
 
             copy.sprite = copying.sprite;
+            copy.sortingLayerName = copying.sortingLayerName;
             copy.sortingOrder = short.MinValue;
             copy.material = outlineMaterial;
 

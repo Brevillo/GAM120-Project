@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Eat",
+                    "type": "Button",
+                    "id": "49b7f7c8-18b1-43f1-802a-9d003d653c8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Debug1",
                     "type": "Button",
                     "id": "75c22068-0195-419e-9f4f-719a8aa9cbff",
@@ -415,6 +424,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aadb6726-c1fd-4082-a364-6fc3293561ed",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ffeff4f0-bb9b-44f3-926c-124c2d1a8d30",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

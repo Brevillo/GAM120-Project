@@ -173,6 +173,7 @@ public class PlayerMovement : Player.Component {
 
     // instances of each state class
     private Grounded        grounded;
+    private Eating          eating;
     private Jumping         jumping;
     private Falling         falling;
     private Flying          flying;
@@ -183,6 +184,7 @@ public class PlayerMovement : Player.Component {
 
         // initialize states
         grounded        = new(this);
+        eating          = new(this);
         jumping         = new(this);
         falling         = new(this);
         flying          = new(this);
@@ -194,7 +196,10 @@ public class PlayerMovement : Player.Component {
 
             toGrounded      = () => onGround,
 
-            startJump       = () => jumpBuffer && onGround,
+            toEating        = () => Input.Eat.Pressed,
+            stopEating      = () => !Input.Eat.Pressed,
+
+            toJump          = () => jumpBuffer && onGround,
             endJump         = () => (!Input.Jump.Pressed && stateMachine.stateDuration > minJumpTime) || velocity.y <= 0,
 
             toFalling       = () => !onGround,
@@ -204,7 +209,7 @@ public class PlayerMovement : Player.Component {
                                 && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immeditaley fly after jumping
             endFlying       = () => !Input.Jump.Pressed || remainingFlightStamina <= 0,
 
-            startHeadbutt   = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0)
+            toHeadbutt      = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0)
                                 && (stateMachine.previousState != headbutting || stateMachine.stateDuration > headbuttCooldown), // headbutt cooldown
 
             stopHeadbutt    = () => stateMachine.stateDuration > headbuttCurve.timeScale,
@@ -218,7 +223,7 @@ public class PlayerMovement : Player.Component {
         // common transitions
         StateMachine<PlayerMovement>.Transition
 
-            toHeadbutt = new(headbutting, startHeadbutt);
+            startHeadbutt = new(headbutting, toHeadbutt);
 
         // initialize state machine
         stateMachine = new(
@@ -242,36 +247,43 @@ public class PlayerMovement : Player.Component {
                  */
 
                 { grounded, new() {
-                    new(jumping, startJump),
-                    new(falling, toFalling),
-                    toHeadbutt,
+                    new(jumping,    toJump),
+                    new(falling,    toFalling),
+                    new(eating,     toEating),
+                    startHeadbutt,
+                } },
+
+                { eating, new() {
+                    new(grounded,   stopEating),
+                    new(falling,    toFalling),
+                    startHeadbutt,
                 } },
 
                 { jumping, new() {
-                    new(falling, endJump),
-                    toHeadbutt,
+                    new(falling,    endJump),
+                    startHeadbutt,
                 } },
 
                 { falling, new() {
-                    new(grounded, toGrounded),
-                    new(flying, toFlight),
-                    toHeadbutt,
+                    new(grounded,   toGrounded),
+                    new(flying,     toFlight),
+                    startHeadbutt,
                 } },
 
                 { flying, new() {
-                    new(falling, endFlying),
-                    toHeadbutt,
+                    new(falling,    endFlying),
+                    startHeadbutt,
                 } },
 
                 { headbutting, new() {
-                    new(grounded, stopHbGrounded),
-                    new(falling, stopHbFalling),
-                    new(jumping, startJump), // a dash of the wave variety perhaps?
+                    new(grounded,   stopHbGrounded),
+                    new(falling,    stopHbFalling),
+                    new(jumping,    toJump), // a dash of the wave variety perhaps?
                 } },
 
                 { knockbacking, new() {
-                    new(grounded, stopKbGrounded),
-                    new(falling, stopKbGrounded),
+                    new(grounded,   stopKbGrounded),
+                    new(falling,    stopKbGrounded),
                 } },
             }
         );
@@ -314,9 +326,25 @@ public class PlayerMovement : Player.Component {
 
         public Eating(PlayerMovement context) : base(context) { }
 
+        private float eatTimer;
+
+        public override void Enter() {
+
+            base.Enter();
+
+            context.velocity = Vector2.zero;
+
+            eatTimer = 0;
+        }
+
         public override void Update() {
 
+            eatTimer += Time.deltaTime;
 
+            if (eatTimer > context.eatDuration) {
+                eatTimer = 0;
+                context.PlayerHealth.EatingZenIncrease();
+            }
 
             base.Update();
         }

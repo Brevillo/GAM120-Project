@@ -7,7 +7,7 @@ using UnityEditor;
 
 public abstract class CameraBound : MonoBehaviour {
 
-    public static readonly Vector2 defaultCameraSize = new(16, 9);
+    private static readonly Vector2 defaultCameraSize = new(16, 9);
 
     [Header("Camera Variables")]
     [SerializeField] private float cameraSizeMultiple;

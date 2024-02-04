@@ -7,8 +7,11 @@ public class PlayerInput : InputManager {
     [Header("Movement")]
     public Button Jump;
     public Axis Movement;
+
+    [Header("Abilities")]
     public Button Whip;
     public Button Attack;
+    public Button Eat;
 
     [Header("Menus")]
     public Button Pause;

@@ -24,7 +24,7 @@ public class CameraEffects : MonoBehaviour {
     private readonly List<ActiveShake> activeShakes = new();
     private readonly List<ActiveBounce> activeBounces = new();
 
-    public delegate IEnumerator Routine<T>(T component);
+    public delegate IEnumerator Routine<T>(T component) where T : VolumeComponent;
 
     public static void AddShake(CameraShakeProfile profile) => I.activeShakes.Add(new(profile));
     public static void AddBounce(CameraBounceProfile profile, Vector2 direction) => I.activeBounces.Add(new(profile, direction));
@@ -39,6 +39,7 @@ public class CameraEffects : MonoBehaviour {
     private Coroutine NewFade(CanvasGroup group, SmartCurve curve) {
 
         if (activeFade != null) StopCoroutine(activeFade);
+
         return activeFade = StartCoroutine(Fade());
 
         IEnumerator Fade() {
@@ -54,7 +55,7 @@ public class CameraEffects : MonoBehaviour {
         }
     }
 
-    private Vector2 CalculateOffset<T>(List<T> effects) where T : ActiveEffect {
+    private static Vector2 CalculateOffset<T>(List<T> effects) where T : ActiveEffect {
 
         Vector2 totalOffset = Vector2.zero;
         Vector2? largest = null;
