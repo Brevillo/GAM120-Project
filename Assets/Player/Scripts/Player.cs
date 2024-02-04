@@ -33,9 +33,9 @@ public class Player : MonoBehaviour {
         playerMovement.enabled  = movement  ?? playerMovement.enabled;
 
         playerWhip.enabled      = abilities ?? playerWhip.enabled;
-        playerAttacks.enabled   = abilities ?? playerWhip.enabled;
+        playerAttacks.enabled   = abilities ?? playerAttacks.enabled;
 
-        this.health.enabled    = health    ?? playerHealth.enabled;
+        this.health.enabled    = health    ?? this.health.enabled;
     }
 
     private void Awake() {
