@@ -985,6 +985,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5352799085895462601, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
+      propertyPath: exitScene.name
+      value: Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5352799085895462601, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
+      propertyPath: exitScene.editorSceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: fcd037e3c19525c49aad26b3e16e05eb, type: 3}
     - target: {fileID: 6464117205188179584, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_Name
       value: Pause menu
