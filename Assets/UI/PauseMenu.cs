@@ -7,6 +7,7 @@ public class PauseMenu : Player.Component
     //stop time and open with escape button
     private bool paused;
     [SerializeField] private GameObject pauseMenuContent;
+    [SerializeField] private Scene exitScene;
 
     public void Pause()
     {
@@ -24,8 +25,8 @@ public class PauseMenu : Player.Component
 
     public void Exit()
     {
-        Application.Quit();
-        print("quit game");
+        UnPause();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(exitScene);
     }
 
     private void Start()
