@@ -18,6 +18,8 @@ public class YellowHummingbird : GenericEnemy
     [SerializeField] private float minMoveDist, maxMoveDist;
     [SerializeField] private float minMoves, maxMoves;
     [SerializeField] private int leftRightCycleCount;
+
+    [Header("Return to Ceiling")]
     [SerializeField] private float ceilingDetectDist;
     [SerializeField] private float ceilingStopDist;
     [SerializeField] private float ceilingReturnSpeed;
@@ -49,11 +51,11 @@ public class YellowHummingbird : GenericEnemy
 
             float moves = Random.Range(minMoves, maxMoves);
             
-            while(moves > 0) {
+            while (moves > 0) {
 
                 moves--;
                 DropNectar();
-                yield return Move();
+                yield return HorizontalMove();
                 yield return Idle();
             }
         }
@@ -89,7 +91,7 @@ public class YellowHummingbird : GenericEnemy
     }
 
         List<bool> moveDirections = new List<bool>();
-    protected IEnumerator Move()
+    protected IEnumerator HorizontalMove()
     {
         //if statement is used to refresh the list back to 6 once all "moves" have been used
         if (moveDirections.Count == 0)
