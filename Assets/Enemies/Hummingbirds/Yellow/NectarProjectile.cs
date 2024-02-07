@@ -28,5 +28,9 @@ public class NectarProjectile : MonoBehaviour
             entity.TakeDamage(new DamageInfo(damage, rigidbody.velocity, rigidbody.velocity.normalized * attackKnockback));
             Destroy(gameObject);
         }
+        else if (collision.gameObject.layer == GameInfo.GroundLayer)
+        {
+            Destroy(gameObject);
+        }
     }
 }
