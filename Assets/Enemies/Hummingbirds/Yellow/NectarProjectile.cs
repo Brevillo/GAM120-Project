@@ -10,6 +10,7 @@ public class NectarProjectile : MonoBehaviour
     [SerializeField] private float gravity;
     [SerializeField] private float terminalVelocity;
     [SerializeField] private new Rigidbody2D rigidbody;
+    [SerializeField] private EntityHealthTeam team;
 
     private void Update()
     {
@@ -18,10 +19,14 @@ public class NectarProjectile : MonoBehaviour
         velocity.y = Mathf.MoveTowards(velocity.y, -terminalVelocity, gravity * Time.deltaTime);
 
         rigidbody.velocity = velocity;
-
     }
 
-
-
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out EntityHealth entity) && entity.Team != team)
+        {
+            entity.TakeDamage(new DamageInfo(damage, rigidbody.velocity, rigidbody.velocity.normalized * attackKnockback));
+            Destroy(gameObject);
+        }
+    }
 }
