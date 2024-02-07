@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class GameInfo {
 
-    public static LayerMask GroundMask = LayerMask.NameToLayer("Ground");
+    public static LayerMask GroundMask = LayerMask.GetMask("Ground");
 }
