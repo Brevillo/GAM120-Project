@@ -123,6 +123,72 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &12330992
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &12330993 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 12330992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &64737617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184,6 +250,72 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!1001 &64837738
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &64837739 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 64837738}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &66418229
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +366,138 @@ MonoBehaviour:
   OnWaveCompleted:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &92288618
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &92288619 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 92288618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &125933789
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (30)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &125933790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 125933789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &132032909
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +531,72 @@ Transform:
   - {fileID: 1525524460}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &146484258
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (35)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &146484259 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 146484258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &168804727
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,10 +681,208 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1525524460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &222350632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (20)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &222350633 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 222350632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &247412953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2616233051966812216, guid: 3957b7063593248f89a17de3051dcbe4, type: 3}
   m_PrefabInstance: {fileID: 3157280140666440370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &250491652
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (12)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &250491653 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 250491652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &282278654
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (14)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &282278655 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 282278654}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &319067266
 PrefabInstance:
@@ -422,6 +950,138 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8505097883787634226, guid: 4a2b01a06bf57492da017dd1575c0096, type: 3}
   m_PrefabInstance: {fileID: 319067266}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &320523804
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (22)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &320523805 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 320523804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &346097523
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &346097524 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 346097523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &385305283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,6 +1146,204 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
   m_PrefabInstance: {fileID: 385305283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &389029822
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (21)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &389029823 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 389029822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &443247156
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (28)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &443247157 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 443247156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &481960459
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &481960460 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 481960459}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &494555379
 GameObject:
@@ -762,6 +1620,138 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1525524460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &607581539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (17)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &607581540 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 607581539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &744205255
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &744205256 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 744205255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &761501314
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +1836,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1525524460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &798250304
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (16)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &798250305 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 798250304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &805717955
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +1991,336 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7163333035395089957, guid: cc6a56e92b56b44f79bc0c7285901b18, type: 3}
   m_PrefabInstance: {fileID: 4691436463770177569}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &871158095
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (18)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &871158096 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 871158095}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &871873190
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (29)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &871873191 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 871873190}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &881177810
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &881177811 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 881177810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &887251260
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (31)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &887251261 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 887251260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &912991181
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (26)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &912991182 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 912991181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &935022399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1020,6 +2406,204 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+--- !u!1001 &944213292
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (25)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &944213293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 944213292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &956414059
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (33)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &956414060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 956414059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1025971140
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (27)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1025971141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1025971140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1048495943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,10 +2737,406 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1525524460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1165042710
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1165042711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1165042710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1168942352
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1168942353 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1168942352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1172368804
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (15)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1172368805 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1172368804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1177066668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5310823749409020933, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
   m_PrefabInstance: {fileID: 4163183266120850006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1235084120
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1235084121 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1235084120}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1285649072
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1285649073 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1285649072}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1397934939
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1397934940 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1397934939}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1427299744
 GameObject:
@@ -53290,6 +55270,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 0b5ecf330384446c9a38502b648ca574, type: 3}
   m_PrefabInstance: {fileID: 1628439580}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1655320386
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (34)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1655320387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1655320386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1683364892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53407,6 +55453,72 @@ MonoBehaviour:
   OnWaveCompleted:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1709804447
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (32)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1709804448 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1709804447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1940025042
 GameObject:
   m_ObjectHideFlags: 0
@@ -53491,10 +55603,208 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1525524460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1992530853
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (19)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &1992530854 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 1992530853}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2001918143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
   m_PrefabInstance: {fileID: 64737617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2042395354
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (24)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &2042395355 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 2042395354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2080435994
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 593284418}
+    m_Modifications:
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975712075984166484, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: ceilingDetectDist
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8421639643989790829, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+      propertyPath: m_Name
+      value: Hummingbird Yellow (23)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+--- !u!4 &2080435995 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 30886898699939077, guid: 3c9fc3b65d01d3042b0ad0e3a5908a8f, type: 3}
+  m_PrefabInstance: {fileID: 2080435994}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2097356514
 GameObject:
@@ -53881,6 +56191,111 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2001918143}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1235084121}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 92288619}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 481960460}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 12330993}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1165042711}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881177811}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 346097524}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1397934940}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 744205256}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1168942353}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1285649073}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 250491653}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 64837739}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 282278655}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1172368805}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 798250305}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 607581540}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 871158096}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1992530854}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 222350633}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 389029823}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 320523805}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2080435995}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2042395355}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 944213293}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 912991182}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1025971141}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 443247157}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 871873191}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 125933790}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 887251261}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1709804448}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 956414060}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1655320387}
+    - targetCorrespondingSourceObject: {fileID: 7256919891918827318, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 146484259}
     - targetCorrespondingSourceObject: {fileID: 3426805006397644356, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1683364893}
