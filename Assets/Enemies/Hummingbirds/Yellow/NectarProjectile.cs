@@ -12,6 +12,11 @@ public class NectarProjectile : MonoBehaviour
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private EntityHealthTeam team;
 
+
+    private void Start()
+    {
+        Destroy(gameObject, 10);
+    }
     private void Update()
     {
         Vector2 velocity = rigidbody.velocity;
