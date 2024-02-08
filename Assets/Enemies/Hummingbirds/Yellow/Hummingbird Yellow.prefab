@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 6177127757091233344}
   - component: {fileID: 4911955032992510564}
   - component: {fileID: 6975712075984166484}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Hummingbird Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,24 +198,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 7501728411578513382}
-  rigidbody: {fileID: 0}
-  minIdleTime: 0
-  maxIdleTime: 0
-  airFriction: 0
-  moveSpeed: 0
-  minMoveDist: 0
-  maxMoveDist: 0
-  dropSpeed: 0
-  attackKnockback: 0
-  damage: 0
-  hurtKnockback: 0
-  damageFlashDur: 0
+  rigidbody: {fileID: 4911955032992510564}
+  minIdleTime: 1
+  maxIdleTime: 3
+  airFriction: 100
+  nectarPrefab: {fileID: 1893020471157351244, guid: f8407c5b7c6829a429fc0793ad40cb56, type: 3}
+  moveSpeed: 30
+  minMoveDist: 5
+  maxMoveDist: 25
+  minMoves: 1
+  maxMoves: 3
+  leftRightCycleCount: 2
+  ceilingDetectDist: 5
+  ceilingStopDist: 3
+  ceilingReturnSpeed: 40
   hoverOscillation:
-    amplitude: 0
-    frequency: 1
+    amplitude: 0.1
+    frequency: 0.25
     offset: 0
     baseline: 0
-  rend: {fileID: 0}
+  rend: {fileID: 6851537655748982450}
 --- !u!1 &8580194557186763521
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9100431057943810731}
   - component: {fileID: 6851537655748982450}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +312,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1902943199666517398, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3623793821079858132, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: health
@@ -318,7 +320,7 @@ PrefabInstance:
       objectReference: {fileID: 7501728411578513382}
     - target: {fileID: 4129123458766063136, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6653609948639022087, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Name
@@ -326,11 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6653609948639022087, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6847643424537116005, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8795956436052548854, guid: 96638064809864d4fa881b930355e795, type: 3}
       propertyPath: m_Pivot.x
@@ -472,11 +474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 887552998076017976, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8021921288653438946, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8343933903172589611, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Name
@@ -484,7 +486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8343933903172589611, guid: 6630532c1a5af40c0be90cf01a4a6bce, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
