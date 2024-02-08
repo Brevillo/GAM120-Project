@@ -76,12 +76,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 30886898699939077}
+  - component: {fileID: 6799798868318571501}
   - component: {fileID: 7501728411578513382}
   - component: {fileID: 6177127757091233344}
   - component: {fileID: 4911955032992510564}
-  - component: {fileID: 6975712075984166484}
+  - component: {fileID: 6716722858687099868}
   m_Layer: 0
-  m_Name: Hummingbird Yellow
+  m_Name: Hummer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,6 +107,41 @@ Transform:
   - {fileID: 2441951129872555349}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6799798868318571501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421639643989790829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750651dd69265456083166abc31b5664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 7501728411578513382}
+  rigidbody: {fileID: 4911955032992510564}
+  attackKnockback: 5
+  damage: 1
+  hurtKnockback: 5
+  damageFlashDur: 0.1
+  minIdleTime: 1
+  maxIdleTime: 2
+  airFriction: 100
+  wanderSpeed: 30
+  minWanderDist: 1
+  maxWanderDist: 3
+  minWanderMoves: 2
+  maxWanderMoves: 5
+  hoverOscillation:
+    amplitude: 0.1
+    frequency: 0.25
+    offset: 0
+    baseline: 0
+  rend: {fileID: 6851537655748982450}
+  diveSpeed: 50
+  maxDiveDist: 100
+  playerPassDistance: 2
 --- !u!114 &7501728411578513382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +221,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &6975712075984166484
+--- !u!114 &6716722858687099868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,30 +230,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8421639643989790829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e999403d709c45847bf4f24d5dcc43ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c92acf678d9242b7aa66ec8608f0009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 7501728411578513382}
-  rigidbody: {fileID: 4911955032992510564}
-  minIdleTime: 1
-  maxIdleTime: 3
-  airFriction: 100
-  nectarPrefab: {fileID: 1893020471157351244, guid: f8407c5b7c6829a429fc0793ad40cb56, type: 3}
-  moveSpeed: 30
-  minMoveDist: 5
-  maxMoveDist: 25
-  minMoves: 1
-  maxMoves: 3
-  leftRightCycleCount: 2
-  ceilingDetectDist: 5
-  ceilingStopDist: 3
-  ceilingReturnSpeed: 40
-  hoverOscillation:
-    amplitude: 0.1
-    frequency: 0.25
-    offset: 0
-    baseline: 0
-  rend: {fileID: 6851537655748982450}
+  outlineMaterial: {fileID: 2100000, guid: 098dba780fdb04292a9283ba4cc35dcb, type: 2}
+  spriteRenderers:
+  - {fileID: 6851537655748982450}
 --- !u!1 &8580194557186763521
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +310,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.9847183, g: 1, b: 0.107547104, a: 1}
+  m_Color: {r: 0.9150943, g: 0.29644814, b: 0.22877358, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
