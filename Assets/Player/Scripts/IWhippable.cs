@@ -8,11 +8,9 @@ public interface IWhippable {
 
     public Type WhippableType { get; }
 
-    public Vector2 WhippablePosition { get; }
+    public Vector2 WhippablePosition { get; set; }
 
     public void DisableMovement();
 
     public void EnableMovement();
-
-    public void MoveTo(Vector2 position);
 }

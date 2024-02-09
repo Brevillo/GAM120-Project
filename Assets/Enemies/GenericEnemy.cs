@@ -59,10 +59,12 @@ public abstract class GenericEnemy : MonoBehaviour, IWhippable {
     #region IWhippable Implementation
 
     public abstract IWhippable.Type WhippableType { get; }
-    public Vector2 WhippablePosition => transform.position;
+    public Vector2 WhippablePosition {
+        get => rigidbody.position;
+        set => rigidbody.MovePosition(value);
+    }
     public void DisableMovement() => StopBehaviour();
     public void EnableMovement() => StartBehaviour();
-    public void MoveTo(Vector2 position) => rigidbody.MovePosition(position);
 
     #endregion
 }

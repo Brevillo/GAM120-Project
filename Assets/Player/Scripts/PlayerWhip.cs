@@ -241,7 +241,7 @@ public class PlayerWhip : Player.Component {
             };
             context.whipRopeSim.OnUpdate += position => {
                 if (context.whipping as Object != null)
-                    context.whipping.MoveTo(position);
+                    context.whipping.WhippablePosition = position;
             };
         }
 

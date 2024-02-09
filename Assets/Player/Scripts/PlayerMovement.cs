@@ -11,6 +11,8 @@ public class PlayerMovement : Player.Component {
     [Header("Running")]
     [SerializeField] private float runSpeed;
     [SerializeField] private float groundAccel, groundDeccel, airAccel, airDeccel;
+    [SerializeField] private float stepSoundFrequency;
+    [SerializeField] private SoundEffect stepSound;
 
     [Header("Eating")]
     [SerializeField] private float eatDuration;
@@ -303,7 +305,15 @@ public class PlayerMovement : Player.Component {
 
         public Grounded(PlayerMovement context) : base(context) { }
 
+        private float stepSoundTimer;
+
         public override void Update() {
+
+            stepSoundTimer += Time.deltaTime;
+            if (stepSoundTimer > context.stepSoundFrequency) {
+                stepSoundTimer = 0;
+                context.stepSound.Play(context);
+            }
 
             context.Run(false);
 
