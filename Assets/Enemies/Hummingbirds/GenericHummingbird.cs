@@ -20,10 +20,9 @@ public abstract class GenericHummingbird : GenericEnemy {
 
     [Header("Visuals")]
     [SerializeField] private Wave hoverOscillation;
-    [SerializeField] private SpriteRenderer rend;
+    [SerializeField] private Transform visualsPivot;
 
     private Transform target;
-    private Color color;
 
     private bool attacking;
 
@@ -37,8 +36,6 @@ public abstract class GenericHummingbird : GenericEnemy {
 
         target = FindObjectOfType<Player>().transform;
 
-        color = rend.color;
-
         hoverOscillation.offset = Random.value;
     }
 
@@ -46,7 +43,7 @@ public abstract class GenericHummingbird : GenericEnemy {
 
         // hover effect
         if (BehaviourActive)
-            rend.transform.localPosition = Vector2.up * hoverOscillation.Evaluate();
+            visualsPivot.localPosition = Vector2.up * hoverOscillation.Evaluate();
     }
 
     protected abstract IEnumerator Attack();
@@ -111,19 +108,19 @@ public abstract class GenericHummingbird : GenericEnemy {
 
     protected override void OnTakeDamage(DamageInfo info) {
 
-        StartCoroutine(Flash());
+        //StartCoroutine(Flash());
 
-        IEnumerator Flash() {
+        //IEnumerator Flash() {
 
-            rend.color = Color.white;
-            Velocity = Vector2.zero;
+        //    rend.color = Color.white;
+        //    Velocity = Vector2.zero;
 
-            yield return new WaitForSeconds(damageFlashDur);
+        //    yield return new WaitForSeconds(damageFlashDur);
 
-            rend.color = color;
-            Velocity = -info.direction * hurtKnockback;
-            StartBehaviour();
-        }
+        //    rend.color = color;
+        //    Velocity = -info.direction * hurtKnockback;
+        //    StartBehaviour();
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

@@ -26,7 +26,7 @@ public class YellowHummingbird : GenericEnemy
 
     [Header("Visuals")]
     [SerializeField] private Wave hoverOscillation;
-    [SerializeField] private SpriteRenderer rend;
+    [SerializeField] private Transform visualsPivot;
 
     private Transform target;
     private Color color;
@@ -123,7 +123,7 @@ public class YellowHummingbird : GenericEnemy
     {
         // hover effect
         if (BehaviourActive)
-            rend.transform.localPosition = Vector2.up * hoverOscillation.Evaluate();
+            visualsPivot.localPosition = Vector2.up * hoverOscillation.Evaluate();
     }
     protected IEnumerator ReturnToCeiling()
     {

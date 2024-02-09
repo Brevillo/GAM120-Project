@@ -71,15 +71,27 @@ public class GenericSpider : GenericEnemy {
                     hit ? Color.green : Color.Lerp(Color.red, Color.blue, (float)i / floorDetectWhiskers));
             }
 
-            float Dist(RaycastHit2D hit) => (hit.point - Position).magnitude;
-            int SortHits(RaycastHit2D hit1, RaycastHit2D hit2) => (int)(Dist(hit1) - Dist(hit2));
-            groundHits.Sort(SortHits);
+            RaycastHit2D closest = default;
+            float closestDist = Mathf.Infinity;
 
-            if (groundHits.Count > 0) {
-                Vector2 up = groundHits[0].normal;
+            foreach (var hit in groundHits) {
+
+                float dist = (Position - hit.point).magnitude;
+
+                if (dist < closestDist) {
+                    closestDist = dist;
+                    closest = hit;
+                }
+            }
+
+            if (closest) {
+
+                Debug.DrawLine(Position, closest.point, Color.white);
+
+                Vector2 up = closest.normal;
                 currentForward = Vector2.Perpendicular(up);
                 currentDown = -up;
-                Velocity = currentForward * crawlSpeed + (groundHits[0].point - Position) * floorSuctionForce;
+                Velocity = currentForward * crawlSpeed + (closest.point - Position).normalized * floorSuctionForce;
             }
 
             transform.localEulerAngles = Vector3.forward * Mathf.Atan2(currentForward.y, currentForward.x) * Mathf.Rad2Deg;
