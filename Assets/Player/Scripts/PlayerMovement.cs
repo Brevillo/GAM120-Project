@@ -27,6 +27,7 @@ public class PlayerMovement : Player.Component {
     [Header("Flying")]
     [SerializeField] private float flightForce;
     [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight, dontFlyAboveGroundDist;
+    [SerializeField] private SoundEffect flightSound;
 
     [Header("Headbutting")]
     [SerializeField] private float headbuttCooldown;
@@ -406,6 +407,8 @@ public class PlayerMovement : Player.Component {
             context.velocity.y = Mathf.Max(context.velocity.y, -context.minStartFlightVel);
 
             wingOscillation = 1;
+
+            context.flightSound.Play(context);
         }
 
         public override void Update() {
@@ -424,6 +427,8 @@ public class PlayerMovement : Player.Component {
         public override void Exit() {
 
             context.wingPivot.localEulerAngles = Vector3.zero;
+
+            context.flightSound.Stop(context);
 
             base.Exit();
         }
