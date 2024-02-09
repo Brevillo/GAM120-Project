@@ -310,7 +310,7 @@ public class PlayerMovement : Player.Component {
         public override void Update() {
 
             stepSoundTimer += Time.deltaTime;
-            if (stepSoundTimer > context.stepSoundFrequency) {
+            if (stepSoundTimer > context.stepSoundFrequency && context.InputDirection.x != 0) {
                 stepSoundTimer = 0;
                 context.stepSound.Play(context);
             }
