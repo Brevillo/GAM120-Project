@@ -72,14 +72,14 @@ public class GenericSpider : GenericEnemy {
             }
 
             float Dist(RaycastHit2D hit) => (hit.point - Position).magnitude;
-            int SortHits(RaycastHit2D hit1, RaycastHit2D hit2) => (int)(Dist(hit2) - Dist(hit1));
+            int SortHits(RaycastHit2D hit1, RaycastHit2D hit2) => (int)(Dist(hit1) - Dist(hit2));
             groundHits.Sort(SortHits);
 
             if (groundHits.Count > 0) {
                 Vector2 up = groundHits[0].normal;
                 currentForward = Vector2.Perpendicular(up);
                 currentDown = -up;
-                Velocity = currentForward * crawlSpeed + currentDown * floorSuctionForce;
+                Velocity = currentForward * crawlSpeed + (groundHits[0].point - Position) * floorSuctionForce;
             }
 
             transform.localEulerAngles = Vector3.forward * Mathf.Atan2(currentForward.y, currentForward.x) * Mathf.Rad2Deg;
