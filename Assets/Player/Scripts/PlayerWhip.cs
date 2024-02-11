@@ -12,9 +12,11 @@ public class PlayerWhip : Player.Component {
     [SerializeField] private VerletRope.Parameters whipRopeParameters;
     [SerializeField] private LineRenderer whipRenderer;
     [SerializeField] private PlayerWhipTrigger whipTrigger;
+
+    [Header("EFfects")]
     [SerializeField] private float whipHitFreezeFrame;
     [SerializeField] private CameraShakeProfile hitEnemyShake;
-
+    [SerializeField] private SoundEffect whipThrow, whipHit;
     #endregion
 
     #region Variables
@@ -166,6 +168,8 @@ public class PlayerWhip : Player.Component {
                 : Vector2.right * context.Facing;
 
             context.whipRopeSim.AddForce(-aimDirection * context.whipBackForce + Vector2.one * 0.01f);
+
+            context.whipThrow.Play(context);
         }
 
         public override void Update() {
@@ -230,6 +234,7 @@ public class PlayerWhip : Player.Component {
 
             TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
             CameraEffects.AddShake(context.hitEnemyShake);
+            context.whipHit.Play(context);
 
             if (context.whipping == null) return;
 

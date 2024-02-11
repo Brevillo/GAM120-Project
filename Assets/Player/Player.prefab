@@ -1725,6 +1725,7 @@ MonoBehaviour:
   stepSoundFrequency: 0.09
   stepSound: {fileID: 11400000, guid: 2c3717343ce1c4e55a442a832035accc, type: 2}
   eatDuration: 0.5
+  eatSound: {fileID: 11400000, guid: 7d51ae2d0043846e9b02cd394934b67c, type: 2}
   jumpHeight: 4.5
   minJumpTime: 0.07
   jumpGravity: 80
@@ -1859,6 +1860,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     interactionType: 0
+  headbuttActionSound: {fileID: 11400000, guid: 0ca5f493e1dd3466599f1b8ae5d53ae7, type: 2}
+  headbuttHitSound: {fileID: 11400000, guid: 9e4e10599ecd34087a6775f380ab6d4e, type: 2}
   swingDamage: 3
   swingKnockback: 0
   swingChargeTime: 0.25
@@ -1907,6 +1910,8 @@ MonoBehaviour:
   - {fileID: 909359668842683206}
   - {fileID: 3702987572078673378}
   - {fileID: 488982062225290127}
+  swingActionSound: {fileID: 11400000, guid: 10e780a6f583c499c96fe41a29ca8751, type: 2}
+  swingHitSound: {fileID: 11400000, guid: 9e4e10599ecd34087a6775f380ab6d4e, type: 2}
 --- !u!114 &3875097491503807348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1973,6 +1978,8 @@ MonoBehaviour:
     interactionType: 0
     shakeType: 1
     timeBetweenPositions: 0.02
+  whipThrow: {fileID: 11400000, guid: e248ef2e831de44c183a315684c4c4e5, type: 2}
+  whipHit: {fileID: 11400000, guid: 02b305e90cbda41a989f921c9979a73c, type: 2}
 --- !u!114 &2008252985994352932
 MonoBehaviour:
   m_ObjectHideFlags: 0

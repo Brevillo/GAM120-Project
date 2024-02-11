@@ -14,6 +14,7 @@ public class PlayerAttacks : Player.Component {
     [SerializeField] private EntityHealthCollisionTrigger headbuttTrigger;
     [SerializeField] private CameraShakeProfile headbuttHitShake;
     [SerializeField] private CameraBounceProfile headbuttHitBounce;
+    [SerializeField] private SoundEffect headbuttActionSound, headbuttHitSound;
 
     [Header("Swinging")]
     [SerializeField] private float swingDamage;
@@ -22,6 +23,7 @@ public class PlayerAttacks : Player.Component {
     [SerializeField] private Transform swingTriggerPivot;
     [SerializeField] private CameraShakeProfile swingHitShake;
     [SerializeField] private List<SpriteRenderer> swingChargeRends;
+    [SerializeField] private SoundEffect swingActionSound, swingHitSound;
 
     #endregion
 
@@ -71,6 +73,7 @@ public class PlayerAttacks : Player.Component {
             entity.TakeDamage(new(headbuttDamage * PlayerHealth.DamageMultiplier, headbuttDirection, headbuttDirection * headbuttKnockback));
             CameraEffects.AddShake(headbuttHitShake);
             CameraEffects.AddBounce(headbuttHitBounce, headbuttDirection);
+            headbuttHitSound.Play(this);
         }
     }
 
@@ -82,6 +85,7 @@ public class PlayerAttacks : Player.Component {
 
             entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, headbuttDirection * swingKnockback));
             CameraEffects.AddShake(swingHitShake);
+            swingHitSound.Play(this);
         }
     }
 
@@ -160,6 +164,8 @@ public class PlayerAttacks : Player.Component {
 
             base.Enter();
 
+            context.headbuttActionSound.Play(context);
+
             context.headbuttTrigger.gameObject.SetActive(true);
         }
 
@@ -229,6 +235,8 @@ public class PlayerAttacks : Player.Component {
 
             context.swingTriggerPivot.localEulerAngles = Vector3.forward * Mathf.Atan2(dir.y, Mathf.Abs(dir.x)) * Mathf.Rad2Deg;
             context.swingTrigger.gameObject.SetActive(true);
+
+            context.swingActionSound.Play(context);
         }
 
         public override void Exit() {

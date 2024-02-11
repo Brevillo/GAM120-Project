@@ -16,6 +16,7 @@ public class PlayerMovement : Player.Component {
 
     [Header("Eating")]
     [SerializeField] private float eatDuration;
+    [SerializeField] private SoundEffect eatSound;
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight;
@@ -345,6 +346,8 @@ public class PlayerMovement : Player.Component {
 
             context.velocity = Vector2.zero;
 
+            context.eatSound.Play(context);
+
             eatTimer = 0;
         }
 
@@ -358,6 +361,13 @@ public class PlayerMovement : Player.Component {
             }
 
             base.Update();
+        }
+
+        public override void Exit() {
+
+            context.eatSound.Stop(context);
+
+            base.Exit();
         }
     }
 
