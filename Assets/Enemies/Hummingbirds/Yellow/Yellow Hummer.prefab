@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Name
-      value: Yellow Hummer Variant
+      value: Yellow Hummer
       objectReference: {fileID: 0}
     - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9843138
       objectReference: {fileID: 0}
+    - target: {fileID: 6989869266368052441, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: turnToTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7531763033259358469, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.b
       value: 0.1137255
@@ -92,11 +96,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8825357261649644446}
   m_SourcePrefab: {fileID: 100100000, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
---- !u!4 &4114497463327644916 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9116906164198950444, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
-  m_PrefabInstance: {fileID: 5160105371188468440}
-  m_PrefabAsset: {fileID: 0}
 --- !u!50 &5048557843248565564 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 111592608271292388, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
@@ -145,9 +144,3 @@ MonoBehaviour:
   ceilingDetectDist: 5
   ceilingStopDist: 3
   ceilingReturnSpeed: 40
-  hoverOscillation:
-    amplitude: 0.1
-    frequency: 0.25
-    offset: 0
-    baseline: 0
-  visualsPivot: {fileID: 4114497463327644916}

@@ -18,9 +18,7 @@ public abstract class GenericHummingbird : GenericEnemy {
     [SerializeField] private float minWanderDist, maxWanderDist;
     [SerializeField] private int minWanderMoves, maxWanderMoves;
 
-    [Header("Visuals")]
-    [SerializeField] private Wave hoverOscillation;
-    [SerializeField] private Transform visualsPivot;
+    [SerializeField] private new HummingbirdAnimation animation;
 
     private Transform target;
 
@@ -30,20 +28,11 @@ public abstract class GenericHummingbird : GenericEnemy {
 
     public override IWhippable.Type WhippableType => IWhippable.Type.Light;
 
-    protected override void Start() {
-
-        base.Start();
+    private void Start() {
 
         target = FindObjectOfType<Player>().transform;
 
-        hoverOscillation.offset = Random.value;
-    }
-
-    protected virtual void Update() {
-
-        // hover effect
-        if (BehaviourActive)
-            visualsPivot.localPosition = Vector2.up * hoverOscillation.Evaluate();
+        animation.target = target;
     }
 
     protected abstract IEnumerator Attack();
@@ -65,7 +54,9 @@ public abstract class GenericHummingbird : GenericEnemy {
             }
 
             attacking = true;
+            animation.turnToTarget = false;
             yield return Attack();
+            animation.turnToTarget = true;
             attacking = false;
         }
     }
@@ -104,23 +95,6 @@ public abstract class GenericHummingbird : GenericEnemy {
               timeToTarget = distanceToTarget / speed;
 
         yield return new WaitForSeconds(timeToTarget);
-    }
-
-    protected override void OnTakeDamage(DamageInfo info) {
-
-        //StartCoroutine(Flash());
-
-        //IEnumerator Flash() {
-
-        //    rend.color = Color.white;
-        //    Velocity = Vector2.zero;
-
-        //    yield return new WaitForSeconds(damageFlashDur);
-
-        //    rend.color = color;
-        //    Velocity = -info.direction * hurtKnockback;
-        //    StartBehaviour();
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

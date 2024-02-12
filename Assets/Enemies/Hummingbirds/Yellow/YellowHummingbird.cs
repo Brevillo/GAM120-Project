@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class YellowHummingbird : GenericEnemy
 {
-
     [Header("Idling")]
     [SerializeField] private float minIdleTime;
     [SerializeField] private float maxIdleTime, airFriction;
@@ -16,7 +15,7 @@ public class YellowHummingbird : GenericEnemy
     [Header("Moving")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float minMoveDist, maxMoveDist;
-    [SerializeField] private float minMoves, maxMoves;
+    [SerializeField] private int minMoves, maxMoves;
     [SerializeField] private int leftRightCycleCount;
 
     [Header("Return to Ceiling")]
@@ -24,26 +23,22 @@ public class YellowHummingbird : GenericEnemy
     [SerializeField] private float ceilingStopDist;
     [SerializeField] private float ceilingReturnSpeed;
 
-    [Header("Visuals")]
-    [SerializeField] private Wave hoverOscillation;
-    [SerializeField] private Transform visualsPivot;
-
-    private Transform target;
-    private Color color;
-
     public override IWhippable.Type WhippableType => IWhippable.Type.Light;
-    
+
+    private List<bool> moveDirections = new List<bool>();
+
     private void DropNectar()
     {
         Instantiate(nectarPrefab, Position, Quaternion.identity);
     }
+
     protected override IEnumerator Behaviour() 
     {
         while(true) {
 
             //The bird casts a line from it's current position to the ceiling indefinitely 
             RaycastHit2D ceilingHit = Physics2D.Raycast(Position, Vector2.up, ceilingDetectDist, GameInfo.GroundMask);
-            if (!ceilingHit){
+            if (!ceilingHit) {
                 yield return ReturnToCeiling();
             }
 
@@ -60,6 +55,7 @@ public class YellowHummingbird : GenericEnemy
             }
         }
     }
+
     protected IEnumerator Idle()
     {
 
@@ -90,7 +86,6 @@ public class YellowHummingbird : GenericEnemy
         yield return new WaitForSeconds(timeToTarget);
     }
 
-        List<bool> moveDirections = new List<bool>();
     protected IEnumerator HorizontalMove()
     {
         //if statement is used to refresh the list back to 6 once all "moves" have been used
@@ -119,26 +114,15 @@ public class YellowHummingbird : GenericEnemy
         yield return MoveTo(movePosition, moveSpeed);
     }
 
-    protected virtual void Update()
-    {
-        // hover effect
-        if (BehaviourActive)
-            visualsPivot.localPosition = Vector2.up * hoverOscillation.Evaluate();
-    }
     protected IEnumerator ReturnToCeiling()
     {
-        
         RaycastHit2D findCeiling = Physics2D.Raycast(Position, Vector2.up, Mathf.Infinity, GameInfo.GroundMask);
         Vector2 ceilingOffset = new Vector2(0, ceilingStopDist);
         Vector2 returnUp = findCeiling.point - ceilingOffset;
-
 
         yield return Idle();
         yield return MoveTo(returnUp, ceilingReturnSpeed);
 
         Velocity = Vector2.zero;
     }
-
-
-
 }

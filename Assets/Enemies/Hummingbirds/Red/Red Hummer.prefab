@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Name
-      value: Red Hummer Variant
+      value: Red Hummer
       objectReference: {fileID: 0}
     - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -108,11 +108,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3240665518229959976}
   m_SourcePrefab: {fileID: 100100000, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
---- !u!4 &3051347785108257599 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9116906164198950444, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+--- !u!114 &3881065415994048970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6989869266368052441, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
   m_PrefabInstance: {fileID: 6115133472897547539}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366694497071501311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b005685c47040a5ad40065fd050eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5366694497071501311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
@@ -144,12 +150,7 @@ MonoBehaviour:
   maxWanderDist: 3
   minWanderMoves: 2
   maxWanderMoves: 5
-  hoverOscillation:
-    amplitude: 0.1
-    frequency: 0.25
-    offset: 0
-    baseline: 0
-  visualsPivot: {fileID: 3051347785108257599}
+  animation: {fileID: 3881065415994048970}
   diveSpeed: 50
   maxDiveDist: 100
   playerPassDistance: 2

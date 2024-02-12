@@ -43,7 +43,7 @@ public abstract class GenericEnemy : MonoBehaviour, IWhippable {
 
     #region Health
 
-    protected virtual void Start() {
+    private void Awake() {
         health.OnTakeDamage += OnTakeDamage;
         health.OnDeath += OnDeath;
     }

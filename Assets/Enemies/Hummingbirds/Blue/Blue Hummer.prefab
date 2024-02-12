@@ -108,11 +108,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5426320429222604822}
   m_SourcePrefab: {fileID: 100100000, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
---- !u!4 &4420104616028894259 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9116906164198950444, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+--- !u!114 &2509522525153332934 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6989869266368052441, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
   m_PrefabInstance: {fileID: 4887140484261261855}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734457215383994611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b005685c47040a5ad40065fd050eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &4782515500905358843 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 111592608271292388, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
@@ -160,12 +166,7 @@ MonoBehaviour:
   maxWanderDist: 2
   minWanderMoves: 1
   maxWanderMoves: 2
-  hoverOscillation:
-    amplitude: 0.1
-    frequency: 0.25
-    offset: 0
-    baseline: 0
-  visualsPivot: {fileID: 4420104616028894259}
+  animation: {fileID: 2509522525153332934}
   attackSpeed: 70
   attackAcceleration: 50
   attackDuration: 1

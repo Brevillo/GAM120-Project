@@ -12,6 +12,7 @@ public class PlayerAttacks : Player.Component {
     [SerializeField] private float headbuttDamage;
     [SerializeField] private float headbuttKnockback;
     [SerializeField] private EntityHealthCollisionTrigger headbuttTrigger;
+    [SerializeField] private float headbuttHitTimestop;
     [SerializeField] private CameraShakeProfile headbuttHitShake;
     [SerializeField] private CameraBounceProfile headbuttHitBounce;
     [SerializeField] private SoundEffect headbuttActionSound, headbuttHitSound;
@@ -22,14 +23,18 @@ public class PlayerAttacks : Player.Component {
     [SerializeField] private EntityHealthCollisionTrigger swingTrigger;
     [SerializeField] private Transform swingTriggerPivot;
     [SerializeField] private CameraShakeProfile swingHitShake;
-    [SerializeField] private List<SpriteRenderer> swingChargeRends;
     [SerializeField] private SoundEffect swingActionSound, swingHitSound;
+
+    [Header("Effects")]
+    [SerializeField] private GameObject hitParticles;
 
     #endregion
 
     private StateMachine<PlayerAttacks> stateMachine;
 
-    private Vector2 headbuttDirection;  // direction of the current headbutt
+    private Vector2
+        headbuttDirection,  // direction of the current headbutt
+        swingDirection;     // direction of the current swing    
 
     private void Awake() {
 
@@ -73,7 +78,9 @@ public class PlayerAttacks : Player.Component {
             entity.TakeDamage(new(headbuttDamage * PlayerHealth.DamageMultiplier, headbuttDirection, headbuttDirection * headbuttKnockback));
             CameraEffects.AddShake(headbuttHitShake);
             CameraEffects.AddBounce(headbuttHitBounce, headbuttDirection);
+            TimeManager.FreezeTime(headbuttHitTimestop, this);
             headbuttHitSound.Play(this);
+            Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, headbuttDirection));
         }
     }
 
@@ -83,9 +90,10 @@ public class PlayerAttacks : Player.Component {
 
         if (stateMachine.currentState == swinging) {
 
-            entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, headbuttDirection * swingKnockback));
+            entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, swingDirection * swingKnockback));
             CameraEffects.AddShake(swingHitShake);
             swingHitSound.Play(this);
+            Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, swingDirection));
         }
     }
 
@@ -182,27 +190,11 @@ public class PlayerAttacks : Player.Component {
 
         public Charging(PlayerAttacks context) : base(context) { }
 
-        private bool flicker;
-        private float flickerTimer;
-
         public override void Update() {
 
             float chargePercent = context.stateMachine.stateDuration / context.swingChargeTime;
 
             context.BodyPivot.localPosition = UnityEngine.Random.insideUnitCircle * Mathf.Lerp(context.minChargeShake, context.maxChargeShake, chargePercent);
-
-            if (chargePercent >= 1) {
-
-                flickerTimer += Time.deltaTime;
-                if (flickerTimer > 0.1f) {
-                    flicker = !flicker;
-                    flickerTimer = 0f;
-                }
-
-                var color = flicker ? Color.white : Color.red;
-
-                context.swingChargeRends.ForEach(rend => rend.color = color);
-            }
 
             base.Update();
         }
@@ -210,7 +202,6 @@ public class PlayerAttacks : Player.Component {
         public override void Exit() {
 
             context.BodyPivot.localPosition = Vector2.zero;
-            context.swingChargeRends.ForEach(rend => rend.color = Color.white);
 
             base.Exit();
         }
@@ -225,7 +216,7 @@ public class PlayerAttacks : Player.Component {
 
             base.Enter();
 
-            Vector2 dir = context.InputDirection;
+            Vector2 dir = context.swingDirection = context.InputDirection;
 
             // no downwards swings when grounded
             if (context.Movement.OnGround()) dir.y = Mathf.Max(0, dir.y);
