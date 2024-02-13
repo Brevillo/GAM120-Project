@@ -137,8 +137,6 @@ public class PlayerMovement : Player.Component {
 
     #region Helper Functions
 
-    Vector2 mousePosition;
-
     private void Run(bool withMomentum) {
 
         float accel = onGround
@@ -147,16 +145,6 @@ public class PlayerMovement : Player.Component {
               speed = withMomentum
                 ? Mathf.Max(runSpeed, Mathf.Abs(velocity.x))
                 : runSpeed;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        float mouseX = UnityEngine.Input.GetAxisRaw("Mouse X"),
-              mouseY = UnityEngine.Input.GetAxisRaw("Mouse Y");
-
-        mousePosition += new Vector2(mouseX, mouseY);
-
-        mousePosition = Vector2.ClampMagnitude(mousePosition, 5f);
 
         velocity.x = Mathf.MoveTowards(velocity.x, speed * InputDirection.x, accel * Time.deltaTime);
     }

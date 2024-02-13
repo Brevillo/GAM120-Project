@@ -2,13 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericSpider : GenericEnemy {
-
-    [SerializeField] private float crawlSpeed, floorSuctionForce;
-    [SerializeField] private float floorDetectDist;
-    [SerializeField] private int floorDetectWhiskers;
-    [SerializeField] private new CircleCollider2D collider;
-    [SerializeField] private Leg[] legs;
+public abstract class GenericSpider : GenericEnemyBehaviour {
 
     [System.Serializable]
     private class Leg {
@@ -20,7 +14,7 @@ public class GenericSpider : GenericEnemy {
 
         private Vector2 footTarget, footPosition;
 
-        public void Update(Vector2 origin, Vector2 down) {
+        private void Update(Vector2 origin, Vector2 down) {
 
             Vector2 jointPosition = origin + (Vector2)(Quaternion.FromToRotation(Vector2.down, down) * offset);
 
@@ -37,43 +31,41 @@ public class GenericSpider : GenericEnemy {
             line.positionCount = 3;
             line.SetPositions(new Vector3[] { origin, jointPosition, footPosition });
         }
-    }
 
-    private void OnDrawGizmos() {
-        if (!Application.IsPlaying(this))
-            foreach (var leg in legs) leg.Update(Position, Vector2.down);
+        public static System.Action<Leg> UpdateAll(Vector2 position, Vector2 down) => leg => leg.Update(position, down);
     }
 
     public override IWhippable.Type WhippableType => IWhippable.Type.Heavy;
 
-    private Vector2 currentForward, currentDown;
+    [System.Serializable]
+    protected class CrawlParameters {
 
-    protected override IEnumerator Behaviour() {
-
-        yield return Crawl(Mathf.Infinity);
+        public float crawlSpeed, floorSuctionForce, floorDetectDist;
+        public int floorDetectWhiskers;
+        public CircleCollider2D collider;
     }
 
-    private List<RaycastHit2D> GetCollisions(float startAngle, float range, bool debug) {
+    protected IEnumerator Crawl(float duration, int direction, CrawlParameters parameters) {
 
-        List<RaycastHit2D> hits = new();
-        for (int i = 0; i < floorDetectWhiskers; i++) {
+        List<RaycastHit2D> GetCollisions(float startAngle, float range, bool debug) {
 
-            float angle = startAngle + (float)i / floorDetectWhiskers * range * Mathf.Deg2Rad;
-            Vector2 direction = new(Mathf.Cos(angle), Mathf.Sin(angle));
+            List<RaycastHit2D> hits = new();
+            for (int i = 0; i < parameters.floorDetectWhiskers; i++) {
 
-            var hit = Physics2D.Raycast(Position + direction * collider.radius, direction, floorDetectDist, GameInfo.GroundMask);
-            if (hit) hits.Add(hit);
+                float angle = startAngle + (float)i / parameters.floorDetectWhiskers * range * Mathf.Deg2Rad;
+                Vector2 direction = new(Mathf.Cos(angle), Mathf.Sin(angle));
 
-            if (debug) Debug.DrawLine(
-                Position + direction * collider.radius,
-                hit ? hit.point : Position + direction * (collider.radius + floorDetectDist),
-                hit ? Color.green : Color.Lerp(Color.red, Color.blue, (float)i / floorDetectWhiskers));
+                var hit = Physics2D.Raycast(Position + direction * parameters.collider.radius, direction, parameters.floorDetectDist, GameInfo.GroundMask);
+                if (hit) hits.Add(hit);
+
+                //if (debug) Debug.DrawLine(
+                //    Position + direction * parameters.collider.radius,
+                //    hit ? hit.point : Position + direction * (parameters.collider.radius + parameters.floorDetectDist),
+                //    hit ? Color.green : Color.Lerp(Color.red, Color.blue, (float)i / parameters.floorDetectWhiskers));
+            }
+
+            return hits;
         }
-
-        return hits;
-    }
-
-    private IEnumerator Crawl(float duration) {
 
         for (float timer = 0; timer < duration; timer += Time.deltaTime) {
 
@@ -93,22 +85,20 @@ public class GenericSpider : GenericEnemy {
             if (closest) {
 
                 Vector2 toClosest = closest.point - Position,
-                        forward = -Vector2.Perpendicular(toClosest);
+                        forward = -Vector2.Perpendicular(toClosest) * direction;
 
-                var groundHits = GetCollisions(Mathf.Atan2(forward.y, forward.x), 180f, true);
+                var groundHits = GetCollisions(Mathf.Atan2(forward.y, forward.x), 180f * direction, true);
 
                 Vector2 averageNormal = Vector2.zero;
                 foreach (var hit in groundHits) averageNormal += hit.normal;
                 averageNormal = (averageNormal / groundHits.Count).normalized;
 
-                currentForward = Vector2.Perpendicular(averageNormal);
-                currentDown = -averageNormal;
-                Velocity = currentForward * crawlSpeed + toClosest.normalized * floorSuctionForce;
+                Vector2 currentForward = Vector2.Perpendicular(averageNormal) * direction;
+                Vector2 currentDown = -averageNormal;
+
+                Velocity = currentForward * parameters.crawlSpeed + toClosest.normalized * parameters.floorSuctionForce;
+                transform.up = -currentDown;
             }
-
-            transform.up = -currentDown;
-
-            foreach (var leg in legs) leg.Update(Position, currentDown);
 
             yield return null;
         }

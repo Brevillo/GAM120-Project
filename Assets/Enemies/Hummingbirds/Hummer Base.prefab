@@ -98,6 +98,8 @@ GameObject:
   - component: {fileID: 8071620366525614151}
   - component: {fileID: 626537091624782468}
   - component: {fileID: 111592608271292388}
+  - component: {fileID: 8352284447590819436}
+  - component: {fileID: 3993115283053847374}
   m_Layer: 0
   m_Name: Hummer Base
   m_TagString: Untagged
@@ -145,15 +147,7 @@ MonoBehaviour:
   wingPivotRange: 15
   visualsPivot: {fileID: 8882364429204250866}
   wingPivot: {fileID: 3499312456295916454}
-  flashDuration: 0.1
-  hitFlashRenderers:
-  - {fileID: 5944782474396352969}
-  - {fileID: 7531763033259358469}
-  - {fileID: 935950402242074121}
-  - {fileID: 8681432492528245351}
-  flashMaterial: {fileID: 2100000, guid: 0cbab0ca260da43719ce8e4210b65572, type: 2}
   rigidbody: {fileID: 111592608271292388}
-  health: {fileID: 2705604521991172}
   turnToTarget: 1
   target: {fileID: 0}
 --- !u!114 &2705604521991172
@@ -252,6 +246,40 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8352284447590819436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208739951423861484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325ccf5cd1b05449c832a047172435c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 2705604521991172}
+  rigidbody: {fileID: 111592608271292388}
+--- !u!114 &3993115283053847374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208739951423861484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0c99296c98645e1a9520470e055062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 2705604521991172}
+  flashDuration: 0.1
+  hitFlashRenderers:
+  - {fileID: 5944782474396352969}
+  - {fileID: 7531763033259358469}
+  - {fileID: 935950402242074121}
+  - {fileID: 8681432492528245351}
+  flashMaterial: {fileID: 2100000, guid: 0cbab0ca260da43719ce8e4210b65572, type: 2}
 --- !u!1 &2560517211426826215
 GameObject:
   m_ObjectHideFlags: 0

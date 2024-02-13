@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OliverUtils;
 
-public abstract class GenericHummingbird : GenericEnemy {
+public abstract class GenericHummingbird : GenericEnemyBehaviour {
 
     [Header("Damage")]
     [SerializeField] private float attackKnockback;
@@ -99,7 +99,7 @@ public abstract class GenericHummingbird : GenericEnemy {
 
     private void OnTriggerEnter2D(Collider2D collision) {
 
-        if (attacking && collision.TryGetComponent(out EntityHealth entity) && entity.Team != health.Team) 
+        if (attacking && collision.TryGetComponent(out EntityHealth entity) && entity.Team != Health.Team) 
             entity.TakeDamage(new(damage, Velocity.normalized, Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
     }
 }
