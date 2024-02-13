@@ -4,37 +4,6 @@ using UnityEngine;
 
 public abstract class GenericSpider : GenericEnemyBehaviour {
 
-    [System.Serializable]
-    private class Leg {
-
-        [SerializeField] private LineRenderer line;
-
-        [SerializeField] private float legLength, legSpeed;
-        [SerializeField] private Vector2 offset;
-
-        private Vector2 footTarget, footPosition;
-
-        private void Update(Vector2 origin, Vector2 down) {
-
-            Vector2 jointPosition = origin + (Vector2)(Quaternion.FromToRotation(Vector2.down, down) * offset);
-
-            if ((footTarget - jointPosition).magnitude > legLength) {
-
-                var hit = Physics2D.Raycast(jointPosition, down, legLength, GameInfo.GroundMask);
-
-                if (hit) footTarget = hit.point;
-                else footTarget = jointPosition;
-            }
-
-            footPosition = Vector2.MoveTowards(footPosition, footTarget, legSpeed * Time.deltaTime);
-
-            line.positionCount = 3;
-            line.SetPositions(new Vector3[] { origin, jointPosition, footPosition });
-        }
-
-        public static System.Action<Leg> UpdateAll(Vector2 position, Vector2 down) => leg => leg.Update(position, down);
-    }
-
     public override IWhippable.Type WhippableType => IWhippable.Type.Heavy;
 
     [System.Serializable]
