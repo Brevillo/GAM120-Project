@@ -22,8 +22,7 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float jumpHeight;
     [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist;
     [SerializeField] private BufferTimer jumpBuffer;
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] private SoundEffect jumpSound;//
+    [SerializeField] private SoundEffect jumpSound;
 
     [Header("Flying")]
     [SerializeField] private float flightForce;
@@ -86,6 +85,12 @@ public class PlayerMovement : Player.Component {
         stateMachine.ChangeState(knockbacking);
     }
 
+    /// <summary> Refills the player's flight stamina and aerial haedbutts. </summary>
+    public void RefillAirMovement() {
+        remainingFlightStamina = maxFlightStamina;
+        aerialHeadbuttsRemaining = maxHeadbuttsInAir;
+    }
+
     #endregion
 
     #region Awake and Update
@@ -100,21 +105,22 @@ public class PlayerMovement : Player.Component {
         // input
 
         jumpBuffer.Buffer(Input.Jump.Down);
-        headbuttBuffer.Buffer(Input.Attack.Down);
+        headbuttBuffer.Buffer(Input.Headbutt.Down);
 
         // get information about current physical state
 
+        RaycastHit2D GroundCast(float distance) => Physics2D.CircleCast(transform.position, Collider.bounds.extents.y, Vector2.down, distance, GameInfo.GroundMask);
+
         velocity = Rigidbody.velocity;
-        groundHit = Physics2D.BoxCast(transform.position, Collider.size, 0, Vector2.down, groundDetectDist, groundMask);
+        groundHit = GroundCast(groundDetectDist);
         onGround = groundHit;
-        var groundDistHit = Physics2D.BoxCast(transform.position, Collider.size, 0, Vector2.down, Mathf.Infinity, groundMask);
+
+        var groundDistHit = GroundCast(Mathf.Infinity);
         groundDist = groundDistHit ? transform.position.y - Collider.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
 
         // run state machines
 
         stateMachine.Update(Time.deltaTime);
-
-        if (Input.Attack.Pressed && !onGround && aerialHeadbuttsRemaining == 0) Attacks.EnterSwingCharge();
 
         // apply velocity
 
@@ -122,9 +128,16 @@ public class PlayerMovement : Player.Component {
 
         // visuals
 
-        float targetAngle = maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
-
-        BodyPivot.eulerAngles = Vector3.forward * Mathf.SmoothDampAngle(BodyPivot.eulerAngles.z, targetAngle, ref spriteRotationVelocity, spriteRotationSpeed);
+        if (onGround) {
+            Vector2 forward = -Vector2.Perpendicular(groundHit.normal);
+            Rigidbody.SetRotation(Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);
+            BodyPivot.localEulerAngles = Vector3.zero;
+            Debug.DrawRay(groundHit.point, groundHit.normal, Color.green);
+        } else {
+            Rigidbody.SetRotation(0);
+            float targetAngle = maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
+            BodyPivot.eulerAngles = Vector3.forward * Mathf.SmoothDampAngle(BodyPivot.eulerAngles.z, targetAngle, ref spriteRotationVelocity, spriteRotationSpeed);
+        }
 
         BodyPivot.localScale = new(Facing, 1, 1);
     }
@@ -133,16 +146,21 @@ public class PlayerMovement : Player.Component {
 
     #region Helper Functions
 
-    private void Run(bool withMomentum) {
+    private void AirRun() {
 
-        float accel = onGround
-                ? InputDirection.x != 0 ? groundAccel : groundDeccel
-                : InputDirection.x != 0 ? airAccel    : airDeccel,
-              speed = withMomentum
-                ? Mathf.Max(runSpeed, Mathf.Abs(velocity.x))
-                : runSpeed;
+        float accel = InputDirection.x != 0 ? airAccel    : airDeccel,
+              speed = Mathf.Max(runSpeed, Mathf.Abs(velocity.x));
 
         velocity.x = Mathf.MoveTowards(velocity.x, speed * InputDirection.x, accel * Time.deltaTime);
+    }
+
+    private void GroundRun() {
+
+        float accel = InputDirection.x != 0 ? groundAccel : groundDeccel;
+
+        Vector2 targetVelocity = -groundHit.normal * 10 + -Vector2.Perpendicular(groundHit.normal) * runSpeed * InputDirection.x;
+
+        velocity = Vector2.MoveTowards(velocity, targetVelocity, accel * Time.deltaTime);
     }
 
     private void Fall(float gravity) {
@@ -200,8 +218,8 @@ public class PlayerMovement : Player.Component {
 
             toGrounded      = () => onGround,
 
-            toEating        = () => Input.Eat.Pressed,
-            stopEating      = () => !Input.Eat.Pressed,
+            toEating        = () => Input.Eat.Pressed && PlayerHealth.CanEatMore,
+            stopEating      = () => !Input.Eat.Pressed || !PlayerHealth.CanEatMore,
 
             toJump          = () => jumpBuffer && onGround,
             endJump         = () => (!Input.Jump.Pressed && stateMachine.stateDuration > minJumpTime) || velocity.y <= 0,
@@ -210,7 +228,7 @@ public class PlayerMovement : Player.Component {
 
             toFlight        = () => remainingFlightStamina > 0 && !onGround
                                 && ((Input.Jump.Pressed && !jumpBuffer) || (groundDist > dontFlyAboveGroundDist && jumpBuffer))          // so you don't accidentally start flying if you try to buffer a jump
-                                && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immeditaley fly after jumping
+                                && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immediateley fly after jumping
             endFlying       = () => !Input.Jump.Pressed || remainingFlightStamina <= 0,
 
             toHeadbutt      = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0)
@@ -317,17 +335,14 @@ public class PlayerMovement : Player.Component {
                 context.stepSound.Play(context);
             }
 
-            context.Run(false);
-
-            context.Fall(1000);
+            context.GroundRun();
 
             base.Update();
         }
 
         public override void Exit() {
 
-            context.remainingFlightStamina = context.maxFlightStamina;
-            context.aerialHeadbuttsRemaining = context.maxHeadbuttsInAir;
+            context.RefillAirMovement();
 
             base.Exit();
         }
@@ -390,7 +405,7 @@ public class PlayerMovement : Player.Component {
 
             context.Fall(context.jumpGravity);
 
-            context.Run(true);
+            context.AirRun();
 
             base.Update();
         }
@@ -429,7 +444,7 @@ public class PlayerMovement : Player.Component {
             wingOscillation *= -1;
             context.wingPivot.localEulerAngles = Vector3.forward * (-45 + 15 * wingOscillation);
 
-            context.Run(true);
+            context.AirRun();
 
             base.Update();
         }
@@ -453,7 +468,7 @@ public class PlayerMovement : Player.Component {
 
             context.Fall(context.fallGravity);
 
-            context.Run(true);
+            context.AirRun();
 
             base.Update();
         }

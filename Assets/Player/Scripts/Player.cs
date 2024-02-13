@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
 
     [Header("References")]
     [SerializeField] private new Rigidbody2D rigidbody;
-    [SerializeField] private new BoxCollider2D collider;
+    [SerializeField] private new CapsuleCollider2D collider;
 
     [Header("Helper")]
     [SerializeField] private Transform bodyPivot;
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour {
         protected EntityHealth      Health          => player.  health;
 
         protected Rigidbody2D       Rigidbody       => player.  rigidbody;
-        protected BoxCollider2D     Collider        => player.  collider;
+        protected CapsuleCollider2D Collider        => player.  collider;
 
         protected Transform         BodyPivot       => player.  bodyPivot;
 

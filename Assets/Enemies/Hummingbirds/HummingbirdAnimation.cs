@@ -9,44 +9,13 @@ public class HummingbirdAnimation : MonoBehaviour {
     [SerializeField] private float wingPivotAngle, wingPivotRange;
     [SerializeField] private Transform visualsPivot, wingPivot;
 
-    [Header("Hit Flash")]
-    [SerializeField] private float flashDuration;
-    [SerializeField] private SpriteRenderer[] hitFlashRenderers;
-    [SerializeField] private Material flashMaterial;
-
     [Header("References")]
     [SerializeField] private new Rigidbody2D rigidbody;
-    [SerializeField] private EntityHealth health;
 
     public bool turnToTarget;
     public Transform target;
 
     private bool wingFlip;
-
-    private void Awake() {
-        health.OnTakeDamage += OnTakeDamage;
-    }
-
-    private void OnTakeDamage(DamageInfo info) {
-
-        StartCoroutine(SpriteFlash());
-        IEnumerator SpriteFlash() {
-
-            List<(SpriteRenderer rend, Material ogMaterial, Color color)> rends = new List<SpriteRenderer>(hitFlashRenderers).ConvertAll(rend => (rend, rend.material, rend.color));
-
-            foreach (var rend in hitFlashRenderers) {
-                rend.material = flashMaterial;
-                rend.color = Color.white;
-            }
-
-            yield return new WaitForSeconds(flashDuration);
-
-            foreach (var (rend, ogMaterial, color) in rends) {
-                rend.material = ogMaterial;
-                rend.color = color;
-            }
-        }
-    }
 
     private void Start() {
         hoverOscillation.offset = Random.value;

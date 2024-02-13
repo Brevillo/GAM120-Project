@@ -26,6 +26,8 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private CameraShakeProfile damageShake;
     [SerializeField] private float damageTimeFreezeDuration;
 
+    public bool CanEatMore => energy < 1.0f;
+
     private float energy;
 
     public float DamageMultiplier => Mathf.Lerp(1, 1 + zealDamagePercent, Mathf.InverseLerp(0.5f, 0, energy));

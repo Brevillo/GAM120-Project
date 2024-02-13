@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OliverUtils;
 using UnityEngine;
 
-public class YellowHummingbird : GenericEnemy
+public class YellowHummingbird : GenericEnemyBehaviour
 {
     [Header("Idling")]
     [SerializeField] private float minIdleTime;
