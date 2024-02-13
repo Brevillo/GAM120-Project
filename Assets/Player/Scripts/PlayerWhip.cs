@@ -231,6 +231,7 @@ public class PlayerWhip : Player.Component {
             base.Enter();
 
             context.Movement.SetVelocity(y: Mathf.Max(context.Rigidbody.velocity.y, context.enemyGrappleVerticalBoost));
+            context.Movement.RefillAirMovement();
 
             TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
             CameraEffects.AddShake(context.hitEnemyShake);

@@ -33,9 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Headbutt",
                     "type": "Button",
                     "id": "b59b4dbc-4b4a-4ab5-9124-4af466808e22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Swing",
+                    "type": "Button",
+                    "id": "cebb1875-4246-4ae9-9b18-9eeb96562334",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -254,7 +263,7 @@
                 {
                     "name": "",
                     "id": "09dade27-7adf-4847-92f7-fc5f4a1c0b4b",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -401,7 +410,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Headbutt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -412,7 +421,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Headbutt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -441,11 +450,33 @@
                 {
                     "name": "",
                     "id": "ffeff4f0-bb9b-44f3-926c-124c2d1a8d30",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Eat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "57b8e398-7c64-4495-b9df-71474a866fe4",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cb56c31-3959-4bce-a4f2-0a8ea28624fb",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swing",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

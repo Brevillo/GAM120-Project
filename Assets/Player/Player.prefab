@@ -1865,11 +1865,10 @@ MonoBehaviour:
   headbuttHitSound: {fileID: 11400000, guid: 9e4e10599ecd34087a6775f380ab6d4e, type: 2}
   swingDamage: 3
   swingKnockback: 0
-  swingChargeTime: 0.25
   swingDuration: 0.1
-  minChargeShake: 0.01
-  maxChargeShake: 0.1
-  chargingRunSpeed: 5
+  swingCooldown: 0.5
+  swingBuffer:
+    threshold: 0.1
   swingTrigger: {fileID: 1831016761755154418}
   swingTriggerPivot: {fileID: 9143918459963403905}
   swingHitShake:
@@ -2196,14 +2195,20 @@ MonoBehaviour:
     released: 0
     impulse: 1
     _vector: {x: 0, y: 0}
-  Whip:
-    actionReference: {fileID: 4453636792242108997, guid: 97a76fd0d12aa484796c795210097222, type: 3}
+  Headbutt:
+    actionReference: {fileID: -5131303573255728265, guid: 97a76fd0d12aa484796c795210097222, type: 3}
     Enabled: 1
     pressed: 0
     down: 0
     released: 0
-  Attack:
-    actionReference: {fileID: -5131303573255728265, guid: 97a76fd0d12aa484796c795210097222, type: 3}
+  Swing:
+    actionReference: {fileID: -3000603247728708067, guid: 97a76fd0d12aa484796c795210097222, type: 3}
+    Enabled: 1
+    pressed: 0
+    down: 0
+    released: 0
+  Whip:
+    actionReference: {fileID: 4453636792242108997, guid: 97a76fd0d12aa484796c795210097222, type: 3}
     Enabled: 1
     pressed: 0
     down: 0

@@ -86,6 +86,12 @@ public class PlayerMovement : Player.Component {
         stateMachine.ChangeState(knockbacking);
     }
 
+    /// <summary> Refills the player's flight stamina and aerial haedbutts. </summary>
+    public void RefillAirMovement() {
+        remainingFlightStamina = maxFlightStamina;
+        aerialHeadbuttsRemaining = maxHeadbuttsInAir;
+    }
+
     #endregion
 
     #region Awake and Update
@@ -100,7 +106,7 @@ public class PlayerMovement : Player.Component {
         // input
 
         jumpBuffer.Buffer(Input.Jump.Down);
-        headbuttBuffer.Buffer(Input.Attack.Down);
+        headbuttBuffer.Buffer(Input.Headbutt.Down);
 
         // get information about current physical state
 
@@ -113,8 +119,6 @@ public class PlayerMovement : Player.Component {
         // run state machines
 
         stateMachine.Update(Time.deltaTime);
-
-        if (Input.Attack.Pressed && !onGround && aerialHeadbuttsRemaining == 0) Attacks.EnterSwingCharge();
 
         // apply velocity
 
@@ -133,6 +137,8 @@ public class PlayerMovement : Player.Component {
 
     #region Helper Functions
 
+    Vector2 mousePosition;
+
     private void Run(bool withMomentum) {
 
         float accel = onGround
@@ -141,6 +147,16 @@ public class PlayerMovement : Player.Component {
               speed = withMomentum
                 ? Mathf.Max(runSpeed, Mathf.Abs(velocity.x))
                 : runSpeed;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        float mouseX = UnityEngine.Input.GetAxisRaw("Mouse X"),
+              mouseY = UnityEngine.Input.GetAxisRaw("Mouse Y");
+
+        mousePosition += new Vector2(mouseX, mouseY);
+
+        mousePosition = Vector2.ClampMagnitude(mousePosition, 5f);
 
         velocity.x = Mathf.MoveTowards(velocity.x, speed * InputDirection.x, accel * Time.deltaTime);
     }
@@ -326,8 +342,7 @@ public class PlayerMovement : Player.Component {
 
         public override void Exit() {
 
-            context.remainingFlightStamina = context.maxFlightStamina;
-            context.aerialHeadbuttsRemaining = context.maxHeadbuttsInAir;
+            context.RefillAirMovement();
 
             base.Exit();
         }

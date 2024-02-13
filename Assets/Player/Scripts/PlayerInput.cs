@@ -9,8 +9,9 @@ public class PlayerInput : InputManager {
     public Axis Movement;
 
     [Header("Abilities")]
+    public Button Headbutt;
+    public Button Swing;
     public Button Whip;
-    public Button Attack;
     public Button Eat;
 
     [Header("Menus")]

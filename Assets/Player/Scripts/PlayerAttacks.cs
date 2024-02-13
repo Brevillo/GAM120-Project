@@ -19,7 +19,8 @@ public class PlayerAttacks : Player.Component {
 
     [Header("Swinging")]
     [SerializeField] private float swingDamage;
-    [SerializeField] private float swingKnockback, swingChargeTime, swingDuration, minChargeShake, maxChargeShake, chargingRunSpeed;
+    [SerializeField] private float swingKnockback, swingDuration, swingCooldown;
+    [SerializeField] private BufferTimer swingBuffer;
     [SerializeField] private EntityHealthCollisionTrigger swingTrigger;
     [SerializeField] private Transform swingTriggerPivot;
     [SerializeField] private CameraShakeProfile swingHitShake;
@@ -46,6 +47,8 @@ public class PlayerAttacks : Player.Component {
 
     private void Update() {
 
+        swingBuffer.Buffer(Input.Swing.Down);
+
         stateMachine.Update(Time.deltaTime);
     }
 
@@ -57,12 +60,7 @@ public class PlayerAttacks : Player.Component {
     }
 
     public void ExitHeadbutt() {
-        stateMachine.ChangeState(Input.Attack.Pressed ? charging : idle);
-    }
-
-    public void EnterSwingCharge() {
-        if (stateMachine.currentState != charging)
-            stateMachine.ChangeState(charging);
+        stateMachine.ChangeState(idle);
     }
 
     #endregion
@@ -94,6 +92,8 @@ public class PlayerAttacks : Player.Component {
             CameraEffects.AddShake(swingHitShake);
             swingHitSound.Play(this);
             Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, swingDirection));
+
+            if (swingDirection.y < 0) Movement.RefillAirMovement();
         }
     }
 
@@ -122,21 +122,17 @@ public class PlayerAttacks : Player.Component {
     // instances of each headbutt state class
     private Idle idle;
     private Headbutting headbutting;
-    private Charging charging;
     private Swinging swinging;
 
     private void InitializeStateMachine() {
 
         idle          = new(this);
         headbutting   = new(this);
-        charging      = new(this);
         swinging      = new(this);
 
         TransitionDelegate
 
-            stopSwingCharge = () => !Input.Attack.Pressed && stateMachine.stateDuration < swingChargeTime,
-
-            startSwing      = () => !Input.Attack.Pressed && stateMachine.stateDuration >= swingChargeTime,
+            startSwing      = () => swingBuffer && (stateMachine.previousState != swinging || stateMachine.stateDuration >= swingCooldown),
             stopSwing       = () => stateMachine.stateDuration > swingDuration;
 
         stateMachine = new(
@@ -145,8 +141,7 @@ public class PlayerAttacks : Player.Component {
 
             transitions: new() {
 
-                { charging , new() {
-                    new(idle, stopSwingCharge),
+                { idle, new() {
                     new(swinging, startSwing),
                 } },
 
@@ -180,28 +175,6 @@ public class PlayerAttacks : Player.Component {
         public override void Exit() {
 
             context.headbuttTrigger.gameObject.SetActive(false);
-
-            base.Exit();
-        }
-    }
-
-    [Serializable]
-    private class Charging : State {
-
-        public Charging(PlayerAttacks context) : base(context) { }
-
-        public override void Update() {
-
-            float chargePercent = context.stateMachine.stateDuration / context.swingChargeTime;
-
-            context.BodyPivot.localPosition = UnityEngine.Random.insideUnitCircle * Mathf.Lerp(context.minChargeShake, context.maxChargeShake, chargePercent);
-
-            base.Update();
-        }
-
-        public override void Exit() {
-
-            context.BodyPivot.localPosition = Vector2.zero;
 
             base.Exit();
         }
