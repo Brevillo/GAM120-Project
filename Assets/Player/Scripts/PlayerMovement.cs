@@ -42,6 +42,8 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float maxSpriteAngle;
     [SerializeField] private float maxAngleVelocity, spriteRotationSpeed;
     [SerializeField] private Transform wingPivot;
+    [SerializeField] private Animator legsAnimator;
+    [SerializeField] private AnimationClip legsIdleAnimation, legsCrawlingAnimation;
 
     #endregion
 
@@ -58,6 +60,8 @@ public class PlayerMovement : Player.Component {
     private float spriteRotationVelocity;   // current veloctiy of sprite rotation
 
     private int aerialHeadbuttsRemaining;   // how many headbutts the player has left after leaving the ground
+
+    private AnimationClip currentLegAnimation;  // current leg animation being played by the leg animator
 
     #endregion
 
@@ -137,6 +141,12 @@ public class PlayerMovement : Player.Component {
             Rigidbody.SetRotation(0);
             float targetAngle = maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
             BodyPivot.eulerAngles = Vector3.forward * Mathf.SmoothDampAngle(BodyPivot.eulerAngles.z, targetAngle, ref spriteRotationVelocity, spriteRotationSpeed);
+        }
+
+        var newLegAnimation = InputDirection.x != 0 ? legsCrawlingAnimation : legsIdleAnimation;
+        if (newLegAnimation != currentLegAnimation) {
+            legsAnimator.Play(newLegAnimation.name);
+            currentLegAnimation = newLegAnimation;
         }
 
         BodyPivot.localScale = new(Facing, 1, 1);
