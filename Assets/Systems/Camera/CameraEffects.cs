@@ -26,14 +26,29 @@ public class CameraEffects : MonoBehaviour {
 
     public delegate IEnumerator Routine<T>(T component) where T : VolumeComponent;
 
-    public static void AddShake(CameraShakeProfile profile) => I.activeShakes.Add(new(profile));
-    public static void AddBounce(CameraBounceProfile profile, Vector2 direction) => I.activeBounces.Add(new(profile, direction));
+    public static EffectToken AddShake(CameraShakeProfile profile) {
+        ActiveShake active = new(profile);
+        I.activeShakes.Add(active);
+        return active;
+    }
+    public static EffectToken AddBounce(CameraBounceProfile profile, Vector2 direction) {
+        ActiveBounce active = new(profile, direction);
+        I.activeBounces.Add(active);
+        return active;
+    }
     public static void PostProcessingEffect<T>(Routine<T> r) where T : VolumeComponent {
         if (!effectVolume.TryGet(out T component)) component = effectVolume.Add<T>();
         I.StartCoroutine(r.Invoke(component));
     }
     public static Coroutine BlackFade(SmartCurve curve) => I.NewFade(I.blackFade, curve);
     public static Coroutine WhiteFade(SmartCurve curve) => I.NewFade(I.whiteFade, curve);
+    public static void RemoveEffect(EffectToken effect) {
+
+        switch (effect) {
+            case ActiveShake shake:     I.activeShakes.Remove(shake);   break;
+            case ActiveBounce bounce:   I.activeBounces.Remove(bounce); break;
+        }
+    }
 
     private Coroutine activeFade;
     private Coroutine NewFade(CanvasGroup group, SmartCurve curve) {
@@ -97,7 +112,11 @@ public class CameraEffects : MonoBehaviour {
             + CalculateOffset(activeBounces);
     }
 
-    private abstract class ActiveEffect {
+    public class EffectToken {
+
+    }
+
+    private abstract class ActiveEffect : EffectToken {
 
         public ActiveEffect() {
             timer = 0;
@@ -139,7 +158,7 @@ public class CameraEffects : MonoBehaviour {
             timer += dt;
 
             // calculate current amplitude
-            float timePercent      = timer / profile.duration,
+            float timePercent      = profile.duration == 0 ? 0 : timer / profile.duration,
                   intensityPercent = profile.intensityCurve.Evaluate(timePercent),
                   amplitude        = intensityPercent * profile.amplitude;
 

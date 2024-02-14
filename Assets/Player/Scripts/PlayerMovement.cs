@@ -10,7 +10,7 @@ public class PlayerMovement : Player.Component {
 
     [Header("Running")]
     [SerializeField] private float runSpeed;
-    [SerializeField] private float groundAccel, groundDeccel, airAccel, airDeccel;
+    [SerializeField] private float groundAccel, groundDeccel, airAccel, airDeccel, maxSlopeAngle, groundedOffset, groundGravity;
     [SerializeField] private float stepSoundFrequency;
     [SerializeField] private SoundEffect stepSound;
 
@@ -20,7 +20,7 @@ public class PlayerMovement : Player.Component {
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight;
-    [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist;
+    [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist, fastFallGravity, fastFallSpeed;
     [SerializeField] private BufferTimer jumpBuffer;
     [SerializeField] private SoundEffect jumpSound;
 
@@ -31,16 +31,20 @@ public class PlayerMovement : Player.Component {
 
     [Header("Headbutting")]
     [SerializeField] private float headbuttCooldown;
-    [SerializeField] private SmartCurve headbuttCurve;
+    [SerializeField] private float headbuttDist, headbuttDuration, headbuttMaxChargeDuration, headbuttChargeLoss, headbuttChargeRunSpeed, headbuttChargeLightGravity, headbuttChargeGravity, wavedashVelocity, wavedashGroundDist;
+    [SerializeField] private Vector2 headbuttExitForce;
     [SerializeField] private int maxHeadbuttsInAir;
     [SerializeField] private BufferTimer headbuttBuffer;
+    [SerializeField] private SmartCurve headbuttChargeAnimation;
+    [SerializeField] private CameraShakeProfile headbuttChargeShake;
+    [SerializeField] private Transform headPivot;
 
     [Header("Taking Knockback")]
     [SerializeField] private float knockbackFriction;
 
     [Header("Animation")]
     [SerializeField] private float maxSpriteAngle;
-    [SerializeField] private float maxAngleVelocity, spriteRotationSpeed;
+    [SerializeField] private float maxAngleVelocity, groundRotateSpeed, airRotateSpeed;
     [SerializeField] private Transform wingPivot;
     [SerializeField] private Animator legsAnimator;
     [SerializeField] private AnimationClip legsIdleAnimation, legsCrawlingAnimation;
@@ -59,6 +63,7 @@ public class PlayerMovement : Player.Component {
     private float remainingFlightStamina;   // how much flight stamina reminas
     private float spriteRotationVelocity;   // current veloctiy of sprite rotation
 
+    private int aerialHeadbuttsUsed;        // how many headbutts have been used after the player left the ground
     private int aerialHeadbuttsRemaining;   // how many headbutts the player has left after leaving the ground
 
     private AnimationClip currentLegAnimation;  // current leg animation being played by the leg animator
@@ -95,6 +100,8 @@ public class PlayerMovement : Player.Component {
         aerialHeadbuttsRemaining = maxHeadbuttsInAir;
     }
 
+    public void RefillOneAerialHeadbutt() => aerialHeadbuttsRemaining++;
+
     #endregion
 
     #region Awake and Update
@@ -113,11 +120,21 @@ public class PlayerMovement : Player.Component {
 
         // get information about current physical state
 
-        RaycastHit2D GroundCast(float distance) => Physics2D.CircleCast(transform.position, Collider.bounds.extents.y, Vector2.down, distance, GameInfo.GroundMask);
+        RaycastHit2D GroundCast(float distance) {
+
+            var hit1 = Physics2D.Raycast(transform.position, Vector2.down, distance, GameInfo.GroundMask);
+            if (hit1) return hit1;
+
+            var hit2 = Physics2D.CapsuleCast(transform.position, Collider.size, Collider.direction, 0, Vector2.down, distance, GameInfo.GroundMask);
+            if (hit2) return hit2;
+
+            return default;
+        }
 
         velocity = Rigidbody.velocity;
         groundHit = GroundCast(groundDetectDist);
-        onGround = groundHit;
+        float slopeAngle = Mathf.Abs(Mathf.DeltaAngle(Mathf.Atan2(groundHit.normal.y, groundHit.normal.x) * Mathf.Rad2Deg, 90));
+        onGround = groundHit && slopeAngle < maxSlopeAngle;
 
         var groundDistHit = GroundCast(Mathf.Infinity);
         groundDist = groundDistHit ? transform.position.y - Collider.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
@@ -132,18 +149,16 @@ public class PlayerMovement : Player.Component {
 
         // visuals
 
-        if (onGround) {
-            Vector2 forward = -Vector2.Perpendicular(groundHit.normal);
-            Rigidbody.SetRotation(Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);
-            BodyPivot.localEulerAngles = Vector3.zero;
-            Debug.DrawRay(groundHit.point, groundHit.normal, Color.green);
-        } else {
-            Rigidbody.SetRotation(0);
-            float targetAngle = maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
-            BodyPivot.eulerAngles = Vector3.forward * Mathf.SmoothDampAngle(BodyPivot.eulerAngles.z, targetAngle, ref spriteRotationVelocity, spriteRotationSpeed);
-        }
+        Vector2 forward = -Vector2.Perpendicular(groundHit.normal);
+        float targetAngle = onGround
+            ? Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg
+            : maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
 
-        var newLegAnimation = InputDirection.x != 0 ? legsCrawlingAnimation : legsIdleAnimation;
+        float rotateSpeed = onGround ? groundRotateSpeed : airRotateSpeed;
+        Rigidbody.SetRotation(Mathf.SmoothDampAngle(Rigidbody.rotation, targetAngle, ref spriteRotationVelocity, rotateSpeed));
+        Debug.DrawRay(groundHit.point, groundHit.normal, Color.green);
+
+        var newLegAnimation = InputDirection.x != 0 && velocity.x != 0 && onGround ? legsCrawlingAnimation : legsIdleAnimation;
         if (newLegAnimation != currentLegAnimation) {
             legsAnimator.Play(newLegAnimation.name);
             currentLegAnimation = newLegAnimation;
@@ -156,30 +171,28 @@ public class PlayerMovement : Player.Component {
 
     #region Helper Functions
 
-    private void AirRun() {
+    private void Run(float? customSpeed = null) {
 
-        float accel = InputDirection.x != 0 ? airAccel    : airDeccel,
-              speed = Mathf.Max(runSpeed, Mathf.Abs(velocity.x));
+        (float accel, float speed, Vector2 vel) = onGround
 
-        velocity.x = Mathf.MoveTowards(velocity.x, speed * InputDirection.x, accel * Time.deltaTime);
+            ? ( accel:  InputDirection.x != 0 ? groundAccel : groundDeccel,
+                speed:  customSpeed ?? runSpeed,
+                vel:    (Vector2)transform.InverseTransformDirection(velocity))
+
+            : ( accel:  InputDirection.x != 0 ? airAccel : airDeccel,
+                speed:  Mathf.Max(customSpeed ?? runSpeed, Mathf.Abs(velocity.x)),
+                vel:    velocity);
+
+        vel.x = Mathf.MoveTowards(vel.x, speed * InputDirection.x, accel * Time.deltaTime);
+
+        velocity = onGround
+            ? -(Vector2)transform.up * groundGravity + (Vector2)transform.right * vel.x
+            : vel;
     }
 
-    private void GroundRun() {
+    private void Fall(float gravity, float? customFallSpeed = null) => velocity.y = Mathf.MoveTowards(velocity.y, -(customFallSpeed ?? maxFallSpeed), gravity * Time.deltaTime);
 
-        float accel = InputDirection.x != 0 ? groundAccel : groundDeccel;
-
-        Vector2 targetVelocity = -groundHit.normal * 10 + -Vector2.Perpendicular(groundHit.normal) * runSpeed * InputDirection.x;
-
-        velocity = Vector2.MoveTowards(velocity, targetVelocity, accel * Time.deltaTime);
-    }
-
-    private void Fall(float gravity) {
-
-        // apply peak gravity if necessary
-        gravity = Mathf.Abs(velocity.y) < peakVelThreshold ? peakGravity : gravity;
-
-        velocity.y = Mathf.MoveTowards(velocity.y, -maxFallSpeed, gravity * Time.deltaTime);
-    }
+    private void FallWithPeakGravity(float gravity, float? customFallSpeed = null) => Fall(Mathf.Abs(velocity.y) < peakVelThreshold ? peakGravity : gravity, customFallSpeed);
 
     #endregion
 
@@ -209,6 +222,7 @@ public class PlayerMovement : Player.Component {
     private Jumping         jumping;
     private Falling         falling;
     private Flying          flying;
+    private HeadbuttCharge  headbuttCharge;
     private Headbutting     headbutting;
     private Knockbacking    knockbacking;
 
@@ -220,6 +234,7 @@ public class PlayerMovement : Player.Component {
         jumping         = new(this);
         falling         = new(this);
         flying          = new(this);
+        headbuttCharge  = new(this);
         headbutting     = new(this);
         knockbacking    = new(this);
 
@@ -237,16 +252,21 @@ public class PlayerMovement : Player.Component {
             toFalling       = () => !onGround,
 
             toFlight        = () => remainingFlightStamina > 0 && !onGround
-                                && ((Input.Jump.Pressed && !jumpBuffer) || (groundDist > dontFlyAboveGroundDist && jumpBuffer))          // so you don't accidentally start flying if you try to buffer a jump
-                                && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immediateley fly after jumping
+                                 && ((Input.Jump.Pressed && !jumpBuffer) || (groundDist > dontFlyAboveGroundDist && jumpBuffer))          // so you don't accidentally start flying if you try to buffer a jump
+                                 && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immediateley fly after jumping
             endFlying       = () => !Input.Jump.Pressed || remainingFlightStamina <= 0,
 
-            toHeadbutt      = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0)
-                                && (stateMachine.previousState != headbutting || stateMachine.stateDuration > headbuttCooldown), // headbutt cooldown
+            toHbCharge      = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0)
+                                 && (stateMachine.previousState != headbutting || stateMachine.stateDuration > headbuttCooldown), // headbutt cooldown
 
-            stopHeadbutt    = () => stateMachine.stateDuration > headbuttCurve.timeScale,
+            skipHbCharge    = () => toHbCharge() && headbuttChargeTime == 0,
+            startHeadbutt   = () => !Input.Headbutt.Pressed || stateMachine.stateDuration > headbuttChargeTime,
+
+            stopHeadbutt    = () => stateMachine.stateDuration > headbuttDuration,
             stopHbGrounded  = () => stopHeadbutt() && onGround,
             stopHbFalling   = () => stopHeadbutt() && !onGround,
+
+            toWavedash      = () => jumpBuffer && groundDist < wavedashGroundDist,
 
             stopKnockback   = () => Mathf.Abs(velocity.x) <= runSpeed,
             stopKbGrounded  = () => stopKnockback() && onGround,
@@ -255,7 +275,8 @@ public class PlayerMovement : Player.Component {
         // common transitions
         StateMachine<PlayerMovement>.Transition
 
-            startHeadbutt = new(headbutting, toHeadbutt);
+            startHeadbuttCharge = new(headbuttCharge,   toHbCharge),
+            skipHeadbuttCharge  = new(headbutting,      skipHbCharge);
 
         // initialize state machine
         stateMachine = new(
@@ -282,40 +303,49 @@ public class PlayerMovement : Player.Component {
                     new(jumping,    toJump),
                     new(falling,    toFalling),
                     new(eating,     toEating),
-                    startHeadbutt,
+                    skipHeadbuttCharge,
+                    startHeadbuttCharge,
                 } },
 
                 { eating, new() {
                     new(grounded,   stopEating),
                     new(falling,    toFalling),
-                    startHeadbutt,
+                    skipHeadbuttCharge,
+                    startHeadbuttCharge,
                 } },
 
                 { jumping, new() {
                     new(falling,    endJump),
-                    startHeadbutt,
+                    skipHeadbuttCharge,
+                    startHeadbuttCharge,
                 } },
 
                 { falling, new() {
                     new(grounded,   toGrounded),
                     new(flying,     toFlight),
-                    startHeadbutt,
+                    skipHeadbuttCharge,
+                    startHeadbuttCharge,
                 } },
 
                 { flying, new() {
                     new(falling,    endFlying),
-                    startHeadbutt,
+                    skipHeadbuttCharge,
+                    startHeadbuttCharge,
+                } },
+
+                { headbuttCharge, new() {
+                    new(headbutting, startHeadbutt),
                 } },
 
                 { headbutting, new() {
                     new(grounded,   stopHbGrounded),
                     new(falling,    stopHbFalling),
-                    new(jumping,    toJump), // a dash of the wave variety perhaps?
+                    new(jumping,    toWavedash),
                 } },
 
                 { knockbacking, new() {
                     new(grounded,   stopKbGrounded),
-                    new(falling,    stopKbGrounded),
+                    new(falling,    stopKbFalling),
                 } },
             }
         );
@@ -335,7 +365,14 @@ public class PlayerMovement : Player.Component {
 
         public Grounded(PlayerMovement context) : base(context) { }
 
-        private float stepSoundTimer;
+        private float stepSoundTimer, velocity;
+
+        public override void Enter() {
+
+            base.Enter();
+
+            velocity = context.velocity.x;
+        }
 
         public override void Update() {
 
@@ -345,7 +382,7 @@ public class PlayerMovement : Player.Component {
                 context.stepSound.Play(context);
             }
 
-            context.GroundRun();
+            context.Run();
 
             base.Update();
         }
@@ -353,6 +390,7 @@ public class PlayerMovement : Player.Component {
         public override void Exit() {
 
             context.RefillAirMovement();
+            context.aerialHeadbuttsUsed = 0;
 
             base.Exit();
         }
@@ -413,9 +451,9 @@ public class PlayerMovement : Player.Component {
 
         public override void Update() {
 
-            context.Fall(context.jumpGravity);
+            context.FallWithPeakGravity(context.jumpGravity);
 
-            context.AirRun();
+            context.Run();
 
             base.Update();
         }
@@ -454,7 +492,7 @@ public class PlayerMovement : Player.Component {
             wingOscillation *= -1;
             context.wingPivot.localEulerAngles = Vector3.forward * (-45 + 15 * wingOscillation);
 
-            context.AirRun();
+            context.Run();
 
             base.Update();
         }
@@ -476,11 +514,59 @@ public class PlayerMovement : Player.Component {
 
         public override void Update() {
 
-            context.Fall(context.fallGravity);
+            float fastFallPercent = -context.Input.Movement.Vector.y,
+                  speed           = Mathf.Lerp(context.maxFallSpeed, context.fastFallSpeed, fastFallPercent),
+                  gravity         = Mathf.Lerp(context.fallGravity, context.fastFallGravity, fastFallPercent);
 
-            context.AirRun();
+            context.FallWithPeakGravity(gravity, speed);
+
+            context.Run();
 
             base.Update();
+        }
+    }
+
+    private float headbuttChargeTime => Mathf.Max(0, headbuttMaxChargeDuration - aerialHeadbuttsUsed * headbuttChargeLoss);
+
+    [Serializable]
+    private class HeadbuttCharge : State {
+
+        public HeadbuttCharge(PlayerMovement context) : base(context) { }
+
+        private CameraEffects.EffectToken shakeEffect;
+
+        public override void Enter() {
+
+            base.Enter();
+
+            context.velocity.y = Mathf.Max(context.velocity.y, 0);
+
+            context.aerialHeadbuttsUsed++;
+
+            float maxChargeTime = context.headbuttChargeTime;
+
+            context.headbuttChargeAnimation.timeScale = maxChargeTime;
+            context.headbuttChargeAnimation.Start();
+            context.headbuttChargeShake.duration = maxChargeTime;
+            shakeEffect = CameraEffects.AddShake(context.headbuttChargeShake);
+        }
+
+        public override void Update() {
+
+            context.Run(context.headbuttChargeRunSpeed);
+            context.Fall(context.InputDirection.y > 0 ? context.headbuttChargeLightGravity : context.headbuttChargeGravity);
+
+            context.headPivot.localPosition = Vector2.left * context.headbuttChargeAnimation.Evaluate();
+
+            base.Update();
+        }
+
+        public override void Exit() {
+
+            context.headPivot.localPosition = Vector2.zero;
+            CameraEffects.RemoveEffect(shakeEffect);
+
+            base.Exit();
         }
     }
 
@@ -503,22 +589,17 @@ public class PlayerMovement : Player.Component {
                 ? context.Input.Movement.Vector.normalized
                 : Vector2.right * context.Facing;
 
-            context.headbuttCurve.Start();
+            context.velocity = direction * context.headbuttDist / context.headbuttDuration;
 
             context.Attacks.EnterHeadbutt(direction);
         }
 
-        public override void Update() {
-
-            context.velocity = context.headbuttCurve.Evaluate(1) * direction;
-
-            base.Update();
-        }
-
         public override void Exit() {
 
-            if (!context.onGround) context.velocity = Vector2.zero;
-            else context.velocity *= 0.5f;
+            context.velocity = direction * context.headbuttExitForce;
+
+            if (context.jumpBuffer) context.velocity.x = Mathf.Sign(context.velocity.x) * context.wavedashVelocity;
+
             context.Attacks.ExitHeadbutt();
 
             base.Exit();
@@ -533,7 +614,7 @@ public class PlayerMovement : Player.Component {
         public override void Update() {
 
             context.velocity.x = Mathf.MoveTowards(context.velocity.x, 0, context.knockbackFriction * Time.deltaTime);
-            context.Fall(context.fallGravity);
+            context.FallWithPeakGravity(context.fallGravity);
 
             base.Update();
         }

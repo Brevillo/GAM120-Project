@@ -10,7 +10,7 @@ public class PlayerAttacks : Player.Component {
 
     [Header("Headbutting")]
     [SerializeField] private float headbuttDamage;
-    [SerializeField] private float headbuttKnockback;
+    [SerializeField] private float headbuttEnemyKnockback, headbuttWallKnockback;
     [SerializeField] private EntityHealthCollisionTrigger headbuttTrigger;
     [SerializeField] private float headbuttHitTimestop;
     [SerializeField] private CameraShakeProfile headbuttHitShake;
@@ -19,7 +19,7 @@ public class PlayerAttacks : Player.Component {
 
     [Header("Swinging")]
     [SerializeField] private float swingDamage;
-    [SerializeField] private float swingKnockback, swingDuration, swingCooldown;
+    [SerializeField] private float swingEnemyKnockback, swingSelfKnockback, swingWallKnockback, swingDuration, swingCooldown;
     [SerializeField] private BufferTimer swingBuffer;
     [SerializeField] private EntityHealthCollisionTrigger swingTrigger;
     [SerializeField] private Transform swingTriggerPivot;
@@ -41,8 +41,11 @@ public class PlayerAttacks : Player.Component {
 
         InitializeStateMachine();
 
-        headbuttTrigger.OnEntityCollision.AddListener(OnHeadbuttCollision);
-        swingTrigger.OnEntityCollision.AddListener(OnSwingCollision);
+        headbuttTrigger.OnEntityCollision.AddListener(OnHeadbuttEntityCollision);
+        headbuttTrigger.OnNonEntityCollision.AddListener(OnHeadbuttNonEntityCollision);
+
+        swingTrigger.OnEntityCollision.AddListener(OnSwingEntityCollision);
+        swingTrigger.OnNonEntityCollision.AddListener(OnSwingNonEntityCollision);
     }
 
     private void Update() {
@@ -67,33 +70,68 @@ public class PlayerAttacks : Player.Component {
 
     #region Collision Functions
 
-    private void OnHeadbuttCollision(EntityHealth entity) {
+    private Vector2 NoDownwards(Vector2 vector) => new(vector.x, MathF.Max(vector.y, 0));
+
+    private void HeadbuttHitEffects() {
+        CameraEffects.AddShake(headbuttHitShake);
+        CameraEffects.AddBounce(headbuttHitBounce, headbuttDirection);
+    }
+
+    private void OnHeadbuttEntityCollision(EntityHealth entity) {
 
         if (entity.Team == Health.Team) return;
 
         if (stateMachine.currentState == headbutting) {
 
-            entity.TakeDamage(new(headbuttDamage * PlayerHealth.DamageMultiplier, headbuttDirection, headbuttDirection * headbuttKnockback));
-            CameraEffects.AddShake(headbuttHitShake);
-            CameraEffects.AddBounce(headbuttHitBounce, headbuttDirection);
+            entity.TakeDamage(new(headbuttDamage * PlayerHealth.DamageMultiplier, headbuttDirection, headbuttDirection * headbuttEnemyKnockback));
+
+            Movement.RefillOneAerialHeadbutt();
+
+            HeadbuttHitEffects();
             TimeManager.FreezeTime(headbuttHitTimestop, this);
             headbuttHitSound.Play(this);
+
             Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, headbuttDirection));
         }
     }
 
-    private void OnSwingCollision(EntityHealth entity) {
+    private void OnHeadbuttNonEntityCollision(GameObject go) {
+
+        if (go.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
+
+            HeadbuttHitEffects();
+            Movement.TakeKnockback(NoDownwards(-headbuttDirection) * headbuttWallKnockback);
+        }
+    }
+
+    private void SwingHitEffects() {
+        CameraEffects.AddShake(swingHitShake);
+    }
+
+    private void OnSwingEntityCollision(EntityHealth entity) {
 
         if (entity.Team == Health.Team) return;
 
         if (stateMachine.currentState == swinging) {
 
-            entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, swingDirection * swingKnockback));
-            CameraEffects.AddShake(swingHitShake);
-            swingHitSound.Play(this);
-            Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, swingDirection));
+            entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, swingDirection * swingEnemyKnockback));
 
             if (swingDirection.y < 0) Movement.RefillAirMovement();
+
+            Movement.TakeKnockback(NoDownwards(-swingDirection) * swingSelfKnockback);
+
+            SwingHitEffects();
+            swingHitSound.Play(this);
+            Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, swingDirection));
+        }
+    }
+
+    private void OnSwingNonEntityCollision(GameObject go) {
+
+        if (go.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
+
+            SwingHitEffects();
+            Movement.TakeKnockback(NoDownwards(-swingDirection) * swingWallKnockback);
         }
     }
 
@@ -189,15 +227,17 @@ public class PlayerAttacks : Player.Component {
 
             base.Enter();
 
-            Vector2 dir = context.swingDirection = context.InputDirection;
+            Vector2 swingDirection = context.InputDirection;
 
             // no downwards swings when grounded
-            if (context.Movement.OnGround()) dir.y = Mathf.Max(0, dir.y);
+            if (context.Movement.OnGround()) swingDirection.y = Mathf.Max(0, swingDirection.y);
 
             // if no input, default to facing direction
-            if (dir == Vector2.zero) dir = Vector2.right * context.Facing;
+            if (swingDirection == Vector2.zero) swingDirection = Vector2.right * context.Facing;
 
-            context.swingTriggerPivot.localEulerAngles = Vector3.forward * Mathf.Atan2(dir.y, Mathf.Abs(dir.x)) * Mathf.Rad2Deg;
+            context.swingDirection = swingDirection;
+
+            context.swingTriggerPivot.localEulerAngles = Vector3.forward * Mathf.Atan2(swingDirection.y, Mathf.Abs(swingDirection.x)) * Mathf.Rad2Deg;
             context.swingTrigger.gameObject.SetActive(true);
 
             context.swingActionSound.Play(context);
