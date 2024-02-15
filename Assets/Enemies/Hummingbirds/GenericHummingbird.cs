@@ -6,8 +6,8 @@ using OliverUtils;
 public abstract class GenericHummingbird : GenericEnemyBehaviour {
 
     [Header("Damage")]
-    [SerializeField] private float attackKnockback;
-    [SerializeField] private float damage, hurtKnockback, damageFlashDur;
+    [SerializeField] private float damage;
+    [SerializeField] private float attackKnockback, damageFlashDur;
 
     [Header("Idling")]
     [SerializeField] private float minIdleTime;
@@ -33,6 +33,11 @@ public abstract class GenericHummingbird : GenericEnemyBehaviour {
         target = FindObjectOfType<Player>().transform;
 
         animation.target = target;
+    }
+
+    protected override void StopBehaviour() {
+        attacking = false;
+        base.StopBehaviour();
     }
 
     protected abstract IEnumerator Attack();
@@ -103,6 +108,6 @@ public abstract class GenericHummingbird : GenericEnemyBehaviour {
             entity.TakeDamage(new(
                 damageAmount: damage,
                 direction: Velocity.normalized,
-                knockback: Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
+                knockbackPercent: Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
     }
 }

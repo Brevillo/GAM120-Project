@@ -6,12 +6,12 @@ public readonly struct DamageInfo {
 
     public readonly float damageAmount;
     public readonly Vector2 direction;
-    public readonly Vector2 knockback;
+    public readonly Vector2 knockbackPercent;
 
-    public DamageInfo(float damageAmount, Vector2 direction, Vector2 knockback) {
+    public DamageInfo(float damageAmount, Vector2 direction, Vector2 knockbackPercent) {
         this.damageAmount = damageAmount;
         this.direction = direction;
-        this.knockback = knockback;
+        this.knockbackPercent = knockbackPercent;
     }
 }
 

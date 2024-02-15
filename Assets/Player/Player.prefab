@@ -7244,7 +7244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3060111673363044745}
   headbuttDamage: 1
-  headbuttEnemyKnockback: 3
+  headbuttEnemyKnockback: 1
   headbuttWallKnockback: 3
   headbuttTrigger: {fileID: 3559755283607251370}
   headbuttHitTimestop: 0.1
@@ -7311,8 +7311,8 @@ MonoBehaviour:
   headbuttActionSound: {fileID: 11400000, guid: 0ca5f493e1dd3466599f1b8ae5d53ae7, type: 2}
   headbuttHitSound: {fileID: 11400000, guid: 9e4e10599ecd34087a6775f380ab6d4e, type: 2}
   swingDamage: 3
-  swingEnemyKnockback: 3
-  swingSelfKnockback: 5
+  swingEnemyKnockback: 0.5
+  swingSelfKnockback: 0
   swingWallKnockback: 3
   swingDuration: 0.1
   swingCooldown: 0.5
@@ -7437,11 +7437,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3060111673363044745}
   ZealBar: {fileID: 4857507759451292312}
-  ZenHealRate50: 0.2
-  ZenHealRate75: 0.5
-  ZenHealRate100: 1
+  ZenHealRate50: 1
+  ZenHealRate75: 2
+  ZenHealRate100: 2
   ZealPerHit: 0.15
   zenPerEat: 0.2
+  healPerEat: 0.25
   zealDamagePercent: 1
   deathShake:
     curve:

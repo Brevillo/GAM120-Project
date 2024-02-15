@@ -12,6 +12,7 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private float ZenHealRate100;
     [SerializeField] private float ZealPerHit;
     [SerializeField] private float zenPerEat;
+    [SerializeField] private float healPerEat;
     [SerializeField] private float zealDamagePercent;
 
     [Header("Death")]
@@ -67,7 +68,7 @@ public class PlayerHealth : Player.Component {
 
         energy = Mathf.MoveTowards(energy, 0.0f, ZealPerHit);
 
-        Movement.TakeKnockback(info.knockback);
+        Movement.TakeKnockback(info.knockbackPercent);
     }
 
     private void OnDeath(DamageInfo info) {
@@ -140,6 +141,6 @@ public class PlayerHealth : Player.Component {
     public void EatingZenIncrease() {
 
         energy = Mathf.MoveTowards(energy, 1.0f, zenPerEat);
-        
+        Health.Heal(healPerEat);
     }
 }

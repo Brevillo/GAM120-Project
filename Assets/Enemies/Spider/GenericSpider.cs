@@ -80,6 +80,6 @@ public abstract class GenericSpider : GenericEnemyBehaviour {
             entity.TakeDamage(new(
                 damageAmount: touchingDamageAmount,
                 direction: Velocity.normalized,
-                knockback: Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
+                knockbackPercent: Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
     }
 }

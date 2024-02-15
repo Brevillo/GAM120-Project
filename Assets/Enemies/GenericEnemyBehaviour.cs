@@ -4,22 +4,52 @@ using UnityEngine;
 
 public abstract class GenericEnemyBehaviour : GenericEnemyComponent, IWhippable {
 
+    [SerializeField] private bool takeKnockback;
+    [SerializeField] private SmartCurve knockback;
+
     #region Behaviour
 
     private Coroutine behaviour;
 
     protected abstract IEnumerator Behaviour();
 
+    protected virtual void Awake() {
+        Health.OnTakeDamage += OnTakeDamage;
+    }
+
+    private void OnTakeDamage(DamageInfo info) {
+
+        StopBehaviour();
+
+        if (takeKnockback) {
+
+            StartCoroutine(Knockback());
+            IEnumerator Knockback() {
+
+                knockback.Start();
+
+                while (!knockback.Done) {
+                    Rigidbody.velocity = info.knockbackPercent * knockback.Evaluate(1);
+                    yield return null;
+                }
+
+                StartBehaviour();
+            }
+        }
+
+        else StartBehaviour();
+    }
+
     private void OnEnable() => StartBehaviour();
 
     private void OnDisable() => StopBehaviour();
 
-    private void StartBehaviour() {
+    protected virtual void StartBehaviour() {
         if (behaviour != null) StopCoroutine(behaviour);
         if (isActiveAndEnabled) behaviour = StartCoroutine(Behaviour());
     }
 
-    private void StopBehaviour() {
+    protected virtual void StopBehaviour() {
         StopCoroutine(behaviour);
     }
 
