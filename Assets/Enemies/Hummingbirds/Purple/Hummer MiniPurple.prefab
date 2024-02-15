@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2691815617042374482
+--- !u!1001 &931053419150614518
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -18,11 +18,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935950402242074121, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.r
-      value: 0.748857
+      value: 0.8798704
       objectReference: {fileID: 0}
     - target: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Name
-      value: Hummer Purple
+      value: Hummer MiniPurple
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,6 +76,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5944782474396352969, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -74,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5944782474396352969, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.r
-      value: 0.748857
+      value: 0.8798704
       objectReference: {fileID: 0}
     - target: {fileID: 7531763033259358469, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.b
@@ -86,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7531763033259358469, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.r
-      value: 0.748857
+      value: 0.8798704
       objectReference: {fileID: 0}
     - target: {fileID: 8681432492528245351, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.b
@@ -98,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8681432492528245351, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.r
-      value: 0.748857
+      value: 0.8798704
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -106,49 +122,47 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5170986603982055307}
+      addedObject: {fileID: 3373154485671718125}
   m_SourcePrefab: {fileID: 100100000, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
---- !u!1 &4322405893137100222 stripped
+--- !u!1 &1318641470558154010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
-  m_PrefabInstance: {fileID: 2691815617042374482}
+  m_PrefabInstance: {fileID: 931053419150614518}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5170986603982055307
+--- !u!114 &3373154485671718125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4322405893137100222}
+  m_GameObject: {fileID: 1318641470558154010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0439ca6773872477fa6c1fa30968a9cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 750651dd69265456083166abc31b5664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackKnockback: 5
-  damage: 1
-  hurtKnockback: 5
+  attackKnockback: 2
+  damage: 0.5
+  hurtKnockback: 7
   damageFlashDur: 0.1
-  minIdleTime: 1
-  maxIdleTime: 2
+  minIdleTime: 0.2
+  maxIdleTime: 0.5
   airFriction: 100
-  wanderSpeed: 30
-  minWanderDist: 1
-  maxWanderDist: 3
+  wanderSpeed: 50
+  minWanderDist: 2
+  maxWanderDist: 4
   minWanderMoves: 2
-  maxWanderMoves: 5
-  animation: {fileID: 4925320726415762315}
-  diveSpeed: 40
+  maxWanderMoves: 4
+  animation: {fileID: 7920359732603986735}
+  diveSpeed: 50
   maxDiveDist: 100
   playerPassDistance: 2
-  spawnNumber: 2
-  miniPurplePrefab: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
---- !u!114 &4925320726415762315 stripped
+--- !u!114 &7920359732603986735 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6989869266368052441, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
-  m_PrefabInstance: {fileID: 2691815617042374482}
+  m_PrefabInstance: {fileID: 931053419150614518}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4322405893137100222}
+  m_GameObject: {fileID: 1318641470558154010}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31b005685c47040a5ad40065fd050eb8, type: 3}
