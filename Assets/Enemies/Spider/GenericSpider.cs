@@ -32,11 +32,6 @@ public abstract class GenericSpider : GenericEnemyBehaviour {
 
                 var hit = Physics2D.Raycast(Position + direction * parameters.collider.radius, direction, parameters.floorDetectDist, GameInfo.GroundMask);
                 if (hit) hits.Add(hit);
-
-                //if (debug) Debug.DrawLine(
-                //    Position + direction * parameters.collider.radius,
-                //    hit ? hit.point : Position + direction * (parameters.collider.radius + parameters.floorDetectDist),
-                //    hit ? Color.green : Color.Lerp(Color.red, Color.blue, (float)i / parameters.floorDetectWhiskers));
             }
 
             return hits;

@@ -1375,11 +1375,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2170614294413058676, guid: e78dd5c77d8d840a2be71551fd2a0927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -52.6
+      value: 122.59
       objectReference: {fileID: 0}
     - target: {fileID: 2170614294413058676, guid: e78dd5c77d8d840a2be71551fd2a0927, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.3
+      value: 45.68
       objectReference: {fileID: 0}
     - target: {fileID: 2170614294413058676, guid: e78dd5c77d8d840a2be71551fd2a0927, type: 3}
       propertyPath: m_LocalPosition.z
@@ -59983,63 +59983,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1237103594030699561, guid: f6bdc208bf96a49ca9882f9cf2079ec5, type: 3}
   m_PrefabInstance: {fileID: 1653553374}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1737517775
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6429844177358628916, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_Name
-      value: Yellow Hummer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -41.93994
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.1310616
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115504201295219370, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5ced5c590d8a440999719fa7a2f5ba19, type: 3}
 --- !u!1 &1825128402
 GameObject:
   m_ObjectHideFlags: 0
@@ -61553,6 +61496,5 @@ SceneRoots:
   - {fileID: 935022399}
   - {fileID: 8680920043619772935}
   - {fileID: 1825128406}
-  - {fileID: 1737517775}
   - {fileID: 726937344}
   - {fileID: 923565676}

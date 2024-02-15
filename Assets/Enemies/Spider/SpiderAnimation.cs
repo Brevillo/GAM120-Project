@@ -12,7 +12,7 @@ public class SpiderAnimation : MonoBehaviour {
 
         [SerializeField] private LineRenderer line;
 
-        [SerializeField] private float legLength;
+        [SerializeField] private float legLength, castAngleOffset;
 
         private Vector2 footTarget, footPosition;
 
@@ -24,7 +24,11 @@ public class SpiderAnimation : MonoBehaviour {
 
             if ((footTarget - jointPosition).magnitude > legLength || !onGround) {
 
-                var hit = Physics2D.Raycast(jointPosition, -line.transform.up, legLength, GameInfo.GroundMask);
+                Vector2 dir = -line.transform.up;
+                float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + castAngleOffset) * Mathf.Deg2Rad;
+                dir = new(Mathf.Cos(angle), Mathf.Sin(angle));
+
+                var hit = Physics2D.Raycast(jointPosition, dir, legLength, GameInfo.GroundMask);
 
                 if (hit) footTarget = hit.point;
 

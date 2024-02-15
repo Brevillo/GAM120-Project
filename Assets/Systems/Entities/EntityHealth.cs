@@ -19,6 +19,7 @@ public class EntityHealth : MonoBehaviour {
 
     [SerializeField] private float maxHealth;
     [SerializeField] private float invincibilityDuration;
+    [SerializeField] private float onEnableInvincibility;
     [SerializeField] private EntityHealthTeam team;
     [SerializeField, Readonly] private float health;
 
@@ -98,6 +99,10 @@ public class EntityHealth : MonoBehaviour {
 
     private void Update() {
         invincibilityRemaining -= Time.deltaTime;
+    }
+
+    private void OnEnable() {
+        invincibilityDuration = onEnableInvincibility;
     }
 
     #endregion

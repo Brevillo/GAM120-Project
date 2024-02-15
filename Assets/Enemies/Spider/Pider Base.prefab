@@ -318,12 +318,16 @@ MonoBehaviour:
   legs:
   - line: {fileID: 3715797546333599653}
     legLength: 7
+    castAngleOffset: 30
   - line: {fileID: 5795000280117865482}
     legLength: 5
+    castAngleOffset: 30
   - line: {fileID: 2072418623346879550}
     legLength: 5
+    castAngleOffset: -30
   - line: {fileID: 1956623916281486124}
     legLength: 7
+    castAngleOffset: -30
 --- !u!1001 &1827167553909542922
 PrefabInstance:
   m_ObjectHideFlags: 0
