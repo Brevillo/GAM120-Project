@@ -10,8 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: maxHealth
-      value: 
-      objectReference: {fileID: 11400000, guid: 86221af4e01b841b39c9f46681dd4438, type: 2}
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: onEnableInvincibility
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 935950402242074121, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.b
       value: 1
