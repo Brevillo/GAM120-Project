@@ -986,9 +986,6 @@ MonoBehaviour:
   OnNonEntityCollision:
     m_PersistentCalls:
       m_Calls: []
-  OnCollision:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!60 &2813153178291248239
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6666,9 +6663,6 @@ MonoBehaviour:
   OnNonEntityCollision:
     m_PersistentCalls:
       m_Calls: []
-  OnCollision:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!61 &3089813281065494689
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7767,8 +7761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880cc4a2493624f3aa7c0a9c658ff117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: {fileID: 11400000, guid: aaddfd99ab9814c5399de5c9c04091a6, type: 2}
   invincibilityDuration: 0.5
+  onEnableInvincibility: 0
   team: {fileID: 11400000, guid: e29e6f6d0ca34479282fe85a6f23d579, type: 2}
   health: 0
   Dead: 0

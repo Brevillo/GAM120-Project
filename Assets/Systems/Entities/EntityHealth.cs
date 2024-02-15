@@ -17,7 +17,7 @@ public readonly struct DamageInfo {
 
 public class EntityHealth : MonoBehaviour {
 
-    [SerializeField] private float maxHealth;
+    [SerializeField] private ReferenceValue maxHealth;
     [SerializeField] private float invincibilityDuration;
     [SerializeField] private float onEnableInvincibility;
     [SerializeField] private EntityHealthTeam team;

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: maxHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 286623c6a74f14936bed9cf430a6bae7, type: 2}
     - target: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Name
       value: Black Hummer
@@ -96,22 +100,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7637789722666032495}
   m_SourcePrefab: {fileID: 100100000, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
---- !u!114 &2746914287296632927 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
-  m_PrefabInstance: {fileID: 2744771651121792091}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4084877075485849271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880cc4a2493624f3aa7c0a9c658ff117, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!50 &2853900786192913343 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 111592608271292388, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
-  m_PrefabInstance: {fileID: 2744771651121792091}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4084877075485849271 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
@@ -129,8 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750651dd69265456083166abc31b5664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 2746914287296632927}
-  rigidbody: {fileID: 2853900786192913343}
   attackKnockback: 5
   damage: 1
   hurtKnockback: 5
