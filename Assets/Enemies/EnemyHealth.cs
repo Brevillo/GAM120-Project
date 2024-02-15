@@ -8,6 +8,7 @@ public class EnemyHealth : GenericEnemyComponent {
     [SerializeField] private float flashDuration;
     [SerializeField] private SpriteRenderer[] hitFlashRenderers;
     [SerializeField] private Material flashMaterial;
+    [SerializeField] private SoundEffect hurtSound;
 
     private void Awake() {
         Health.OnTakeDamage += OnTakeDamage;
@@ -15,10 +16,10 @@ public class EnemyHealth : GenericEnemyComponent {
     }
 
     protected virtual void OnTakeDamage(DamageInfo info) {
-        
+        if (hurtSound != null) hurtSound.Play(this); 
         StartCoroutine(SpriteFlash());
         IEnumerator SpriteFlash() {
-
+            
             List<(SpriteRenderer rend, Material ogMaterial, Color color)> rends = new List<SpriteRenderer>(hitFlashRenderers).ConvertAll(rend => (rend, rend.material, rend.color));
 
             foreach (var rend in hitFlashRenderers) {
