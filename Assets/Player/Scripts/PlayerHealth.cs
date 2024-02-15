@@ -33,6 +33,8 @@ public class PlayerHealth : Player.Component {
 
     public float DamageMultiplier => Mathf.Lerp(1, 1 + zealDamagePercent, Mathf.InverseLerp(0.5f, 0, energy));
 
+    public float DebugSetEnergy(float energy) => this.energy = energy;
+
     private void Awake() {
         Health.OnTakeDamage += DamageEffects;
         Health.OnDeath += OnDeath;

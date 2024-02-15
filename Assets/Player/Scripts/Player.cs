@@ -52,9 +52,8 @@ public class Player : MonoBehaviour {
         #if UNITY_EDITOR
 
         if (inputManager.Debug1.Down) UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        if (inputManager.Debug2.Down) health.Heal(1);
-        //if (inputManager.Debug3.Down) ;
-        if (inputManager.Debug4.Down) health.TakeDamage(new(1f, Vector2.zero, Vector2.zero));
+        if (inputManager.Debug2.Down) playerHealth.DebugSetEnergy(1);
+        if (inputManager.Debug3.Down) playerHealth.DebugSetEnergy(0f);
 
         #endif
     }
