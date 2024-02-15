@@ -26,12 +26,6 @@ public class PlayerWhip : Player.Component {
 
     private StateMachine<PlayerWhip> stateMachine;
 
-    // state instances
-    private WhipIdle whipIdle;
-    private WhipExtending whipExtending;
-    private WhipRetracting whipRetracting;
-    private WhipPullingEnemy whipPullingEnemy;
-
     #endregion
 
     #region Awake and Update
@@ -47,7 +41,8 @@ public class PlayerWhip : Player.Component {
     private void FixedUpdate() {
 
         // question mark means that it only runs these functions if whipRopeSim isn't null
-        whipRopeSim?.Update(transform.position);
+        Vector2 whipOrigin = stateMachine.currentState == pullingSelf && whipping as Object != null ? whipping.WhippablePosition : transform.position;
+        whipRopeSim?.Update(whipOrigin);
         whipRopeSim?.ApplyToLineRenderer(whipRenderer);
     }
 
@@ -84,12 +79,20 @@ public class PlayerWhip : Player.Component {
 
     #endregion
 
+    // state instances
+    private Idle idle;
+    private Extending extending;
+    private Retracting retracting;
+    private PullingEnemy pullingEnemy;
+    private PullingSelf pullingSelf;
+
     private void InitializeWhipStateMachine() {
 
-        whipIdle            = new(this);
-        whipExtending       = new(this);
-        whipRetracting      = new(this);
-        whipPullingEnemy    = new(this);
+        idle            = new(this);
+        extending       = new(this);
+        retracting      = new(this);
+        pullingEnemy    = new(this);
+        pullingSelf     = new(this);
 
         TransitionDelegate
 
@@ -99,38 +102,47 @@ public class PlayerWhip : Player.Component {
             whipRetracted   = () => whipRopeSim.Length == 0,
 
             pullEnemy       = () => whipping != null && whipping.WhippableType == IWhippable.Type.Light,
-            stopPullEnemy   = () => whipping == null;
+
+            pullSelf        = () => whipping != null && whipping.WhippableType == IWhippable.Type.Heavy,
+
+            targetIsNull    = () => whipping == null;
 
         stateMachine = new(
 
-            firstState: whipIdle,
+            firstState: idle,
 
             transitions: new() {
 
-                { whipIdle, new() {
-                    new(whipExtending, startWhip),
+                { idle, new() {
+                    new(extending,      startWhip),
                 } },
 
-                { whipExtending, new() {
-                    new(whipRetracting, stopWhip),
-                    new(whipPullingEnemy, pullEnemy),
+                { extending, new() {
+                    new(retracting,     stopWhip),
+                    new(pullingEnemy,   pullEnemy),
+                    new(pullingSelf,    pullSelf),
                 } },
 
-                { whipRetracting, new() {
-                    new(whipIdle, whipRetracted),
+                { retracting, new() {
+                    new(idle,           whipRetracted),
                 } },
 
-                { whipPullingEnemy, new() {
-                    new(whipIdle, whipRetracted),
-                    new(whipRetracting, stopPullEnemy),
+                { pullingEnemy, new() {
+                    new(idle,           whipRetracted),
+                    new(retracting,     targetIsNull),
+                } },
+
+                { pullingSelf, new() {
+                    new(idle,           pullSelf),
+                    new(retracting,     targetIsNull),
                 } },
             }
         );
     }
 
-    private class WhipIdle : State {
+    private class Idle : State {
 
-        public WhipIdle(PlayerWhip context) : base(context) { }
+        public Idle(PlayerWhip context) : base(context) { }
 
         public override void Enter() {
 
@@ -141,9 +153,9 @@ public class PlayerWhip : Player.Component {
         }
     }
 
-    private class WhipExtending : State {
+    private class Extending : State {
 
-        public WhipExtending(PlayerWhip context) : base(context) { }
+        public Extending(PlayerWhip context) : base(context) { }
 
         private Vector2 aimDirection;
         private PlayerWhipTrigger activeWhipTrigger;
@@ -210,9 +222,9 @@ public class PlayerWhip : Player.Component {
         }
     }
 
-    private class WhipRetracting : State {
+    private class Retracting : State {
 
-        public WhipRetracting(PlayerWhip context) : base(context) { }
+        public Retracting(PlayerWhip context) : base(context) { }
 
         public override void Update() {
 
@@ -222,9 +234,23 @@ public class PlayerWhip : Player.Component {
         }
     }
 
-    private class WhipPullingEnemy : State {
+    private class Pulling : State {
 
-        public WhipPullingEnemy(PlayerWhip context) : base(context) { }
+        public Pulling(PlayerWhip context) : base(context) { }
+
+        public override void Enter() {
+
+            base.Enter();
+
+            TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
+            CameraEffects.AddShake(context.hitEnemyShake);
+            context.whipHit.Play(context);
+        }
+    }
+
+    private class PullingEnemy : Pulling {
+
+        public PullingEnemy(PlayerWhip context) : base(context) { }
 
         public override void Enter() {
 
@@ -232,10 +258,6 @@ public class PlayerWhip : Player.Component {
 
             context.Movement.SetVelocity(y: Mathf.Max(context.Rigidbody.velocity.y, context.enemyGrappleVerticalBoost));
             context.Movement.RefillAirMovement();
-
-            TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
-            CameraEffects.AddShake(context.hitEnemyShake);
-            context.whipHit.Play(context);
 
             if (context.whipping == null) return;
 
@@ -266,6 +288,27 @@ public class PlayerWhip : Player.Component {
             context.whipping = null;
 
             base.Exit();
+        }
+    }
+
+    private class PullingSelf : Pulling {
+
+        public PullingSelf(PlayerWhip context) : base(context) { }
+
+        public override void Enter() {
+
+            base.Enter();
+
+            context.Movement.RefillAirMovement();
+
+            if (context.whipping == null) return;
+
+            // move player with whip
+            context.whipRopeSim = new(context.whipRopeParameters, context.whipping.WhippablePosition, context.transform.position) {
+                Length = (context.whipping.WhippablePosition - (Vector2)context.transform.position).magnitude
+            };
+
+
         }
     }
 

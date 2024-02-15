@@ -22,7 +22,8 @@ public abstract class GenericSpider : GenericEnemyBehaviour {
 
     protected IEnumerator Crawl(float duration, int direction, CrawlParameters parameters) {
 
-        List<RaycastHit2D> GetCollisions(float startAngle, float range, bool debug) {
+        // gathers all ground collisions within an arc
+        List<RaycastHit2D> GetCollisions(float startAngle, float range) {
 
             List<RaycastHit2D> hits = new();
             for (int i = 0; i < parameters.floorDetectWhiskers; i++) {
@@ -39,10 +40,12 @@ public abstract class GenericSpider : GenericEnemyBehaviour {
 
         for (float timer = 0; timer < duration; timer += Time.deltaTime) {
 
+            // find closest ground point
+
             RaycastHit2D closest = default;
             float closestDist = Mathf.Infinity;
 
-            foreach (var hit in GetCollisions(0f, 360f, false)) {
+            foreach (var hit in GetCollisions(0f, 360f)) {
 
                 float dist = (Position - hit.point).magnitude;
 
@@ -54,10 +57,12 @@ public abstract class GenericSpider : GenericEnemyBehaviour {
 
             if (closest) {
 
+                // 180º arc around ground point to find average ground normal
+
                 Vector2 toClosest = closest.point - Position,
                         forward = -Vector2.Perpendicular(toClosest) * direction;
 
-                var groundHits = GetCollisions(Mathf.Atan2(forward.y, forward.x), 180f * direction, true);
+                var groundHits = GetCollisions(Mathf.Atan2(forward.y, forward.x), 180f * direction);
 
                 Vector2 averageNormal = Vector2.zero;
                 foreach (var hit in groundHits) averageNormal += hit.normal;
@@ -65,6 +70,8 @@ public abstract class GenericSpider : GenericEnemyBehaviour {
 
                 Vector2 currentForward = Vector2.Perpendicular(averageNormal) * direction;
                 Vector2 currentDown = -averageNormal;
+
+                // set velocity and rotation
 
                 Velocity = currentForward * parameters.crawlSpeed + toClosest.normalized * parameters.floorSuctionForce;
                 transform.up = -currentDown;

@@ -16,7 +16,9 @@ public class EnemyHealth : GenericEnemyComponent {
     }
 
     protected virtual void OnTakeDamage(DamageInfo info) {
+
         if (hurtSound != null) hurtSound.Play(this); 
+
         StartCoroutine(SpriteFlash());
         IEnumerator SpriteFlash() {
             
@@ -37,6 +39,15 @@ public class EnemyHealth : GenericEnemyComponent {
     }
 
     protected virtual void OnDeath(DamageInfo info) {
-        gameObject.SetActive(false);
+
+        OnTakeDamage(info);
+
+        StartCoroutine(DeathDelay());
+        IEnumerator DeathDelay() {
+
+            yield return new WaitForSeconds(flashDuration);
+
+            gameObject.SetActive(false);
+        }
     }
 }
