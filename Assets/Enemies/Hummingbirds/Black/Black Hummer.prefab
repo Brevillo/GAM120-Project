@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: maxHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 286623c6a74f14936bed9cf430a6bae7, type: 2}
     - target: {fileID: 2208739951423861484, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Name
       value: Black Hummer

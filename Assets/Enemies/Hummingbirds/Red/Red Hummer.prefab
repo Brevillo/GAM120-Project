@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: maxHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 20470ad2e45524d12b32dae0e1e2bc49, type: 2}
     - target: {fileID: 935950402242074121, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.b
       value: 0.23529413
@@ -136,8 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750651dd69265456083166abc31b5664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 6112736840815943959}
-  rigidbody: {fileID: 6147736319519451895}
   attackKnockback: 5
   damage: 1
   hurtKnockback: 5
@@ -154,19 +156,3 @@ MonoBehaviour:
   diveSpeed: 50
   maxDiveDist: 100
   playerPassDistance: 2
---- !u!114 &6112736840815943959 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
-  m_PrefabInstance: {fileID: 6115133472897547539}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5366694497071501311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880cc4a2493624f3aa7c0a9c658ff117, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!50 &6147736319519451895 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 111592608271292388, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
-  m_PrefabInstance: {fileID: 6115133472897547539}
-  m_PrefabAsset: {fileID: 0}

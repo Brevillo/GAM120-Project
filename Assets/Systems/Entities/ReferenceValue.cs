@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class ReferenceValue : ScriptableObject {
 
     [SerializeField] private float value;
