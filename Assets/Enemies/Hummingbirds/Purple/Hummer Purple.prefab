@@ -142,9 +142,9 @@ MonoBehaviour:
   minWanderMoves: 2
   maxWanderMoves: 5
   animation: {fileID: 4925320726415762315}
-  diveSpeed: 40
-  maxDiveDist: 100
-  playerPassDistance: 2
+  attackSpeed: 0
+  attackAcceleration: 0
+  attackDuration: 0
   spawnNumber: 2
   miniPurplePrefab: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
 --- !u!114 &4925320726415762315 stripped
