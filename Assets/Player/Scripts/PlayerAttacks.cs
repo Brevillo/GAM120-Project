@@ -44,9 +44,11 @@ public class PlayerAttacks : Player.Component {
 
         headbuttTrigger.OnEntityCollision.AddListener(OnHeadbuttEntityCollision);
         headbuttTrigger.OnNonEntityCollision.AddListener(OnHeadbuttNonEntityCollision);
+        headbuttTrigger.enabled = false;
 
         swingTrigger.OnEntityCollision.AddListener(OnSwingEntityCollision);
         swingTrigger.OnNonEntityCollision.AddListener(OnSwingNonEntityCollision);
+        swingTrigger.enabled = false;
     }
 
     private void Update() {
@@ -218,12 +220,12 @@ public class PlayerAttacks : Player.Component {
 
             context.headbuttActionSound.Play(context);
 
-            context.headbuttTrigger.gameObject.SetActive(true);
+            context.headbuttTrigger.enabled = true;
         }
 
         public override void Exit() {
 
-            context.headbuttTrigger.gameObject.SetActive(false);
+            context.headbuttTrigger.enabled = false;
 
             base.Exit();
         }
@@ -249,14 +251,14 @@ public class PlayerAttacks : Player.Component {
             context.swingDirection = swingDirection;
 
             context.swingTriggerPivot.localEulerAngles = Vector3.forward * Mathf.Atan2(swingDirection.y, Mathf.Abs(swingDirection.x)) * Mathf.Rad2Deg;
-            context.swingTrigger.gameObject.SetActive(true);
+            context.swingTrigger.enabled = true;
 
             context.swingActionSound.Play(context);
         }
 
         public override void Exit() {
 
-            context.swingTrigger.gameObject.SetActive(false);
+            context.swingTrigger.enabled = false;
 
             base.Exit();
         }

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyHealth : GenericEnemyComponent {
 
+    [Header("Effects")]
+    [SerializeField] private SoundEffect hurtSound;
+
     [Header("Hit Flash")]
     [SerializeField] private float flashDuration;
-    [SerializeField] private SpriteRenderer[] hitFlashRenderers;
+    [SerializeField] private List<SpriteRenderer> hitFlashRenderers;
     [SerializeField] private Material flashMaterial;
-    [SerializeField] private SoundEffect hurtSound;
 
     private void Awake() {
         Health.OnTakeDamage += OnTakeDamage;
@@ -22,7 +24,7 @@ public class EnemyHealth : GenericEnemyComponent {
         StartCoroutine(SpriteFlash());
         IEnumerator SpriteFlash() {
             
-            List<(SpriteRenderer rend, Material ogMaterial, Color color)> rends = new List<SpriteRenderer>(hitFlashRenderers).ConvertAll(rend => (rend, rend.material, rend.color));
+            List<(SpriteRenderer rend, Material ogMaterial, Color ogColor)> rends = hitFlashRenderers.ConvertAll(rend => (rend, rend.material, rend.color));
 
             foreach (var rend in hitFlashRenderers) {
                 rend.material = flashMaterial;
@@ -31,9 +33,9 @@ public class EnemyHealth : GenericEnemyComponent {
 
             yield return new WaitForSeconds(flashDuration);
 
-            foreach (var (rend, ogMaterial, color) in rends) {
+            foreach (var (rend, ogMaterial, ogColor) in rends) {
                 rend.material = ogMaterial;
-                rend.color = color;
+                rend.color = ogColor;
             }
         }
     }

@@ -18,13 +18,23 @@ public readonly struct EntityHealthCollision {
 
 public class EntityHealthCollisionTrigger : MonoBehaviour {
 
+    public new bool enabled {
+        get => _enabled;
+        set => ((_enabled = value) ? OnEnable : OnDisable).Invoke();
+    }
+
+    [SerializeField] private bool _enabled;
+
     public UnityEvent<EntityHealthCollision> OnEntityCollision;
     public UnityEvent<Collider2D> OnNonEntityCollision;
+    public UnityEvent OnEnable, OnDisable;
 
     private void OnTriggerEnter2D(Collider2D collision)    => CheckCollisionForEntity(collision);
     private void OnCollisionEnter2D(Collision2D collision) => CheckCollisionForEntity(collision.collider);
 
     private void CheckCollisionForEntity(Collider2D collider) {
+
+        if (!enabled) return;
 
         if (collider.TryGetComponent(out EntityHealth entity))
             OnEntityCollision.Invoke(new(entity, collider));
