@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705604521991172, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: onEnableInvincibility
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 935950402242074121, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_Color.b
       value: 1
