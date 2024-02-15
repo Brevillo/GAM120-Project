@@ -986,6 +986,9 @@ MonoBehaviour:
   OnNonEntityCollision:
     m_PersistentCalls:
       m_Calls: []
+  OnCollision:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!60 &2813153178291248239
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6663,6 +6666,9 @@ MonoBehaviour:
   OnNonEntityCollision:
     m_PersistentCalls:
       m_Calls: []
+  OnCollision:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &3089813281065494689
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7071,6 +7077,7 @@ GameObject:
   - component: {fileID: 7560332416474703363}
   - component: {fileID: 250192126328090591}
   - component: {fileID: 1557454652479058045}
+  - component: {fileID: 4124466150152741197}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -7135,6 +7142,7 @@ MonoBehaviour:
   groundDetectDist: 0.1
   fastFallGravity: 150
   fastFallSpeed: 40
+  groundDetectWhiskers: 50
   jumpBuffer:
     threshold: 0.1
   jumpSound: {fileID: 11400000, guid: 1f3f59c75caca4bad8f5f8eb8856d5e4, type: 2}
@@ -7351,7 +7359,8 @@ MonoBehaviour:
     timeBetweenPositions: 0.02
   swingActionSound: {fileID: 11400000, guid: 10e780a6f583c499c96fe41a29ca8751, type: 2}
   swingHitSound: {fileID: 11400000, guid: 9e4e10599ecd34087a6775f380ab6d4e, type: 2}
-  hitParticles: {fileID: 861018831298353788, guid: c890b6b992e6f4dccaa0eb09353a406b, type: 3}
+  enemyHitParticles: {fileID: 861018831298353788, guid: c890b6b992e6f4dccaa0eb09353a406b, type: 3}
+  wallHitParticles: {fileID: 5975935789800029232, guid: 0c61a634e27c94db395d5f8e69f8bb95, type: 3}
 --- !u!114 &3875097491503807348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7744,7 +7753,7 @@ MonoBehaviour:
   playerHealth: {fileID: 2008252985994352932}
   health: {fileID: 6791614321812120477}
   rigidbody: {fileID: 7560332416474703363}
-  collider: {fileID: 1557454652479058045}
+  collider: {fileID: 4124466150152741197}
   bodyPivot: {fileID: 1483030378175564037}
 --- !u!114 &6791614321812120477
 MonoBehaviour:
@@ -7848,12 +7857,47 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.14214508, y: 0.18447435}
+  m_Size: {x: 3.631066, y: 1.4133258}
+  m_Direction: 1
+--- !u!58 &4124466150152741197
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159668116364633624}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.5, y: 1.25}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0.25}
+  serializedVersion: 2
+  m_Radius: 0.7
 --- !u!1 &8536024215107641163
 GameObject:
   m_ObjectHideFlags: 0

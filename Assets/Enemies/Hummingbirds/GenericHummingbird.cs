@@ -100,6 +100,9 @@ public abstract class GenericHummingbird : GenericEnemyBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (attacking && collision.TryGetComponent(out EntityHealth entity) && entity.Team != Health.Team) 
-            entity.TakeDamage(new(damage, Velocity.normalized, Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
+            entity.TakeDamage(new(
+                damageAmount: damage,
+                direction: Velocity.normalized,
+                knockback: Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
     }
 }

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public abstract class GenericSpider : GenericEnemyBehaviour {
 
+    [Header("Damage")]
+    [SerializeField] private float touchingDamageAmount;
+    [SerializeField] private float attackKnockback;
+
     public override IWhippable.Type WhippableType => IWhippable.Type.Heavy;
+
+    protected bool attacking;
 
     [System.Serializable]
     protected class CrawlParameters {
@@ -71,5 +77,14 @@ public abstract class GenericSpider : GenericEnemyBehaviour {
 
             yield return null;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+
+        if (attacking && collision.TryGetComponent(out EntityHealth entity) && entity.Team != Health.Team)
+            entity.TakeDamage(new(
+                damageAmount: touchingDamageAmount,
+                direction: Velocity.normalized,
+                knockback: Vector2.right * attackKnockback * Mathf.Sign(Velocity.x)));
     }
 }

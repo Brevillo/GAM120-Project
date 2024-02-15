@@ -3,19 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public readonly struct EntityHealthCollision {
+
+    public EntityHealthCollision(EntityHealth entity, Collider2D collider) {
+        this.entity     = entity;
+        this.collider   = collider;
+        this.gameObject = collider.gameObject;
+    }
+
+    public readonly EntityHealth entity;
+    public readonly Collider2D collider;
+    public readonly GameObject gameObject;
+}
+
 public class EntityHealthCollisionTrigger : MonoBehaviour {
 
-    public UnityEvent<EntityHealth> OnEntityCollision;
-    public UnityEvent<GameObject> OnNonEntityCollision;
+    public UnityEvent<EntityHealthCollision> OnEntityCollision;
+    public UnityEvent<Collider2D> OnNonEntityCollision;
 
-    private void OnTriggerEnter2D(Collider2D collision) => CheckCollision(collision.gameObject);
-    private void OnCollisionEnter2D(Collision2D collision) => CheckCollision(collision.gameObject);
+    private void OnTriggerEnter2D(Collider2D collision)    => CheckCollisionForEntity(collision);
+    private void OnCollisionEnter2D(Collision2D collision) => CheckCollisionForEntity(collision.collider);
 
-    private void CheckCollision(GameObject go) {
+    private void CheckCollisionForEntity(Collider2D collider) {
 
-        if (go.TryGetComponent(out EntityHealth entity))
-            OnEntityCollision.Invoke(entity);
+        if (collider.TryGetComponent(out EntityHealth entity))
+            OnEntityCollision.Invoke(new(entity, collider));
 
-        else OnNonEntityCollision.Invoke(go);
+        else OnNonEntityCollision.Invoke(collider);
     }
 }

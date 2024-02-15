@@ -206,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8150197049549233773, guid: 09e8e9e4243734a9990ce7f96f56f057, type: 3}
       propertyPath: m_Name
-      value: Black Pider Variant
+      value: Black Pider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -233,6 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7eee9aa07a0c460e82d9ec0d775e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchingDamageAmount: 1
+  attackKnockback: 3
   minIdleTime: 0.5
   maxIdleTime: 2
   minCrawlTime: 1

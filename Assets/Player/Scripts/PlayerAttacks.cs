@@ -27,7 +27,8 @@ public class PlayerAttacks : Player.Component {
     [SerializeField] private SoundEffect swingActionSound, swingHitSound;
 
     [Header("Effects")]
-    [SerializeField] private GameObject hitParticles;
+    [SerializeField] private GameObject enemyHitParticles;
+    [SerializeField] private GameObject wallHitParticles;
 
     #endregion
 
@@ -72,18 +73,26 @@ public class PlayerAttacks : Player.Component {
 
     private Vector2 NoDownwards(Vector2 vector) => new(vector.x, MathF.Max(vector.y, 0));
 
+    private void EnemyHitEffects(EntityHealth entity, Vector2 direction) {
+        Instantiate(enemyHitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, direction));
+    }
+
+    private void WallHitEffects(Collider2D collision, Vector2 direction) {
+        Instantiate(wallHitParticles, collision.ClosestPoint(transform.position), Quaternion.FromToRotation(Vector2.right, -direction));
+    }
+
     private void HeadbuttHitEffects() {
         CameraEffects.AddShake(headbuttHitShake);
         CameraEffects.AddBounce(headbuttHitBounce, headbuttDirection);
     }
 
-    private void OnHeadbuttEntityCollision(EntityHealth entity) {
+    private void OnHeadbuttEntityCollision(EntityHealthCollision collision) {
 
-        if (entity.Team == Health.Team) return;
+        if (collision.entity.Team == Health.Team) return;
 
         if (stateMachine.currentState == headbutting) {
 
-            entity.TakeDamage(new(headbuttDamage * PlayerHealth.DamageMultiplier, headbuttDirection, headbuttDirection * headbuttEnemyKnockback));
+            collision.entity.TakeDamage(new(headbuttDamage * PlayerHealth.DamageMultiplier, headbuttDirection, headbuttDirection * headbuttEnemyKnockback));
 
             Movement.RefillOneAerialHeadbutt();
 
@@ -91,15 +100,16 @@ public class PlayerAttacks : Player.Component {
             TimeManager.FreezeTime(headbuttHitTimestop, this);
             headbuttHitSound.Play(this);
 
-            Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, headbuttDirection));
+            EnemyHitEffects(collision.entity, headbuttDirection);
         }
     }
 
-    private void OnHeadbuttNonEntityCollision(GameObject go) {
+    private void OnHeadbuttNonEntityCollision(Collider2D collision) {
 
-        if (go.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
+        if (collision.gameObject.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
 
             HeadbuttHitEffects();
+            WallHitEffects(collision, headbuttDirection);
             Movement.TakeKnockback(NoDownwards(-headbuttDirection) * headbuttWallKnockback);
         }
     }
@@ -108,13 +118,13 @@ public class PlayerAttacks : Player.Component {
         CameraEffects.AddShake(swingHitShake);
     }
 
-    private void OnSwingEntityCollision(EntityHealth entity) {
+    private void OnSwingEntityCollision(EntityHealthCollision collision) {
 
-        if (entity.Team == Health.Team) return;
+        if (collision.entity.Team == Health.Team) return;
 
         if (stateMachine.currentState == swinging) {
 
-            entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, swingDirection * swingEnemyKnockback));
+            collision.entity.TakeDamage(new(swingDamage * PlayerHealth.DamageMultiplier, InputDirection, swingDirection * swingEnemyKnockback));
 
             if (swingDirection.y < 0) Movement.RefillAirMovement();
 
@@ -122,15 +132,16 @@ public class PlayerAttacks : Player.Component {
 
             SwingHitEffects();
             swingHitSound.Play(this);
-            Instantiate(hitParticles, entity.transform.position, Quaternion.FromToRotation(Vector2.right, swingDirection));
+            EnemyHitEffects(collision.entity, swingDirection);
         }
     }
 
-    private void OnSwingNonEntityCollision(GameObject go) {
+    private void OnSwingNonEntityCollision(Collider2D collision) {
 
-        if (go.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
+        if (collision.gameObject.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
 
             SwingHitEffects();
+            WallHitEffects(collision, swingDirection);
             Movement.TakeKnockback(NoDownwards(-swingDirection) * swingWallKnockback);
         }
     }

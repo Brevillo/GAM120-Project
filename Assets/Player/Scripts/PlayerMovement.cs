@@ -21,6 +21,7 @@ public class PlayerMovement : Player.Component {
     [Header("Jumping")]
     [SerializeField] private float jumpHeight;
     [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist, fastFallGravity, fastFallSpeed;
+    [SerializeField] private int groundDetectWhiskers;
     [SerializeField] private BufferTimer jumpBuffer;
     [SerializeField] private SoundEffect jumpSound;
 
@@ -55,16 +56,16 @@ public class PlayerMovement : Player.Component {
 
     private StateMachine<PlayerMovement> stateMachine;
 
-    private Vector2 velocity;               // current velocity (stored so that I can edit the x and y components individually)
-    private RaycastHit2D groundHit;         // raycast hit for the ground
-    private bool onGround;                  // is the player on the ground?
-    private float groundDist;               // distance to the ground
+    private Vector2 velocity;                   // current velocity (stored so that I can edit the x and y components individually)
+    private Vector2 groundNormal;               // current normal vector of the ground
+    private bool onGround;                      // is the player on the ground?
+    private float groundDist;                   // distance to the ground
 
-    private float remainingFlightStamina;   // how much flight stamina reminas
-    private float spriteRotationVelocity;   // current veloctiy of sprite rotation
+    private float remainingFlightStamina;       // how much flight stamina reminas
+    private float spriteRotationVelocity;       // current veloctiy of sprite rotation
 
-    private int aerialHeadbuttsUsed;        // how many headbutts have been used after the player left the ground
-    private int aerialHeadbuttsRemaining;   // how many headbutts the player has left after leaving the ground
+    private int aerialHeadbuttsUsed;            // how many headbutts have been used after the player left the ground
+    private int aerialHeadbuttsRemaining;       // how many headbutts the player has left after leaving the ground
 
     private AnimationClip currentLegAnimation;  // current leg animation being played by the leg animator
 
@@ -118,25 +119,34 @@ public class PlayerMovement : Player.Component {
         jumpBuffer.Buffer(Input.Jump.Down);
         headbuttBuffer.Buffer(Input.Headbutt.Down);
 
-        // get information about current physical state
-
-        RaycastHit2D GroundCast(float distance) {
-
-            var hit1 = Physics2D.Raycast(transform.position, Vector2.down, distance, GameInfo.GroundMask);
-            if (hit1) return hit1;
-
-            var hit2 = Physics2D.CapsuleCast(transform.position, Collider.size, Collider.direction, 0, Vector2.down, distance, GameInfo.GroundMask);
-            if (hit2) return hit2;
-
-            return default;
-        }
+        // store velocity for easy modification
 
         velocity = Rigidbody.velocity;
-        groundHit = GroundCast(groundDetectDist);
-        float slopeAngle = Mathf.Abs(Mathf.DeltaAngle(Mathf.Atan2(groundHit.normal.y, groundHit.normal.x) * Mathf.Rad2Deg, 90));
-        onGround = groundHit && slopeAngle < maxSlopeAngle;
 
-        var groundDistHit = GroundCast(Mathf.Infinity);
+        // get ground information, onGround, normal, and ground distance
+
+        groundNormal = Vector2.zero;
+
+        int hits = 0;
+        for (int i = 0; i < groundDetectWhiskers; i++) {
+
+            float angle = (float)i / groundDetectWhiskers * 360f * Mathf.Deg2Rad;
+            var hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Collider.bounds.extents.y + groundDetectDist, GameInfo.GroundMask);
+
+            if (!hit) continue;
+
+            float slopeAngle = Mathf.Abs(Mathf.DeltaAngle(Mathf.Atan2(hit.normal.y, hit.normal.x) * Mathf.Rad2Deg, 90));
+
+            if (slopeAngle > maxSlopeAngle) continue;
+
+            groundNormal += hit.normal;
+            hits++;
+        }
+
+        onGround = hits > 0;
+        if (hits > 0) groundNormal /= hits;
+
+        var groundDistHit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, GameInfo.GroundMask);
         groundDist = groundDistHit ? transform.position.y - Collider.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
 
         // run state machines
@@ -147,16 +157,17 @@ public class PlayerMovement : Player.Component {
 
         Rigidbody.velocity = velocity;
 
-        // visuals
+        // rotation
 
-        Vector2 forward = -Vector2.Perpendicular(groundHit.normal);
+        Vector2 forward = -Vector2.Perpendicular(groundNormal);
         float targetAngle = onGround
             ? Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg
             : maxSpriteAngle * Mathf.Clamp(velocity.y / maxAngleVelocity, -1, 1) * Facing;
 
         float rotateSpeed = onGround ? groundRotateSpeed : airRotateSpeed;
         Rigidbody.SetRotation(Mathf.SmoothDampAngle(Rigidbody.rotation, targetAngle, ref spriteRotationVelocity, rotateSpeed));
-        Debug.DrawRay(groundHit.point, groundHit.normal, Color.green);
+
+        // leg animation
 
         var newLegAnimation = InputDirection.x != 0 && velocity.x != 0 && onGround ? legsCrawlingAnimation : legsIdleAnimation;
         if (newLegAnimation != currentLegAnimation) {
@@ -171,13 +182,15 @@ public class PlayerMovement : Player.Component {
 
     #region Helper Functions
 
-    private void Run(float? customSpeed = null) {
+    private void Run(float? customSpeed = null, bool onGround = false) {
+
+        var groundRotation = Quaternion.FromToRotation(groundNormal, Vector2.up);
 
         (float accel, float speed, Vector2 vel) = onGround
 
             ? ( accel:  InputDirection.x != 0 ? groundAccel : groundDeccel,
                 speed:  customSpeed ?? runSpeed,
-                vel:    (Vector2)transform.InverseTransformDirection(velocity))
+                vel:    (Vector2)(groundRotation * velocity))
 
             : ( accel:  InputDirection.x != 0 ? airAccel : airDeccel,
                 speed:  Mathf.Max(customSpeed ?? runSpeed, Mathf.Abs(velocity.x)),
@@ -186,7 +199,7 @@ public class PlayerMovement : Player.Component {
         vel.x = Mathf.MoveTowards(vel.x, speed * InputDirection.x, accel * Time.deltaTime);
 
         velocity = onGround
-            ? -(Vector2)transform.up * groundGravity + (Vector2)transform.right * vel.x
+            ? Quaternion.Inverse(groundRotation) * new Vector2(vel.x, -groundGravity)
             : vel;
     }
 
@@ -365,14 +378,7 @@ public class PlayerMovement : Player.Component {
 
         public Grounded(PlayerMovement context) : base(context) { }
 
-        private float stepSoundTimer, velocity;
-
-        public override void Enter() {
-
-            base.Enter();
-
-            velocity = context.velocity.x;
-        }
+        private float stepSoundTimer;
 
         public override void Update() {
 
@@ -382,7 +388,7 @@ public class PlayerMovement : Player.Component {
                 context.stepSound.Play(context);
             }
 
-            context.Run();
+            context.Run(onGround: true);
 
             base.Update();
         }
@@ -446,7 +452,13 @@ public class PlayerMovement : Player.Component {
             context.jumpSound.Play(context);
 
             context.jumpBuffer.Reset();
-            context.velocity.y = Mathf.Sqrt(context.jumpHeight * context.jumpGravity * 2f);
+
+            var groundRotation = Quaternion.FromToRotation(context.groundNormal, Vector2.up);
+
+            Vector2 groundVel = groundRotation * context.velocity;
+            groundVel.y = Mathf.Sqrt(context.jumpHeight * context.jumpGravity * 2f);
+
+            context.velocity = Quaternion.Inverse(groundRotation) * groundVel;
         }
 
         public override void Update() {
@@ -553,7 +565,7 @@ public class PlayerMovement : Player.Component {
 
         public override void Update() {
 
-            context.Run(context.headbuttChargeRunSpeed);
+            context.Run(context.headbuttChargeRunSpeed, context.onGround);
             context.Fall(context.InputDirection.y > 0 ? context.headbuttChargeLightGravity : context.headbuttChargeGravity);
 
             context.headPivot.localPosition = Vector2.left * context.headbuttChargeAnimation.Evaluate();
