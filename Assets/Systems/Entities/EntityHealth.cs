@@ -60,7 +60,7 @@ public class EntityHealth : MonoBehaviour {
 
         Health = Mathf.MoveTowards(Health, 0, info.damageAmount);
 
-        invincibilityRemaining = invincibilityDuration;
+        invincibilityRemaining = Mathf.Max(invincibilityDuration, invincibilityRemaining);
 
         // death
         if (Health <= 0) {
@@ -102,7 +102,7 @@ public class EntityHealth : MonoBehaviour {
     }
 
     private void OnEnable() {
-        invincibilityDuration = onEnableInvincibility;
+        invincibilityRemaining = onEnableInvincibility;
     }
 
     #endregion
