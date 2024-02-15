@@ -30,13 +30,13 @@ public class Player : MonoBehaviour {
 
     public void Freeze(bool? movement = null, bool? abilities = null, bool? health = null) {
 
-        playerMovement.enabled  = movement  ?? playerMovement.enabled;
+        playerMovement.enabled  = !movement  ?? playerMovement.enabled;
 
-        playerWhip.enabled      = abilities ?? playerWhip.enabled;
-        playerAttacks.enabled   = abilities ?? playerAttacks.enabled;
+        playerWhip.enabled      = !abilities ?? playerWhip.enabled;
+        playerAttacks.enabled   = !abilities ?? playerAttacks.enabled;
 
-        this.health.enabled     = health    ?? this.health.enabled;
-        playerHealth.enabled    = health    ?? playerHealth.enabled;
+        this.health.enabled     = !health    ?? this.health.enabled;
+        playerHealth.enabled    = !health    ?? playerHealth.enabled;
     }
 
     private void Awake() {

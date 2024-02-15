@@ -104,6 +104,7 @@ public class PlayerWhip : Player.Component {
             pullEnemy       = () => whipping != null && whipping.WhippableType == IWhippable.Type.Light,
 
             pullSelf        = () => whipping != null && whipping.WhippableType == IWhippable.Type.Heavy,
+            stopPullingSelf = () => !Input.Whip.Pressed,
 
             targetIsNull    = () => whipping == null;
 
@@ -133,7 +134,8 @@ public class PlayerWhip : Player.Component {
                 } },
 
                 { pullingSelf, new() {
-                    new(idle,           pullSelf),
+                    new(idle,           whipRetracted),
+                    new(retracting,     stopPullingSelf),
                     new(retracting,     targetIsNull),
                 } },
             }
@@ -246,6 +248,20 @@ public class PlayerWhip : Player.Component {
             CameraEffects.AddShake(context.hitEnemyShake);
             context.whipHit.Play(context);
         }
+        
+        public override void Update() {
+
+            context.RetractWhip(context.whipPullSpeed);
+
+            base.Update();
+        }
+
+        public override void Exit() {
+
+            context.whipping = null;
+
+            base.Exit();
+        }
     }
 
     private class PullingEnemy : Pulling {
@@ -273,19 +289,10 @@ public class PlayerWhip : Player.Component {
             };
         }
 
-        public override void Update() {
-
-            context.RetractWhip(context.whipPullSpeed);
-
-            base.Update();
-        }
-
         public override void Exit() {
 
             if (context.whipping as Object != null)
                 context.whipping.EnableMovement();
-
-            context.whipping = null;
 
             base.Exit();
         }
@@ -303,12 +310,24 @@ public class PlayerWhip : Player.Component {
 
             if (context.whipping == null) return;
 
+            context.Player.Freeze(movement: true);
+
             // move player with whip
             context.whipRopeSim = new(context.whipRopeParameters, context.whipping.WhippablePosition, context.transform.position) {
                 Length = (context.whipping.WhippablePosition - (Vector2)context.transform.position).magnitude
             };
 
+            context.whipRopeSim.OnUpdate += position => {
+                if (context.whipping as Object != null)
+                    context.Rigidbody.MovePosition(position);
+            };
+        }
 
+        public override void Exit() {
+
+            context.Player.Freeze(movement: false);
+
+            base.Exit();
         }
     }
 
