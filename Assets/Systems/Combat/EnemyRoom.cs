@@ -7,6 +7,7 @@ public class EnemyRoom : MonoBehaviour {
     [SerializeField] private float startDelay;
     [SerializeField] private CombatBound cameraCombatBound;
     [SerializeField] private GameObject enableDuringCombat;
+    [SerializeField] private MusicManager musicManager;
 
     [SerializeField, Readonly] private State state;
 
@@ -32,6 +33,8 @@ public class EnemyRoom : MonoBehaviour {
     private void ActivateRoom() {
 
         if (state != State.Incomplete) return;
+
+        musicManager.StartCombat();
 
         state = State.Active;
 
@@ -63,6 +66,8 @@ public class EnemyRoom : MonoBehaviour {
     private void RoomCompleted() {
 
         state = State.Complete;
+
+        musicManager.StopCombat();
 
         CameraMovement.CombatUnlock();
         enableDuringCombat.SetActive(false);

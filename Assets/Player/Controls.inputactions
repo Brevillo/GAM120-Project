@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "1187faff-128f-4f00-924d-9a0e28858d94",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Debug1",
                     "type": "Button",
                     "id": "75c22068-0195-419e-9f4f-719a8aa9cbff",
@@ -90,15 +99,6 @@
                     "name": "Debug4",
                     "type": "Button",
                     "id": "9217c80a-b3f4-4efd-adae-68fddf3c3a88",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "1187faff-128f-4f00-924d-9a0e28858d94",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -176,61 +176,6 @@
                     "name": "right",
                     "id": "b3b95c65-c1e2-48e3-b932-935854d4ade3",
                     "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Arrow Keys",
-                    "id": "5fc1f65f-f65a-4716-8b6d-56b702c22465",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "f881d3f9-a25d-41e6-bb0f-103551e48760",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "59e035ba-c752-4cff-ae35-9f5f596a7704",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "c1dbf4c9-d3e2-4700-b120-33c7c755fd00",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "8e881970-e5da-4857-abfa-26ab3299a55e",
-                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -416,17 +361,6 @@
                 },
                 {
                     "name": "",
-                    "id": "dd132d1b-f42a-4919-96b4-595222bb82b9",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "aadb6726-c1fd-4082-a364-6fc3293561ed",
                     "path": "<Keyboard>/rightShift",
                     "interactions": "",
@@ -466,6 +400,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Swing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd132d1b-f42a-4919-96b4-595222bb82b9",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74581f15-8cfb-4ee4-a08d-7e2d7e581497",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -237,6 +237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7eee9aa07a0c460e82d9ec0d775e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  takeKnockback: 0
+  knockback:
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 0
+    valueScale: 0
+    timer: 0
   touchingDamageAmount: 1
   attackKnockback: 3
   minIdleTime: 0.5

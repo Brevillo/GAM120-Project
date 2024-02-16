@@ -46,6 +46,19 @@ public class SoundEffect : ScriptableObject {
     /// <summary> Is the clip playing right now? </summary>
     public bool IsPlaying(GameObject host) => GetInstance(host).source.isPlaying;
 
+    /// <summary> Get the length of the current audio clip. </summary>
+    public float CurrentLength(Component host) => GetInstance(host).source.clip.length; 
+    /// <summary> Get the length of the current audio clip. </summary>
+    public float CurrentLength(GameObject host) => GetInstance(host).source.clip.length;
+
+    public float maxLength {
+        get {
+            float length = 0;
+            foreach (var clip in Clips) length = Mathf.Max(length, clip.length);
+            return length;
+        }
+    }
+
     #region Internals
 
     private readonly Dictionary<GameObject, Instance> instances = new();
