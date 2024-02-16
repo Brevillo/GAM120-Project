@@ -20,10 +20,16 @@ public class EntityHealthCollisionTrigger : MonoBehaviour {
 
     public new bool enabled {
         get => _enabled;
-        set => ((_enabled = value) ? OnEnable : OnDisable).Invoke();
+        set => ((_enabled = collider.enabled = value) ? OnEnable : OnDisable).Invoke();
     }
 
     [SerializeField] private bool _enabled;
+
+    private new Collider2D collider;
+
+    private void Awake() {
+        collider = GetComponent<Collider2D>();
+    }
 
     public UnityEvent<EntityHealthCollision> OnEntityCollision;
     public UnityEvent<Collider2D> OnNonEntityCollision;

@@ -32,7 +32,7 @@ public class PlayerMovement : Player.Component {
 
     [Header("Headbutting")]
     [SerializeField] private float headbuttCooldown;
-    [SerializeField] private float headbuttDist, headbuttDuration, headbuttMaxChargeDuration, headbuttChargeLoss, headbuttChargeRunSpeed, headbuttChargeLightGravity, headbuttChargeGravity, wavedashVelocity, wavedashGroundDist;
+    [SerializeField] private float headbuttMinDist, headbuttMaxDist, headbuttMinDuration, headbuttMaxDuration, headbuttMaxChargeDuration, headbuttChargeLoss, headbuttChargeRunSpeed, headbuttChargeLightGravity, headbuttChargeGravity, wavedashVelocity, wavedashGroundDist;
     [SerializeField] private Vector2 headbuttExitForce;
     [SerializeField] private int maxHeadbuttsInAir;
     [SerializeField] private BufferTimer headbuttBuffer;
@@ -63,6 +63,8 @@ public class PlayerMovement : Player.Component {
 
     private float remainingFlightStamina;       // how much flight stamina reminas
     private float spriteRotationVelocity;       // current veloctiy of sprite rotation
+
+    private float headbuttChargePercent;
 
     private int aerialHeadbuttsUsed;            // how many headbutts have been used after the player left the ground
     private int aerialHeadbuttsRemaining;       // how many headbutts the player has left after leaving the ground
@@ -275,7 +277,7 @@ public class PlayerMovement : Player.Component {
             skipHbCharge    = () => toHbCharge() && headbuttChargeTime == 0,
             startHeadbutt   = () => !Input.Headbutt.Pressed || stateMachine.stateDuration > headbuttChargeTime,
 
-            stopHeadbutt    = () => stateMachine.stateDuration > headbuttDuration,
+            stopHeadbutt    = () => stateMachine.stateDuration > headbutting.duration,
             stopHbGrounded  = () => stopHeadbutt() && onGround,
             stopHbFalling   = () => stopHeadbutt() && !onGround,
 
@@ -578,6 +580,8 @@ public class PlayerMovement : Player.Component {
             context.headPivot.localPosition = Vector2.zero;
             CameraEffects.RemoveEffect(shakeEffect);
 
+            context.headbuttChargePercent = context.stateMachine.stateDuration / context.headbuttMaxChargeDuration;
+
             base.Exit();
         }
     }
@@ -588,6 +592,8 @@ public class PlayerMovement : Player.Component {
         public Headbutting(PlayerMovement context) : base(context) { }
 
         private Vector2 direction;
+
+        public float duration;
 
         public override void Enter() {
 
@@ -601,7 +607,12 @@ public class PlayerMovement : Player.Component {
                 ? context.Input.Movement.Vector.normalized
                 : Vector2.right * context.Facing;
 
-            context.velocity = direction * context.headbuttDist / context.headbuttDuration;
+            float percent = context.headbuttChargePercent,
+                  distance = Mathf.Lerp(context.headbuttMinDist, context.headbuttMaxDist, percent);
+
+            duration = Mathf.Lerp(context.headbuttMinDuration, context.headbuttMaxDuration, percent);
+
+            context.velocity = direction * distance / duration;
 
             context.Attacks.EnterHeadbutt(direction);
         }

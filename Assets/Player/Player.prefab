@@ -6677,7 +6677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4832097023500043353}
   - component: {fileID: 3559755283607251370}
-  - component: {fileID: 3089813281065494689}
+  - component: {fileID: 5507665191056661550}
   m_Layer: 10
   m_Name: Headbutt Collider
   m_TagString: Untagged
@@ -6696,7 +6696,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1483030378175564037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6725,8 +6725,8 @@ MonoBehaviour:
   OnDisable:
     m_PersistentCalls:
       m_Calls: []
---- !u!61 &3089813281065494689
-BoxCollider2D:
+--- !u!70 &5507665191056661550
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6757,19 +6757,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.25, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4, y: 2}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.25, y: 0}
+  m_Size: {x: 6, y: 3}
+  m_Direction: 1
 --- !u!1 &6610445711539800147
 GameObject:
   m_ObjectHideFlags: 0
@@ -7204,14 +7194,16 @@ MonoBehaviour:
   jumpSound: {fileID: 11400000, guid: 1f3f59c75caca4bad8f5f8eb8856d5e4, type: 2}
   flightForce: 90
   minStartFlightVel: 5
-  maxFlightVel: 17
-  maxFlightStamina: 0.5
+  maxFlightVel: 15
+  maxFlightStamina: 0.75
   timeAfterJumpingBeforeFlight: 0.15
   dontFlyAboveGroundDist: 1
   flightSound: {fileID: 11400000, guid: 54096d4022df4486eb4816367e2fba60, type: 2}
   headbuttCooldown: 0.25
-  headbuttDist: 7
-  headbuttDuration: 0.1
+  headbuttMinDist: 5
+  headbuttMaxDist: 20
+  headbuttMinDuration: 0.05
+  headbuttMaxDuration: 0.1
   headbuttMaxChargeDuration: 0.75
   headbuttChargeLoss: 0.25
   headbuttChargeRunSpeed: 5
@@ -7252,7 +7244,7 @@ MonoBehaviour:
     valueScale: 0.75
     timer: 0
   headbuttChargeShake:
-    amplitude: 0.1
+    amplitude: 0.25
     duration: 0
     unscaledTime: 0
     intensityCurve:

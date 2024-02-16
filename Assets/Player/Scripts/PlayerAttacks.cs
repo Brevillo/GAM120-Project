@@ -44,10 +44,14 @@ public class PlayerAttacks : Player.Component {
 
         headbuttTrigger.OnEntityCollision.AddListener(OnHeadbuttEntityCollision);
         headbuttTrigger.OnNonEntityCollision.AddListener(OnHeadbuttNonEntityCollision);
-        headbuttTrigger.enabled = false;
 
         swingTrigger.OnEntityCollision.AddListener(OnSwingEntityCollision);
         swingTrigger.OnNonEntityCollision.AddListener(OnSwingNonEntityCollision);
+    }
+
+    private void Start() {
+        
+        headbuttTrigger.enabled = false;
         swingTrigger.enabled = false;
     }
 
