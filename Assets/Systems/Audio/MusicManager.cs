@@ -52,10 +52,14 @@ public class MusicManager : GameManager.Manager {
     protected override void RuntimeInitializeOnLoad() {
 
         void SetVolume(string name, float volume) => mixer.SetFloat(name, volume == 0 ? -80f : Mathf.Log10(volume) * 70 + 20);
+        void InitMixerGroup(Setting setting, string name) {
+            SetVolume(name, setting.floatValue);
+            setting.onValueChanged += () => SetVolume(name, setting.floatValue);
+        }
 
-        masterVolume.onValueChanged += () => SetVolume(masterVolumeKey, masterVolume.floatValue);
-        musicVolume .onValueChanged += () => SetVolume(musicVolumeKey,  musicVolume .floatValue);
-        soundVolume .onValueChanged += () => SetVolume(soundVolumeKey,  soundVolume .floatValue);
+        InitMixerGroup(masterVolume, masterVolumeKey);
+        InitMixerGroup(musicVolume, musicVolumeKey);
+        InitMixerGroup(soundVolume, soundVolumeKey);
 
         fullscreenSetting.onValueChanged += () => Screen.fullScreen = fullscreenSetting.boolValue;
     }
