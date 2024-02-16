@@ -119,6 +119,9 @@ public class GameManager : ScriptableObject {
                     if (canAdd) {
                         gameManager.managers.Add(manager);
                         manager.gameManager = gameManager;
+
+                        EditorUtility.SetDirty(manager);
+                        AssetDatabase.SaveAssets();
                     }
                     else Debug.LogError(log);
 
