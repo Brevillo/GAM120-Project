@@ -10,6 +10,7 @@ public class CameraEffects : MonoBehaviour {
 
     [SerializeField] private Volume volumeComponent;
     [SerializeField] private CanvasGroup whiteFade, blackFade;
+    [SerializeField] private Setting cameraShakeSetting;
 
     private void Awake() {
         I = this;
@@ -107,9 +108,9 @@ public class CameraEffects : MonoBehaviour {
 
     private void LateUpdate() {
 
-        transform.localPosition
-            = CalculateOffset(activeShakes)
-            + CalculateOffset(activeBounces);
+        transform.localPosition = cameraShakeSetting.boolValue
+            ? CalculateOffset(activeShakes) + CalculateOffset(activeBounces)
+            : Vector2.zero;
     }
 
     public class EffectToken {

@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using OliverUtils;
 
 [CreateAssetMenu(menuName = "Systems/Music Manager")]
 public class MusicManager : GameManager.Manager {
 
     [SerializeField] private List<SceneMusic> sceneMusic;
+    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private string masterVolumeKey, musicVolumeKey, soundVolumeKey;
+    [SerializeField] private Setting masterVolume, musicVolume, soundVolume;
     [SerializeField] private MusicInstance musicInstancePrefab;
+
+    [Header("Putting this here for no good reason")]
+    [SerializeField] private Setting fullscreenSetting;
 
     [System.Serializable]
     public class SceneMusic {
@@ -40,6 +47,17 @@ public class MusicManager : GameManager.Manager {
             instance = Instantiate(musicInstancePrefab);
             instance.Setup(found);
         }
+    }
+
+    protected override void RuntimeInitializeOnLoad() {
+
+        void SetVolume(string name, float volume) => mixer.SetFloat(name, volume == 0 ? -80f : Mathf.Log10(volume) * 70 + 20);
+
+        masterVolume.onValueChanged += () => SetVolume(masterVolumeKey, masterVolume.floatValue);
+        musicVolume .onValueChanged += () => SetVolume(musicVolumeKey,  musicVolume .floatValue);
+        soundVolume .onValueChanged += () => SetVolume(soundVolumeKey,  soundVolume .floatValue);
+
+        fullscreenSetting.onValueChanged += () => Screen.fullScreen = fullscreenSetting.boolValue;
     }
 
     public void StartCombat() => instance.StartCombat();
