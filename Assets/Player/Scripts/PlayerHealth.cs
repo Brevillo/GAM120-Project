@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using OliverBeebe.UnityUtilities.Runtime.Camera;
+using OliverBeebe.UnityUtilities.Runtime;
 
 public class PlayerHealth : Player.Component {
 
     [Header("Zeal/Zen")]
-    [SerializeField] private Image ZealBar;
     [SerializeField] private float ZenHealRate50;
     [SerializeField] private float ZenHealRate75;
     [SerializeField] private float ZenHealRate100;
@@ -23,17 +24,42 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private SmartCurve deathFadeOut, deathFadeIn;
     [SerializeField] private float deathGravity, deathFriction;
 
-    [Header("Effects")]
-    [SerializeField] private CameraShakeProfile damageShake;
+    [Header("Damage")]
     [SerializeField] private float damageTimeFreezeDuration;
+    [SerializeField] private CameraShakeProfile damageScreenShake, damageUIShake;
+    [SerializeField] private SmartCurve hurtScreenDarken;
+    [SerializeField] private RectTransform uiTransform;
 
-    public bool CanEatMore => energy < 1.0f;
+    [Header("Healing")]
+    [SerializeField] private Wave healthBrightnessPulse;
+    [SerializeField] private Wave healingBrightnessPulse;
+    [SerializeField] private float minHealthBrightness, maxHealthBrightness, healthBrightnessAdjustSpeed;
+    [SerializeField] private Image healthbarImage;
 
     private float energy;
+    private float healthBrightnessVelocity;
 
-    public float DamageMultiplier => Mathf.Lerp(1, 1 + zealDamagePercent, Mathf.InverseLerp(0.5f, 0, energy));
+    private CameraEffectsManager uiEffects = new();
 
-    public float DebugSetEnergy(float energy) => this.energy = energy;
+    #region Public Fields/Methods
+
+    public float Energy {
+        get => energy;
+        set {
+            energy = value;
+            OnEnergyUpdated?.Invoke();
+        }
+    }
+
+    public event System.Action OnEnergyUpdated;
+
+    public float DamageMultiplier => Mathf.Lerp(1, 1 + zealDamagePercent, Mathf.InverseLerp(0.5f, 0, Energy));
+
+    public bool CanEatMore => Energy < 1.0f;
+
+    public float DebugSetEnergy(float energy) => Energy = energy;
+
+    #endregion
 
     private void Awake() {
         Health.OnTakeDamage += DamageEffects;
@@ -42,16 +68,14 @@ public class PlayerHealth : Player.Component {
 
     private void Start() {
 
-        energy = 0.5f;
+        Energy = 0.5f;
 
         CameraEffects.BlackFade(deathFadeIn);
     }
 
     private void Update() {
 
-        ZealBar.fillAmount = 1 - energy;
-
-        float healAmount = energy switch {
+        float healAmount = Energy switch {
                   1 => ZenHealRate100,
             > 0.75f => ZenHealRate75,
             >  0.5f => ZenHealRate50,
@@ -60,15 +84,31 @@ public class PlayerHealth : Player.Component {
 
         if (healAmount != 0)
             Health.Heal(healAmount * Time.deltaTime);
+
+        uiTransform.localPosition = uiEffects.Update();
+
+        // health bar brightness effects
+
+        Color.RGBToHSV(healthbarImage.color, out float healthColorH, out float healthColorS, out float currentHealthColorValue);
+
+        float healthColorTargetValue
+            = (healAmount != 0 && Health.HealthPercent != 1 ? healingBrightnessPulse : healthBrightnessPulse).Evaluate()
+            + Mathf.Lerp(minHealthBrightness, maxHealthBrightness, Health.HealthPercent);
+
+        currentHealthColorValue = Mathf.SmoothDamp(currentHealthColorValue, healthColorTargetValue, ref healthBrightnessVelocity, healthBrightnessAdjustSpeed);
+
+        healthbarImage.color = Color.HSVToRGB(healthColorH, healthColorS, currentHealthColorValue);
     }   
 
     private void DamageEffects(DamageInfo info) {
 
         TimeManager.FreezeTime(damageTimeFreezeDuration, this);
-        CameraEffects.AddShake(damageShake);
+        CameraEffects.Effects.AddShake(damageScreenShake);
         CameraEffects.PostProcessingEffect<UnityEngine.Rendering.Universal.ColorAdjustments>(InvincibilityFlashing);
 
-        energy = Mathf.MoveTowards(energy, 0.0f, ZealPerHit);
+        uiEffects.AddShake(damageUIShake);
+
+        Energy = Mathf.MoveTowards(Energy, 0.0f, ZealPerHit);
 
         Movement.TakeKnockback(info.knockbackPercent);
     }
@@ -127,22 +167,20 @@ public class PlayerHealth : Player.Component {
 
     private IEnumerator InvincibilityFlashing(UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustment) {
 
-        bool flash = false;
+        colorAdjustment.postExposure.overrideState = true;
 
-        colorAdjustment.saturation.overrideState = true;
-
-        while (Health.Invincible) {
-            flash = !flash;
-            colorAdjustment.saturation.value = flash ? -100 : 0;
+        hurtScreenDarken.Start();
+        while (!hurtScreenDarken.Done) {
+            colorAdjustment.postExposure.value = hurtScreenDarken.Evaluate();
             yield return null;
         }
 
-        colorAdjustment.saturation.value = 0;
+        colorAdjustment.postExposure.value = 0;
     }
 
     public void EatingZenIncrease() {
 
-        energy = Mathf.MoveTowards(energy, 1.0f, zenPerEat);
+        Energy = Mathf.MoveTowards(Energy, 1.0f, zenPerEat);
         Health.Heal(healPerEat);
     }
 }

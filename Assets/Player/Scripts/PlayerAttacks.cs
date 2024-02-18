@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using StateMachine;
+using OliverBeebe.UnityUtilities.Runtime.Camera;
+using OliverBeebe.UnityUtilities.Runtime;
 
 public class PlayerAttacks : Player.Component {
 
@@ -88,8 +89,8 @@ public class PlayerAttacks : Player.Component {
     }
 
     private void HeadbuttHitEffects() {
-        CameraEffects.AddShake(headbuttHitShake);
-        CameraEffects.AddBounce(headbuttHitBounce, headbuttDirection);
+        CameraEffects.Effects.AddShake(headbuttHitShake);
+        CameraEffects.Effects.AddBounce(headbuttHitBounce, headbuttDirection);
     }
 
     private void OnHeadbuttEntityCollision(EntityHealthCollision collision) {
@@ -121,7 +122,7 @@ public class PlayerAttacks : Player.Component {
     }
 
     private void SwingHitEffects() {
-        CameraEffects.AddShake(swingHitShake);
+        CameraEffects.Effects.AddShake(swingHitShake);
     }
 
     private void OnSwingEntityCollision(EntityHealthCollision collision) {

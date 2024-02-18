@@ -162,8 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880cc4a2493624f3aa7c0a9c658ff117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: {fileID: 0}
   invincibilityDuration: 0
+  onEnableInvincibility: 0
   team: {fileID: 11400000, guid: 94cf57cbd4a1040ecaad9cd91c2c783f, type: 2}
   health: 0
   Dead: 0
@@ -272,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0c99296c98645e1a9520470e055062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtSound: {fileID: 11400000, guid: ef02e49e467ed4b2fb02e5ccc5c7c829, type: 2}
   flashDuration: 0.1
   hitFlashRenderers:
   - {fileID: 5944782474396352969}
@@ -279,7 +281,6 @@ MonoBehaviour:
   - {fileID: 935950402242074121}
   - {fileID: 8681432492528245351}
   flashMaterial: {fileID: 2100000, guid: 0cbab0ca260da43719ce8e4210b65572, type: 2}
-  hurtSound: {fileID: 11400000, guid: ef02e49e467ed4b2fb02e5ccc5c7c829, type: 2}
 --- !u!1 &2560517211426826215
 GameObject:
   m_ObjectHideFlags: 0

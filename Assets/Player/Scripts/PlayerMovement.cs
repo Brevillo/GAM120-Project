@@ -2,53 +2,102 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using StateMachine;
+using OliverBeebe.UnityUtilities.Runtime.Camera;
+using OliverBeebe.UnityUtilities.Runtime;
 
 public class PlayerMovement : Player.Component {
 
     #region Parameters
 
     [Header("Running")]
-    [SerializeField] private float runSpeed;
-    [SerializeField] private float groundAccel, groundDeccel, airAccel, airDeccel, maxSlopeAngle, groundedOffset, groundGravity;
-    [SerializeField] private float stepSoundFrequency;
-    [SerializeField] private SoundEffect stepSound;
+    [SerializeField] private float              runSpeed;
+    [SerializeField] private float              groundAccel;
+    [SerializeField] private float              groundDeccel;
+    [SerializeField] private float              airAccel;
+    [SerializeField] private float              airDeccel;
+
+    [SerializeField] private float              maxSlopeAngle;
+    [SerializeField] private float              groundedOffset;
+    [SerializeField] private float              groundGravity;
+
+    [SerializeField] private float              stepSoundFrequency;
+    [SerializeField] private SoundEffect        stepSound;
 
     [Header("Eating")]
-    [SerializeField] private float eatDuration;
-    [SerializeField] private SoundEffect eatSound;
+    [SerializeField] private float              eatDuration;
+    [SerializeField] private SoundEffect        eatSound;
 
     [Header("Jumping")]
-    [SerializeField] private float jumpHeight;
-    [SerializeField] private float minJumpTime, jumpGravity, fallGravity, peakVelThreshold, peakGravity, maxFallSpeed, groundDetectDist, fastFallGravity, fastFallSpeed;
-    [SerializeField] private int groundDetectWhiskers;
-    [SerializeField] private BufferTimer jumpBuffer;
-    [SerializeField] private SoundEffect jumpSound;
+    [SerializeField] private float              jumpHeight;
+    [SerializeField] private float              minJumpTime;
+    [SerializeField] private float              jumpGravity;
+
+    [SerializeField] private float              fallGravity;
+    [SerializeField] private float              peakVelThreshold;
+    [SerializeField] private float              peakGravity;
+
+    [SerializeField] private float              maxFallSpeed;
+    [SerializeField] private float              fastFallGravity;
+    [SerializeField] private float              fastFallSpeed;
+
+    [SerializeField] private float              groundDetectDist;
+    [SerializeField] private int                groundDetectWhiskers;
+
+    [SerializeField] private BufferTimer        jumpBuffer;
+    [SerializeField] private SoundEffect        jumpSound;
 
     [Header("Flying")]
-    [SerializeField] private float flightForce;
-    [SerializeField] private float minStartFlightVel, maxFlightVel, maxFlightStamina, timeAfterJumpingBeforeFlight, dontFlyAboveGroundDist;
-    [SerializeField] private SoundEffect flightSound;
+    [SerializeField] private float              flightForce;
+    [SerializeField] private float              minStartFlightVel;
+    [SerializeField] private float              maxFlightVel;
+    [SerializeField] private float              maxFlightStamina;
+
+    [SerializeField] private float              timeAfterJumpingBeforeFlight;
+    [SerializeField] private float              dontFlyAboveGroundDist;
+
+    [SerializeField] private SoundEffect        flightSound;
 
     [Header("Headbutting")]
-    [SerializeField] private float headbuttCooldown;
-    [SerializeField] private float headbuttMinDist, headbuttMaxDist, headbuttMinDuration, headbuttMaxDuration, headbuttMaxChargeDuration, headbuttChargeLoss, headbuttChargeRunSpeed, headbuttChargeLightGravity, headbuttChargeGravity, wavedashVelocity, wavedashGroundDist;
-    [SerializeField] private Vector2 headbuttExitForce;
-    [SerializeField] private int maxHeadbuttsInAir;
-    [SerializeField] private BufferTimer headbuttBuffer;
-    [SerializeField] private SmartCurve headbuttChargeAnimation;
+    [SerializeField] private BufferTimer        headbuttBuffer;
+    [SerializeField] private float              headbuttCooldown;
+
+    [SerializeField] private float              headbuttMinDist;
+    [SerializeField] private float              headbuttMaxDist;
+    [SerializeField] private float              headbuttMinDuration;
+    [SerializeField] private float              headbuttMaxDuration;
+    [SerializeField] private Vector2            headbuttExitForce;
+
+    [SerializeField] private float              headbuttMaxChargeDuration;
+    [SerializeField] private float              headbuttChargeLoss;
+
+    [SerializeField] private float              headbuttChargeRunSpeed;
+    [SerializeField] private float              headbuttChargeLightGravity;
+    [SerializeField] private float              headbuttChargeGravity;
+
+    [SerializeField] private float              wavedashVelocity;
+    [SerializeField] private float              wavedashGroundDist;
+
+    [SerializeField] private int                maxHeadbuttsInAir;
+
+    [SerializeField] private SmartCurve         headbuttChargeAnimation;
     [SerializeField] private CameraShakeProfile headbuttChargeShake;
-    [SerializeField] private Transform headPivot;
+    [SerializeField] private Transform          headPivot;
 
     [Header("Taking Knockback")]
-    [SerializeField] private float knockbackFriction;
+    [SerializeField] private float              knockbackFriction;
 
     [Header("Animation")]
-    [SerializeField] private float maxSpriteAngle;
-    [SerializeField] private float maxAngleVelocity, groundRotateSpeed, airRotateSpeed;
-    [SerializeField] private Transform wingPivot;
-    [SerializeField] private Animator legsAnimator;
-    [SerializeField] private AnimationClip legsIdleAnimation, legsCrawlingAnimation;
+    [SerializeField] private float              maxSpriteAngle;
+    [SerializeField] private float              maxAngleVelocity;
+
+    [SerializeField] private float              groundRotateSpeed;
+    [SerializeField] private float              airRotateSpeed;
+
+    [SerializeField] private Transform          wingPivot;
+
+    [SerializeField] private Animator           legsAnimator;
+    [SerializeField] private AnimationClip      legsIdleAnimation;
+    [SerializeField] private AnimationClip      legsCrawlingAnimation;
 
     #endregion
 
@@ -64,7 +113,7 @@ public class PlayerMovement : Player.Component {
     private float remainingFlightStamina;       // how much flight stamina reminas
     private float spriteRotationVelocity;       // current veloctiy of sprite rotation
 
-    private float headbuttChargePercent;
+    private float headbuttChargePercent;        // charge percent of headbutt after exiting headbuttCharge state
 
     private int aerialHeadbuttsUsed;            // how many headbutts have been used after the player left the ground
     private int aerialHeadbuttsRemaining;       // how many headbutts the player has left after leaving the ground
@@ -547,7 +596,7 @@ public class PlayerMovement : Player.Component {
 
         public HeadbuttCharge(PlayerMovement context) : base(context) { }
 
-        private CameraEffects.EffectToken shakeEffect;
+        private ActiveEffect shakeEffect;
 
         public override void Enter() {
 
@@ -562,7 +611,7 @@ public class PlayerMovement : Player.Component {
             context.headbuttChargeAnimation.timeScale = maxChargeTime;
             context.headbuttChargeAnimation.Start();
             context.headbuttChargeShake.duration = maxChargeTime;
-            shakeEffect = CameraEffects.AddShake(context.headbuttChargeShake);
+            shakeEffect = CameraEffects.Effects.AddShake(context.headbuttChargeShake);
         }
 
         public override void Update() {
@@ -578,7 +627,7 @@ public class PlayerMovement : Player.Component {
         public override void Exit() {
 
             context.headPivot.localPosition = Vector2.zero;
-            CameraEffects.RemoveEffect(shakeEffect);
+            CameraEffects.Effects.RemoveEffect(shakeEffect);
 
             context.headbuttChargePercent = context.stateMachine.stateDuration / context.headbuttMaxChargeDuration;
 

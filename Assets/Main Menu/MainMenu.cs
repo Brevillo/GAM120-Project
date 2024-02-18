@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using OliverBeebe.UnityUtilities.Runtime;
 
 public class MainMenu : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     //transition into test scene
     public void StartGame()
     {
-        SceneManager.LoadScene(startScene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(startScene);
     }
 
 

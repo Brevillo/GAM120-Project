@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StateMachine;
+using OliverBeebe.UnityUtilities.Runtime;
+using OliverBeebe.UnityUtilities.Runtime.Camera;
 
 public class PlayerWhip : Player.Component {
 
@@ -15,7 +16,7 @@ public class PlayerWhip : Player.Component {
 
     [Header("EFfects")]
     [SerializeField] private float whipHitFreezeFrame;
-    [SerializeField] private CameraShakeProfile hitEnemyShake;
+    [SerializeField] private OliverBeebe.UnityUtilities.Runtime.Camera.CameraShakeProfile hitEnemyShake;
     [SerializeField] private SoundEffect whipThrow, whipHit;
     #endregion
 
@@ -245,7 +246,7 @@ public class PlayerWhip : Player.Component {
             base.Enter();
 
             TimeManager.FreezeTime(context.whipHitFreezeFrame, context);
-            CameraEffects.AddShake(context.hitEnemyShake);
+            CameraEffects.Effects.AddShake(context.hitEnemyShake);
             context.whipHit.Play(context);
         }
         
