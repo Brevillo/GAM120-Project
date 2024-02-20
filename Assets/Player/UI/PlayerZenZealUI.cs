@@ -9,8 +9,15 @@ public class PlayerZenZealUI : MonoBehaviour {
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private Image zenImage, zealImage;
     [SerializeField] private Slider halfwayMarker;
-    [SerializeField] private ParticleSystem zealParticles;
+
+    [Header("Zeal Particles")]
+    [SerializeField] private ParticleSystem zealBarParticles;
     [SerializeField] private SmartCurve zealParticlesEmissionRate, zealParticlesSpeed;
+
+    [Header("Zen Particles")]
+    [SerializeField] private ParticleSystem zenBarParticles;
+    [SerializeField] private SmartCurve zenParticlesEmissionRate, zenParticlesSpeed;
+    [SerializeField] private SmartCurve zenBarParticlesEmissionRate, zenBarParticlesSpeed;
 
     private void Awake() {
         playerHealth.OnEnergyUpdated += OnEnergyUpdated;
@@ -27,14 +34,28 @@ public class PlayerZenZealUI : MonoBehaviour {
 
         var rect = (transform as RectTransform).rect;
 
-        var zealParticlesShape = zealParticles.shape;
-        zealParticlesShape.scale = new(rect.width * zeal, rect.height, 1);
-        zealParticlesShape.position = new(Mathf.Lerp(rect.xMax, rect.xMin + rect.width * zen, 0.5f), 0, 0);
+        // zeal particles
 
-        var zealParticlesEmission = zealParticles.emission;
+        var zealParticlesShape = zealBarParticles.shape;
+        zealParticlesShape.scale = new(rect.width * zeal, rect.height, 0);
+        zealParticlesShape.position = new(Mathf.Lerp(rect.xMax - rect.width * zeal, rect.xMax, 0.5f), 0, 0);
+
+        var zealParticlesEmission = zealBarParticles.emission;
         zealParticlesEmission.rateOverTime = zealParticlesEmissionRate.EvaluateAt(zeal);
 
-        var zealParticlesMain = zealParticles.main;
+        var zealParticlesMain = zealBarParticles.main;
         zealParticlesMain.simulationSpeed = zealParticlesSpeed.EvaluateAt(zeal);
+
+        // zen particles
+
+        var zenBarParticlesShape = zenBarParticles.shape;
+        zenBarParticlesShape.scale = new(rect.width * zen, 0, rect.height);
+        zenBarParticlesShape.position = new(Mathf.Lerp(rect.xMin, rect.xMin + rect.width * zen, 0.5f), 0, 0);
+
+        var zenBarParticlesEmission = zenBarParticles.emission;
+        zenBarParticlesEmission.rateOverTime = zenBarParticlesEmissionRate.EvaluateAt(zen);
+
+        var zenBarParticlesMain = zenBarParticles.main;
+        zenBarParticlesMain.simulationSpeed = zenBarParticlesSpeed.EvaluateAt(zen);
     }
 }

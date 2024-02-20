@@ -35,6 +35,8 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private Wave healingBrightnessPulse;
     [SerializeField] private float minHealthBrightness, maxHealthBrightness, healthBrightnessAdjustSpeed;
     [SerializeField] private Image healthbarImage;
+    [SerializeField] private ParticleSystem zenBodyParticles;
+    [SerializeField] private SmartCurve zenBodyParticlesEmissionRate;
 
     private float energy;
     private float healthBrightnessVelocity;
@@ -45,7 +47,7 @@ public class PlayerHealth : Player.Component {
 
     public float Energy {
         get => energy;
-        set {
+        private set {
             energy = value;
             OnEnergyUpdated?.Invoke();
         }
@@ -82,17 +84,25 @@ public class PlayerHealth : Player.Component {
                   _ => 0,
         };
 
-        if (healAmount != 0)
-            Health.Heal(healAmount * Time.deltaTime);
+        bool healing = healAmount != 0 && Health.HealthPercent != 1;
+
+        if (healing) Health.Heal(healAmount * Time.deltaTime);
+
+        // UI shake
 
         uiTransform.localPosition = uiEffects.Update();
+
+        // healing zen body particles
+
+        var zenBodyParticlesEmission = zenBodyParticles.emission;
+        zenBodyParticlesEmission.rateOverTime = healing ? zenBodyParticlesEmissionRate.EvaluateAt(Energy) : 0;
 
         // health bar brightness effects
 
         Color.RGBToHSV(healthbarImage.color, out float healthColorH, out float healthColorS, out float currentHealthColorValue);
 
         float healthColorTargetValue
-            = (healAmount != 0 && Health.HealthPercent != 1 ? healingBrightnessPulse : healthBrightnessPulse).Evaluate()
+            = (healing ? healingBrightnessPulse : healthBrightnessPulse).Evaluate()
             + Mathf.Lerp(minHealthBrightness, maxHealthBrightness, Health.HealthPercent);
 
         currentHealthColorValue = Mathf.SmoothDamp(currentHealthColorValue, healthColorTargetValue, ref healthBrightnessVelocity, healthBrightnessAdjustSpeed);
