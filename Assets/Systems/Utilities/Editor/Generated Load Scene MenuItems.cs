@@ -26,5 +26,11 @@ public static partial class LoadSceneMenuItemsGenerator {
 
         [MenuItem("Load Scene/Particle Maker Scene", priority = 15)]
         private static void LoadScene15() => LoadScene("Assets/Scenes/Testing/Particle Maker Scene.unity");
+
+        [MenuItem("Load Scene/Swamp Scene", priority = 16)]
+        private static void LoadScene16() => LoadScene("Assets/Scenes/Testing/Swamp Scene.unity");
+
+        [MenuItem("Load Scene/Woods Scene", priority = 17)]
+        private static void LoadScene17() => LoadScene("Assets/Scenes/Testing/Woods Scene.unity");
     }
 }
