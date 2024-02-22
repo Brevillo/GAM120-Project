@@ -18,14 +18,16 @@ public static partial class LoadSceneMenuItemsGenerator {
         Dictionary<string, List<SceneAsset>> sceneFolders = new();
         foreach (var (folder, asset) in AssetDatabase.FindAssets("t:scene", new[] { "Assets" })
             .Select(AssetDatabase.GUIDToAssetPath)
-            .Select(path => (folder: Path.GetDirectoryName(path), asset: AssetDatabase.LoadAssetAtPath<SceneAsset>(path))))
+            .Select(path => (
+                folder: Path.GetDirectoryName(path),
+                asset:  AssetDatabase.LoadAssetAtPath<SceneAsset>(path))))
 
             if (sceneFolders.TryGetValue(folder, out var assets)) assets.Add(asset);
             else sceneFolders.Add(folder, new() { asset });
 
         // generate script
 
-        string script = @" /* THIS CODE WAS AUTO GENERATED LOL */
+        string script = @"/* THIS CODE WAS AUTO GENERATED LOL */
 
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -61,15 +63,16 @@ public static partial class LoadSceneMenuItemsGenerator {
 
         // create script file
 
-        string selfDirectory = Path.GetDirectoryName(AssetDatabase.GetAssetPath(
+        string selfDirectory = Path.GetDirectoryName(
             AssetDatabase.FindAssets("t:script")
             .Select(AssetDatabase.GUIDToAssetPath)
-            .Select(AssetDatabase.LoadAssetAtPath<MonoScript>)
-            .First(script => script.GetClass() == typeof(LoadSceneMenuItemsGenerator)))),
-               path = $"{selfDirectory}/{GeneratedScriptName}.cs";
+            .First(path => AssetDatabase.LoadAssetAtPath<MonoScript>(path)
+                .GetClass() == typeof(LoadSceneMenuItemsGenerator)));
 
-        File.WriteAllText(path, script);
-        AssetDatabase.ImportAsset(path);
+        string scriptPath = $"{selfDirectory}/{GeneratedScriptName}.cs";
+
+        File.WriteAllText(scriptPath, script);
+        AssetDatabase.ImportAsset(scriptPath);
         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
         CompilationPipeline.RequestScriptCompilation();
     }
