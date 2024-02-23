@@ -9,8 +9,9 @@ public class PurpleHummingbird : BlueHummingbird
     [SerializeField] private int spawnNumber;
     [SerializeField] private GameObject miniPurplePrefab;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Health.OnDeath += Health_OnDeath;
 
     }
