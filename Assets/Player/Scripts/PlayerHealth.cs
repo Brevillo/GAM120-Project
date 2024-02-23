@@ -66,7 +66,7 @@ public class PlayerHealth : Player.Component {
     #endregion
 
     private void Awake() {
-        Health.OnTakeDamage += DamageEffects;
+        Health.OnTakeDamage += OnDamage;
         Health.OnDeath += OnDeath;
     }
 
@@ -111,6 +111,11 @@ public class PlayerHealth : Player.Component {
 
         healthbarImage.color = Color.HSVToRGB(healthColorH, healthColorS, currentHealthColorValue);
     }   
+
+    private void OnDamage(DamageInfo info) {
+
+        DamageEffects(info);
+    }
 
     private void DamageEffects(DamageInfo info) {
 
