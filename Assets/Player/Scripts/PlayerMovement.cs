@@ -82,6 +82,9 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private SmartCurve         headbuttChargeAnimation;
     [SerializeField] private CameraShakeProfile headbuttChargeShake;
     [SerializeField] private Transform          headPivot;
+    [SerializeField] private ParticleSystem     headbuttZealParticles;
+    [SerializeField] private float              headbuttMinZealParticles;
+    [SerializeField] private float              headbuttMaxZealParticles;
 
     [Header("Taking Knockback")]
     [SerializeField] private float              knockbackFriction;
@@ -94,6 +97,9 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float              airRotateSpeed;
 
     [SerializeField] private Transform          wingPivot;
+    [SerializeField] private Wave               wingFlap;
+    [SerializeField] private Transform          wingCasePivot;
+    [SerializeField] private float              wingCaseOffset;
 
     [SerializeField] private Animator           legsAnimator;
     [SerializeField] private AnimationClip      legsIdleAnimation;
@@ -536,15 +542,14 @@ public class PlayerMovement : Player.Component {
 
         public Flying(PlayerMovement context) : base(context) { }
 
-        private int wingOscillation;
-
         public override void Enter() {
 
             base.Enter();
 
             context.velocity.y = Mathf.Max(context.velocity.y, -context.minStartFlightVel);
 
-            wingOscillation = 1;
+            context.wingFlap.Reset();
+            context.wingCasePivot.localEulerAngles = Vector3.forward * context.wingCaseOffset;
 
             context.flightSound.Play(context);
         }
@@ -553,9 +558,8 @@ public class PlayerMovement : Player.Component {
 
             context.remainingFlightStamina -= Time.deltaTime;
             context.velocity.y = Mathf.MoveTowards(context.velocity.y, context.maxFlightVel, context.flightForce * Time.deltaTime);
-
-            wingOscillation *= -1;
-            context.wingPivot.localEulerAngles = Vector3.forward * (-45 + 15 * wingOscillation);
+ 
+            context.wingPivot.localEulerAngles = Vector3.forward * context.wingFlap.Evaluate();
 
             context.Run();
 
@@ -565,6 +569,7 @@ public class PlayerMovement : Player.Component {
         public override void Exit() {
 
             context.wingPivot.localEulerAngles = Vector3.zero;
+            context.wingCasePivot.localEulerAngles = Vector3.zero;
 
             context.flightSound.Stop(context);
 
@@ -665,6 +670,12 @@ public class PlayerMovement : Player.Component {
 
             context.velocity = direction * distance / duration;
 
+            float energy = context.PlayerHealth.Energy,
+                  zealPercent = Mathf.InverseLerp(0.5f, 0f, energy);
+            var zealParticlesEmmission = context.headbuttZealParticles.emission;
+            zealParticlesEmmission.rateOverTime = Mathf.Lerp(context.headbuttMinZealParticles, context.headbuttMaxZealParticles, zealPercent);
+            if (energy < 0.5f) context.headbuttZealParticles.Play();
+
             context.Attacks.EnterHeadbutt(direction);
         }
 
@@ -675,6 +686,8 @@ public class PlayerMovement : Player.Component {
             if (context.jumpBuffer) context.velocity.x = Mathf.Sign(context.velocity.x) * context.wavedashVelocity;
 
             context.Attacks.ExitHeadbutt();
+
+            context.headbuttZealParticles.Stop();
 
             base.Exit();
         }
