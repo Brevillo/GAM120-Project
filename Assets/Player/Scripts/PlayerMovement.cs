@@ -110,6 +110,8 @@ public class PlayerMovement : Player.Component {
     private bool onGround;                      // is the player on the ground?
     private float groundDist;                   // distance to the ground
 
+    private int crawlingDirection;              // current direction of the players crawling
+
     private float remainingFlightStamina;       // how much flight stamina reminas
     private float spriteRotationVelocity;       // current veloctiy of sprite rotation
 
@@ -226,7 +228,7 @@ public class PlayerMovement : Player.Component {
             currentLegAnimation = newLegAnimation;
         }
 
-        BodyPivot.localScale = new(Facing, 1, 1);
+        BodyPivot.localScale = new(Facing * crawlingDirection, 1, 1);
     }
 
     #endregion
@@ -234,6 +236,8 @@ public class PlayerMovement : Player.Component {
     #region Helper Functions
 
     private void Run(float? customSpeed = null, bool onGround = false) {
+
+        if (Input.Movement.Down) crawlingDirection = (int)Mathf.Sign(Vector2.Dot(Vector2.right, transform.right));
 
         var groundRotation = Quaternion.FromToRotation(groundNormal, Vector2.up);
 
@@ -247,7 +251,7 @@ public class PlayerMovement : Player.Component {
                 speed:  Mathf.Max(customSpeed ?? runSpeed, Mathf.Abs(velocity.x)),
                 vel:    velocity);
 
-        vel.x = Mathf.MoveTowards(vel.x, speed * InputDirection.x, accel * Time.deltaTime);
+        vel.x = Mathf.MoveTowards(vel.x, speed * InputDirection.x * crawlingDirection, accel * Time.deltaTime);
 
         velocity = onGround
             ? Quaternion.Inverse(groundRotation) * new Vector2(vel.x, -groundGravity)
