@@ -23,12 +23,14 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private CanvasGroup deathCanvasGroup;
     [SerializeField] private SmartCurve deathFadeOut, deathFadeIn;
     [SerializeField] private float deathGravity, deathFriction;
+    [SerializeField] private SoundEffect deathSound;
 
     [Header("Damage")]
     [SerializeField] private float damageTimeFreezeDuration;
     [SerializeField] private CameraShakeProfile damageScreenShake, damageUIShake;
     [SerializeField] private SmartCurve hurtScreenDarken;
     [SerializeField] private RectTransform uiTransform;
+    [SerializeField] private SoundEffect playerHit;
 
     [Header("Healing")]
     [SerializeField] private Wave healthBrightnessPulse;
@@ -130,6 +132,8 @@ public class PlayerHealth : Player.Component {
 
         StartCoroutine(DeathShake());
         StartCoroutine(DeathFall());
+
+        if (deathSound != null) deathSound.Play(this);
 
         IEnumerator DeathFall() {
 
