@@ -22,7 +22,10 @@ public class Player : MonoBehaviour {
     [Header("Helper")]
     [SerializeField] private Transform bodyPivot;
 
-    private int facing; // current direction being faced, 1 = right, -1 = left
+    private int facing;             // current direction being faced, 1 = right, -1 = left
+    private int crawlOrientation;   // current orientation of the player, 1 if right side up, -1 if upside down
+
+    private bool xInputPrevious;    // was x movement input active last frame?
 
     private Vector2Int inputDirection => new(
         Mathf.RoundToInt(inputManager.Movement.Vector.x),
@@ -39,13 +42,20 @@ public class Player : MonoBehaviour {
         playerHealth.enabled    = !health    ?? playerHealth.enabled;
     }
 
+    private void ResetCrawlOrientation() {
+        crawlOrientation = (int)Mathf.Sign(Vector2.Dot(Vector2.right, transform.right));
+    }
+
     private void Awake() {
         facing = 1;
+        crawlOrientation = 1;
     }
 
     private void Update() {
 
-        if (inputDirection.x != 0) facing = inputDirection.x;
+        bool xInput = inputDirection.x != 0;
+        if (!xInput) ResetCrawlOrientation();
+        if (xInput) facing = inputDirection.x * crawlOrientation;
 
         // debug helpers
 
@@ -66,22 +76,25 @@ public class Player : MonoBehaviour {
         [SerializeField] private Player player;
 
         // references
-        protected Player            Player          => player;
-        protected PlayerInput       Input           => player.  inputManager;
-        protected PlayerMovement    Movement        => player.  playerMovement;
-        protected PlayerWhip        Whip            => player.  playerWhip;
-        protected PlayerAttacks     Attacks         => player.  playerAttacks;
-        protected PlayerHealth      PlayerHealth    => player.  playerHealth;
+        protected Player            Player              => player;
+        protected PlayerInput       Input               => player.  inputManager;
+        protected PlayerMovement    Movement            => player.  playerMovement;
+        protected PlayerWhip        Whip                => player.  playerWhip;
+        protected PlayerAttacks     Attacks             => player.  playerAttacks;
+        protected PlayerHealth      PlayerHealth        => player.  playerHealth;
 
-        protected EntityHealth      Health          => player.  health;
+        protected EntityHealth      Health              => player.  health;
 
-        protected Rigidbody2D       Rigidbody       => player.  rigidbody;
-        protected Collider2D        Collider        => player.  collider;
+        protected Rigidbody2D       Rigidbody           => player.  rigidbody;
+        protected Collider2D        Collider            => player.  collider;
 
-        protected Transform         BodyPivot       => player.  bodyPivot;
+        protected Transform         BodyPivot           => player.  bodyPivot;
 
         // helper properties
-        protected Vector2Int        InputDirection  => player.inputDirection;
-        protected int               Facing          => player.facing;
+        protected Vector2Int        InputDirection      => player.inputDirection;
+        protected int               Facing              => player.facing;
+        protected int               CrawlOrientation     => player.crawlOrientation;
+
+        protected void ResetCrawlOrientation() => player.ResetCrawlOrientation();
     }
 }

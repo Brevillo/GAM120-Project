@@ -245,7 +245,7 @@ public class PlayerAttacks : Player.Component {
 
             base.Enter();
 
-            Vector2 swingDirection = context.InputDirection;
+            Vector2 swingDirection = context.InputDirection * new Vector2(context.Facing, context.CrawlOrientation);
 
             // no downwards swings when grounded
             if (context.Movement.OnGround()) swingDirection.y = Mathf.Max(0, swingDirection.y);
