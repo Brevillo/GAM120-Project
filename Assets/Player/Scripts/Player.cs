@@ -22,10 +22,10 @@ public class Player : MonoBehaviour {
     [Header("Helper")]
     [SerializeField] private Transform bodyPivot;
 
+    public PlayerInput Input => inputManager;
+
     private int facing;             // current direction being faced, 1 = right, -1 = left
     private int crawlOrientation;   // current orientation of the player, 1 if right side up, -1 if upside down
-
-    private bool xInputPrevious;    // was x movement input active last frame?
 
     private Vector2Int inputDirection => new(
         Mathf.RoundToInt(inputManager.Movement.Vector.x),
