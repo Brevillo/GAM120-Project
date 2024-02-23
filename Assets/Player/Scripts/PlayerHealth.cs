@@ -30,6 +30,7 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private CameraShakeProfile damageScreenShake, damageUIShake;
     [SerializeField] private SmartCurve hurtScreenDarken;
     [SerializeField] private RectTransform uiTransform;
+    [SerializeField] private SoundEffect playerHit;
 
     [Header("Healing")]
     [SerializeField] private Wave healthBrightnessPulse;
