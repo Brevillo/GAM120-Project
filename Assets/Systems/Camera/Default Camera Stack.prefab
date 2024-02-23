@@ -3924,7 +3924,7 @@ ParticleSystem:
     colliderQueryMode: 0
     radiusScale: 1
     primitives:
-    - {fileID: 0}
+    - {fileID: 2477992490307820090}
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -5002,7 +5002,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 841524504539073168, guid: 44eaa527eb8f041a4affee38eef14256, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2934681781097114235}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9138634524693733585, guid: 44eaa527eb8f041a4affee38eef14256, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2477992490307820090}
   m_SourcePrefab: {fileID: 100100000, guid: 44eaa527eb8f041a4affee38eef14256, type: 3}
 --- !u!4 &587589037036038519 stripped
 Transform:
@@ -5014,6 +5017,32 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 7165306066998528112, guid: 44eaa527eb8f041a4affee38eef14256, type: 3}
   m_PrefabInstance: {fileID: 255081241838412775}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9032189673230385974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9138634524693733585, guid: 44eaa527eb8f041a4affee38eef14256, type: 3}
+  m_PrefabInstance: {fileID: 255081241838412775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2477992490307820090
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032189673230385974}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 50
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &706059767831320275
 PrefabInstance:
   m_ObjectHideFlags: 0
