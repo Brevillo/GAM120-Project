@@ -50,13 +50,16 @@ public class MusicManager : GameManager.Manager {
         }
     }
 
+    protected override void Start() {
+
+        foreach (var setting in new[] { masterVolume, musicVolume, soundVolume })
+            setting.SetValue(setting.floatValue);
+    }
+
     protected override void RuntimeInitializeOnLoad() {
 
         void SetVolume(string name, float volume) => mixer.SetFloat(name, volume == 0 ? -80f : Mathf.Log10(volume) * 70 + 20);
-        void InitMixerGroup(Setting setting, string name) {
-            SetVolume(name, setting.floatValue);
-            setting.onValueChanged += () => SetVolume(name, setting.floatValue);
-        }
+        void InitMixerGroup(Setting setting, string name) => setting.onValueChanged += () => SetVolume(name, setting.floatValue);
 
         InitMixerGroup(masterVolume, masterVolumeKey);
         InitMixerGroup(musicVolume, musicVolumeKey);

@@ -7,13 +7,8 @@ public class MusicInstance : MonoBehaviour {
     [SerializeField] private AnimationCurve fadeCurve;
     [SerializeField] private float fadeDuration;
     [SerializeField] private AudioSource battleMusicSource, passiveMusicSource;
-    [SerializeField] private MusicManager manager;
-
-    private MusicManager.SceneMusic sceneMusic;
 
     public void Setup(MusicManager.SceneMusic sceneMusic) {
-
-        this.sceneMusic = sceneMusic;
 
         battleMusicSource.clip = sceneMusic.battleMusic;
         passiveMusicSource.clip = sceneMusic.passiveMusic;
@@ -32,14 +27,14 @@ public class MusicInstance : MonoBehaviour {
 
     private (AudioSource source, float volume) battleMusicInfo, passiveMusicInfo;
 
-    public void StartCombat() => FadeBetween(passiveMusicInfo, battleMusicInfo);
+    public void StartCombat() => FadeFromTo(passiveMusicInfo, battleMusicInfo);
 
-    public void StopCombat() => FadeBetween(battleMusicInfo, passiveMusicInfo);
+    public void StopCombat() => FadeFromTo(battleMusicInfo, passiveMusicInfo);
 
     private void FadeTo((AudioSource source, float volume) fade, float targetVolume) {
 
-        StartCoroutine(FadeIn());
-        IEnumerator FadeIn() {
+        StartCoroutine(FadeTo());
+        IEnumerator FadeTo() {
 
             float ogVolume = fade.source.volume / fade.volume;
 
@@ -54,10 +49,10 @@ public class MusicInstance : MonoBehaviour {
         }
     }
 
-    private void FadeBetween((AudioSource source, float volume) fadeOut, (AudioSource source, float volume) fadeIn) {
+    private void FadeFromTo((AudioSource source, float volume) fadeOut, (AudioSource source, float volume) fadeIn) {
 
-        StartCoroutine(Fade());
-        IEnumerator Fade() {
+        StartCoroutine(FadeFromTo());
+        IEnumerator FadeFromTo() {
 
             for (float timer = 0; timer < fadeDuration; timer += Time.deltaTime) {
 
