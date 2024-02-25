@@ -146,15 +146,13 @@ MonoBehaviour:
     timeScale: 0.25
     valueScale: 3
     timer: 0
-  minIdleTime: 1
-  maxIdleTime: 3
-  airFriction: 100
+  minIdleTime: 0.5
+  maxIdleTime: 2
+  airFriction: 200
   nectarPrefab: {fileID: 1893020471157351244, guid: f8407c5b7c6829a429fc0793ad40cb56, type: 3}
   moveSpeed: 30
   minMoveDist: 5
   maxMoveDist: 25
-  minMoves: 1
-  maxMoves: 3
   leftRightCycleCount: 2
   ceilingDetectDist: 5
   ceilingStopDist: 3

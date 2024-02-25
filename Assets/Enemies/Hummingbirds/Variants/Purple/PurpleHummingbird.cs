@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PurpleHummingbird : BlueHummingbird
+public class PurpleHummingbird : RedHummingbird
 {
     [Header("Babies")]
     [SerializeField] private int spawnNumber;

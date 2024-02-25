@@ -7166,7 +7166,7 @@ MonoBehaviour:
   eatSound: {fileID: 11400000, guid: 7d51ae2d0043846e9b02cd394934b67c, type: 2}
   jumpHeight: 4.5
   minJumpTime: 0.07
-  jumpGravity: 80
+  jumpGravity: 150
   fallGravity: 80
   peakVelThreshold: 7
   peakGravity: 35
@@ -8508,11 +8508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969658750917228489, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2969658750917228489, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3300776092445419742, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8708,15 +8708,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8977736903571519248, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977736903571519248, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977736903571519248, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9009339991016979525, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.y

@@ -172,15 +172,15 @@ MonoBehaviour:
   damage: 1
   attackKnockback: 5
   damageFlashDur: 0.1
-  minIdleTime: 1
-  maxIdleTime: 2
-  airFriction: 100
+  minIdleTime: 0.5
+  maxIdleTime: 1
+  airFriction: 300
   wanderSpeed: 30
   minWanderDist: 1
   maxWanderDist: 3
   minWanderMoves: 2
-  maxWanderMoves: 5
+  maxWanderMoves: 4
   animation: {fileID: 3881065415994048970}
-  diveSpeed: 50
-  maxDiveDist: 100
+  diveSpeed: 30
+  maxDiveDist: 50
   playerPassDistance: 2

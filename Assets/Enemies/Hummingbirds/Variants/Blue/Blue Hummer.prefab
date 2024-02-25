@@ -29,6 +29,14 @@ PrefabInstance:
       value: Blue Hummer
       objectReference: {fileID: 0}
     - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -169,12 +177,12 @@ MonoBehaviour:
     timeScale: 0.25
     valueScale: 3
     timer: 0
-  damage: 1
+  damage: 0.5
   attackKnockback: 5
   damageFlashDur: 0.1
   minIdleTime: 0.5
   maxIdleTime: 1
-  airFriction: 100
+  airFriction: 200
   wanderSpeed: 50
   minWanderDist: 1
   maxWanderDist: 2
@@ -182,5 +190,6 @@ MonoBehaviour:
   maxWanderMoves: 1
   animation: {fileID: 2509522525153332934}
   attackSpeed: 70
+  attackInitialBoost: 15
   attackAcceleration: 50
-  attackDuration: 1.5
+  attackDuration: 2.5

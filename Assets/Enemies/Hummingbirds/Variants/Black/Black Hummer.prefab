@@ -17,6 +17,14 @@ PrefabInstance:
       value: Black Hummer
       objectReference: {fileID: 0}
     - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980179780487237746, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -149,18 +157,18 @@ MonoBehaviour:
   damage: 1.5
   attackKnockback: 5
   damageFlashDur: 0.1
-  minIdleTime: 0.5
-  maxIdleTime: 2
-  airFriction: 100
+  minIdleTime: 0
+  maxIdleTime: 1
+  airFriction: 200
   wanderSpeed: 0
   minWanderDist: 0
   maxWanderDist: 0
   minWanderMoves: 0
   maxWanderMoves: 0
   animation: {fileID: 5122389749547726978}
-  diveSpeed: 50
-  maxDiveDist: 100
-  playerPassDistance: 2
+  diveSpeed: 40
+  maxDiveDist: 7.5
+  playerPassDistance: 1
 --- !u!114 &5122389749547726978 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6989869266368052441, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}

@@ -15,7 +15,6 @@ public class YellowHummingbird : GenericEnemyBehaviour
     [Header("Moving")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float minMoveDist, maxMoveDist;
-    [SerializeField] private int minMoves, maxMoves;
     [SerializeField] private int leftRightCycleCount;
 
     [Header("Return to Ceiling")]
@@ -38,21 +37,12 @@ public class YellowHummingbird : GenericEnemyBehaviour
 
             //The bird casts a line from it's current position to the ceiling indefinitely 
             RaycastHit2D ceilingHit = Physics2D.Raycast(Position, Vector2.up, ceilingDetectDist, GameInfo.GroundMask);
-            if (!ceilingHit) {
-                yield return ReturnToCeiling();
-            }
-
+            if (!ceilingHit) yield return ReturnToCeiling();
+            
             yield return Idle();
 
-            float moves = Random.Range(minMoves, maxMoves);
-            
-            while (moves > 0) {
-
-                moves--;
-                DropNectar();
-                yield return HorizontalMove();
-                yield return Idle();
-            }
+            DropNectar();
+            yield return HorizontalMove();
         }
     }
 

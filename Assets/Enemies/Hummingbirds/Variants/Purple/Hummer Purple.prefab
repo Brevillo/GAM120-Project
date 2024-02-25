@@ -163,16 +163,16 @@ MonoBehaviour:
   damageFlashDur: 0.1
   minIdleTime: 1
   maxIdleTime: 2
-  airFriction: 100
+  airFriction: 200
   wanderSpeed: 30
   minWanderDist: 1
   maxWanderDist: 3
   minWanderMoves: 2
-  maxWanderMoves: 5
+  maxWanderMoves: 4
   animation: {fileID: 4925320726415762315}
-  attackSpeed: 70
-  attackAcceleration: 50
-  attackDuration: 2
+  diveSpeed: 20
+  maxDiveDist: 30
+  playerPassDistance: 2
   spawnNumber: 3
   miniPurplePrefab: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
 --- !u!114 &4925320726415762315 stripped
