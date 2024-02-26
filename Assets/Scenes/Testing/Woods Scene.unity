@@ -353,6 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 358174009}
+  - component: {fileID: 358174010}
   m_Layer: 0
   m_Name: Environment Art
   m_TagString: Untagged
@@ -381,6 +382,18 @@ Transform:
   - {fileID: 1499870164}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358174010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358174008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee221de4d89084ebd8d27ee339d91a4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &484324550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4437162163641956168, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
@@ -8160,6 +8173,10 @@ PrefabInstance:
       propertyPath: m_Creator
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1430572735817300985, guid: 55545ce75012d4223b68b04e63702bb8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5594447203660687875, guid: 55545ce75012d4223b68b04e63702bb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -8356,6 +8373,10 @@ PrefabInstance:
     - target: {fileID: 184585041451094727, guid: 55545ce75012d4223b68b04e63702bb8, type: 3}
       propertyPath: m_Spline.m_ControlPoints.Array.data[3].rightTangent.y
       value: -0.00044631958
+      objectReference: {fileID: 0}
+    - target: {fileID: 1430572735817300985, guid: 55545ce75012d4223b68b04e63702bb8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5594447203660687875, guid: 55545ce75012d4223b68b04e63702bb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8918,6 +8939,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medium Mushroom Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 5101966258891391455, guid: 4af1736753b7e4305924e7bb985ae508, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8651849297614728319, guid: 4af1736753b7e4305924e7bb985ae508, type: 3}
       propertyPath: m_Creator
       value: 
@@ -9078,7 +9103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4909888576438053171, guid: ef16f7c96e4c54ad4b7640c70862ed2b, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5722367383382338685, guid: ef16f7c96e4c54ad4b7640c70862ed2b, type: 3}
       propertyPath: m_Creator
@@ -9101,6 +9126,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 358174009}
     m_Modifications:
+    - target: {fileID: 39708003852855814, guid: a3cb274d13f1e4875b27e5c367a8cedf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1685126688721164017, guid: a3cb274d13f1e4875b27e5c367a8cedf, type: 3}
       propertyPath: m_Name
       value: Big mushroom platform
