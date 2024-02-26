@@ -25,4 +25,19 @@ public class Hazard : MonoBehaviour {
 
         collision.entity.TakeDamage(new(damage, dirToEntity, Vector2.one * knockbackPercent, respawn, respawnPoint.position));
     }
+
+    #region Editor
+    #if UNITY_EDITOR
+
+    [CustomEditor(typeof(Hazard))]
+    private class HazardEditor : Editor {
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+        }
+    }
+
+    #endif
+    #endregion
 }
