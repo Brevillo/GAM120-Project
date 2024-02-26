@@ -23,7 +23,7 @@ public class EntityHealthCollisionTrigger : MonoBehaviour {
         set => ((_enabled = collider.enabled = value) ? OnEnable : OnDisable).Invoke();
     }
 
-    [SerializeField] private bool _enabled;
+    [SerializeField] private bool _enabled = true;
 
     private new Collider2D collider;
 
@@ -31,20 +31,22 @@ public class EntityHealthCollisionTrigger : MonoBehaviour {
         collider = GetComponent<Collider2D>();
     }
 
-    public UnityEvent<EntityHealthCollision> OnEntityCollision;
-    public UnityEvent<Collider2D> OnNonEntityCollision;
+    public UnityEvent<EntityHealthCollision> OnEntityEnter, OnEntityStay;
+    public UnityEvent<Collider2D> OnNonEntityEnter, OnNonEntityStay;
     public UnityEvent OnEnable, OnDisable;
 
-    private void OnTriggerEnter2D(Collider2D collision)    => CheckCollisionForEntity(collision);
-    private void OnCollisionEnter2D(Collision2D collision) => CheckCollisionForEntity(collision.collider);
+    private void OnTriggerEnter2D(Collider2D collider)      => CheckCollisionForEntity(collider,            OnEntityEnter,  OnNonEntityEnter);
+    private void OnCollisionEnter2D(Collision2D collision)  => CheckCollisionForEntity(collision.collider,  OnEntityEnter,  OnNonEntityEnter);
+    private void OnTriggerStay2D(Collider2D collider)       => CheckCollisionForEntity(collider,            OnEntityStay,   OnNonEntityStay);
+    private void OnCollisionStay2D(Collision2D collision)   => CheckCollisionForEntity(collision.collider,  OnEntityStay,   OnNonEntityStay);
 
-    private void CheckCollisionForEntity(Collider2D collider) {
+    private void CheckCollisionForEntity(Collider2D collider, UnityEvent<EntityHealthCollision> onEntity, UnityEvent<Collider2D> onNonEntity) {
 
         if (!enabled) return;
 
         if (collider.TryGetComponent(out EntityHealth entity))
-            OnEntityCollision.Invoke(new(entity, collider));
+            onEntity.Invoke(new(entity, collider));
 
-        else OnNonEntityCollision.Invoke(collider);
+        else onNonEntity.Invoke(collider);
     }
 }

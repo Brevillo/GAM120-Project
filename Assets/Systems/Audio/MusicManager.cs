@@ -44,10 +44,10 @@ public class MusicManager : GameManager.Manager {
 
     protected override void OnSceneChange(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to) {
 
-        if (sceneMusic.TryFind(sceneMusic => sceneMusic.scene.name == to.name, out var found)) {
-            instance = Instantiate(musicInstancePrefab);
+        instance = Instantiate(musicInstancePrefab);
+
+        if (sceneMusic.TryFind(sceneMusic => sceneMusic.scene.name == to.name, out var found))
             instance.Setup(found);
-        }
     }
 
     protected override void Start() {

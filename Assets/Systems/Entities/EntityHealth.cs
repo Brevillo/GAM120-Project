@@ -8,11 +8,23 @@ public readonly struct DamageInfo {
     public readonly float damageAmount;
     public readonly Vector2 direction;
     public readonly Vector2 knockbackPercent;
+    public readonly bool forceKill;
+    public readonly Vector2 respawnPosition;
 
     public DamageInfo(float damageAmount, Vector2 direction, Vector2 knockbackPercent) {
-        this.damageAmount = damageAmount;
-        this.direction = direction;
-        this.knockbackPercent = knockbackPercent;
+        this.damageAmount       = damageAmount;
+        this.direction          = direction;
+        this.knockbackPercent   = knockbackPercent;
+        this.forceKill          = false;
+        this.respawnPosition    = Vector2.zero;
+    }
+
+    public DamageInfo(float damageAmount, Vector2 direction, Vector2 knockbackPercent, bool forceKill, Vector2 respawnPosition) {
+        this.damageAmount       = damageAmount;
+        this.direction          = direction;
+        this.knockbackPercent   = knockbackPercent;
+        this.forceKill          = forceKill;
+        this.respawnPosition    = respawnPosition;
     }
 }
 
@@ -44,6 +56,7 @@ public class EntityHealth : MonoBehaviour {
     public bool Dead;
 
     public event System.Action<DamageInfo> OnTakeDamage;
+    public event System.Action<DamageInfo> OnForceKill;
     public event System.Action<DamageInfo> OnDeath;
     public event System.Action<float> OnHeal;
     public event System.Action OnHealthUpdated;
@@ -68,6 +81,8 @@ public class EntityHealth : MonoBehaviour {
             Dead = true;
             OnDeath?.Invoke(info);
         }
+
+        else if (info.forceKill) OnForceKill?.Invoke(info);
 
         else OnTakeDamage?.Invoke(info);
     }

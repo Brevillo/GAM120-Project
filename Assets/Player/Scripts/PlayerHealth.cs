@@ -25,6 +25,10 @@ public class PlayerHealth : Player.Component {
     [SerializeField] private float deathGravity, deathFriction;
     [SerializeField] private SoundEffect deathSound;
 
+    [Header("Hazard Respawn")]
+    [SerializeField] private SmartCurve respawnFadeOut;
+    [SerializeField] private SmartCurve respawnFadeIn;
+
     [Header("Damage")]
     [SerializeField] private float damageTimeFreezeDuration;
     [SerializeField] private CameraShakeProfile damageScreenShake, damageUIShake;
@@ -67,7 +71,8 @@ public class PlayerHealth : Player.Component {
 
     private void Awake() {
         Health.OnTakeDamage += OnDamage;
-        Health.OnDeath += OnDeath;
+        Health.OnDeath      += OnDeath;
+        Health.OnForceKill  += OnRespawn;
     }
 
     private void Start() {
@@ -111,6 +116,28 @@ public class PlayerHealth : Player.Component {
 
         healthbarImage.color = Color.HSVToRGB(healthColorH, healthColorS, currentHealthColorValue);
     }   
+
+    private void OnRespawn(DamageInfo info) {
+
+        StartCoroutine(Respawn());
+        IEnumerator Respawn() {
+
+            Player.Freeze(input: true, health: true);
+
+            yield return CameraEffects.BlackFade(respawnFadeOut);
+
+            Vector2 position = info.respawnPosition;
+
+            var groundHit = Physics2D.Raycast(position, Vector2.down, Mathf.Infinity, GameInfo.GroundMask);
+            if (groundHit) position.y = groundHit.point.y + Collider.bounds.extents.y;
+
+            Rigidbody.position = position;
+
+            yield return CameraEffects.BlackFade(respawnFadeIn);
+
+            Player.Freeze(input: false, health: false);
+        }
+    }
 
     private void OnDamage(DamageInfo info) {
 

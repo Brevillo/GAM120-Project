@@ -43,11 +43,11 @@ public class PlayerAttacks : Player.Component {
 
         InitializeStateMachine();
 
-        headbuttTrigger.OnEntityCollision.AddListener(OnHeadbuttEntityCollision);
-        headbuttTrigger.OnNonEntityCollision.AddListener(OnHeadbuttNonEntityCollision);
+        headbuttTrigger.OnEntityEnter.AddListener(OnHeadbuttEntityCollision);
+        headbuttTrigger.OnNonEntityEnter.AddListener(OnHeadbuttNonEntityCollision);
 
-        swingTrigger.OnEntityCollision.AddListener(OnSwingEntityCollision);
-        swingTrigger.OnNonEntityCollision.AddListener(OnSwingNonEntityCollision);
+        swingTrigger.OnEntityEnter.AddListener(OnSwingEntityCollision);
+        swingTrigger.OnNonEntityEnter.AddListener(OnSwingNonEntityCollision);
     }
 
     private void Start() {
