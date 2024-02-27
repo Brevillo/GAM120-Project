@@ -5183,7 +5183,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1001 &8782892966348474875
+--- !u!1001 &8722772802439997512
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5191,67 +5191,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 32336050702936803, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
-      propertyPath: m_Name
-      value: ForegroundPlatfornm(Blurred)
+    - target: {fileID: 1962595327894374233, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
+      propertyPath: m_Creator
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.552295
+      value: 0.7318065
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.8349948
+      value: 3.2471492
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2179944964448325575, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+    - target: {fileID: 4350233484710903845, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4570348358843553675, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
-      propertyPath: m_LocalAABB.m_Center.y
-      value: -2.1847074
-      objectReference: {fileID: 0}
-    - target: {fileID: 4570348358843553675, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
-      propertyPath: m_LocalAABB.m_Extent.y
-      value: 3.2204397
-      objectReference: {fileID: 0}
-    - target: {fileID: 7562935898980822840, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
-      propertyPath: m_Creator
-      value: 
+    - target: {fileID: 8097475356234777696, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
+      propertyPath: m_Name
+      value: Medium Mushroom Wall Platform
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c587d05e967f849ff85cb1248f7fbbd1, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: cf4738c66719649a785be6dd9ea1c2e4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5259,4 +5251,4 @@ SceneRoots:
   - {fileID: 1727276633}
   - {fileID: 1547662805}
   - {fileID: 2015753121}
-  - {fileID: 8782892966348474875}
+  - {fileID: 8722772802439997512}
