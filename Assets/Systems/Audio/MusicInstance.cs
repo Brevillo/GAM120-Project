@@ -6,32 +6,36 @@ public class MusicInstance : MonoBehaviour {
 
     [SerializeField] private AnimationCurve fadeCurve;
     [SerializeField] private float fadeDuration;
-    [SerializeField] private AudioSource battleMusicSource, passiveMusicSource;
+    [SerializeField] private MusicInfo battleMusicInfo, passiveMusicInfo;
 
     public void Setup(MusicManager.SceneMusic sceneMusic) {
 
-        battleMusicSource.clip = sceneMusic.battleMusic;
-        passiveMusicSource.clip = sceneMusic.passiveMusic;
+        battleMusicInfo.source.clip = sceneMusic.battleMusic;
+        passiveMusicInfo.source.clip = sceneMusic.passiveMusic;
 
-        passiveMusicSource.Play();
-        battleMusicSource.Play();
+        passiveMusicInfo.source.Play();
+        battleMusicInfo.source.Play();
 
-        battleMusicInfo = (battleMusicSource, sceneMusic.battleMusicVolume);
-        passiveMusicInfo = (passiveMusicSource, sceneMusic.passiveMusicVolume);
+        battleMusicInfo.volume = sceneMusic.battleMusicVolume;
+        passiveMusicInfo.volume = sceneMusic.passiveMusicVolume;
 
-        battleMusicSource.volume = 0;
-        passiveMusicSource.volume = 0;
+        battleMusicInfo.volume = 0;
+        passiveMusicInfo.volume = 0;
 
         FadeTo(passiveMusicInfo, 1);
     }
 
-    private (AudioSource source, float volume) battleMusicInfo, passiveMusicInfo;
+    [System.Serializable]
+    private class MusicInfo {
+        public AudioSource source;
+        public float volume;
+    }
 
     public void StartCombat() => FadeFromTo(passiveMusicInfo, battleMusicInfo);
 
     public void StopCombat() => FadeFromTo(battleMusicInfo, passiveMusicInfo);
 
-    private void FadeTo((AudioSource source, float volume) fade, float targetVolume) {
+    private void FadeTo(MusicInfo fade, float targetVolume) {
 
         StartCoroutine(FadeTo());
         IEnumerator FadeTo() {
@@ -49,7 +53,7 @@ public class MusicInstance : MonoBehaviour {
         }
     }
 
-    private void FadeFromTo((AudioSource source, float volume) fadeOut, (AudioSource source, float volume) fadeIn) {
+    private void FadeFromTo(MusicInfo fadeOut, MusicInfo fadeIn) {
 
         StartCoroutine(FadeFromTo());
         IEnumerator FadeFromTo() {
