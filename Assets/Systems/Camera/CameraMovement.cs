@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour {
     public static void CombatLock(CombatBound bound) => I.combatBound = bound;
     public static void CombatUnlock() => I.combatBound = null;
 
-    private CombatBound combatBound;
+    private CameraBound combatBound, roomBound;
     private Vector2 velocity;
 
     private void LateUpdate() {
@@ -29,10 +29,10 @@ public class CameraMovement : MonoBehaviour {
         Vector2 focus = target.position,
                 size  = defaultCameraSize;
 
-        CameraBound bound
-            = combatBound != null                                 ? combatBound
-            : RoomBound.Contains(focus).TryIndex(0, out var room) ? room
-            : null;
+        if (RoomBound.Contains(focus).TryIndex(0, out var room))
+            roomBound = room;
+
+        CameraBound bound = combatBound != null ? combatBound : roomBound;
 
         if (bound != null) {
             focus = bound.Clamp(focus);
