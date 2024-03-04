@@ -84,7 +84,7 @@ public abstract class CameraBound : MonoBehaviour {
 #if UNITY_EDITOR
 
     [CustomEditor(typeof(CameraBound), true), CanEditMultipleObjects]
-    private class CameraBoundsEditor : Editor {
+    protected class CameraBoundEditor : Editor {
 
         private const float handleSize = 2f;
 

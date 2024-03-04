@@ -6,7 +6,7 @@ using OliverUtils;
 public class CameraMovement : MonoBehaviour {
 
     [SerializeField] private Transform target;
-    [SerializeField] private float smoothSpeed;
+    [SerializeField] private float positionSpeed, sizeSpeed;
     [SerializeField] private Camera cam;
 
     [SerializeField] private Vector2 defaultCameraSize;
@@ -22,7 +22,8 @@ public class CameraMovement : MonoBehaviour {
     public static void CombatUnlock() => I.combatBound = null;
 
     private CameraBound combatBound, roomBound;
-    private Vector2 velocity;
+    private Vector2 positionVelocity;
+    private float sizeVelocity;
 
     private void LateUpdate() {
 
@@ -40,9 +41,10 @@ public class CameraMovement : MonoBehaviour {
         }
 
         // move towards focus point
-        transform.position = Vector2.SmoothDamp(transform.position, focus, ref velocity, smoothSpeed);
+        transform.position = Vector2.SmoothDamp(transform.position, focus, ref positionVelocity, positionSpeed);
 
         // move backwards based on camera size and field of view
-        cam.transform.localPosition = Vector3.back * size.y / 2f * Mathf.Tan((90f - cam.fieldOfView / 2f) * Mathf.Deg2Rad);
+        float targetSize = -size.y / 2f * Mathf.Tan((90f - cam.fieldOfView / 2f) * Mathf.Deg2Rad);
+        cam.transform.localPosition = Vector3.forward * Mathf.SmoothDamp(cam.transform.localPosition.z, targetSize, ref sizeVelocity, sizeSpeed);
     }
 }
