@@ -12,6 +12,15 @@ public class MultiSpriteOutline : MonoBehaviour {
 
     private SpriteRenderer[] outlines;
 
+    private readonly int outlineWidthID = Shader.PropertyToID("_Outline_Size");
+
+    public float Size {
+        set  {
+            foreach (var rend in outlines)
+                rend.material.SetFloat(outlineWidthID, value);
+        }
+    }
+
     private void GatherSpriteRenderers() {
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>(); 
     }

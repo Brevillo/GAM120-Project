@@ -35,7 +35,7 @@ public readonly struct ParabolicPath {
     public float GetVelocity(float x) => 2f * a * x * speed + b * speed;
 
     /// <summary> Is the parabolic path finished at x? </summary>
-    public bool IsFinished(float x) => x >= end.x;
+    public bool IsFinished(float x) => Mathf.Abs(start.x - x) >=  Mathf.Abs(end.x - start.x);
 
     const float delta = 0.01f;
     private float Y(float x) => a * x * x + b * x + c;
