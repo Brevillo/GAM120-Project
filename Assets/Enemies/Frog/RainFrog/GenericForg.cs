@@ -66,6 +66,7 @@ public class GenericForg : GenericEnemyBehaviour
             damaging = true;
             yield return Jumping();
             damaging = false;
+
         }
 
     }
@@ -99,12 +100,13 @@ public class GenericForg : GenericEnemyBehaviour
         Transform lastJump = remainingJumpPoints[jumpIndex];
         remainingJumpPoints.RemoveAt(jumpIndex);
 
-        ParabolicPath jumpPath = new (Position, lastJump.position, -gravity, horizontalSpeed);
+        float speed = horizontalSpeed * Mathf.Sign(lastJump.position.x - Position.x);
+        ParabolicPath jumpPath = new (Position, lastJump.position, -gravity, speed);
 
         while (!jumpPath.IsFinished(Position.x))
         {
             jumpPath.RenderPath(Color.red);
-            Velocity = new Vector2(horizontalSpeed, jumpPath.GetVelocity(Position.x));
+            Velocity = new Vector2(speed, jumpPath.GetVelocity(Position.x));
             yield return null;
         }
         Velocity = Vector2.zero;   
