@@ -7694,7 +7694,7 @@ MonoBehaviour:
     timer: 0
   deathGravity: 40
   deathFriction: 20
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 11400000, guid: 57ae85032d9034b44acc0d876cf6e993, type: 2}
   respawnFadeOut:
     curve:
       serializedVersion: 2
@@ -8674,7 +8674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4333568548847205136, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_text
-      value: 50%
+      value: 0%
       objectReference: {fileID: 0}
     - target: {fileID: 4575455867359215901, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8734,7 +8734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6613383555471727913, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_Value
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6924089917231249863, guid: 4b9b1ce8958c94d40839393789c1d5fb, type: 3}
       propertyPath: m_AnchorMax.x
