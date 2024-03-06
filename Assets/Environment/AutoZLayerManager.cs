@@ -28,7 +28,7 @@ public class AutoZLayerManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (renderers == null) GetRenderers();
+        GetRenderers();
         if (sortOnUpdate) Sort();
     }
 
