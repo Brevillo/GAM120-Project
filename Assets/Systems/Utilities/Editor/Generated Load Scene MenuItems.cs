@@ -18,8 +18,8 @@ public static partial class LoadSceneMenuItemsGenerator {
         [MenuItem("Load Scene/Combat Tutorial Scene", priority = 2)]
         private static void LoadScene2() => LoadScene("Assets/Scenes/Production/Combat Tutorial Scene.unity");
 
-        [MenuItem("Load Scene/Level 1", priority = 3)]
-        private static void LoadScene3() => LoadScene("Assets/Scenes/Production/Level 1.unity");
+        [MenuItem("Load Scene/Level 2", priority = 3)]
+        private static void LoadScene3() => LoadScene("Assets/Scenes/Production/Level 2.unity");
 
         [MenuItem("Load Scene/Main Menu", priority = 4)]
         private static void LoadScene4() => LoadScene("Assets/Scenes/Production/Main Menu.unity");

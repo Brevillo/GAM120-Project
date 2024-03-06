@@ -44,9 +44,7 @@ public class Player : MonoBehaviour {
         inputManager.enabled    = !input        ?? inputManager.enabled;
     }
 
-    private void ResetCrawlOrientation() {
-        crawlOrientation = (int)Mathf.Sign(Vector2.Dot(Vector2.right, transform.right));
-    }
+    private void ResetCrawlOrientation() => crawlOrientation = 1;
 
     private void Awake() {
         facing = 1;
@@ -56,6 +54,7 @@ public class Player : MonoBehaviour {
     private void Update() {
 
         bool xInput = inputDirection.x != 0;
+
         if (!xInput) ResetCrawlOrientation();
         if (xInput) facing = inputDirection.x * crawlOrientation;
 
