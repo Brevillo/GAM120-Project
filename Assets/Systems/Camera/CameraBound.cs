@@ -106,7 +106,7 @@ public abstract class CameraBound : MonoBehaviour {
             Toggle("Always Show Border", ref alwaysShowBorder);
         }
 
-        private void OnSceneGUI() {
+        protected void OnSceneGUI() {
 
             var rect = Bounds.rect;
 

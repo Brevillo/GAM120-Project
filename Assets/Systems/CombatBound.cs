@@ -35,7 +35,6 @@ public class CombatBound : CameraBound {
                 bound.trigger.size = bound.rect.size;
                 bound.trigger.offset = Vector2.zero;
             }
-
         }
     }
 
