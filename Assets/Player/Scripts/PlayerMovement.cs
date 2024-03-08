@@ -59,7 +59,6 @@ public class PlayerMovement : Player.Component {
 
     [Header("Headbutting")]
     [SerializeField] private BufferTimer        headbuttBuffer;
-    [SerializeField] private float              headbuttCooldown;
 
     [SerializeField] private float              headbuttMinDist;
     [SerializeField] private float              headbuttMaxDist;
@@ -327,8 +326,7 @@ public class PlayerMovement : Player.Component {
                                  && (stateMachine.previousState != jumping || stateMachine.stateDuration > timeAfterJumpingBeforeFlight), // so you can't immediateley fly after jumping
             endFlying       = () => !Input.Jump.Pressed || remainingFlightStamina <= 0,
 
-            toHbCharge      = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0)
-                                 && (stateMachine.previousState != headbutting || stateMachine.stateDuration > headbuttCooldown), // headbutt cooldown
+            toHbCharge      = () => headbuttBuffer && (onGround || aerialHeadbuttsRemaining > 0) && Attacks.AttackCooldownReady,
 
             skipHbCharge    = () => toHbCharge() && headbuttChargeTime == 0,
             startHeadbutt   = () => !Input.Headbutt.Pressed || stateMachine.stateDuration > headbuttChargeTime,

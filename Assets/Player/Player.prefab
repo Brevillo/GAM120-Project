@@ -7253,7 +7253,6 @@ MonoBehaviour:
   flightSound: {fileID: 11400000, guid: 54096d4022df4486eb4816367e2fba60, type: 2}
   headbuttBuffer:
     threshold: 0.25
-  headbuttCooldown: 0.25
   headbuttMinDist: 5
   headbuttMaxDist: 20
   headbuttMinDuration: 0.1
@@ -7357,6 +7356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3060111673363044745}
+  attackCooldown: 0.35
   headbuttDamage: 1
   headbuttEnemyKnockback: 1
   headbuttWallKnockback: 3
@@ -7426,7 +7426,6 @@ MonoBehaviour:
   swingSelfKnockback: 4
   swingWallKnockback: 3
   swingDuration: 0.1
-  swingCooldown: 0.5
   swingBuffer:
     threshold: 0.25
   swingTrigger: {fileID: 1831016761755154418}
@@ -7909,18 +7908,6 @@ MonoBehaviour:
     released: 0
     impulse: 1
     _vector: {x: 0, y: 0}
-  RightMove:
-    actionReference: {fileID: -8387553260718481591, guid: 97a76fd0d12aa484796c795210097222, type: 3}
-    Enabled: 1
-    pressed: 0
-    down: 0
-    released: 0
-  LeftMove:
-    actionReference: {fileID: -8878784801248303507, guid: 97a76fd0d12aa484796c795210097222, type: 3}
-    Enabled: 1
-    pressed: 0
-    down: 0
-    released: 0
   Headbutt:
     actionReference: {fileID: -5131303573255728265, guid: 97a76fd0d12aa484796c795210097222, type: 3}
     Enabled: 1

@@ -9,6 +9,8 @@ public class PlayerAttacks : Player.Component {
 
     #region Parameters
 
+    [SerializeField] private float attackCooldown;
+
     [Header("Headbutting")]
     [SerializeField] private float headbuttDamage;
     [SerializeField] private float headbuttEnemyKnockback, headbuttWallKnockback;
@@ -20,7 +22,7 @@ public class PlayerAttacks : Player.Component {
 
     [Header("Swinging")]
     [SerializeField] private float swingDamage;
-    [SerializeField] private float swingEnemyKnockback, swingSelfKnockback, swingWallKnockback, swingDuration, swingCooldown;
+    [SerializeField] private float swingEnemyKnockback, swingSelfKnockback, swingWallKnockback, swingDuration;
     [SerializeField] private BufferTimer swingBuffer;
     [SerializeField] private EntityHealthCollisionTrigger swingTrigger;
     [SerializeField] private Transform swingTriggerPivot;
@@ -34,6 +36,11 @@ public class PlayerAttacks : Player.Component {
     #endregion
 
     private StateMachine<PlayerAttacks> stateMachine;
+
+    private float attackCooldownRemaining;
+
+    public bool AttackCooldownReady => attackCooldownRemaining <= 0;
+    private void ResetAttackCooldown() => attackCooldownRemaining = attackCooldown;
 
     private Vector2
         headbuttDirection,  // direction of the current headbutt
@@ -57,6 +64,8 @@ public class PlayerAttacks : Player.Component {
     }
 
     private void Update() {
+
+        attackCooldownRemaining -= Time.deltaTime;
 
         swingBuffer.Buffer(Input.Swing.Down);
 
@@ -188,7 +197,7 @@ public class PlayerAttacks : Player.Component {
 
         TransitionDelegate
 
-            startSwing      = () => swingBuffer && (stateMachine.previousState != swinging || stateMachine.stateDuration >= swingCooldown),
+            startSwing      = () => swingBuffer && AttackCooldownReady,
             stopSwing       = () => stateMachine.stateDuration > swingDuration;
 
         stateMachine = new(
@@ -223,6 +232,8 @@ public class PlayerAttacks : Player.Component {
 
             base.Enter();
 
+            context.ResetAttackCooldown();
+
             context.headbuttActionSound.Play(context);
 
             context.headbuttTrigger.enabled = true;
@@ -244,6 +255,8 @@ public class PlayerAttacks : Player.Component {
         public override void Enter() {
 
             base.Enter();
+
+            context.ResetAttackCooldown();
 
             Vector2 swingDirection = context.InputDirection * new Vector2(context.Facing, context.CrawlOrientation);
 
