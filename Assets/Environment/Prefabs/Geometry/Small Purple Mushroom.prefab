@@ -179,6 +179,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6065992486526748061}
     m_Modifications:
     - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_ColliderSegment.Array.size
       value: 39
       objectReference: {fileID: 0}
@@ -725,26 +729,6 @@ PrefabInstance:
     - target: {fileID: 7562264243799922278, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_Name
       value: Ground (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Center.x
-      value: 1.9727955
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Center.y
-      value: -2.0122766
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Extent.x
-      value: 2.8153691
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Extent.y
-      value: 1.9493527
       objectReference: {fileID: 0}
     - target: {fileID: 8762867482523664010, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size

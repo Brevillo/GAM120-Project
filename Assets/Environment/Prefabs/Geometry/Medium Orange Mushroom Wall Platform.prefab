@@ -94,6 +94,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4350233484710903845}
     m_Modifications:
     - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_ColliderSegment.Array.size
       value: 52
       objectReference: {fileID: 0}

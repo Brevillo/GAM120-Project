@@ -95,6 +95,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 3455933109717105993}
     m_Modifications:
     - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_ColliderSegment.Array.size
       value: 44
       objectReference: {fileID: 0}
@@ -590,22 +594,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Center.x
-      value: -2.5204792
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Center.y
-      value: -0.20209694
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Extent.x
-      value: 20.484789
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Extent.y
-      value: 12.290623
-      objectReference: {fileID: 0}
     - target: {fileID: 8762867482523664010, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
       value: 44
@@ -996,6 +984,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3455933109717105993}
     m_Modifications:
+    - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2721134007213137905, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_ColliderSegment.Array.size
       value: 117
@@ -2371,22 +2363,6 @@ PrefabInstance:
     - target: {fileID: 7562264243799922278, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_Name
       value: Ground (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Center.x
-      value: -2.4349403
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Center.y
-      value: -9.852302
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Extent.x
-      value: 20.353003
-      objectReference: {fileID: 0}
-    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
-      propertyPath: m_LocalAABB.m_Extent.y
-      value: 5.7159014
       objectReference: {fileID: 0}
     - target: {fileID: 8762867482523664010, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
