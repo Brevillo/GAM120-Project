@@ -308,7 +308,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 653420477
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 245ffdc225043435eb32a9e76f98a6dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7316,7 +7316,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1015442889
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: a1eff125c91fe446498a9a41cde7496e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7914,7 +7914,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 653420477
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 245ffdc225043435eb32a9e76f98a6dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -12797,6 +12797,10 @@ PrefabInstance:
     - target: {fileID: 3443480122704810437, guid: 10d751bd8a8df47c0a7658222b138fda, type: 3}
       propertyPath: m_Name
       value: Medium Branch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004380387266211424, guid: 10d751bd8a8df47c0a7658222b138fda, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5018632286755712379, guid: 10d751bd8a8df47c0a7658222b138fda, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
