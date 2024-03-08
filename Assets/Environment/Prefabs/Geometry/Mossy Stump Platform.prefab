@@ -1198,6 +1198,10 @@ PrefabInstance:
       value: Ground (4)
       objectReference: {fileID: 0}
     - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8240102191533745986, guid: 32a516c6d11fa4f138f6ebe7e1e3644c, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
       value: 3.3271751
       objectReference: {fileID: 0}
