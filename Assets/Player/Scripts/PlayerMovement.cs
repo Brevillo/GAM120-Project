@@ -164,7 +164,14 @@ public class PlayerMovement : Player.Component {
 
     #region Awake and Update
 
+    public override void Respawn() {
+        jumpBuffer.Reset();
+        headbuttBuffer.Reset();
+    }
+
     private void Awake() {
+
+        Respawn();
 
         InitializeStateMachine();
     }

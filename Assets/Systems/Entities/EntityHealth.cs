@@ -58,7 +58,6 @@ public class EntityHealth : MonoBehaviour {
     public event System.Action<DamageInfo> OnTakeDamage;
     public event System.Action<DamageInfo> OnForceKill;
     public event System.Action<DamageInfo> OnDeath;
-    public event System.Action<float> OnHeal;
     public event System.Action OnHealthUpdated;
 
     #endregion
@@ -88,19 +87,11 @@ public class EntityHealth : MonoBehaviour {
     }
 
     public void FullHeal() {
-
-        float healthDiff = maxHealth - Health;
-
         Health = maxHealth;
-
-        OnHeal?.Invoke(healthDiff);
     }
 
     public void Heal(float amount) {
-
         Health = Mathf.MoveTowards(Health, maxHealth, amount);
-
-        OnHeal?.Invoke(amount);
     }
 
     #endregion

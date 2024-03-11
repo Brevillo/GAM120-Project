@@ -49,6 +49,9 @@ public class PlayerHealth : Player.Component {
 
     private CameraEffectsManager uiEffects = new();
 
+    private Checkpoint checkpoint;
+    private Vector2 sceneSpawnPosition;
+
     #region Public Fields/Methods
 
     public float Energy {
@@ -67,7 +70,35 @@ public class PlayerHealth : Player.Component {
 
     public float DebugSetEnergy(float energy) => Energy = energy;
 
+    public bool RegisterCheckpoint(Checkpoint newCheckpoint) {
+
+        if (checkpoint != newCheckpoint) {
+
+            if (checkpoint != null) checkpoint.Deregister();
+
+            checkpoint = newCheckpoint;
+
+            return true;
+        }
+
+        return false;
+    }
+
     #endregion
+
+    public override void Respawn() {
+
+        Vector2 respawnPoint = checkpoint != null
+            ? checkpoint.transform.position
+            : sceneSpawnPosition;
+
+        var groundHit = Physics2D.Raycast(respawnPoint, Vector2.down, Mathf.Infinity, GameInfo.GroundMask);
+        if (groundHit) respawnPoint = groundHit.point + Vector2.up * Collider.bounds.extents.y / 2f;
+
+        transform.position = respawnPoint;
+
+        Health.FullHeal();
+    }
 
     private void Awake() {
         Health.OnTakeDamage += OnDamage;
@@ -78,6 +109,8 @@ public class PlayerHealth : Player.Component {
     private void Start() {
 
         Energy = 0.5f;
+
+        sceneSpawnPosition = transform.position;
 
         CameraEffects.BlackFade(deathFadeIn);
     }
@@ -169,14 +202,11 @@ public class PlayerHealth : Player.Component {
 
         IEnumerator DeathFall() {
 
-            Vector2 velocity = Rigidbody.velocity;
-
             while (true) {
 
-                velocity.y -= deathGravity * Time.deltaTime;
-                velocity.x = Mathf.MoveTowards(velocity.x, 0, deathFriction * Time.deltaTime);
-
-                Rigidbody.velocity = velocity;
+                Rigidbody.velocity = new Vector2(
+                    Mathf.MoveTowards(Rigidbody.velocity.x, 0, deathFriction * Time.deltaTime),
+                    Rigidbody.velocity.y - deathGravity * Time.deltaTime);
 
                 yield return null;
             }
@@ -207,7 +237,12 @@ public class PlayerHealth : Player.Component {
 
             yield return CameraEffects.BlackFade(deathFadeOut);
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            Player.Respawn();
+
+            yield return CameraEffects.BlackFade(deathFadeIn);
+
+            BodyPivot.localEulerAngles = Vector3.zero;
+            Player.Freeze(movement: false, abilities: false, health: false);
         }
     }
 

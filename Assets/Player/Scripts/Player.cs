@@ -44,6 +44,11 @@ public class Player : MonoBehaviour {
         inputManager.enabled    = !input        ?? inputManager.enabled;
     }
 
+    public void Respawn() {
+        foreach (var component in GetComponentsInChildren<Component>())
+            component.Respawn();
+    }
+
     private void ResetCrawlOrientation() => crawlOrientation = 1;
 
     private void Awake() {
@@ -95,6 +100,8 @@ public class Player : MonoBehaviour {
         protected Vector2Int        InputDirection      => player.inputDirection;
         protected int               Facing              => player.facing;
         protected int               CrawlOrientation     => player.crawlOrientation;
+
+        public virtual void Respawn() { }
 
         protected void ResetCrawlOrientation() => player.ResetCrawlOrientation();
     }

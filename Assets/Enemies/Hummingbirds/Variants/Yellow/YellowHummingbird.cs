@@ -18,9 +18,12 @@ public class YellowHummingbird : GenericEnemyBehaviour
     [SerializeField] private int leftRightCycleCount;
 
     [Header("Return to Ceiling")]
-    [SerializeField] private float ceilingDetectDist;
-    [SerializeField] private float ceilingStopDist;
-    [SerializeField] private float ceilingReturnSpeed;
+    [SerializeField] private MovementType movementType;
+    [SerializeField] private float ceilingFloorDetectDist;
+    [SerializeField] private float ceilingFloorOffset;
+    [SerializeField] private float ceilingFloorReturnSpeed;
+
+    private enum MovementType { RelativeToCeiling, RelativeToFloor }
 
     public override IWhippable.Type WhippableType => IWhippable.Type.Light;
 
@@ -35,8 +38,13 @@ public class YellowHummingbird : GenericEnemyBehaviour
     {
         while(true) {
 
-            //The bird casts a line from it's current position to the ceiling indefinitely 
-            RaycastHit2D ceilingHit = Physics2D.Raycast(Position, Vector2.up, ceilingDetectDist, GameInfo.GroundMask);
+            //The bird casts a line from it's current position to the ceiling indefinitely
+            Vector2 checkDirection = movementType switch {
+                MovementType.RelativeToCeiling => Vector2.up,
+                MovementType.RelativeToFloor => Vector2.down,
+                _ => Vector2.down,
+            };
+            RaycastHit2D ceilingHit = Physics2D.Raycast(Position, checkDirection, ceilingFloorDetectDist, GameInfo.GroundMask);
             if (!ceilingHit) yield return ReturnToCeiling();
             
             yield return Idle();
@@ -106,12 +114,14 @@ public class YellowHummingbird : GenericEnemyBehaviour
 
     protected IEnumerator ReturnToCeiling()
     {
-        RaycastHit2D findCeiling = Physics2D.Raycast(Position, Vector2.up, Mathf.Infinity, GameInfo.GroundMask);
-        Vector2 ceilingOffset = new Vector2(0, ceilingStopDist);
-        Vector2 returnUp = findCeiling.point - ceilingOffset;
+        Vector2 targetPosition = movementType switch {
+            MovementType.RelativeToCeiling => Physics2D.Raycast(Position, Vector2.up,   Mathf.Infinity, GameInfo.GroundMask).point + Vector2.down * ceilingFloorOffset,
+            MovementType.RelativeToFloor   => Physics2D.Raycast(Position, Vector2.down, Mathf.Infinity, GameInfo.GroundMask).point + Vector2.up * ceilingFloorOffset,
+            _ => Position
+        };
 
         yield return Idle();
-        yield return MoveTo(returnUp, ceilingReturnSpeed);
+        yield return MoveTo(targetPosition, ceilingFloorReturnSpeed);
 
         Velocity = Vector2.zero;
     }
