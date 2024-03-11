@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
 
         bool xInput = inputDirection.x != 0;
 
-        if (!xInput) ResetCrawlOrientation();
+        if (!xInput) crawlOrientation = (int)Mathf.Sign(Vector2.Dot(Vector2.right, transform.right));
         if (xInput) facing = inputDirection.x * crawlOrientation;
 
         // debug helpers
