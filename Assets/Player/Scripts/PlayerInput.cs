@@ -15,6 +15,8 @@ public class PlayerInput : InputManager {
     public Button Whip;
     public Button Eat;
 
+    public Button Interact;
+
     [Header("Menus")]
     public Button Pause;
 
