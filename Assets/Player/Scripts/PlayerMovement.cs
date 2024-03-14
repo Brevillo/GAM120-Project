@@ -16,7 +16,6 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private float              airAccel;
     [SerializeField] private float              airDeccel;
 
-    [SerializeField] private float              maxSlopeAngle;
     [SerializeField] private float              groundedOffset;
     [SerializeField] private float              groundGravity;
 
@@ -115,6 +114,9 @@ public class PlayerMovement : Player.Component {
     private bool onGround;                      // is the player on the ground?
     private float groundDist;                   // distance to the ground
 
+    private int facing;                         // current direction being faced, 1 = right, -1 = left
+    private int currentCrawlOrientation;         // current target orientation of the player, disregarding their current rotation
+    private int effectiveCrawlOrientation;      // the orientation of the player that is being used to determine input direction
 
     private float remainingFlightStamina;       // how much flight stamina reminas
     private float spriteRotationVelocity;       // current veloctiy of sprite rotation
@@ -130,7 +132,9 @@ public class PlayerMovement : Player.Component {
 
     #region Public Functions
 
-    public bool OnGround() => onGround;
+    public bool OnGround => onGround;
+    public new int Facing => facing;
+    public new int CrawlOrientation => effectiveCrawlOrientation;
 
     /// <summary> Set player x and/or y velocity individually. </summary>
     public void SetVelocity(float? x = null, float? y = null)
@@ -174,6 +178,9 @@ public class PlayerMovement : Player.Component {
         Respawn();
 
         InitializeStateMachine();
+
+        facing = 1;
+        effectiveCrawlOrientation = 1;
     }
 
     private void Update() {
@@ -195,16 +202,12 @@ public class PlayerMovement : Player.Component {
         for (int i = 0; i < groundDetectWhiskers; i++) {
 
             float angle = (float)i / groundDetectWhiskers * 360f * Mathf.Deg2Rad;
-            var hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Collider.bounds.extents.y + groundDetectDist, GameInfo.GroundMask);
+            var hit = Physics2D.Raycast(Collider.bounds.center, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Collider.bounds.extents.y + groundDetectDist, GameInfo.GroundMask);
 
-            if (!hit) continue;
-
-            float slopeAngle = Mathf.Abs(Mathf.DeltaAngle(Mathf.Atan2(hit.normal.y, hit.normal.x) * Mathf.Rad2Deg, 90));
-
-            if (slopeAngle > maxSlopeAngle) continue;
-
-            groundNormal += hit.normal;
-            hits++;
+            if (hit) {
+                groundNormal += hit.normal;
+                hits++;
+            }
         }
 
         onGround = hits > 0;
@@ -212,6 +215,15 @@ public class PlayerMovement : Player.Component {
 
         var groundDistHit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, GameInfo.GroundMask);
         groundDist = groundDistHit ? transform.position.y - Collider.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
+
+        // facing and crawl orientation
+
+        bool xInput = InputDirection.x != 0;
+
+        currentCrawlOrientation = (int)Mathf.Sign(Vector2.Dot(Vector2.up, groundNormal));
+
+        if (!xInput) ReevaluateCrawlOrientation();
+        if (xInput) facing = InputDirection.x * effectiveCrawlOrientation;
 
         // run state machines
 
@@ -270,6 +282,9 @@ public class PlayerMovement : Player.Component {
     private void Fall(float gravity, float? customFallSpeed = null) => velocity.y = Mathf.MoveTowards(velocity.y, -(customFallSpeed ?? maxFallSpeed), gravity * Time.deltaTime);
 
     private void FallWithPeakGravity(float gravity, float? customFallSpeed = null) => Fall(Mathf.Abs(velocity.y) < peakVelThreshold ? peakGravity : gravity, customFallSpeed);
+
+    private void ReevaluateCrawlOrientation() => effectiveCrawlOrientation = currentCrawlOrientation;
+    private void ResetCrawlOrientation() => effectiveCrawlOrientation = 1;
 
     #endregion
 
@@ -442,6 +457,13 @@ public class PlayerMovement : Player.Component {
         public Grounded(PlayerMovement context) : base(context) { }
 
         private float stepSoundTimer;
+
+        public override void Enter() {
+
+            base.Enter();
+
+            context.ReevaluateCrawlOrientation();
+        }
 
         public override void Update() {
 

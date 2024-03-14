@@ -24,8 +24,6 @@ public class Player : MonoBehaviour {
 
     public PlayerInput Input => inputManager;
 
-    private int facing;             // current direction being faced, 1 = right, -1 = left
-    private int crawlOrientation;   // current orientation of the player, 1 if right side up, -1 if upside down
 
     private Vector2Int inputDirection => new(
         Mathf.RoundToInt(inputManager.Movement.Vector.x),
@@ -49,19 +47,7 @@ public class Player : MonoBehaviour {
             component.Respawn();
     }
 
-    private void ResetCrawlOrientation() => crawlOrientation = 1;
-
-    private void Awake() {
-        facing = 1;
-        crawlOrientation = 1;
-    }
-
     private void Update() {
-
-        bool xInput = inputDirection.x != 0;
-
-        if (!xInput) crawlOrientation = (int)Mathf.Sign(Vector2.Dot(Vector2.right, transform.right));
-        if (xInput) facing = inputDirection.x * crawlOrientation;
 
         // debug helpers
 
@@ -98,11 +84,9 @@ public class Player : MonoBehaviour {
 
         // helper properties
         protected Vector2Int        InputDirection      => player.inputDirection;
-        protected int               Facing              => player.facing;
-        protected int               CrawlOrientation     => player.crawlOrientation;
+        protected int               Facing              => Movement.Facing;
+        protected int               CrawlOrientation    => Movement.CrawlOrientation;
 
         public virtual void Respawn() { }
-
-        protected void ResetCrawlOrientation() => player.ResetCrawlOrientation();
     }
 }

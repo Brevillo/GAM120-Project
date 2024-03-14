@@ -7223,7 +7223,6 @@ MonoBehaviour:
   groundDeccel: 200
   airAccel: 150
   airDeccel: 150
-  maxSlopeAngle: 180
   groundedOffset: 0.05
   groundGravity: 10
   stepSoundFrequency: 0.09
@@ -7480,7 +7479,7 @@ MonoBehaviour:
   whipForwardForce: 1.75
   whipForwardDelay: 0.1
   minWhipLength: 3
-  maxWhipLength: 20
+  maxWhipLength: 40
   maxLengthExtendDuration: 0.25
   minWhipDuration: 0.2
   maxWhipDuration: 0.25
