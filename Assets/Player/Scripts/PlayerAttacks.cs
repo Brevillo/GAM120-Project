@@ -13,7 +13,7 @@ public class PlayerAttacks : Player.Component {
 
     [Header("Headbutting")]
     [SerializeField] private float headbuttDamage;
-    [SerializeField] private float headbuttEnemyKnockback, headbuttWallKnockback;
+    [SerializeField] private float headbuttEnemyKnockback;
     [SerializeField] private EntityHealthCollisionTrigger headbuttTrigger;
     [SerializeField] private float headbuttHitTimestop;
     [SerializeField] private CameraShakeProfile headbuttHitShake;
@@ -122,11 +122,10 @@ public class PlayerAttacks : Player.Component {
 
     private void OnHeadbuttNonEntityCollision(Collider2D collision) {
 
-        if (collision.gameObject.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
+        if (collision.gameObject.layer == GameInfo.GroundLayer && !Movement.OnGround) {
 
             HeadbuttHitEffects();
             WallHitEffects(collision, headbuttDirection);
-            Movement.TakeKnockback(NoDownwards(-headbuttDirection) * headbuttWallKnockback);
         }
     }
 
@@ -154,7 +153,7 @@ public class PlayerAttacks : Player.Component {
 
     private void OnSwingNonEntityCollision(Collider2D collision) {
 
-        if (collision.gameObject.layer == GameInfo.GroundLayer && !Movement.OnGround()) {
+        if (collision.gameObject.layer == GameInfo.GroundLayer && !Movement.OnGround) {
 
             SwingHitEffects();
             WallHitEffects(collision, swingDirection);
@@ -261,7 +260,7 @@ public class PlayerAttacks : Player.Component {
             Vector2 swingDirection = context.InputDirection * new Vector2(context.Facing, context.CrawlOrientation);
 
             // no downwards swings when grounded
-            if (context.Movement.OnGround()) swingDirection.y = Mathf.Max(0, swingDirection.y);
+            if (context.Movement.OnGround) swingDirection.y = Mathf.Max(0, swingDirection.y);
 
             // if no input, default to facing direction
             if (swingDirection == Vector2.zero) swingDirection = Vector2.right * context.Facing;
