@@ -69,8 +69,7 @@ public abstract class CameraBound : MonoBehaviour {
 
         // traversable area by the camera
         Gizmos.color = new(color.r, color.g, color.b, 0.15f);
-        Gizmos.DrawWireCube(rect.center, rect.size - defaultCameraSize * cameraSizeMultiple * Vector2.up);
-        Gizmos.DrawWireCube(rect.center, rect.size - defaultCameraSize * cameraSizeMultiple * Vector2.right);
+        Gizmos.DrawWireCube(rect.center, rect.size - defaultCameraSize * cameraSizeMultiple);
     }
 
     private void DrawBorder() {
@@ -86,7 +85,7 @@ public abstract class CameraBound : MonoBehaviour {
     [CustomEditor(typeof(CameraBound), true), CanEditMultipleObjects]
     protected class CameraBoundEditor : Editor {
 
-        private const float handleSize = 2f;
+        private const float handleSize = 0.1f;
 
         private CameraBound Bounds => target as CameraBound;
 
@@ -118,11 +117,11 @@ public abstract class CameraBound : MonoBehaviour {
 
             Vector2 DrawHandle(Vector2 position, Vector2 minimum, Vector2 maximum, Vector2 anchor) {
 
-                position = (Vector2)Handles.FreeMoveHandle(position, handleSize, Vector3.one, Handles.SphereHandleCap);
+                position = (Vector2)Handles.FreeMoveHandle(position, handleSize * HandleUtility.GetHandleSize(position), Vector2.one, Handles.DotHandleCap);
 
                 Vector2 Snap(Vector2 position) => new(
-                    Mathf.Round(position.x / snapTo.x) * snapTo.x,
-                    Mathf.Round(position.y / snapTo.y) * snapTo.y);
+                    snapTo.x == 0 ? position.x : Mathf.Round(position.x / snapTo.x) * snapTo.x,
+                    snapTo.y == 0 ? position.y : Mathf.Round(position.y / snapTo.y) * snapTo.y);
 
                 Vector2 Clamp(Vector2 position) => Vector2.Max(Vector2.Min(position, maximum), minimum);
 

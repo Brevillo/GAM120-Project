@@ -253,30 +253,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - name: Tutorial
+  - name: Movement Tutorial
     scene:
       editorSceneAsset: {fileID: 102900000, guid: 7c18f9259de0d38458880dc8cca37e0b, type: 3}
       name: Tutorial Scene
-    description: This is what we have so far of the tutorial. It is mostly functional
-      at this point, but still needs playtesting and an art pass.
-  - name: Combat Prototype
+    description: This is the tutorial we have for the player movement. It still needs
+      an art pass and the prompts for controller, but otherwise complete.
+  - name: Level 1
     scene:
-      editorSceneAsset: {fileID: 102900000, guid: 9b8fbecf1638542a1837a03c7ef578a7, type: 3}
-      name: Combat Prototype
-    description: Has a few waves to showcase the combat mechanics and enemies we
-      have so far.
-  - name: Woodland Area Art Prototype
+      editorSceneAsset: {fileID: 102900000, guid: b3e7f34f1a32dc648ad2fd052341d1a7, type: 3}
+      name: Level 1
+    description: Mostly complete level 1
+  - name: Level 2
     scene:
-      editorSceneAsset: {fileID: 102900000, guid: 059a928cab00e4e94a4ca1ff10622bfb, type: 3}
-      name: Woods Scene
-    description: A scene to preview what the woodlands area will look like after
-      being art passed.
-  - name: Swamp Area Art Prototype
+      editorSceneAsset: {fileID: 102900000, guid: 1228c027194ff4e4c892faf9221d003c, type: 3}
+      name: Level 2
+    description: Mostly complete level 2
+  - name: Level 3
     scene:
-      editorSceneAsset: {fileID: 102900000, guid: add8deb801b4549af823c152569e74ff, type: 3}
-      name: Swamp Scene
-    description: A scene to preview what the swamp area will look like after being
-      art passed.
+      editorSceneAsset: {fileID: 102900000, guid: 3fad0eca2c7014a4fa31db1bfd340f41, type: 3}
+      name: Level 3
+    description: Mostly complete level 3
   selectionPrefab: {fileID: 2904319100661536431, guid: f123a25e0e49d40d1bc528ac86bb0397, type: 3}
   selectionContent: {fileID: 143690227}
 --- !u!1 &189015631
