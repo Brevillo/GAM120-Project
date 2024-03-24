@@ -10184,6 +10184,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6608069407337726105, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608069407337726105, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -11690,6 +11694,10 @@ PrefabInstance:
     - target: {fileID: 8478293481002938855, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
       propertyPath: m_Name
       value: Enemy Room 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478293481002938855, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25380,6 +25388,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6608069407337726105, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608069407337726105, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -31295,6 +31307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Room 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8478293481002938855, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -35820,6 +35836,10 @@ PrefabInstance:
       value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 6608069407337726105, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608069407337726105, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -36746,6 +36766,10 @@ PrefabInstance:
     - target: {fileID: 8478293481002938855, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
       propertyPath: m_Name
       value: Enemy Room 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478293481002938855, guid: a14e1e0ef164f4a0eb2ac6e1373fb4af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
