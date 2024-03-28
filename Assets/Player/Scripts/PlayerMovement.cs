@@ -45,6 +45,7 @@ public class PlayerMovement : Player.Component {
     [SerializeField] private BufferTimer        jumpBuffer;
     [SerializeField] private SoundEffect        jumpSound;
 
+
     [Header("Flying")]
     [SerializeField] private float              flightForce;
     [SerializeField] private float              minStartFlightVel;
