@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Resume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b004ff359b511492e835995732996cfc, type: 2}
+  m_sharedMaterial: {fileID: -5314175529307514377, guid: b004ff359b511492e835995732996cfc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -452,8 +452,8 @@ MonoBehaviour:
     \u2013\u2013    Right shift or east gamepad\nPause           \u2013\u2013   
     Escape or start"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b004ff359b511492e835995732996cfc, type: 2}
+  m_sharedMaterial: {fileID: -5314175529307514377, guid: b004ff359b511492e835995732996cfc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -586,8 +586,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PAUSED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b004ff359b511492e835995732996cfc, type: 2}
+  m_sharedMaterial: {fileID: -5314175529307514377, guid: b004ff359b511492e835995732996cfc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1101,8 +1101,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b004ff359b511492e835995732996cfc, type: 2}
+  m_sharedMaterial: {fileID: -5314175529307514377, guid: b004ff359b511492e835995732996cfc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1254,6 +1254,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2055935060553116817, guid: 34947313e97d24f74afd20c117075c42, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186275136434824123, guid: 34947313e97d24f74afd20c117075c42, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b004ff359b511492e835995732996cfc, type: 2}
+    - target: {fileID: 2186275136434824123, guid: 34947313e97d24f74afd20c117075c42, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5314175529307514377, guid: b004ff359b511492e835995732996cfc, type: 2}
+    - target: {fileID: 2186275136434824123, guid: 34947313e97d24f74afd20c117075c42, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3020408556059447427, guid: 34947313e97d24f74afd20c117075c42, type: 3}
