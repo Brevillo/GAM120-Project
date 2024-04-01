@@ -44,12 +44,6 @@ public class EnemyHealth : GenericEnemyComponent {
 
         OnTakeDamage(info);
 
-        StartCoroutine(DeathDelay());
-        IEnumerator DeathDelay() {
-
-            yield return new WaitForSeconds(Mathf.Max(flashDuration, hurtSound.CurrentLength(this)));
-
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 }
