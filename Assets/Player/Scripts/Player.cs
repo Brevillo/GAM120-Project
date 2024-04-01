@@ -12,12 +12,14 @@ public class Player : MonoBehaviour {
     [SerializeField] private PlayerWhip playerWhip;
     [SerializeField] private PlayerAttacks playerAttacks;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerColor playerColor;
 
     [SerializeField] private EntityHealth health;
 
     [Header("References")]
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private new Collider2D collider;
+    [SerializeField] private PlayerColorProfileReference colorProfileReference;
 
     [Header("Helper")]
     [SerializeField] private Transform bodyPivot;
@@ -45,6 +47,10 @@ public class Player : MonoBehaviour {
     public void Respawn() {
         foreach (var component in GetComponentsInChildren<Component>())
             component.Respawn();
+    }
+
+    private void Start() {
+        playerColor.SetProfile(colorProfileReference.PlayerColorProfile);
     }
 
     private void Update() {

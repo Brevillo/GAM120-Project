@@ -8012,9 +8012,11 @@ MonoBehaviour:
   playerWhip: {fileID: 3875097491503807348}
   playerAttacks: {fileID: 5404126991406413386}
   playerHealth: {fileID: 2008252985994352932}
+  playerColor: {fileID: 6429605309664106109}
   health: {fileID: 6791614321812120477}
   rigidbody: {fileID: 7560332416474703363}
   collider: {fileID: 4124466150152741197}
+  colorProfileReference: {fileID: 11400000, guid: ba12cd9b98e7540aeaeaced72c9d0a1a, type: 2}
   bodyPivot: {fileID: 1483030378175564037}
 --- !u!114 &6791614321812120477
 MonoBehaviour:
