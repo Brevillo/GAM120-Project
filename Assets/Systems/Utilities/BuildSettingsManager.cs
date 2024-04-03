@@ -10,11 +10,11 @@ using UnityEditor;
 [CreateAssetMenu]
 public class BuildSettingsManager : ScriptableObject {
 
-    [SerializeField] private SceneAsset startScene;
-    [SerializeField] private DefaultAsset scenesFolder;
-
     #region Editor
     #if UNITY_EDITOR
+
+    [SerializeField] private SceneAsset startScene;
+    [SerializeField] private DefaultAsset scenesFolder;
 
     private void UpdateBuildSettings() {
 
