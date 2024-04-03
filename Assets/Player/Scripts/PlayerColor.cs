@@ -10,6 +10,11 @@ public class PlayerColor : MonoBehaviour {
     [SerializeField] private SpriteRenderer head, abdomen, thorax, wing, wingCasing;
     [SerializeField] private SpriteRenderer[] legs;
 
+    public void SetProfile(PlayerColorProfile colorProfile) {
+        this.colorProfile = colorProfile;
+        UpdateColors();
+    }
+
     private void UpdateColors() {
 
         if (colorProfile != null) {
@@ -22,7 +27,7 @@ public class PlayerColor : MonoBehaviour {
         }
     }
 
-    private void Update() { 
+    private void Start() { 
         UpdateColors();
     }
 }
