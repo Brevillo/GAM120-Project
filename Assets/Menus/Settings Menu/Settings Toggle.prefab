@@ -141,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -183,10 +183,10 @@ RectTransform:
   - {fileID: 1134344898379658133}
   m_Father: {fileID: 2502264681935676312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -30, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2408918056569235704
 MonoBehaviour:
@@ -229,7 +229,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5782860350135500609}
-  toggleTransition: 1
+  toggleTransition: 0
   graphic: {fileID: 141957712191014637}
   m_Group: {fileID: 0}
   onValueChanged:
@@ -254,23 +254,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 898239688428465842, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 898239688428465842, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 898239688428465842, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 898239688428465842, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 898239688428465842, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 898239688428465842, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -324,6 +324,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1213677095993419568, guid: cc38db3c326fb456abeda4944455203d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1213677095993419568, guid: cc38db3c326fb456abeda4944455203d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1213677095993419568, guid: cc38db3c326fb456abeda4944455203d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1496235133722654497, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_Value
       value: 20
@@ -352,9 +364,13 @@ PrefabInstance:
       propertyPath: m_text
       value: Label
       objectReference: {fileID: 0}
+    - target: {fileID: 6570837549586802909, guid: cc38db3c326fb456abeda4944455203d, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 8257923033861866636, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_Name
-      value: Settings Toggle Variant
+      value: Settings Toggle
       objectReference: {fileID: 0}
     - target: {fileID: 8297645928184385816, guid: cc38db3c326fb456abeda4944455203d, type: 3}
       propertyPath: m_text
