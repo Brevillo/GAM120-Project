@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : MonoBehaviour {
 
@@ -45,6 +46,12 @@ public class Player : MonoBehaviour {
     }
 
     public void Respawn() {
+
+        foreach (var resetable in FindObjectsOfType<GameObject>(true)
+            .Select(go => go.GetComponent<IResetable>())
+            .Where(resetable => resetable != null))
+            resetable.ResetableReset();
+
         foreach (var component in GetComponentsInChildren<Component>())
             component.Respawn();
     }
@@ -60,9 +67,9 @@ public class Player : MonoBehaviour {
         #if UNITY_EDITOR
 
         if (inputManager.Debug1.Down) UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        if (inputManager.Debug2.Down) playerHealth.DebugSetEnergy(1);
-        if (inputManager.Debug3.Down) playerHealth.DebugSetEnergy(0f);
-        if (inputManager.Debug4.Down) health.TakeDamage(new(1f, Vector2.down, Vector2.zero));
+        if (inputManager.Debug2.Down) health.TakeDamage(new(1, Vector2.up, Vector2.zero));
+        if (inputManager.Debug3.Down) health.TakeDamage(new(99999, Vector2.up, Vector2.zero));
+        //if (inputManager.Debug4.Down) ;
 
         #endif
     }

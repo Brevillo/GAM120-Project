@@ -18,6 +18,7 @@ public class PlayerMovement : Player.Component {
 
     [SerializeField] private float              groundedOffset;
     [SerializeField] private float              groundGravity;
+    [SerializeField] private float              defaultOrientationBuffer;
 
     [SerializeField] private float              stepSoundFrequency;
     [SerializeField] private SoundEffect        stepSound;
@@ -211,20 +212,17 @@ public class PlayerMovement : Player.Component {
             }
         }
 
-        onGround = hits > 0;
         if (hits > 0) groundNormal /= hits;
+        onGround = hits > 0 && (Vector2.Dot(groundNormal, -InputDirection) > 0 || groundNormal.y > 0 || onGround);
+        currentCrawlOrientation = onGround ? (int)Mathf.Sign(Vector2.Dot(Vector2.up, groundNormal) + defaultOrientationBuffer) : 1;
 
         var groundDistHit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, GameInfo.GroundMask);
         groundDist = groundDistHit ? transform.position.y - Collider.bounds.extents.y - groundDistHit.point.y : Mathf.Infinity;
 
         // facing and crawl orientation
 
-        bool xInput = InputDirection.x != 0;
-
-        currentCrawlOrientation = (int)Mathf.Sign(Vector2.Dot(Vector2.up, groundNormal));
-
-        if (!xInput) ReevaluateCrawlOrientation();
-        if (xInput) facing = InputDirection.x * effectiveCrawlOrientation;
+        if (InputDirection.x != 0) facing = InputDirection.x * effectiveCrawlOrientation;
+        else ReevaluateCrawlOrientation();
 
         // run state machines
 

@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
-public class EnemyWave : MonoBehaviour {
+public class EnemyWave : MonoBehaviour, IResetable {
 
     [SerializeField] private float startDelay, waveDuration;
     [SerializeField] private bool endWhenAllDead;
 
-    private List<EntityHealth> enemies, activeEnemies;
+    private List<(EntityHealth health, Vector2 position)> enemies;
+    private List<EntityHealth> activeEnemies;
 
     public UnityEvent OnWaveCompleted;
 
     private void Start() {
 
-        enemies = new(GetComponentsInChildren<EntityHealth>(true));
+        enemies = GetComponentsInChildren<EntityHealth>(true).Select(health => (health, (Vector2)health.transform.position)).ToList();
 
-        foreach (var enemy in enemies) {
+        foreach (var (enemy, position) in enemies) {
             enemy.gameObject.SetActive(false);
             enemy.OnDeath += info => RemoveEnemy(enemy);
         }
@@ -45,9 +47,9 @@ public class EnemyWave : MonoBehaviour {
 
     private void StartWave() {
 
-        activeEnemies = new(enemies);
+        activeEnemies = new(enemies.Select(enemy => enemy.health));
 
-        foreach (var enemy in enemies)
+        foreach (var enemy in activeEnemies)
             enemy.gameObject.SetActive(true);
     }
 
@@ -56,5 +58,16 @@ public class EnemyWave : MonoBehaviour {
         activeEnemies.Remove(enemy);
 
         if (activeEnemies.Count == 0) OnWaveCompleted.Invoke();
+    }
+
+    public void ResetableReset()
+    {
+        if (enemies == null) return;
+
+        foreach (var (enemy, position) in enemies)
+        {
+            enemy.gameObject.SetActive(false);
+            enemy.transform.position = position;
+        }
     }
 }

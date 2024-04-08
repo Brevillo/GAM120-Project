@@ -28,7 +28,7 @@ public abstract class GenericHummingbird : GenericEnemyBehaviour {
 
     public override IWhippable.Type WhippableType => IWhippable.Type.Light;
 
-    private void Start() {
+    protected virtual void Start() {
 
         target = FindObjectOfType<Player>().transform;
 

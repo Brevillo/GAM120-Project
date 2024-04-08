@@ -71,9 +71,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fadeDuration: 4
-  battleMusicSource: {fileID: 4223471440476173723}
-  passiveMusicSource: {fileID: 4530273233713669114}
-  manager: {fileID: 11400000, guid: b90b831ecca6f4fc2970a3d658965277, type: 2}
+  battleMusicInfo:
+    source: {fileID: 4223471440476173723}
+    volume: 0
+  passiveMusicInfo:
+    source: {fileID: 4530273233713669114}
+    volume: 0
 --- !u!1 &5056381432474468270
 GameObject:
   m_ObjectHideFlags: 0

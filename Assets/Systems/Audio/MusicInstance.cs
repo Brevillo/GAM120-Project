@@ -19,9 +19,6 @@ public class MusicInstance : MonoBehaviour {
         battleMusicInfo.volume = sceneMusic.battleMusicVolume;
         passiveMusicInfo.volume = sceneMusic.passiveMusicVolume;
 
-        battleMusicInfo.volume = 0;
-        passiveMusicInfo.volume = 0;
-
         FadeTo(passiveMusicInfo, 1);
     }
 

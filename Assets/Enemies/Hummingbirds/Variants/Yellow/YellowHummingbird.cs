@@ -18,12 +18,9 @@ public class YellowHummingbird : GenericEnemyBehaviour
     [SerializeField] private int leftRightCycleCount;
 
     [Header("Return to Ceiling")]
-    [SerializeField] private MovementType movementType;
-    [SerializeField] private float ceilingFloorDetectDist;
-    [SerializeField] private float ceilingFloorOffset;
     [SerializeField] private float ceilingFloorReturnSpeed;
-
-    private enum MovementType { RelativeToCeiling, RelativeToFloor }
+    [SerializeField] private float maxAllowedDistFromHeightTarget;
+    [SerializeField] private float heightTarget;
 
     public override IWhippable.Type WhippableType => IWhippable.Type.Light;
 
@@ -34,18 +31,23 @@ public class YellowHummingbird : GenericEnemyBehaviour
         Instantiate(nectarPrefab, Position, Quaternion.identity);
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, heightTarget));
+        float width = 6;
+        Gizmos.DrawRay(new Vector3(transform.position.x - width / 2, heightTarget), Vector2.right * width);
+    }
+
     protected override IEnumerator Behaviour() 
     {
         while(true) {
 
-            //The bird casts a line from it's current position to the ceiling indefinitely
-            Vector2 checkDirection = movementType switch {
-                MovementType.RelativeToCeiling => Vector2.up,
-                MovementType.RelativeToFloor => Vector2.down,
-                _ => Vector2.down,
-            };
-            RaycastHit2D ceilingHit = Physics2D.Raycast(Position, checkDirection, ceilingFloorDetectDist, GameInfo.GroundMask);
-            if (!ceilingHit) yield return ReturnToCeiling();
+            float distFromHeightTarget = heightTarget - transform.position.y;
+            if (distFromHeightTarget > maxAllowedDistFromHeightTarget)
+            {
+                yield return ReturnToCeiling();
+            }
             
             yield return Idle();
 
@@ -114,11 +116,7 @@ public class YellowHummingbird : GenericEnemyBehaviour
 
     protected IEnumerator ReturnToCeiling()
     {
-        Vector2 targetPosition = movementType switch {
-            MovementType.RelativeToCeiling => Physics2D.Raycast(Position, Vector2.up,   Mathf.Infinity, GameInfo.GroundMask).point + Vector2.down * ceilingFloorOffset,
-            MovementType.RelativeToFloor   => Physics2D.Raycast(Position, Vector2.down, Mathf.Infinity, GameInfo.GroundMask).point + Vector2.up * ceilingFloorOffset,
-            _ => Position
-        };
+        Vector2 targetPosition = new Vector2(transform.position.x, heightTarget);
 
         yield return Idle();
         yield return MoveTo(targetPosition, ceilingFloorReturnSpeed);

@@ -6,21 +6,30 @@ using UnityEngine;
 public class PurpleHummingbird : RedHummingbird
 {
     [Header("Babies")]
-    [SerializeField] private int spawnNumber;
-    [SerializeField] private GameObject miniPurplePrefab;
+    [SerializeField] private List<GameObject> babies;
 
     protected override void Awake()
     {
         base.Awake();
-        Health.OnDeath += Health_OnDeath;
-
+        Health.OnDeath += OnDeath;
     }
 
-    private void Health_OnDeath(DamageInfo info)
+    protected override IEnumerator Behaviour() {
+
+        yield return null;
+
+        foreach (var baby in babies)
+            baby.SetActive(false);
+
+        yield return base.Behaviour();
+    }
+
+    private void OnDeath(DamageInfo info)
     {
-        for(int i = 0; i < spawnNumber; i++)
+        foreach (var baby in babies)
         {
-            Instantiate(miniPurplePrefab, Position, Quaternion.identity);
+            baby.SetActive(true);
+            baby.transform.position = transform.position;
         }
     }
 }

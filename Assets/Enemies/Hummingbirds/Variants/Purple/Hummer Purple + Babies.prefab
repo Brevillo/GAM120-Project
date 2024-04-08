@@ -1,0 +1,328 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6521003870157523743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3858309266769523709}
+  m_Layer: 0
+  m_Name: Hummer Purple + Babies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3858309266769523709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6521003870157523743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5570656478294020610}
+  - {fileID: 7526856035992317242}
+  - {fileID: 6428021920760180165}
+  - {fileID: 3456332657154851921}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1450414681067670485
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3858309266769523709}
+    m_Modifications:
+    - target: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_Name
+      value: Hummer MiniPurple (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+--- !u!1 &462790051558549199 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+  m_PrefabInstance: {fileID: 1450414681067670485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3456332657154851921 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+  m_PrefabInstance: {fileID: 1450414681067670485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6026792553688556222
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3858309266769523709}
+    m_Modifications:
+    - target: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_Name
+      value: Hummer MiniPurple
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+--- !u!1 &4751216840672595876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+  m_PrefabInstance: {fileID: 6026792553688556222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7526856035992317242 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+  m_PrefabInstance: {fileID: 6026792553688556222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6857226226432154914
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3858309266769523709}
+    m_Modifications:
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322405893137100222, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: m_Name
+      value: Hummer Purple
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170986603982055307, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: babies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170986603982055307, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: babies.Array.data[0]
+      value: 
+      objectReference: {fileID: 4751216840672595876}
+    - target: {fileID: 5170986603982055307, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: babies.Array.data[1]
+      value: 
+      objectReference: {fileID: 8119883224544628571}
+    - target: {fileID: 5170986603982055307, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+      propertyPath: babies.Array.data[2]
+      value: 
+      objectReference: {fileID: 462790051558549199}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+--- !u!4 &5570656478294020610 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1326081832353697568, guid: 596b1f3bd1d901a4d9ef150b12963cfa, type: 3}
+  m_PrefabInstance: {fileID: 6857226226432154914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7125644226797593153
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3858309266769523709}
+    m_Modifications:
+    - target: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_Name
+      value: Hummer MiniPurple (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+--- !u!4 &6428021920760180165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4312113402400001924, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+  m_PrefabInstance: {fileID: 7125644226797593153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8119883224544628571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+  m_PrefabInstance: {fileID: 7125644226797593153}
+  m_PrefabAsset: {fileID: 0}

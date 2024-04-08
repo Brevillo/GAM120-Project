@@ -154,7 +154,6 @@ MonoBehaviour:
   minMoveDist: 5
   maxMoveDist: 25
   leftRightCycleCount: 2
-  movementType: 0
-  ceilingFloorDetectDist: 5
-  ceilingFloorOffset: 3
   ceilingFloorReturnSpeed: 40
+  maxAllowedDistFromHeightTarget: 3
+  heightTarget: 0

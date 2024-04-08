@@ -98,12 +98,13 @@ public class PlayerHealth : Player.Component {
         transform.position = respawnPoint;
 
         Health.FullHeal();
+        Health.Dead = false;
     }
 
     private void Awake() {
         Health.OnTakeDamage += OnDamage;
         Health.OnDeath      += OnDeath;
-        Health.OnForceKill  += OnRespawn;
+        Health.OnForceKill  += ForceKillRespawn;
     }
 
     private void Start() {
@@ -150,7 +151,7 @@ public class PlayerHealth : Player.Component {
         healthbarImage.color = Color.HSVToRGB(healthColorH, healthColorS, currentHealthColorValue);
     }   
 
-    private void OnRespawn(DamageInfo info) {
+    private void ForceKillRespawn(DamageInfo info) {
 
         StartCoroutine(Respawn());
         IEnumerator Respawn() {
@@ -202,7 +203,7 @@ public class PlayerHealth : Player.Component {
 
         IEnumerator DeathFall() {
 
-            while (true) {
+            while (Health.Dead) {
 
                 Rigidbody.velocity = new Vector2(
                     Mathf.MoveTowards(Rigidbody.velocity.x, 0, deathFriction * Time.deltaTime),
@@ -236,6 +237,8 @@ public class PlayerHealth : Player.Component {
             }
 
             yield return CameraEffects.BlackFade(deathFadeOut);
+
+            deathCanvasGroup.alpha = 0;
 
             Player.Respawn();
 

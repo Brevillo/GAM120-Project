@@ -28,7 +28,7 @@ public readonly struct DamageInfo {
     }
 }
 
-public class EntityHealth : MonoBehaviour {
+public class EntityHealth : MonoBehaviour , IResetable {
 
     [SerializeField] private ReferenceValue maxHealth;
     [SerializeField] private float invincibilityDuration;
@@ -76,7 +76,7 @@ public class EntityHealth : MonoBehaviour {
         invincibilityRemaining = Mathf.Max(invincibilityDuration, invincibilityRemaining);
 
         // death
-        if (Health <= 0) {
+        if (Health == 0) {
             Dead = true;
             OnDeath?.Invoke(info);
         }
@@ -92,6 +92,13 @@ public class EntityHealth : MonoBehaviour {
 
     public void Heal(float amount) {
         Health = Mathf.MoveTowards(Health, maxHealth, amount);
+    }
+
+
+    public void ResetableReset() {
+        FullHeal();
+        Dead = false;
+        invincibilityRemaining = 0;
     }
 
     #endregion

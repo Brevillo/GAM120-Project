@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OliverBeebe.UnityUtilities.Runtime;
 
-public class EnemyRoom : MonoBehaviour {
+public class EnemyRoom : MonoBehaviour, IResetable {
 
     [SerializeField] private float startDelay;
     [SerializeField] private CombatBound cameraCombatBound;
@@ -16,6 +16,11 @@ public class EnemyRoom : MonoBehaviour {
 
     private EnemyWave[] waves;
     private int currentWave;
+
+    public void ResetableReset() {
+        RoomCompleted();
+        state = State.Incomplete;
+    }
 
     private void Start() {
 

@@ -803,7 +803,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84dbb17f182fe401cb5dd26199f1f0d1, type: 2}
+  - {fileID: 2100000, guid: abf668ae9834c47d281280d8d253e07b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7225,6 +7225,7 @@ MonoBehaviour:
   airDeccel: 150
   groundedOffset: 0.05
   groundGravity: 10
+  defaultOrientationBuffer: 0.25
   stepSoundFrequency: 0.09
   stepSound: {fileID: 11400000, guid: 2c3717343ce1c4e55a442a832035accc, type: 2}
   eatDuration: 0.5
