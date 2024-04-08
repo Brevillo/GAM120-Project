@@ -10,7 +10,7 @@ public class SpiderAnimation : MonoBehaviour {
     [System.Serializable]
     private class Leg {
 
-        [SerializeField] private LineRenderer line;
+        [SerializeField] private LineRenderer line, outline;
 
         [SerializeField] private float legLength, castAngleOffset;
 
@@ -38,8 +38,13 @@ public class SpiderAnimation : MonoBehaviour {
             footPosition = Vector2.MoveTowards(footPosition, footTarget, speed * Time.deltaTime);
             footPosition = Vector2.ClampMagnitude(footPosition - jointPosition, legLength) + jointPosition;
 
+            var positions = new Vector3[] { origin, jointPosition, footPosition };
+
             line.positionCount = 3;
-            line.SetPositions(new Vector3[] { origin, jointPosition, footPosition });
+            line.SetPositions(positions);
+
+            outline.positionCount = 3;
+            outline.SetPositions(positions);
         }
 
         public static System.Action<Leg> UpdateAll(Vector2 position, float speed) => leg => leg.Update(position, speed);
