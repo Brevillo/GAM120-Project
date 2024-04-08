@@ -241,10 +241,10 @@ public class PlayerHealth : Player.Component {
             deathCanvasGroup.alpha = 0;
 
             Player.Respawn();
+            BodyPivot.localEulerAngles = Vector3.zero;
 
             yield return CameraEffects.BlackFade(deathFadeIn);
 
-            BodyPivot.localEulerAngles = Vector3.zero;
             Player.Freeze(movement: false, abilities: false, health: false);
         }
     }

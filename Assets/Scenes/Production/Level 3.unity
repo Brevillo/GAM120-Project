@@ -10584,7 +10584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7081245641773892406, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: -1.5934726
+      value: -1.5934724
       objectReference: {fileID: 0}
     - target: {fileID: 7081245641773892406, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
@@ -10592,7 +10592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7081245641773892406, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: 4.118127
+      value: 4.118128
       objectReference: {fileID: 0}
     - target: {fileID: 7081245641773892406, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
@@ -10680,7 +10680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7081245641773892406, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[12].y
-      value: -1.5934726
+      value: -1.5934724
       objectReference: {fileID: 0}
     - target: {fileID: 7081245641773892406, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[13].x
@@ -29088,7 +29088,7 @@ Transform:
   m_GameObject: {fileID: 1258933752}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.70534515, w: 0.70886415}
-  m_LocalPosition: {x: -63.948345, y: -17.225979, z: 1.0703336}
+  m_LocalPosition: {x: -62.6, y: -11.3, z: 1.0703336}
   m_LocalScale: {x: 42.09052, y: 10.8735, z: 7.249}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29405,8 +29405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSizeMultiple: 4
-  max: {x: 70, y: 28.5}
-  min: {x: -70, y: -28.5}
+  max: {x: 80.5, y: 28.5}
+  min: {x: -80.5, y: -28.5}
   snapTo: {x: 1, y: 1}
   color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!4 &1278828434
@@ -29418,7 +29418,7 @@ Transform:
   m_GameObject: {fileID: 1278828432}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 45.695976, y: -5.261511, z: -35.269997}
+  m_LocalPosition: {x: 35.195976, y: -5.261511, z: -35.269997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -105,7 +105,6 @@ public class PlayerWhip : Player.Component {
             pullEnemy       = () => whipping != null && whipping.WhippableType == IWhippable.Type.Light,
 
             pullSelf        = () => whipping != null && whipping.WhippableType == IWhippable.Type.Heavy,
-            stopPullingSelf = () => !Input.Whip.Pressed,
 
             targetIsNull    = () => whipping == null;
 
@@ -136,7 +135,6 @@ public class PlayerWhip : Player.Component {
 
                 { pullingSelf, new() {
                     new(idle,           whipRetracted),
-                    new(retracting,     stopPullingSelf),
                     new(retracting,     targetIsNull),
                 } },
             }

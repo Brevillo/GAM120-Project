@@ -275,9 +275,9 @@ MonoBehaviour:
     timer: 0
   touchingDamageAmount: 1
   attackKnockback: 3
-  minIdleTime: 0.5
-  maxIdleTime: 2
-  minCrawlTime: 1
+  minIdleTime: 0.25
+  maxIdleTime: 0.75
+  minCrawlTime: 2
   maxCrawlTime: 5
   crawlParameters:
     crawlSpeed: 20
