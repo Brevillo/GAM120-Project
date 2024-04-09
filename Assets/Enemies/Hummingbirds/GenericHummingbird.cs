@@ -19,6 +19,7 @@ public abstract class GenericHummingbird : GenericEnemyBehaviour {
     [SerializeField] private int minWanderMoves, maxWanderMoves;
 
     [SerializeField] private new HummingbirdAnimation animation;
+    [SerializeField] private new SoundEffect hummingbirdTelegraph;
 
     private Transform target;
 
@@ -60,6 +61,7 @@ public abstract class GenericHummingbird : GenericEnemyBehaviour {
 
             attacking = true;
             animation.turnToTarget = false;
+            hummingbirdTelegraph.Play(this);
             yield return Attack();
             animation.turnToTarget = true;
             attacking = false;

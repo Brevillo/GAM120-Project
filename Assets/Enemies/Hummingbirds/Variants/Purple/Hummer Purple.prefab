@@ -170,11 +170,11 @@ MonoBehaviour:
   minWanderMoves: 2
   maxWanderMoves: 4
   animation: {fileID: 4925320726415762315}
+  hummingbirdTelegraph: {fileID: 11400000, guid: 39fed85bac773426286aa2f09ac2cb8e, type: 2}
   diveSpeed: 20
   maxDiveDist: 30
   playerPassDistance: 2
-  spawnNumber: 3
-  miniPurplePrefab: {fileID: 1318641470558154010, guid: bdd68e41608ae46479345cbbdb3def87, type: 3}
+  babies: []
 --- !u!114 &4925320726415762315 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6989869266368052441, guid: cac28255156b94dff8368f0c3e518ef8, type: 3}
