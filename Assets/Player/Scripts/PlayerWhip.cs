@@ -3,20 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using OliverBeebe.UnityUtilities.Runtime;
 using OliverBeebe.UnityUtilities.Runtime.Camera;
+using System.Linq;
 
 public class PlayerWhip : Player.Component {
 
     #region Parameters
 
     [SerializeField] private float whipBackForce;
-    [SerializeField] private float whipForwardForce, whipForwardDelay, minWhipLength, maxWhipLength, maxLengthExtendDuration, minWhipDuration, maxWhipDuration, whipTriggerDelay, whipRetractSpeed, whipPullSpeed, whipMaxLength, enemyGrappleVerticalBoost;
+    [SerializeField] private float
+        whipForwardForce,
+        whipForwardDelay,
+        minWhipLength,
+        maxWhipLength,
+        maxLengthExtendDuration,
+        minWhipDuration,
+        maxWhipDuration,
+        whipTriggerDelay,
+        whipRetractSpeed,
+        whipPullSpeed,
+        whipMaxLength,
+        enemyGrappleVerticalBoost,
+        whipAutoAimRadius;
     [SerializeField] private VerletRope.Parameters whipRopeParameters;
     [SerializeField] private LineRenderer whipRenderer;
     [SerializeField] private PlayerWhipTrigger whipTrigger;
 
     [Header("EFfects")]
     [SerializeField] private float whipHitFreezeFrame;
-    [SerializeField] private OliverBeebe.UnityUtilities.Runtime.Camera.CameraShakeProfile hitEnemyShake;
+    [SerializeField] private CameraShakeProfile hitEnemyShake;
     [SerializeField] private SoundEffect whipThrow, whipHit;
     #endregion
 
@@ -176,8 +190,15 @@ public class PlayerWhip : Player.Component {
             whippedForward = false;
             triggerActive = false;
 
+            var autoAimHit = Physics2D.CircleCastAll(context.transform.position, context.whipAutoAimRadius, context.InputDirection)
+                .Where(hit => hit.collider.TryGetComponent(out EntityHealth _))
+                .Where(hit => hit.collider.gameObject != context.gameObject)
+                .FirstOrDefault();
+
             aimDirection = context.InputDirection != Vector2Int.zero
-                ? context.Input.Movement.Vector.normalized
+                ? autoAimHit && (autoAimHit.point - (Vector2)context.transform.position).magnitude > context.whipAutoAimRadius
+                    ? (autoAimHit.point - (Vector2)context.transform.position).normalized
+                    : context.Input.Movement.Vector.normalized
                 : Vector2.right * context.Facing;
 
             context.whipRopeSim.AddForce(-aimDirection * context.whipBackForce + Vector2.one * 0.01f);
