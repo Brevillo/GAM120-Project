@@ -19,6 +19,8 @@ public class Hazard : MonoBehaviour {
 
     private void OnEntityCollision(EntityHealthCollision collision) {
 
+        if (!collision.entity.TryGetComponent(out Player _)) return;
+
         Vector2 entityPosition = collision.entity.transform.position,
                 selfPosition = collision.collider.ClosestPoint(entityPosition),
                 dirToEntity = (entityPosition - selfPosition).normalized;
