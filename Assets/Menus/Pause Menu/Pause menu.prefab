@@ -447,10 +447,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "<b><size=40>Controls</b></size>\nCrawl / Aim    \u2013\u2013    Arrow
-    keys\nHeadbutt       \u2013\u2013    Z or left triggers\nSlash             \u2013\u2013   
-    X or west gamepad\nWhip             \u2013\u2013    C or right triggers\nEat               
-    \u2013\u2013    Right shift or east gamepad\nPause           \u2013\u2013   
-    Escape or start"
+    keys\nHeadbutt       \u2013\u2013    Z\nSlash             \u2013\u2013    X\nWhip            
+    \u2013\u2013    C\nHeal              \u2013\u2013    Right shift\nPause          
+    \u2013\u2013    Escape"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b004ff359b511492e835995732996cfc, type: 2}
   m_sharedMaterial: {fileID: -5314175529307514377, guid: b004ff359b511492e835995732996cfc, type: 2}
@@ -1255,6 +1254,10 @@ PrefabInstance:
     - target: {fileID: 2055935060553116817, guid: 34947313e97d24f74afd20c117075c42, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186275136434824123, guid: 34947313e97d24f74afd20c117075c42, type: 3}
+      propertyPath: m_fontSize
+      value: 25.25
       objectReference: {fileID: 0}
     - target: {fileID: 2186275136434824123, guid: 34947313e97d24f74afd20c117075c42, type: 3}
       propertyPath: m_fontAsset
