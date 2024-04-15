@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private PlayerAttacks playerAttacks;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerColor playerColor;
+    [SerializeField] private PlayerBodyAnimation bodyAnimation;
 
     [SerializeField] private EntityHealth health;
 
@@ -87,6 +88,7 @@ public class Player : MonoBehaviour {
         protected PlayerWhip        Whip                => player.  playerWhip;
         protected PlayerAttacks     Attacks             => player.  playerAttacks;
         protected PlayerHealth      PlayerHealth        => player.  playerHealth;
+        protected PlayerBodyAnimation BodyAnimation     => player.  bodyAnimation;
 
         protected EntityHealth      Health              => player.  health;
 

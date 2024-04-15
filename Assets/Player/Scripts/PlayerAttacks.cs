@@ -266,6 +266,7 @@ public class PlayerAttacks : Player.Component {
             if (swingDirection == Vector2.zero) swingDirection = Vector2.right * context.Facing;
 
             context.swingDirection = swingDirection;
+            context.BodyAnimation.SwingAnimation(swingDirection);
 
             context.swingTriggerPivot.localEulerAngles = Vector3.forward * Mathf.Atan2(swingDirection.y, Mathf.Abs(swingDirection.x)) * Mathf.Rad2Deg;
             context.swingTrigger.enabled = true;

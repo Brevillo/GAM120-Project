@@ -7169,6 +7169,7 @@ GameObject:
   - component: {fileID: 2008252985994352932}
   - component: {fileID: 6080058142479919497}
   - component: {fileID: 6429605309664106109}
+  - component: {fileID: 742162224149560926}
   - component: {fileID: 3060111673363044745}
   - component: {fileID: 6791614321812120477}
   - component: {fileID: 7560332416474703363}
@@ -7997,6 +7998,26 @@ MonoBehaviour:
   - {fileID: 1659957302897679686}
   - {fileID: 7646492157922906108}
   - {fileID: 3317878524570911535}
+--- !u!114 &742162224149560926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159668116364633624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e6d70251c224563a414c1b567e513d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8930819273131006816}
+  swingDown: {fileID: 7400000, guid: 64d747cc9c456490c899c1ab865e389a, type: 2}
+  swingDownDiagonal: {fileID: 7400000, guid: 2c1a3ed738e5d4f18b6e1ad8f19c77fc, type: 2}
+  swingHorizontal: {fileID: 7400000, guid: 3456b485e7114435a87e310f9219cc58, type: 2}
+  swingUpDiagonal: {fileID: 7400000, guid: 525268fe7c6154d259a861a0b63f9624, type: 2}
+  swingUp: {fileID: 7400000, guid: e24cbe561cd994e09b549b9869dae396, type: 2}
+  eatStart: {fileID: 7400000, guid: 783fc453bc87b4b16a8a934fa29366c4, type: 2}
+  eatEnd: {fileID: 7400000, guid: dc015c9bdbb064f19a4628ca68d0aaf9, type: 2}
 --- !u!114 &3060111673363044745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8015,6 +8036,7 @@ MonoBehaviour:
   playerAttacks: {fileID: 5404126991406413386}
   playerHealth: {fileID: 2008252985994352932}
   playerColor: {fileID: 6429605309664106109}
+  bodyAnimation: {fileID: 742162224149560926}
   health: {fileID: 6791614321812120477}
   rigidbody: {fileID: 7560332416474703363}
   collider: {fileID: 4124466150152741197}

@@ -503,6 +503,8 @@ public class PlayerMovement : Player.Component {
             context.eatSound.Play(context);
 
             eatTimer = 0;
+
+            context.BodyAnimation.StartEat();
         }
 
         public override void Update() {
@@ -520,6 +522,8 @@ public class PlayerMovement : Player.Component {
         public override void Exit() {
 
             context.eatSound.Stop(context);
+
+            context.BodyAnimation.EndEat();
 
             base.Exit();
         }
