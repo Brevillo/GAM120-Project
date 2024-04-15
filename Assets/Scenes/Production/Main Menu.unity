@@ -11823,19 +11823,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 690941390834963515, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 690941390834963515, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 690941390834963515, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 690941390834963515, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -145
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1103622860661125836, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -11887,35 +11887,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2915493814802389110, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2915493814802389110, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2915493814802389110, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2915493814802389110, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -170
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5015144880943693276, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
+      propertyPath: m_text
+      value: Oliver Beebe - Producer, Tech Lead
       objectReference: {fileID: 0}
     - target: {fileID: 5221888118093511750, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5221888118093511750, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5221888118093511750, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5221888118093511750, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6118889492674184519, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_fontAsset
@@ -11924,6 +11928,10 @@ PrefabInstance:
     - target: {fileID: 6118889492674184519, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648484388595517530, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
+      propertyPath: m_text
+      value: Josh Hao - Design Lead
       objectReference: {fileID: 0}
     - target: {fileID: 6856475016157885719, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_Pivot.x
@@ -11987,11 +11995,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6856475016157885719, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 380
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 6856475016157885719, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -275
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 6856475016157885719, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12004,6 +12012,10 @@ PrefabInstance:
     - target: {fileID: 6856475016157885719, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838605831911577086, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
+      propertyPath: m_text
+      value: Isabella Goossens - Content Lead
       objectReference: {fileID: 0}
     - target: {fileID: 7916212161943484784, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -12030,7 +12042,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5734014852907046280, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
+    - {fileID: 7957875407874070981, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
+    - {fileID: 3427632520881533368, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 885c0cf2e226e46ebbf51a06135d6c4f, type: 3}
