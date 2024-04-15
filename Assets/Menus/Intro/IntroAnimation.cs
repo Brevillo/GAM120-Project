@@ -16,13 +16,19 @@ public class IntroAnimation : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI companyText;
     [SerializeField] private float companyVisibleDuration;
     [SerializeField] private SmartCurve companyDisappearAnimation;
-    [SerializeField] private Scene loadScene;
+    //[SerializeField] private Scene loadScene;
+    [Header("Camera Rotation")]
+    [SerializeField] private Transform cameraPivot;
+    [SerializeField] private Vector3 cameraStartRotation, cameraEndRotation;
+    [SerializeField] private SmartCurve endCameraRotation;
 
     private void Start() {
         StartCoroutine(Animation());
     }
 
     private IEnumerator Animation() {
+
+        cameraPivot.eulerAngles = cameraStartRotation;
 
         companyText.enabled = false;
 
@@ -64,6 +70,12 @@ public class IntroAnimation : MonoBehaviour {
             yield return null;
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(loadScene);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(loadScene);
+
+        endCameraRotation.Start();
+        while (!endCameraRotation.Done) {
+            cameraPivot.eulerAngles = Vector3.LerpUnclamped(cameraStartRotation, cameraEndRotation, endCameraRotation.Evaluate());
+            yield return null;
+        }
     }
 }
