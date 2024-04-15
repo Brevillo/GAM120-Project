@@ -15,11 +15,11 @@ public static partial class LoadSceneMenuItemsGenerator {
         [MenuItem("Load Scene/Color Selection", priority = 1)]
         private static void LoadScene1() => LoadScene("Assets/Scenes/Production/Color Selection.unity");
 
-        [MenuItem("Load Scene/End Scene", priority = 2)]
-        private static void LoadScene2() => LoadScene("Assets/Scenes/Production/End Scene.unity");
+        [MenuItem("Load Scene/Combat Tutorial", priority = 2)]
+        private static void LoadScene2() => LoadScene("Assets/Scenes/Production/Combat Tutorial.unity");
 
-        [MenuItem("Load Scene/Intro", priority = 3)]
-        private static void LoadScene3() => LoadScene("Assets/Scenes/Production/Intro.unity");
+        [MenuItem("Load Scene/End Scene", priority = 3)]
+        private static void LoadScene3() => LoadScene("Assets/Scenes/Production/End Scene.unity");
 
         [MenuItem("Load Scene/Level 1", priority = 4)]
         private static void LoadScene4() => LoadScene("Assets/Scenes/Production/Level 1.unity");
