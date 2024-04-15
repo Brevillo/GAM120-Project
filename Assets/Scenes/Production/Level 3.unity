@@ -11063,7 +11063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7603465548224715518, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -0.5567298
+      value: -0.55673075
       objectReference: {fileID: 0}
     - target: {fileID: 7603465548224715518, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
@@ -11071,7 +11071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7603465548224715518, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 4.674858
+      value: 4.674857
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11140,7 +11140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1015442889
   m_SortingLayer: 3
-  m_SortingOrder: 49
+  m_SortingOrder: 70
   m_Sprite: {fileID: 21300000, guid: b70549b4fe94c4d3ea80e4be59c52c02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11161,7 +11161,7 @@ Transform:
   m_GameObject: {fileID: 451782162}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.04793482, w: 0.99885046}
-  m_LocalPosition: {x: -87.73161, y: 347.47647, z: 0}
+  m_LocalPosition: {x: -87.9, y: 349.37, z: 0}
   m_LocalScale: {x: -0.49615997, y: 0.49615997, z: 0.49616}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56619,7 +56619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7603465548224715518, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -2.013926
+      value: -2.013921
       objectReference: {fileID: 0}
     - target: {fileID: 7603465548224715518, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
@@ -56627,7 +56627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7603465548224715518, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 3.2149806
+      value: 3.2149856
       objectReference: {fileID: 0}
     - target: {fileID: 8299247545251965914, guid: 21ae1f726b5a94d45a7ebc2f42741d14, type: 3}
       propertyPath: m_Name
@@ -56967,12 +56967,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5437628729242604779, guid: 534fea16e4e4a41d4ade21e3642dce8f, type: 3}
       propertyPath: loadScene.name
-      value: Main Menu
+      value: End Scene
       objectReference: {fileID: 0}
     - target: {fileID: 5437628729242604779, guid: 534fea16e4e4a41d4ade21e3642dce8f, type: 3}
       propertyPath: loadScene.editorSceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: fcd037e3c19525c49aad26b3e16e05eb, type: 3}
+      objectReference: {fileID: 102900000, guid: 138a1382c284f455391c5a6ac29244b7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
