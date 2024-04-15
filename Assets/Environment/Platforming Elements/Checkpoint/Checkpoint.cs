@@ -18,6 +18,7 @@ public class Checkpoint : MonoBehaviour {
         if (collision.TryGetComponent(out PlayerHealth player) && player.RegisterCheckpoint(this)) {
 
             particles.Play(true);
+            player.GetComponent<EntityHealth>().FullHeal();
 
             StartCoroutine(Spin());
             IEnumerator Spin() {

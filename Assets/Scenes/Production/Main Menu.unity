@@ -5783,6 +5783,63 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1001 &620169624
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 333193143895843468, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565499721370441041, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
+      propertyPath: m_Name
+      value: Camera Effects
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a92a40c194234c0d87855e41991c6f2, type: 3}
 --- !u!1 &980479682
 GameObject:
   m_ObjectHideFlags: 0
@@ -6603,8 +6660,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1746458430}
+  - component: {fileID: 1746458431}
   m_Layer: 0
-  m_Name: Zoom in point
+  m_Name: Zoom Sequence
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6625,6 +6683,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1746458431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746458429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52673bf52b1184a4290f1a8dca905fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraZoomPivot: {fileID: 1833247669}
+  zoomTarget: {fileID: 1746458430}
+  zoomCurve:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 5
+    valueScale: 1
+    timer: 0
+  fadeOutDelay: 3.5
+  fadeOut:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeScale: 1
+    valueScale: 1
+    timer: 0
+  loadScene:
+    editorSceneAsset: {fileID: 102900000, guid: 7c18f9259de0d38458880dc8cca37e0b, type: 3}
+    name: Tutorial Scene
 --- !u!1 &1796097649
 GameObject:
   m_ObjectHideFlags: 0
@@ -11925,18 +12057,18 @@ PrefabInstance:
     - target: {fileID: 3419939397122488474, guid: 584ab6ad9e939449ca026d7f49c3bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 189015636}
+      objectReference: {fileID: 1746458431}
     - target: {fileID: 3419939397122488474, guid: 584ab6ad9e939449ca026d7f49c3bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3419939397122488474, guid: 584ab6ad9e939449ca026d7f49c3bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: StartZoom
       objectReference: {fileID: 0}
     - target: {fileID: 3419939397122488474, guid: 584ab6ad9e939449ca026d7f49c3bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: MainMenuCameraZoom, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3419939397122488474, guid: 584ab6ad9e939449ca026d7f49c3bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -12047,3 +12179,4 @@ SceneRoots:
   - {fileID: 1796097650}
   - {fileID: 1746458430}
   - {fileID: 1731141949}
+  - {fileID: 620169624}
