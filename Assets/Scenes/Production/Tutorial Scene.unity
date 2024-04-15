@@ -181,12 +181,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5437628729242604779, guid: 534fea16e4e4a41d4ade21e3642dce8f, type: 3}
       propertyPath: loadScene.name
-      value: Level 1
+      value: Combat Written
       objectReference: {fileID: 0}
     - target: {fileID: 5437628729242604779, guid: 534fea16e4e4a41d4ade21e3642dce8f, type: 3}
       propertyPath: loadScene.editorSceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: b3e7f34f1a32dc648ad2fd052341d1a7, type: 3}
+      objectReference: {fileID: 102900000, guid: 00630729e54a143478e683cf1cc5d6e7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18378,11 +18378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6930403288867093224, guid: e1d86a5ffd49a0a4eb7a1300af3e9883, type: 3}
       propertyPath: m_text
-      value: "\u25CF\u2192\n"
+      value: Hold Right
       objectReference: {fileID: 0}
     - target: {fileID: 6930403288867093224, guid: e1d86a5ffd49a0a4eb7a1300af3e9883, type: 3}
       propertyPath: m_fontSize
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6930403288867093224, guid: e1d86a5ffd49a0a4eb7a1300af3e9883, type: 3}
       propertyPath: m_fontAsset
@@ -18390,12 +18390,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b004ff359b511492e835995732996cfc, type: 2}
     - target: {fileID: 6930403288867093224, guid: e1d86a5ffd49a0a4eb7a1300af3e9883, type: 3}
       propertyPath: m_fontSizeBase
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6930403288867093224, guid: e1d86a5ffd49a0a4eb7a1300af3e9883, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -5314175529307514377, guid: b004ff359b511492e835995732996cfc, type: 2}
+    - target: {fileID: 6930403288867093224, guid: e1d86a5ffd49a0a4eb7a1300af3e9883, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6930403288867093224, guid: e1d86a5ffd49a0a4eb7a1300af3e9883, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
